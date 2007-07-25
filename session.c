@@ -76,7 +76,7 @@ session_destroy(struct session *s)
 	u_int	i;
 
 	if (session_index(s, &i) != 0)
-		log_fatalx("session not found");
+		fatalx("session not found");
 	ARRAY_REMOVE(&sessions, i);
 
 	while (!ARRAY_EMPTY(&s->windows))
