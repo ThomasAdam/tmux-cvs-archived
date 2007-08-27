@@ -119,7 +119,7 @@ session_attach(struct session *s, struct window *w)
 }
 
 /* Detach a window from a session. */
-int
+void
 session_detach(struct session *s, struct window *w)
 {
 	if (s->window == w) {
@@ -128,11 +128,18 @@ session_detach(struct session *s, struct window *w)
 	}
 
 	window_remove(&s->windows, w);
-	if (ARRAY_EMPTY(&s->windows)) {
-		session_destroy(s);
-		return (1);
-	}
 	return (0);
+}
+
+/* Flush session if it is empty. */
+int
+session_flush(struct session *s)
+{
+	if (!ARRAY_EMPTY(&s->windows))
+		return (0);
+
+	session_destroy(s);
+	return (1);
 }
 
 /* Return if session has window. */
