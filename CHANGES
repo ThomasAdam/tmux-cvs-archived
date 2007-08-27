@@ -1,3 +1,7 @@
+27 August 2007
+
+* Change screen.c to work more logically and hopefully fix heap corruption.
+
 09 July 2007
 
 * Initial import to CVS. Basic functions are working, albeit with a couple of 
