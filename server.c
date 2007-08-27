@@ -667,11 +667,8 @@ lost_window(struct window *w)
 		if (!session_has(s, w))
 			continue;
 
-		/* Detach window from session. */
-		session_detach(s, w);
-
-		/* Try to flush session and either redraw or kill clients. */
-		destroyed = session_flush(s);		
+		/* Detach window and either redraw or kill clients. */
+		destroyed = session_detach(s, w);
 		for (j = 0; j < ARRAY_LENGTH(&clients); j++) {
 			c = ARRAY_ITEM(&clients, j);
 			if (c == NULL || c->session != s)
