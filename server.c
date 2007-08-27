@@ -663,7 +663,8 @@ lost_window(struct window *w)
 			if (session_has(c->session, w)) {
 				if (session_detach(c->session, w) != 0)
 					write_client(c, MSG_EXIT, NULL, 0);
-				changed_window(c);
+				else
+					changed_window(c);
 			}
 		}
 	}
