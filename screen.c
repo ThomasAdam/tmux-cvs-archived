@@ -24,6 +24,8 @@
 
 /*
  * Virtual screen and basic ANSI terminal emulator.
+ *
+ * XXX Most of this file sucks. There be memory corruption somewhere here.
  */
 
 size_t	 screen_store_attributes(struct buffer *, u_char);
