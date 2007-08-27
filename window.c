@@ -162,8 +162,8 @@ window_remove(struct windows *ww, struct window *w)
 
 	w->references--;
 	if (w->references == 0) {
-		window_destroy(w);
 		window_remove(&windows, w);
+		window_destroy(w);
 	}
 }
 
