@@ -479,7 +479,7 @@ input_control_sequence(
 
 	log_debug(
 	    "sequence:  %c (%hhu) [%c] [cx %u, cy %u, sx %u, sy %u]: %u", code,
-	    code, private, s->cx + 1, s->cy + 1, s->sx + 1, s->sy + 1, argc);
+	    code, private, s->cx, s->cy, s->sx, s->sy, argc);
 	for (i = 0; i < argc; i++)
 		log_debug("\targument %u: %u", i, argv[i]);
 
