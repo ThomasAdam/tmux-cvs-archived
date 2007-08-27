@@ -70,7 +70,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 	if (*name != '\0')
 		strlcpy(s->name, name, sizeof s->name);
 	else
-		xsnprintf(s->name, sizeof s->name, "session-%u", i);
+		xsnprintf(s->name, sizeof s->name, "%u", i);
 
 	return (s);
 }
