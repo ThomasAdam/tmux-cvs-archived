@@ -83,7 +83,7 @@ cmd_fn_select(struct buffer *srv_out, int arg)
  	struct hdr		hdr;
 	struct select_data	data;
 
-	hdr.code = MSG_SELECT;
+	hdr.type = MSG_SELECT;
 	hdr.size = sizeof data;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 	data.idx = arg;
@@ -98,7 +98,7 @@ cmd_fn_create(struct buffer *srv_out, unused int arg)
 {
  	struct hdr	hdr;
 
-	hdr.code = MSG_CREATE;
+	hdr.type = MSG_CREATE;
 	hdr.size = 0;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 
@@ -118,7 +118,7 @@ cmd_fn_next(struct buffer *srv_out, unused int arg)
 {
  	struct hdr	hdr;
 
-	hdr.code = MSG_NEXT;
+	hdr.type = MSG_NEXT;
 	hdr.size = 0;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 
@@ -131,7 +131,7 @@ cmd_fn_previous(struct buffer *srv_out, unused int arg)
 {
  	struct hdr	hdr;
 
-	hdr.code = MSG_PREVIOUS;
+	hdr.type = MSG_PREVIOUS;
 	hdr.size = 0;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 
@@ -144,7 +144,7 @@ cmd_fn_refresh(struct buffer *srv_out, unused int arg)
 {
  	struct hdr	hdr;
 
-	hdr.code = MSG_REFRESH;
+	hdr.type = MSG_REFRESH;
 	hdr.size = 0;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 
@@ -157,7 +157,7 @@ cmd_fn_rename(struct buffer *srv_out, unused int arg)
 {
  	struct hdr	hdr;
 
-	hdr.code = MSG_RENAME;
+	hdr.type = MSG_RENAME;
 	hdr.size = 0;
 	buffer_write(srv_out, &hdr, sizeof hdr);
 
