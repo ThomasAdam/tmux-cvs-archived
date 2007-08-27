@@ -438,8 +438,10 @@ input_pair_control(u_char **buf, size_t *len,
 		if (**buf == ';' && (ch == '0' || ch == '1')) {
 			log_debug("title found, length %zu bytes: %.*s",
 			    size - 1, (int) size - 1, *buf + 1);
-			input_store_one(b, CODE_TITLE, size - 1);
-			buffer_write(b, *buf + 1, size - 1);
+			if (size > 1) {
+				input_store_one(b, CODE_TITLE, size - 1);
+				buffer_write(b, *buf + 1, size - 1);
+			}
 		}
 
 		/* Skip the title; add one for the \007. */
