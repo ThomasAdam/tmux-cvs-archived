@@ -23,7 +23,7 @@
 #include "tmux.h"
 
 /*
- * Virtual screen and basic ANSI terminal emulator.
+ * Virtual screen and basic terminal emulator.
  *
  * XXX Much of this file sucks.
  */
