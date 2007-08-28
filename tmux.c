@@ -154,6 +154,32 @@ main(int argc, char **argv)
 		err(1, "realpath");
 	xfree(path);
 
+	/* Set up signal handlers. */
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART;
+
+	act.sa_handler = SIG_IGN;
+	if (sigaction(SIGPIPE, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGUSR1, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGUSR2, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGINT, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGTSTP, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGQUIT, &act, NULL) != 0)
+		err(1, "sigaction");
+
+	act.sa_handler = sighandler;
+	if (sigaction(SIGWINCH, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGTERM, &act, NULL) != 0)
+		err(1, "sigaction");
+	if (sigaction(SIGCHLD, &act, NULL) != 0)
+		err(1, "sigaction");
+
 	/* Start server if necessary. */
 	n = 0;
 restart:
@@ -194,32 +220,6 @@ restart:
 		errx(1, "stdin is not a tty");
 	if (!isatty(STDOUT_FILENO))
 		errx(1, "stdout is not a tty");
-
-	/* Set up signal handlers. */
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_RESTART;
-
-	act.sa_handler = SIG_IGN;
-	if (sigaction(SIGPIPE, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGUSR1, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGUSR2, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGINT, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGTSTP, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGQUIT, &act, NULL) != 0)
-		err(1, "sigaction");
-
-	act.sa_handler = sighandler;
-	if (sigaction(SIGWINCH, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGTERM, &act, NULL) != 0)
-		err(1, "sigaction");
-	if (sigaction(SIGCHLD, &act, NULL) != 0)
-		err(1, "sigaction");
 
 	/* Find window size. */
 	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
