@@ -1,3 +1,7 @@
+28 August 2007
+
+* Scrolling region (\e[r) support.
+
 27 August 2007
 
 * Change screen.c to work more logically and hopefully fix heap corruption.

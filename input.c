@@ -449,7 +449,7 @@ input_pair_control(u_char **buf, size_t *len,
 		(*len) -= size + 1;
 		break;
 	case 'M':	/* RI */
-		input_store_one(b, CODE_CURSORUPSCROLL, 1);
+		input_store_zero(b, CODE_REVERSEINDEX);
 		break;
 	default:
 		log_debug("unknown control2: %c (%hhu)", ch, ch);

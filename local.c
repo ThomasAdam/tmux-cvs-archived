@@ -557,19 +557,12 @@ local_output(struct buffer *b, size_t size)
 			}
 			local_putp(cursor_invisible);
 			break;
-		case CODE_CURSORUPSCROLL:
+		case CODE_REVERSEINDEX:
 			if (scroll_reverse == NULL) {
 				log_warnx("scroll_reverse not supported");
 				break;
 			}
 			local_putp(scroll_reverse);
-			break;
-		case CODE_CURSORDOWNSCROLL:
-			if (scroll_forward == NULL) {
-				log_warnx("scroll_forward not supported");
-				break;
-			}
-			local_putp(scroll_forward);
 			break;
 		case CODE_SCROLLREGION:
 			if (size < 4)
