@@ -155,6 +155,8 @@ main(int argc, char **argv)
 	xfree(path);
 
 	/* Start server if necessary. */
+	n = 0;
+restart:
 	if (stat(socket_path, &sb) != 0) {
 		if (errno != ENOENT)
 			err(1, "%s", socket_path);
@@ -169,8 +171,13 @@ main(int argc, char **argv)
 	}
 
 	/* Connect to server. */
-	if ((server_fd = connect_server()) == -1)
+	if ((server_fd = connect_server()) == -1) {
+		if (errno == ECONNREFUSED && n++ < 5) {
+			unlink(socket_path);
+			goto restart;
+		}
 		errx(1, "couldn't find server");
+	}
 	if ((mode = fcntl(server_fd, F_GETFL)) == -1)
 		err(1, "fcntl");
 	if (fcntl(server_fd, F_SETFL, mode|O_NONBLOCK) == -1)
