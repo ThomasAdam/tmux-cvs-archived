@@ -158,7 +158,7 @@ window_remove(struct windows *ww, struct window *w)
 
 	if (window_index(ww, w, &i) != 0)
 		fatalx("window not found");
-	ARRAY_REMOVE(ww, i);
+	ARRAY_SET(ww, i, NULL);
 
 	w->references--;
 	if (w->references == 0) {
