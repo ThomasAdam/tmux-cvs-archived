@@ -20,7 +20,7 @@
 
 #include "tmux.h"
 
-int	cmd_prefix = '\002';	/* C-b */
+int	cmd_prefix = META;
 
 int	cmd_fn_select(struct buffer *, int);
 int	cmd_fn_create(struct buffer *, int);

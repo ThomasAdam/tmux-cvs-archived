@@ -13,6 +13,9 @@ DATE!= date +%Y%m%d-%H%M
 # This must be empty as OpenBSD includes it in default CFLAGS.
 DEBUG=
 
+# Command prefix. This will go when we get a configuration file...
+META?= \002 # C-b
+
 SRCS= tmux.c server.c buffer.c buffer-poll.c xmalloc.c xmalloc-debug.c \
       input.c screen.c window.c session.c local.c log.c command.c
 
@@ -20,7 +23,7 @@ YACC= yacc -d
 
 CC= cc
 INCDIRS+= -I. -I- -I/usr/local/include
-CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\""
+CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
 .ifdef DEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -Wl,-E
