@@ -155,13 +155,19 @@ int
 session_next(struct session *s)
 {
 	struct window	*w;
+	u_int            n;
 
 	if (s->window == NULL)
 		return (-1);
 
 	w = window_next(&s->windows, s->window);
-	if (w == NULL)
-		return (-1);
+	if (w == NULL) {
+		n = 0;
+		while ((w = ARRAY_ITEM(&s->windows, n)) == NULL)
+			n++;
+		if (w == s->window)
+			return (1);
+	}
 	s->window = w;
 	return (0);
 }
@@ -176,8 +182,11 @@ session_previous(struct session *s)
 		return (-1);
 
 	w = window_previous(&s->windows, s->window);
-	if (w == NULL)
-		return (-1);
+	if (w == NULL) {
+		w = ARRAY_LAST(&s->windows);
+		if (w == s->window)
+			return (1);
+	}
 	s->window = w;
 	return (0);
 }
