@@ -155,6 +155,7 @@ main(int argc, char **argv)
 	xfree(path);
 
 	/* Set up signal handlers. */
+	memset(&act, 0, sizeof act);
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART;
 

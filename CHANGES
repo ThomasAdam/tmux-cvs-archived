@@ -1,5 +1,6 @@
 20 September 2007
 
+* Reset ignored signals in child after forkpty, makes ^C work.
 * Wrap on next/previous. From Maximilian Gass.
 
 19 September 2007
