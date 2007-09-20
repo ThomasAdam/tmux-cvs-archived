@@ -1,5 +1,6 @@
 20 September 2007
 
+* Record last window and ^L key to switch to it. Largely from Maximilian Gass.
 * Reset ignored signals in child after forkpty, makes ^C work.
 * Wrap on next/previous. From Maximilian Gass.
 
