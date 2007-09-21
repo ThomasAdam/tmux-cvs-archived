@@ -138,6 +138,7 @@ session_detach(struct session *s, struct window *w)
 	if (s->last == w)
 		s->last = NULL;
 	if (s->window == w) {
+		/* Reset s->window to stop it ending up in s->last. */
 		s->window = NULL;
 		if (session_last(s) != 0 && session_previous(s) != 0)
 			session_next(s);
