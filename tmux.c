@@ -190,7 +190,7 @@ restart:
 		else if (op != OP_LIST) {
 			if (server_start() != 0)
 				errx(1, "couldn't start server");	
-			sleep(1);
+			sleep(1); /* XXX this sucks */
 		}
 	} else {
 		if (!S_ISSOCK(sb.st_mode))

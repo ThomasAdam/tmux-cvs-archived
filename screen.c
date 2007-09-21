@@ -100,6 +100,9 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 {
 	u_int	i, ox, oy, ny;
 
+	if (sx == s->sx || sy == s->sy)
+		return;
+
 	if (sx < 1)
 		sx = 1;
 	if (sy < 1)
