@@ -129,11 +129,11 @@ session_attach(struct session *s, struct window *w)
 int
 session_detach(struct session *s, struct window *w)
 {
-	if (s->window == w) {
-		if (session_last(s) == -1) 
-			session_previous(s);
-	}
+	/* Move to last, previous of next window if possible. */
+	if (s->window == w && session_last(s) != 0 && session_previous(s) != 0)
+		session_next(s);
 
+	/* Remove the window from the list. */
 	window_remove(&s->windows, w);
 
 	/* Destroy session if it is empty. */
