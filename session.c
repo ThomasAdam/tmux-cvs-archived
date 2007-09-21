@@ -130,16 +130,16 @@ int
 session_detach(struct session *s, struct window *w)
 {
 	window_remove(&s->windows, w);
+	if (ARRAY_EMPTY(&s->windows)) {
+		session_destroy(s);
+		return (1);
+	}
 
 	if (s->last == w)
 		s->last = NULL;
 	if (s->window == w && session_last(s) != 0 && session_previous(s) != 0)
 		session_next(s);
-
-	if (!ARRAY_EMPTY(&s->windows))
-		return (0);
-	session_destroy(s);
-	return (1);
+	return (0);
 }
 
 /* Return if session has window. */
