@@ -395,6 +395,9 @@ screen_character(struct screen *s, u_char ch)
 		if (s->cx > 0)
 			s->cx--;
 		break;
+	case '\177':	/* DC */
+		/* XXX */
+		break;
 	default:
 		if (ch < ' ')
 			fatalx("bad control");

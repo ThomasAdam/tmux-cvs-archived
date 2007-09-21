@@ -49,7 +49,7 @@ struct local_key local_keys[] = {
 	{ "ka1",   NULL, 0, KEYC_A1 },
 	{ "ka3",   NULL, 0, KEYC_A3 },
 	{ "kb2",   NULL, 0, KEYC_B2 },
-	{ "kbs",   NULL, 0, KEYC_BACKSPACE },
+/*	{ "kbs",   NULL, 0, KEYC_BACKSPACE }, */
 	{ "kbeg",  NULL, 0, KEYC_BEG },
 	{ "kcbt",  NULL, 0, KEYC_BTAB },
 	{ "kc1",   NULL, 0, KEYC_C1 },
@@ -348,7 +348,8 @@ local_key(size_t *used)
 		if (strncmp(BUFFER_OUT(local_in), lk->string, size) == 0) {
 			if (size < lk->size)
 				return (KEYC_NONE);
-			log_debug("got key: %s %d", lk->name, lk->code);
+			log_debug("got key: "
+			    "%s %d \"%s\"", lk->name, lk->code, lk->string);
 			buffer_remove(local_in, lk->size);
 			if (used != NULL)
 				*used = lk->size;

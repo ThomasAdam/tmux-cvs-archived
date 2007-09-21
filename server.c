@@ -575,6 +575,12 @@ user_input(struct client *c, size_t in)
 			case '\005':
 				key = KEYC_LL;
 				goto again;
+			case '\010':
+				key = KEYC_BACKSPACE;
+				goto again;
+			case '\177':
+				key = KEYC_DC;
+				goto again;
 			case '\013':
 				c->buf[c->idx + 1] = '\0';
 				input_store_zero(c->out, CODE_CURSOROFF);
