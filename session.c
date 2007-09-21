@@ -137,8 +137,11 @@ session_detach(struct session *s, struct window *w)
 
 	if (s->last == w)
 		s->last = NULL;
-	if (s->window == w && session_last(s) != 0 && session_previous(s) != 0)
-		session_next(s);
+	if (s->window == w) {
+		s->window = NULL;
+		if (session_last(s) != 0 && session_previous(s) != 0)
+			session_next(s);
+	}
 	return (0);
 }
 
