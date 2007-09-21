@@ -187,10 +187,10 @@ window_remove(struct windows *ww, struct window *w)
 		ARRAY_TRUNC(ww, 1);
 
 	w->references--;
-	if (w->references == 1)
-		window_remove(&windows, w);
 	if (w->references == 0)
 		window_destroy(w);
+	if (w->references == 1)
+		window_remove(&windows, w);
 }
 
 /* Destroy a window. */
