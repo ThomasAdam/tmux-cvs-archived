@@ -1,3 +1,7 @@
+22 September 2007
+
+* Window list command (C-b W). Started by Maximilian Gass, finished by me.
+
 20 September 2007
 
 * Specify meta via environment variable (META).

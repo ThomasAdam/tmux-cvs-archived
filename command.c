@@ -56,7 +56,9 @@ struct cmd cmd_table[] = {
 	{ 'T', cmd_fn_msg, MSG_RENAME },
 	{ 't', cmd_fn_msg, MSG_RENAME },
 	{ 'L', cmd_fn_msg, MSG_LAST },
-	{ 'l', cmd_fn_msg, MSG_LAST }
+	{ 'l', cmd_fn_msg, MSG_LAST },
+	{ 'W', cmd_fn_msg, MSG_WINDOWLIST },
+	{ 'w', cmd_fn_msg, MSG_WINDOWLIST }
 };
 
 /* Dispatch to a command. */

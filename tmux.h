@@ -282,7 +282,8 @@ enum hdrtype {
 	MSG_WINDOWS,
 	MSG_PAUSE,
 	MSG_RENAME,
-	MSG_LAST
+	MSG_LAST,
+	MSG_WINDOWLIST
 };
 
 /* Message header structure. */
