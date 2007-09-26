@@ -442,6 +442,9 @@ void		 sigreset(void);
 int	 op_new(char *, int, char **);
 int	 op_attach(char *, int, char **);
 
+/* op-list.c */
+int	 op_list(char *, int, char **);
+
 /* client.c */
 int	 client_init(char *, struct client_ctx *, int);
 int	 client_main(struct client_ctx *);

@@ -43,7 +43,7 @@ struct op {
 	int		(*fn)(char *, int, char **);
 };
 struct op op_table[] = {
-//	{ "list", op_list },
+	{ "list", op_list },
 	{ "new", op_new },
 	{ "attach", op_attach }
 };
