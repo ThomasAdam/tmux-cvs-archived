@@ -24,7 +24,7 @@
 #include "tmux.h"
 
 int
-op_new(char *path, int argc, unused char **argv)
+op_new(char *path, int argc, char **argv)
 {
 	struct new_data	 	data;	
 	struct client_ctx	cctx;
@@ -62,7 +62,7 @@ op_new(char *path, int argc, unused char **argv)
 }
 
 int
-op_attach(char *path, int argc, unused char **argv)
+op_attach(char *path, int argc, char **argv)
 {
 	struct attach_data	data;
 	struct client_ctx	cctx;
