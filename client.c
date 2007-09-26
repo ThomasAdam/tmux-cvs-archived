@@ -165,7 +165,7 @@ client_main(struct client_ctx *cctx)
 		/* XXX Output flushed; pause if required. */
 		if (n)
 			usleep(750000);
-		/* XXX XXX special return code for pause */
+		/* XXX XXX special return code for pause? or flag in cctx? */
 		if ((n = client_process_local(cctx, &error)) == -1)
 			break;
 		if ((n = client_msg_dispatch(cctx, &error)) == -1)
