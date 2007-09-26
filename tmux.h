@@ -420,14 +420,6 @@ struct client {
 	u_int		 sy;
 
 	struct session	*session;
-
-	/* User input. */
-	const char	*prompt;
-	char		*buf;
-	size_t		 len;
-	size_t		 idx;
-	void		 (*callback)(struct client *, const char *);
-
 };
 ARRAY_DECL(clients, struct client *);
 
@@ -437,7 +429,20 @@ extern int   debug_level;
 extern char  socket_path[MAXPATHLEN];
 
 /* server.c */
+extern struct clients clients;
 int	 server_start(void);
+
+/* server-msg.c */
+void	 server_msg_dispatch(struct client *);
+
+/* server-fn.c */
+void	 write_message(struct client *, const char *, ...);
+void	 write_client(struct client *, u_int, void *, size_t);
+void	 write_client2(
+	     struct client *, u_int, void *, size_t, void *, size_t);
+void	 write_clients(struct window *, u_int, void *, size_t);
+void	 changed_window(struct client *);
+void	 draw_client(struct client *, u_int, u_int);
 
 /* ansi.c */
 void	 input_key(struct buffer *, int);
