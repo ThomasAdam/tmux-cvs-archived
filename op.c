@@ -31,6 +31,7 @@ op_new(char *path, int argc, char **argv)
 	char			name[MAXNAMELEN];
 	int			opt;
 
+	*name = '\0';
 	optind = 1;
 	while ((opt = getopt(argc, argv, "n:?")) != EOF) {
 		switch (opt) {
@@ -69,6 +70,7 @@ op_attach(char *path, int argc, char **argv)
 	char			name[MAXNAMELEN];
 	int			opt;
 
+	*name = '\0';
 	optind = 1;
 	while ((opt = getopt(argc, argv, "n:?")) != EOF) {
 		switch (opt) {
