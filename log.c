@@ -56,7 +56,7 @@ log_open(FILE *f, int facility, int level)
 void
 log_close(void)
 {
-	if (log_stream != NULL)
+	if (log_stream != NULL && log_stream != stderr) /* XXX */
 		fclose(log_stream);
 
 	log_enabled = 0;
