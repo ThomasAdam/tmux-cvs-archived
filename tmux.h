@@ -462,15 +462,15 @@ int	 server_start(char *);
 int	 server_msg_dispatch(struct client *);
 
 /* server-fn.c */
-void	 write_message(struct client *, const char *, ...);
-void	 write_client(struct client *, u_int, void *, size_t);
-void	 write_client2(
+void	 server_write_message(struct client *, const char *, ...);
+void	 server_write_client(struct client *, u_int, void *, size_t);
+void	 server_write_client2(
 	     struct client *, u_int, void *, size_t, void *, size_t);
-void	 write_clients(struct window *, u_int, void *, size_t);
-void	 changed_window(struct client *);
-void	 draw_client(struct client *, u_int, u_int);
+void	 server_write_clients(struct window *, u_int, void *, size_t);
+void	 server_window_changed(struct client *);
+void	 server_draw_client(struct client *, u_int, u_int);
 
-/* ansi.c */
+/* input.c */
 void	 input_key(struct buffer *, int);
 size_t	 input_parse(u_char *, size_t, struct buffer *, struct screen *);
 uint8_t  input_extract8(struct buffer *);

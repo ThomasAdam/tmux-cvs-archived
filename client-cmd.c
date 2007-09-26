@@ -62,7 +62,6 @@ struct cmd client_cmd_table[] = {
 };
 #define NCLIENTCMD (sizeof client_cmd_table / sizeof client_cmd_table[0])
 
-/* Dispatch to a command. */
 int
 client_cmd_dispatch(int key, struct client_ctx *cctx, const char **error)
 {

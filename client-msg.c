@@ -69,7 +69,7 @@ client_msg_dispatch(struct client_ctx *cctx, const char **error)
 	}
 }
 
-/* Output message from client. */
+/* Output message from server. */
 int
 client_msg_fn_output(
     struct hdr *hdr, struct client_ctx *cctx, unused const char **error)
