@@ -55,7 +55,7 @@ usage(const char *s)
 {
 	if (s == NULL)
 		s = "command [flags]";
-	fprintf(stderr, "usage: %s [-v] [-s path] %s\n", __progname, s);
+	fprintf(stderr, "usage: %s [-v] [-S path] %s\n", __progname, s);
 	return (1);
 }
 
@@ -161,9 +161,9 @@ main(int argc, char **argv)
 	u_int			 i;
 
 	path = NULL;
-        while ((opt = getopt(argc, argv, "s:v?")) != EOF) {
+        while ((opt = getopt(argc, argv, "S:v?")) != EOF) {
                 switch (opt) {
-		case 's':
+		case 'S':
 			path = xstrdup(optarg);
 			break;
 		case 'v':
