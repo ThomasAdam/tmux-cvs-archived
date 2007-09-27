@@ -45,8 +45,10 @@ struct op {
 };
 struct op op_table[] = {
 	{ "attach", NULL, op_attach },
-	{ "list-sessions", "ls", op_list },
-	{ "new-session", "new", op_new },
+	{ "list-sessions", "ls", op_list/*_sessions*/ },
+	{ "new-session", "new", op_new/*_session*/ },
+//	{ "rename-window", "rw", op_rename_window },
+//	{ "rename-session", "rs", op_rename_session },
 };
 #define NOP (sizeof op_table / sizeof op_table[0])
 

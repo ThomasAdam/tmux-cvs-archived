@@ -58,7 +58,7 @@ struct cmd client_cmd_table[] = {
 	{ 'L', client_cmd_fn_msg, MSG_LAST },
 	{ 'l', client_cmd_fn_msg, MSG_LAST },
 	{ 'W', client_cmd_fn_msg, MSG_WINDOWLIST },
-	{ 'w', client_cmd_fn_msg, MSG_WINDOWLIST }
+	{ 'w', client_cmd_fn_msg, MSG_WINDOWLIST },
 };
 #define NCLIENTCMD (sizeof client_cmd_table / sizeof client_cmd_table[0])
 

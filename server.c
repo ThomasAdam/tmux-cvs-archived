@@ -321,6 +321,8 @@ server_lost_window(struct window *w)
 	u_int		 i, j;
 	int		 destroyed;
 
+	log_debug("lost window %d", w->fd);
+
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i);
 		if (s == NULL)
