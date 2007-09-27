@@ -47,7 +47,7 @@ server_find_sessid(struct sessid *sid, char **cause)
 			xasprintf(cause, "index out of range: %u", sid->idx);
 			return (NULL);
 		}
-		if ((s = ARRAY_ITEM(&sessions, sid->idx) = NULL)) {
+		if ((s = ARRAY_ITEM(&sessions, sid->idx)) == NULL) {
 			xasprintf(cause, "session doesn't exist: %u", sid->idx);
 			return (NULL);
 		}

@@ -45,8 +45,10 @@ struct op {
 };
 struct op op_table[] = {
 	{ "attach", NULL, op_attach },
-	{ "list-sessions", "ls", op_list/*_sessions*/ },
+	{ "list-sessions", "ls", op_list_sessions },
+	{ "list-windows", "lsw", op_list_windows },
 	{ "new-session", "new", op_new/*_session*/ },
+//	{ "new-window", "neww", op_new_window },
 //	{ "rename-window", "rw", op_rename_window },
 //	{ "rename-session", "rs", op_rename_session },
 };
