@@ -187,7 +187,7 @@ main(int argc, char **argv)
 
 	for (i = 0; i < NOP; i++) {
 		op = op_table + i;
-		if (strncmp(argv[0], op->cmd, strlen(op->cmd)) == 0 ||
+		if (strncmp(argv[0], op->cmd, strlen(argv[0])) == 0 ||
 		    (op->alias != NULL && strcmp(argv[0], op->alias) == 0))
 			exit(op->fn(path, argc, argv));
 	}
