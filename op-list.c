@@ -63,7 +63,7 @@ op_list(char *path, int argc, char **argv)
 	if (*name == '\0')
 		client_write_server(&cctx, MSG_SESSIONS, &sdata, sizeof sdata);
 	else {
-		strlcpy(wdata.name, name, sizeof wdata.name);
+		client_fill_sessid(&wdata.sid, name);
 		client_write_server(&cctx, MSG_WINDOWS, &wdata, sizeof wdata);
 	}
 

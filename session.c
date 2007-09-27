@@ -112,13 +112,13 @@ session_new(struct session *s, const char *cmd, u_int sx, u_int sy)
 {
 	struct window	*w;
 	const char	*environ[] = { NULL, "TERM=screen", NULL };
-	char		 blk[256];
+	char		 buf[256];
 	u_int		 i;
 
 	if (session_index(s, &i) != 0)
 		fatalx("session not found");
-	xsnprintf(blk, sizeof blk, "TMUX=%ld,%u", (long) getpid(), i);
-	environ[0] = blk;
+	xsnprintf(buf, sizeof buf, "TMUX=%ld,%u", (long) getpid(), i);
+	environ[0] = buf;
 	
 	if ((w = window_create(cmd, environ, sx, sy)) == NULL)
 		return (-1);
