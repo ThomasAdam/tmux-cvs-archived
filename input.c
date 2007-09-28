@@ -19,8 +19,8 @@
 #include <sys/types.h>
 
 #include <stdint.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tmux.h"
 
