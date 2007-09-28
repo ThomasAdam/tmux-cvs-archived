@@ -455,6 +455,7 @@ int	 op_list_windows(char *, int, char **);
 
 /* client.c */
 int	 client_init(char *, struct client_ctx *, int);
+int	 client_flush(struct client_ctx *);
 int	 client_main(struct client_ctx *);
 void	 client_write_server(struct client_ctx *, enum hdrtype, void *, size_t);
 void	 client_fill_sessid(struct sessid *, char [MAXNAMELEN]);

@@ -125,6 +125,31 @@ retry:
 }
 
 int
+client_flush(struct client_ctx *cctx)
+{
+	struct pollfd	 pfd;
+
+	/* XXX error response! */
+	while (BUFFER_USED(cctx->srv_out) > 0) {
+		pfd.fd = cctx->srv_fd;
+		pfd.events = POLLIN|POLLOUT;
+	
+		if (poll(&pfd, 1, INFTIM) == -1) {
+			if (errno == EAGAIN || errno == EINTR)
+				continue;
+			fatal("poll failed");
+		}
+
+		if (buffer_poll(&pfd, cctx->srv_in, cctx->srv_out) != 0) {
+			log_warnx("lost server");
+			return (1);
+		}
+	}
+
+	return (0);
+}
+
+int
 client_main(struct client_ctx *cctx)
 {
 	struct pollfd	 pfds[2];
