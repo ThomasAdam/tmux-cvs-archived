@@ -17,8 +17,8 @@ DEBUG=
 META?= \002 # C-b
 
 SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c \
-      xmalloc.c xmalloc-debug.c input.c screen.c window.c session.c local.c \
-      log.c client.c client-msg.c client-cmd.c op.c op-list.c
+      xmalloc.c xmalloc-debug.c input.c input-keys.c screen.c window.c \
+      session.c local.c log.c client.c client-msg.c client-cmd.c op.c op-list.c
 
 YACC= yacc -d
 

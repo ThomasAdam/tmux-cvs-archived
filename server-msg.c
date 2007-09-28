@@ -389,14 +389,13 @@ server_msg_fn_rename(struct hdr *hdr, struct client *c)
 	char                   *cause;
 	struct window	       *w;
 	struct session	       *s;
-	
 
 	if (hdr->size != sizeof data)
 		fatalx("bad MSG_RENAME size");
 
 	buffer_read(c->in, &data, hdr->size);
 
-	data.newname[sizeof data.newname] = '\0';
+	data.newname[(sizeof data.newname) - 1] = '\0';
 	
 	if ((s = server_find_sessid(&data.sid, &cause)) == NULL) {
 		/* XXX: Send message to client */
