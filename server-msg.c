@@ -112,6 +112,7 @@ server_msg_fn_new(struct hdr *hdr, struct client *c)
 	if (c->sy == 0)
 		c->sy = 25;
 
+	data.name[(sizeof data.name) - 1] = '\0';
 	if (*data.name != '\0' && session_find(data.name) != NULL) {
 		xasprintf(&msg, "duplicate session: %s", data.name);
 		server_write_client(c, MSG_ERROR, msg, strlen(msg));

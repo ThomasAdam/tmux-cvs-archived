@@ -31,6 +31,7 @@ server_find_sessid(struct sessid *sid, char **cause)
 	u_int		i, n;
 
 	if (*sid->name != '\0') {
+		sid->name[(sizeof sid->name) - 1] = '\0';
 		if ((s = session_find(sid->name)) == NULL) {
 			xasprintf(cause, "session not found: %s", sid->name);
 			return (NULL);
