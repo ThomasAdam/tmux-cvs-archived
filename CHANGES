@@ -1,3 +1,6 @@
+28 September 2007
+ * (mxey) Added window remaming, like "tmux rename [-s session] [-i index] name"
+    
 27 September 2007
 
 * Split "tmux list" into "tmux list-sessions" (ls) and "list-windows" (lsw).

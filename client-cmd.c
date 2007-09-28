@@ -53,8 +53,6 @@ struct cmd client_cmd_table[] = {
 	{ 'p', client_cmd_fn_msg, MSG_PREVIOUS },
 	{ 'R', client_cmd_fn_msg, MSG_REFRESH },
 	{ 'r', client_cmd_fn_msg, MSG_REFRESH },
-	{ 'T', client_cmd_fn_msg, MSG_RENAME },
-	{ 't', client_cmd_fn_msg, MSG_RENAME },
 	{ 'L', client_cmd_fn_msg, MSG_LAST },
 	{ 'l', client_cmd_fn_msg, MSG_LAST },
 	{ 'W', client_cmd_fn_msg, MSG_WINDOWLIST },
