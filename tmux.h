@@ -539,10 +539,12 @@ int	 server_msg_dispatch(struct client *);
 /* server-fn.c */
 struct session *server_find_sessid(struct sessid *, char **);
 void	 server_write_message(struct client *, const char *, ...);
-void	 server_write_client(struct client *, enum hdrtype, void *, size_t);
-void	 server_write_client2(
-	     struct client *, enum hdrtype, void *, size_t, void *, size_t);
-void	 server_write_clients(struct window *, enum hdrtype, void *, size_t);
+void	 server_write_client(
+             struct client *, enum hdrtype, const void *, size_t);
+void	 server_write_client2(struct client *,
+    	     enum hdrtype, const void *, size_t, const void *, size_t);
+void	 server_write_clients(
+    	     struct window *, enum hdrtype, const void *, size_t);
 void	 server_window_changed(struct client *);
 void	 server_draw_client(struct client *, u_int, u_int);
 

@@ -393,6 +393,13 @@ local_output(struct buffer *b, size_t size)
 				}
 				log_warnx("carriage_return not supported");
 				break;
+			case '\007':	/* BEL */
+				if (bell != NULL) {
+					local_putp(bell);
+					break;
+				}
+				log_warnx("bell not supported");
+				break;
 			case '\010':	/* BS */
 				if (cursor_left != NULL) {
 					local_putp(cursor_left);
