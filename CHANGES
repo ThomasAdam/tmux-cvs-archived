@@ -1,5 +1,6 @@
 29 September 2007
 
+* (nicm) Deleting/inserting lines should follow scrolling region. Fix.
 * (nicm) Allow creation of detached sessions: "tmux new-session -d".
 * (nicm) Permit error messages to be passed back for transient clients like 
   rename. Also make rename -i work.
