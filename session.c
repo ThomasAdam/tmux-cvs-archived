@@ -180,6 +180,8 @@ session_next(struct session *s)
 		if (w == s->window)
 			return (1);
 	}
+	if (w == s->window)
+		return (0);
 	s->last = s->window;
 	s->window = w;
 	return (0);
@@ -200,6 +202,8 @@ session_previous(struct session *s)
 		if (w == s->window)
 			return (1);
 	}
+	if (w == s->window)
+		return (0);
 	s->last = s->window;
 	s->window = w;
 	return (0);
