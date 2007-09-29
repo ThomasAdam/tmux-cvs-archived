@@ -128,7 +128,8 @@ server_msg_fn_new(struct hdr *hdr, struct client *c)
 	if (c->session == NULL)
 		fatalx("session_create failed");
 	xfree(cmd);
-	
+
+	server_write_client(c, MSG_DONE, NULL, 0);
 	server_draw_client(c, 0, c->sy - 1);
 
 	return (0);

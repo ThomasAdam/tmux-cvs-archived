@@ -30,11 +30,12 @@ op_new(char *path, int argc, char **argv)
 	struct new_data	 	data;	
 	struct client_ctx	cctx;
 	char			name[MAXNAMELEN];
-	int			opt;
+	int			opt, detached;
 
 	*name = '\0';
+	detached = 0;
 	optind = 1;
-	while ((opt = getopt(argc, argv, "s:?")) != EOF) {
+	while ((opt = getopt(argc, argv, "s:d?")) != EOF) {
 		switch (opt) {
 		case 's':
 			if (strlcpy(name, optarg, sizeof name) >= sizeof name) {
@@ -42,9 +43,12 @@ op_new(char *path, int argc, char **argv)
 				return (1);
 			}
 			break;
+		case 'd':
+			detached = 1;
+			break;
 		case '?':
 		default:
-			return (usage("new [-s session]"));
+			return (usage("new [-d] [-s session]"));
 		}
 	}	
 	argc -= optind;
@@ -60,6 +64,8 @@ op_new(char *path, int argc, char **argv)
 	data.sy = cctx.ws.ws_row;
 	client_write_server(&cctx, MSG_NEW, &data, sizeof data);
 
+	if (detached)
+		return (client_flush(&cctx));
 	return (client_main(&cctx));
 }
 
