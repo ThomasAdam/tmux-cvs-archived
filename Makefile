@@ -63,3 +63,6 @@ depend:
 
 clean:
 		rm -f ${CLEANFILES}
+
+install:	all
+		${INSTALLBIN} ${PROG} ${DESTDIR}${PREFIX}/bin/${PROG}
