@@ -1,5 +1,7 @@
 29 September 2007
 
+* (nicm) Permit error messages to be passed back for transient clients like 
+  rename. Also make rename -i work.
 * (nicm) Pass through bell in any window to current.
 
 28 September 2007

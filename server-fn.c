@@ -172,6 +172,20 @@ server_draw_client(struct client *c, u_int py_upper, u_int py_lower)
 		buffer_reverse_add(c->out, sizeof hdr);
 }
 
+/* Send error message command to client. */
+void
+server_write_error(struct client *c, const char *fmt, ...)
+{
+	va_list	ap;
+	char   *msg;
+
+	va_start(ap, fmt);
+	xvasprintf(&msg, fmt, ap);
+	va_end(ap);
+
+	server_write_client(c, MSG_ERROR, msg, strlen(msg));
+	xfree(msg);
+}
 
 /* Write message command to a client. */
 void
