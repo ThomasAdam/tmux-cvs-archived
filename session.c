@@ -218,6 +218,8 @@ session_select(struct session *s, u_int i)
 	w = window_at(&s->windows, i);
 	if (w == NULL)
 		return (-1);
+	if (w == s->window)
+		return (0);
 	s->last = s->window;
 	s->window = w;
 	return (0);
