@@ -310,11 +310,13 @@ local_putc(int c)
 	if (c < 0 || c > (int) UCHAR_MAX)
 		fatalx("invalid character");
 
+/* XXX
 	if (debug_level > 2) {
 		f = fopen("tmux-out.log", "a+");
 		fprintf(f, "%c", ch);
 		fclose(f);
 	}
+*/
 
 	buffer_write(local_out, &ch, 1);
 	return (c);
