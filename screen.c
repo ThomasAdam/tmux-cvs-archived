@@ -592,7 +592,7 @@ screen_insert_lines_region(struct screen *s, u_int py, u_int ny)
 
 	screen_free_lines(s, (s->ry_lower + 1) - ny, ny);
 
-	if (py != s->ry_upper)
+	if (py != s->ry_lower)
 		screen_move_lines(s, py + ny, py, (s->ry_lower + 1) - py - ny);
 
 	screen_make_lines(s, py, ny);
