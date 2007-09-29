@@ -183,7 +183,6 @@ screen_draw(struct screen *s, struct buffer *b, u_int uy, u_int ly)
 		input_store_two(b, CODE_CURSORMOVE, j + 1, 1);
 
 		for (i = 0; i <= screen_last_x(s); i++) {
-			
 			size = BUFFER_USED(b);
 			input_store_one(b, CODE_ATTRIBUTES, 0);
 			
