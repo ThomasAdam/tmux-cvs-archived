@@ -927,12 +927,12 @@ input_handle_sequence_decstbm(struct input_ctx *ictx)
 	if (input_get_argument(ictx, 1, &m, 1) != 0)
 		return;
 
-	if (n == 0 || n > ictx->s->sy || m == 0 || m > ictx->s->sx) {
-		log_debug3("decstbm: out of range: %hu,%hu", m, n);
+	if (n == 0 || n > ictx->s->sy || m == 0 || m > ictx->s->sy) {
+		log_debug3("decstbm: out of range: %hu,%hu", n, m);
 		return;
 	}
-	if (m > n) {
-		log_debug3("decstbm: out of range: %hu,%hu", m, n);
+	if (n > m) {
+		log_debug3("decstbm: out of range: %hu,%hu", n, m);
 		return;
 	}
 
