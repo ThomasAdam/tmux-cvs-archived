@@ -1,3 +1,7 @@
+30 September 2007
+
+* (nicm) Window info command for debugging, C-b I.
+
 29 September 2007
 
 * (nicm) Deleting/inserting lines should follow scrolling region. Fix.
