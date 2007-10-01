@@ -565,6 +565,7 @@ void	 input_translate_key(struct buffer *, int);
 
 /* screen.c */
 void	 screen_create(struct screen *, u_int, u_int);
+void	 screen_destroy(struct screen *);
 void	 screen_resize(struct screen *, u_int, u_int);
 void	 screen_draw(struct screen *, struct buffer *, u_int, u_int);
 size_t	 screen_store_attributes(struct buffer *, u_char);

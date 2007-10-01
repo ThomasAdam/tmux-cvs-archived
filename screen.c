@@ -157,6 +157,16 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 	}
 }
 
+/* Destroy a screen. */
+void
+screen_destroy(struct screen *s)
+{
+	screen_free_lines(s, 0, s->sy);
+	xfree(s->grid_data);
+	xfree(s->grid_attr);
+	xfree(s->grid_colr);
+}
+
 /* Draw a set of lines on the screen. */
 void
 screen_draw(struct screen *s, struct buffer *b, u_int uy, u_int ly)

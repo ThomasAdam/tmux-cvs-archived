@@ -178,6 +178,8 @@ window_destroy(struct window *w)
 
 	input_free(&w->ictx);
 
+	screen_destroy(&w->screen);
+
 	buffer_destroy(w->in);
 	buffer_destroy(w->out);
 	xfree(w);
