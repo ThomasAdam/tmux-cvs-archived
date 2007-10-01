@@ -430,6 +430,10 @@ struct input_ctx {
 	struct buffer	*b;
 	struct screen	*s;
 
+	u_char		 title_buf[MAXTITLELEN];
+	size_t		 title_len;
+	u_int		 title_type;
+
 	void 		*(*state)(u_char, enum input_class, struct input_ctx *);
 
 	u_char		 private;
