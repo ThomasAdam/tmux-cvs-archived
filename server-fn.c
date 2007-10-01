@@ -203,9 +203,7 @@ server_write_message(struct client *c, const char *fmt, ...)
 
 	input_store_zero(c->out, CODE_CURSOROFF);
 	input_store_two(c->out, CODE_CURSORMOVE, c->sy, 1);
-	input_store_one(c->out, CODE_ATTRIBUTES, 2);
-	input_store16(c->out, 0);
-	input_store16(c->out, 7);
+	input_store_two(c->out, CODE_ATTRIBUTES, ATTR_REVERSE, 0x88);
 	va_start(ap, fmt);
 	xvasprintf(&msg, fmt, ap);
 	va_end(ap);
