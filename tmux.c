@@ -35,6 +35,7 @@ const char	*malloc_options = "AFGJPX";
 volatile sig_atomic_t sigwinch;
 volatile sig_atomic_t sigterm;
 int		 debug_level;
+u_int		 status_lines;
 
 void		 sighandler(int);
 
@@ -183,6 +184,8 @@ main(int argc, char **argv)
 
 	log_open(stderr, LOG_USER, debug_level);
 
+	status_lines = 1;
+       
 	for (i = 0; i < NOP; i++) {
 		op = op_table + i;
 		if (strncmp(argv[0], op->cmd, strlen(argv[0])) == 0 ||
