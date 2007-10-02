@@ -17,6 +17,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/ioctl.h>
 
 #include <curses.h>
 #include <fcntl.h>
@@ -288,12 +289,20 @@ local_cmp(const void *ptr1, const void *ptr2)
 void
 local_done(void)
 {
+	struct winsize	ws;
+
 	xfree(local_in);
 	xfree(local_out);
 
 	if (tcsetattr(local_fd, TCSANOW, &local_tio) != 0)
 		fatal("tcsetattr failed");
 	close(local_fd);
+	
+	if (change_scroll_region != NULL) {
+		if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
+			fatal("ioctl(TIOCGWINSZ)");
+		putp(tparm(change_scroll_region, 0, ws.ws_row - 1));
+	}
 
 	if (keypad_local != NULL)
 		putp(keypad_local);	/* not local_putp */
