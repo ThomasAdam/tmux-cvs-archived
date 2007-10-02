@@ -22,9 +22,10 @@
 
 int	client_cmd_prefix = META;
 
+int	client_cmd_fn_msg(int, struct client_ctx *, char **);
 int	client_cmd_fn_select(int, struct client_ctx *, char **);
 int	client_cmd_fn_detach(int, struct client_ctx *, char **);
-int	client_cmd_fn_msg(int, struct client_ctx *, char **);
+int	client_cmd_fn_meta(int, struct client_ctx *, char **);
 
 struct cmd {
 	int	key;
@@ -59,6 +60,7 @@ struct cmd client_cmd_table[] = {
 	{ 'w', client_cmd_fn_msg, MSG_WINDOWLIST },
 	{ 'I', client_cmd_fn_msg, MSG_WINDOWINFO },
 	{ 'i', client_cmd_fn_msg, MSG_WINDOWINFO },
+	{ META, client_cmd_fn_meta, 0 },
 };
 #define NCLIENTCMD (sizeof client_cmd_table / sizeof client_cmd_table[0])
 
@@ -103,4 +105,15 @@ client_cmd_fn_detach(
     unused int arg, unused struct client_ctx *cctx, unused char **error)
 {
 	return (-1);
+}
+
+/* Handle meta command. */
+int
+client_cmd_fn_meta(unused int arg, struct client_ctx *cctx, unused char **error)
+{
+	uint8_t	key = META;
+
+	client_write_server(cctx, MSG_INPUT, &key, sizeof key);
+
+	return (0);
 }
