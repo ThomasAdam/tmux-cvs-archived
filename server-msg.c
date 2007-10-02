@@ -401,6 +401,7 @@ server_msg_fn_rename(struct hdr *hdr, struct client *c)
 	char                   *cause;
 	struct window	       *w;
 	struct session	       *s;
+	u_int			i;
 
 	if (hdr->size != sizeof data)
 		fatalx("bad MSG_RENAME size");
@@ -429,6 +430,14 @@ server_msg_fn_rename(struct hdr *hdr, struct client *c)
 	strlcpy(w->name, data.newname, sizeof w->name);
 
 	server_write_client(c, MSG_DONE, NULL, 0);
+	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
+		c = ARRAY_ITEM(&clients, i);
+		if (c != NULL && c->session != NULL) {
+			if (session_has(c->session, w))
+				server_draw_status(c);
+		}
+	}
+
 	return (0);
 }
 

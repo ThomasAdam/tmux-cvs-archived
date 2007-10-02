@@ -23,8 +23,6 @@
 
 #include "tmux.h"
 
-void	server_draw_status(struct client *);
-
 /* Find session from sessid. */
 struct session *
 server_find_sessid(struct sessid *sid, char **cause)

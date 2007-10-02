@@ -1,5 +1,6 @@
 02 October 2007
 
+* (nicm) Redraw client status lines on rename.
 * (nicm) Error on ambiguous command.
 
 01 October 2007
