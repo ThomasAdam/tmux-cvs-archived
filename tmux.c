@@ -202,9 +202,9 @@ main(int argc, char **argv)
 	status_lines = 1;
 
 	shell = getenv("SHELL");
-	if (shell == NULL)
+	if (shell == NULL || *shell == '\0')
 		shell = "/bin/ksh";
-	xasprintf(&default_command, "%s -l", shell);
+	xasprintf(&default_command, "exec %s -l", shell);
 
 	found = NULL;
 	for (i = 0; i < NOP; i++) {
