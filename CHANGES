@@ -1,3 +1,8 @@
+03 October 2007
+
+* (nicm) Move command parsing into the client. Also rename some messages and
+  tidy up a few bits. Lots more tidying up needed :-/.
+
 02 October 2007
 
 * (nicm) Redraw client status lines on rename.

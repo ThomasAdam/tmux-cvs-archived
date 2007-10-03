@@ -172,16 +172,6 @@ input_free(struct input_ctx *ictx)
 }
 
 void
-input_parse1(struct screen *s, u_char *buf, size_t len, struct buffer *b)
-{
-	struct input_ctx	ictx;
-
-	input_init(&ictx, s);
-	input_parse(&ictx, buf, len, b);
-	input_free(&ictx);
-}
-
-void
 input_parse(struct input_ctx *ictx, u_char *buf, size_t len, struct buffer *b)
 {
 	enum input_class	iclass;
