@@ -528,9 +528,9 @@ void		 siginit(void);
 void		 sigreset(void);
 
 /* op.c */
-int	 op_new(char *, int, char **);
+int	 op_new_session(char *, int, char **);
 int	 op_attach(char *, int, char **);
-int	 op_rename(char *, int, char **);
+int	 op_rename_window(char *, int, char **);
 int	 op_bind_key(char *, int, char **);
 int	 op_unbind_key(char *, int, char **);
 

@@ -47,11 +47,11 @@ struct op {
 };
 const struct op op_table[] = {
 	{ "attach", NULL, op_attach },
+	{ "bind-key", "bind", op_bind_key },
 	{ "list-sessions", "ls", op_list_sessions },
 	{ "list-windows", "lsw", op_list_windows },
-	{ "new-session", "new", op_new/*_session*/ },
-	{ "rename-window", "renw", op_rename },
-	{ "bind-key", "bind", op_bind_key },
+	{ "new-session", "new", op_new_session },
+	{ "rename-window", "renw", op_rename_window },
 	{ "unbind-key", "unbind", op_unbind_key },
 };
 #define NOP (sizeof op_table / sizeof op_table[0])
