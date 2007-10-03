@@ -272,7 +272,7 @@ server_accept_client(int srv_fd)
 	if (fcntl(client_fd, F_SETFL, mode|O_NONBLOCK) == -1)
 		fatal("fcntl failed");
 
-	c = xmalloc(sizeof *c);
+	c = xcalloc(1, sizeof *c);
 	c->fd = client_fd;
 	c->in = buffer_create(BUFSIZ);
 	c->out = buffer_create(BUFSIZ);
