@@ -205,7 +205,7 @@ main(int argc, char **argv)
 	if ((cmd = cmd_parse(argc, argv, &cause)) == NULL) {
 		if (cause == NULL)
 			goto usage;
-		log_warnx("%s", cause);
+		log_warnx("%s: %s", __progname, cause);
 		exit(1);
 	}
 
