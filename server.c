@@ -127,7 +127,7 @@ server_main(char *srv_path, int srv_fd)
 	ARRAY_INIT(&clients);
 	ARRAY_INIT(&sessions);
 
-	cmd_init();
+	key_bindings_init();
 
 	pfds = NULL;
 	while (!sigterm) {
@@ -171,7 +171,7 @@ server_main(char *srv_path, int srv_fd)
 		server_handle_clients(&pfd);
 	}
 
-	cmd_free();
+	key_bindings_free();
 
 	close(srv_fd);
 	unlink(srv_path);
