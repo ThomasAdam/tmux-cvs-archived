@@ -36,6 +36,7 @@ volatile sig_atomic_t sigwinch;
 volatile sig_atomic_t sigterm;
 int		 debug_level;
 u_int		 status_lines;
+char		*default_command;
 
 void		 sighandler(int);
 
@@ -172,6 +173,7 @@ int
 main(int argc, char **argv)
 {
 	const struct op		*op, *found;
+	const char		*shell;
 	char			*path;
 	int	 		 opt;
 	u_int			 i;
@@ -198,6 +200,11 @@ main(int argc, char **argv)
 	log_open(stderr, LOG_USER, debug_level);
 
 	status_lines = 1;
+
+	shell = getenv("SHELL");
+	if (shell == NULL)
+		shell = "/bin/ksh";
+	xasprintf(&default_command, "%s -l", shell);
 
 	found = NULL;
 	for (i = 0; i < NOP; i++) {

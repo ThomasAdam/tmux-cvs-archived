@@ -230,6 +230,8 @@ server_write_message(struct client *c, const char *fmt, ...)
 	va_start(ap, fmt);
 	xvasprintf(&msg, fmt, ap);
 	va_end(ap);
+	if (strlen(msg) > c->sx - 1)
+		msg[c->sx - 1] = '\0';
 	buffer_write(c->out, msg, strlen(msg));
 	for (i = strlen(msg); i < c->sx; i++)
 		input_store8(c->out, ' ');
