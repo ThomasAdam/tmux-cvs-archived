@@ -45,7 +45,7 @@ struct server_msg {
 	
 	int	        (*fn)(struct hdr *, struct client *);
 };
-struct server_msg server_msg_table[] = {
+const struct server_msg server_msg_table[] = {
 	{ MSG_ATTACH, server_msg_fn_attach },
 	{ MSG_CREATE, server_msg_fn_create },
 	{ MSG_INPUT, server_msg_fn_input },
@@ -68,7 +68,7 @@ int
 server_msg_dispatch(struct client *c)
 {
 	struct hdr		 hdr;
-	struct server_msg	*msg;
+	const struct server_msg	*msg;
 	u_int		 	 i;
 	int			 n;
 

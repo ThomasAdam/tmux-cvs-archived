@@ -24,7 +24,7 @@
 
 #include "tmux.h"
 
-struct {
+const struct {
 	u_char		 first;
 	u_char		 last;
 	enum input_class class;

@@ -44,7 +44,7 @@ struct op {
 	const char     *alias;
 	int		(*fn)(char *, int, char **);
 };
-struct op op_table[] = {
+const struct op op_table[] = {
 	{ "attach", NULL, op_attach },
 	{ "list-sessions", "ls", op_list_sessions },
 	{ "list-windows", "lsw", op_list_windows },
@@ -158,7 +158,7 @@ sigreset(void)
 int
 main(int argc, char **argv)
 {
-	struct op		*op, *found;
+	const struct op		*op, *found;
 	char			*path;
 	int	 		 opt;
 	u_int			 i;
