@@ -379,7 +379,7 @@ server_lost_window(struct window *w)
 				c->session = NULL;
 				server_write_client(c, MSG_EXIT, NULL, 0);
 			} else
-				server_window_changed(c);
+				server_draw_client(c);
 		}
 	}
 }

@@ -67,7 +67,7 @@ cmd_detach_session_parse(void **ptr, int argc, char **argv, char **cause)
 		}
 	}	
 	argc -= optind;
-	argv -= optind;
+	argv += optind;
 	if (argc != 0)
 		goto usage;
 

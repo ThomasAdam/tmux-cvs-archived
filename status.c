@@ -34,7 +34,7 @@ status_write(struct client *c)
 	u_int		 i;
 
 	input_store_zero(b, CODE_CURSOROFF);
-	input_store_two(b, CODE_CURSORMOVE, s->sy + 1, 1);
+	input_store_two(b, CODE_CURSORMOVE, c->sy - status_lines + 1, 1);
 	input_store_two(b, CODE_ATTRIBUTES, ATTR_REVERSE, 0x20);
 
 	size = s->sx;

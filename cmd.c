@@ -27,6 +27,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_detach_session_entry,
 	&cmd_list_sessions_entry,
 	&cmd_new_session_entry,
+	&cmd_new_window_entry,
 	NULL
 };
 
