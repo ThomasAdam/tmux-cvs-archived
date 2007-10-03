@@ -25,6 +25,11 @@ YACC= yacc -d
 CC= cc
 INCDIRS+= -I. -I- -I/usr/local/include
 CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
+.ifdef PROFILE
+# Don't use ccache
+CC= /usr/bin/gcc
+CFLAGS+= -pg -DPROFILE -O0
+.endif
 .ifdef DEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -Wl,-E
@@ -40,6 +45,9 @@ INSTALLBIN= install -g bin -o root -m 555
 INSTALLMAN= install -g bin -o root -m 444
 
 LDFLAGS+= -L/usr/local/lib
+.ifdef PROFILE
+LDFLAGS+= -pg
+.endif
 LIBS+= -lutil -lncurses
 
 OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
