@@ -58,12 +58,12 @@ cmd_new_session_parse(void **ptr, int argc, char **argv, char **cause)
 	data->flag_detached = 0;
 	data->name = NULL;
 
-	while ((opt = getopt(argc, argv, "ds:")) != EOF) {
+	while ((opt = getopt(argc, argv, "dn:")) != EOF) {
 		switch (opt) {
 		case 'd':
 			data->flag_detached = 1;
 			break;
-		case 's':
+		case 'n':
 			data->name = xstrdup(optarg);
 			break;
 		default:
