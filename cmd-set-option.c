@@ -102,17 +102,24 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 		return;
 	}
 
-	number =  strtonum(data->value, 0, UINT_MAX, &errstr);
-
-	bool = -1;
-	if (number == 1 ||
-	    strcmp(data->value, "on") == 0 || strcmp(data->value, "yes") == 0)
+	if (data->value != NULL) {
+		number = strtonum(data->value, 0, UINT_MAX, &errstr);
+		
+		bool = -1;
+		if (number == 1 || strcmp(data->value, "on") == 0 ||
+		    strcmp(data->value, "yes") == 0)
+			bool = 1;
+		if (number == 0 || strcmp(data->value, "off") == 0 ||
+		    strcmp(data->value, "no") == 0)
+			bool = 0;
+	} else
 		bool = 1;
-	if (number == 0 ||
-	    strcmp(data->value, "off") == 0 || strcmp(data->value, "no") == 0)
-		bool = 0;
-	
+
 	if (strcmp(data->option, "prefix") == 0) {
+		if (data->value == NULL) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
 		key = key_string_lookup_string(data->value);
 		if (key == KEYC_NONE) {
 			ctx->error(ctx, "unknown key: %s", data->value);
