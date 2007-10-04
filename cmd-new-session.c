@@ -128,7 +128,7 @@ cmd_new_session_exec(void *ptr, struct cmd_ctx *ctx)
 		server_write_client(c, MSG_EXIT, NULL, 0);
 	else {
 		server_write_client(c, MSG_READY, NULL, 0);
-		server_draw_client(c);
+		server_redraw_client(c);
 	}
 }
 

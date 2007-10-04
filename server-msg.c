@@ -123,7 +123,7 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 	else {
 		ctx.session = server_find_sessid(&data.sid, &cause);
 		if (ctx.session == NULL) {
-			server_write_error(c, "%s", cause);
+			server_msg_fn_command_error(&ctx, "%s", cause);
 			xfree(cause);
 			return (0);
 		}
@@ -212,7 +212,7 @@ server_msg_fn_keys(struct hdr *hdr, struct client *c)
 		fatalx("bad MSG_KEYS size");
 
 	if (c->flags & CLIENT_HOLD) {
-		server_draw_client(c);
+		server_redraw_client(c);
 		c->flags &= ~CLIENT_HOLD;
 	}
 

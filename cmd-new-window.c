@@ -120,15 +120,15 @@ cmd_new_window_exec(void *ptr, struct cmd_ctx *ctx)
 		ctx->error(ctx, "command failed: %s", cmd);
 		return;
 	}
-	if (!data->flag_detached)
+	if (!data->flag_detached) {
 		session_select(s, i);
-	
-	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
-		c = ARRAY_ITEM(&clients, i);
-		if (c != NULL && c->session == s) {
-			if (!data->flag_detached)
-				server_draw_client(c);
-			server_draw_status(c); 
+		server_redraw_session(s);
+	} else {
+		/* XXX */
+		for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
+			c = ARRAY_ITEM(&clients, i);
+			if (c != NULL && c->session == s)
+				server_redraw_status(c); 
 		}
 	}
 	
