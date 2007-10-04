@@ -1,5 +1,6 @@
 04 October 2007
 
+* (mxey) Fixed usage statemnt for new-window
 * (nicm) attach-session (can't believe I forgot it until now!) and list-windows
   commands.
 * (nicm) rename-window and select-window commands.

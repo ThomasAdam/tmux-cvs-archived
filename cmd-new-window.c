@@ -92,7 +92,7 @@ usage:
 const char *
 cmd_new_window_usage(void)
 {
-	return ("new-window [command]");
+	return ("new-window [-d] [-n name] [command]");
 }
 
 void
