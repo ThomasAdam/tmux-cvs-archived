@@ -160,6 +160,9 @@ server_clear_client(struct client *c)
 		input_store_two(c->out, CODE_CURSORMOVE, i + 1, 1);
 		input_store_zero(c->out, CODE_CLEARLINE);
 	}
+	input_store_two(c->out, CODE_CURSORMOVE, s->cy + 1, s->cx + 1);
+	if (s->mode & MODE_CURSOR)
+		input_store_zero(c->out, CODE_CURSORON);
 	
 	size = BUFFER_USED(c->out) - size;
 	hdr.type = MSG_DATA;
