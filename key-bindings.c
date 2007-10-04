@@ -138,7 +138,7 @@ key_bindings_free(void)
 		xfree(bd);
 	}
 	
-	ARRAY_FREEALL(&key_bindings);
+	ARRAY_FREE(&key_bindings);
 }
 
 void
