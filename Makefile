@@ -22,7 +22,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       key-bindings.c cmd.c cmd-new-session.c cmd-detach-session.c \
       cmd-list-sessions.c cmd-new-window.c cmd-next-window.c cmd-bind-key.c \
       cmd-unbind-key.c cmd-previous-window.c cmd-last-window.c cmd-list-keys.c \
-      cmd-set-option.c cmd-rename-window.c
+      cmd-set-option.c cmd-rename-window.c cmd-select-window.c
 
 YACC= yacc -d
 

@@ -467,6 +467,7 @@ enum cmd_type {
 	CMD_NEXTWINDOW,
 	CMD_PREVIOUSWINDOW,
 	CMD_RENAMEWINDOW,
+	CMD_SELECTWINDOW,
 	CMD_SETOPTION,
 	CMD_UNBINDKEY,
 };
@@ -541,6 +542,8 @@ extern const struct cmd_entry cmd_new_window_entry;
 extern const struct cmd_entry cmd_next_window_entry;
 extern const struct cmd_entry cmd_previous_window_entry;
 extern const struct cmd_entry cmd_rename_window_entry;
+extern const struct cmd_entry cmd_select_window_entry;
+void	cmd_select_window_default(void **, int);
 extern const struct cmd_entry cmd_set_option_entry;
 extern const struct cmd_entry cmd_unbind_key_entry;
 
