@@ -77,7 +77,6 @@ cmd_new_window_parse(void **ptr, int argc, char **argv, char **cause)
 	if (argc != 0 && argc != 1)
 		goto usage;
 
-	data->cmd = NULL;
 	if (argc == 1)
 		data->cmd = xstrdup(argv[0]);
 

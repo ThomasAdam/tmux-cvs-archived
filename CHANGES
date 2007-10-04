@@ -1,5 +1,6 @@
 04 October 2007
 
+* (nicm) rename-window command.
 * (nicm) set-option command (alias set): "tmux set-option prefix ^A".
 * (nicm) Key binding and unbinding is back.
 
