@@ -171,7 +171,7 @@ main(int argc, char **argv)
 
 	*name = '\0';
 	path = NULL;
-        while ((opt = getopt(argc, argv, "S:s:v?")) != EOF) {
+        while ((opt = getopt(argc, argv, "S:s:v")) != EOF) {
                 switch (opt) {
 		case 'S':
 			path = xstrdup(optarg);
@@ -183,7 +183,6 @@ main(int argc, char **argv)
 		case 'v':
 			debug_level++;
 			break;
-                case '?':
                 default:
 			goto usage;
                 }

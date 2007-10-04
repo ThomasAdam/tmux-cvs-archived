@@ -29,6 +29,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_last_window_entry,
 	&cmd_list_keys_entry,
 	&cmd_list_sessions_entry,
+	&cmd_list_windows_entry,
 	&cmd_new_session_entry,
 	&cmd_new_window_entry,
 	&cmd_next_window_entry,

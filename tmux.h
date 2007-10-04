@@ -462,6 +462,7 @@ enum cmd_type {
 	CMD_LASTWINDOW,
 	CMD_LISTKEYS,
 	CMD_LISTSESSIONS,
+	CMD_LISTWINDOWS,
 	CMD_NEWSESSION,
 	CMD_NEWWINDOW,
 	CMD_NEXTWINDOW,
@@ -537,6 +538,7 @@ extern const struct cmd_entry cmd_detach_session_entry;
 extern const struct cmd_entry cmd_last_window_entry;
 extern const struct cmd_entry cmd_list_keys_entry;
 extern const struct cmd_entry cmd_list_sessions_entry;
+extern const struct cmd_entry cmd_list_windows_entry;
 extern const struct cmd_entry cmd_new_session_entry;
 extern const struct cmd_entry cmd_new_window_entry;
 extern const struct cmd_entry cmd_next_window_entry;
