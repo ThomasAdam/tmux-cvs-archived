@@ -118,6 +118,12 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 	log_debug("got command %u %s from client %d",
 	    cmd->entry->type, cmd->entry->name, c->fd);
 
+	ctx.error = server_msg_fn_command_error;
+	ctx.print = server_msg_fn_command_print;
+
+	ctx.client = c;
+	ctx.flags = 0;
+
 	if (cmd->entry->flags & CMD_NOSESSION)
 		ctx.session = NULL;
 	else {
@@ -128,12 +134,6 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 			return (0);
 		}
 	}		
-
-	ctx.error = server_msg_fn_command_error;
-	ctx.print = server_msg_fn_command_print;
-
-	ctx.client = c;
-	ctx.flags = 0;
 
 	cmd_exec(cmd, &ctx);
 	cmd_free(cmd);

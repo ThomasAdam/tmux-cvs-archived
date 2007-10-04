@@ -51,7 +51,7 @@ u_int	xmalloc_mallocs;
 u_int	xmalloc_reallocs;
 
 /* Print function. */
-#define XMALLOC_PRINT log_debug3
+#define XMALLOC_PRINT log_debug
 
 /* Bytes of unallocated blocks and number of allocated blocks to show. */
 #define XMALLOC_BYTES 8

@@ -24,6 +24,7 @@
 #include "tmux.h"
 
 const struct cmd_entry *cmd_table[] = {
+	&cmd_attach_session_entry,
 	&cmd_bind_key_entry,
 	&cmd_detach_session_entry,
 	&cmd_last_window_entry,
