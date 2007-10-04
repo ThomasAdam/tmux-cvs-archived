@@ -282,7 +282,10 @@ server_accept_client(int srv_fd)
 	c->fd = client_fd;
 	c->in = buffer_create(BUFSIZ);
 	c->out = buffer_create(BUFSIZ);
+
 	c->session = NULL;
+	c->sx = 80;
+	c->sy = 25;
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		if (ARRAY_ITEM(&clients, i) == NULL) {

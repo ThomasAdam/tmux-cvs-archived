@@ -74,7 +74,6 @@ cmd_new_session_parse(void **ptr, int argc, char **argv, char **cause)
 	}	
 	argc -= optind;
 	argv += optind;
-
 	if (argc != 0 && argc != 1)
 		goto usage;
 
@@ -128,7 +127,6 @@ cmd_new_session_exec(void *ptr, struct cmd_ctx *ctx)
 	cmd = data->cmd;
 	if (cmd == NULL)
 		cmd = default_command;
-
 	
 	c->session = session_create(data->name, cmd, c->sx, sy);
 	if (c->session == NULL)
