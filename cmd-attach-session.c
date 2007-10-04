@@ -55,5 +55,6 @@ cmd_attach_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 	c->session = s;
 
 	server_write_client(c, MSG_READY, NULL, 0);
+	recalculate_sizes();
 	server_redraw_client(c);
 }

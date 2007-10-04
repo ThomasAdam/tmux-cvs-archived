@@ -309,6 +309,8 @@ server_lost_client(struct client *c)
 	buffer_destroy(c->in);
 	buffer_destroy(c->out);
 	xfree(c);
+
+	recalculate_sizes();
 }
 
 /* Handle window data. */
@@ -376,5 +378,7 @@ server_lost_window(struct window *w)
 				server_redraw_client(c);
 		}
 	}
+
+	recalculate_sizes();
 }
 

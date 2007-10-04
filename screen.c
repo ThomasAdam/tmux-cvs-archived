@@ -87,6 +87,9 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 	s->sx = sx;
 	s->sy = sy;
 
+	s->ry_upper = 0;
+	s->ry_lower = screen_last_y(s);
+
 	log_debug("resizing screen (%u, %u) -> (%u, %u)", ox, oy, sx, sy);
 
 	if (sy < oy) {

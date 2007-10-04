@@ -593,13 +593,18 @@ void	 server_write_session(
 void	 server_write_window(
              struct window *, enum hdrtype, const void *, size_t);
 void	 server_redraw_status(struct client *);
+void	 server_clear_client(struct client *);
 void	 server_redraw_client(struct client *);
 void	 server_redraw_session(struct session *);
+void	 server_clear_window(struct window *);
 void	 server_redraw_window(struct window *);
 void	 server_write_message(struct client *, const char *, ...);
 
 /* status.c */
 void	 status_write(struct client *c);
+
+/* resize.c */
+void	 recalculate_sizes(void);
 
 /* input.c */
 void	 input_init(struct input_ctx *, struct screen *);

@@ -99,7 +99,7 @@ cmd_new_session_usage(void)
 void
 cmd_new_session_exec(void *ptr, struct cmd_ctx *ctx)
 {
-	struct cmd_new_session_data	*data = ptr, std = { NULL, 0 };
+	struct cmd_new_session_data	*data = ptr, std = { NULL, NULL, 0 };
 	struct client			*c = ctx->client;
 	char				*cmd;
 	u_int				 sy;

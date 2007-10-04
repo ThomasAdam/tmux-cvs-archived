@@ -175,7 +175,7 @@ client_main(struct client_ctx *cctx)
 
 	if (error != NULL) {
 		if (*error == '\0') {
-			printf("[exited]\n", error);
+			printf("[exited]\n");
 			return (0);
 		}
 		printf("[error: %s]\n", error);
