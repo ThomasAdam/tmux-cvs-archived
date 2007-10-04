@@ -86,11 +86,7 @@ cmd_new_window_parse(void **ptr, int argc, char **argv, char **cause)
 usage:
 	usage(cause, "%s", cmd_new_window_usage());
 
-	if (data->name != NULL)
-		xfree(data->name);
-	if (data->cmd != NULL)
-		xfree(data->cmd);
-	xfree(data);
+	cmd_new_window_free(data);
 	return (-1);
 }
 

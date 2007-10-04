@@ -466,6 +466,7 @@ enum cmd_type {
 	CMD_NEWWINDOW,
 	CMD_NEXTWINDOW,
 	CMD_PREVIOUSWINDOW,
+	CMD_SETOPTION,
 	CMD_UNBINDKEY,
 };
 
@@ -538,6 +539,7 @@ extern const struct cmd_entry cmd_new_session_entry;
 extern const struct cmd_entry cmd_new_window_entry;
 extern const struct cmd_entry cmd_next_window_entry;
 extern const struct cmd_entry cmd_previous_window_entry;
+extern const struct cmd_entry cmd_set_option_entry;
 extern const struct cmd_entry cmd_unbind_key_entry;
 
 /* client.c */

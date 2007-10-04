@@ -76,7 +76,7 @@ cmd_detach_session_parse(void **ptr, int argc, char **argv, char **cause)
 usage:
 	usage(cause, "%s", cmd_detach_session_usage());
 
-	xfree(data);
+	cmd_detach_session_free(data);
 	return (-1);
 }
 

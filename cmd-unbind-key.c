@@ -63,7 +63,7 @@ cmd_unbind_key_parse(void **ptr, int argc, char **argv, char **cause)
 	}	
 	argc -= optind;
 	argv += optind;
-	if (argc < 1)
+	if (argc != 1)
 		goto usage;
 
 	if ((data->key = key_string_lookup_string(argv[0])) == KEYC_NONE) {

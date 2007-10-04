@@ -84,9 +84,7 @@ usage:
 	usage(cause, "%s", cmd_bind_key_usage());
 
 error:
-	if (data->cmd != NULL)
-		cmd_free(data->cmd);
-	xfree(data);
+	cmd_bind_key_free(data);
 	return (-1);
 }
 

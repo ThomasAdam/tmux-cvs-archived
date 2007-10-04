@@ -79,10 +79,8 @@ cmd_new_session_parse(void **ptr, int argc, char **argv, char **cause)
 
 usage:
 	usage(cause, "%s", cmd_new_session_usage());
-
-	if (data->name != NULL)
-		xfree(data->name);
-	xfree(data);
+	
+	cmd_new_session_free(data);
 	return (-1);
 }
 
