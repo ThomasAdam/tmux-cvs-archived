@@ -74,7 +74,9 @@ server_start(char *path)
 		return (0);
 	}
 
+#ifdef DEBUG
 	xmalloc_clear();
+#endif
 
 	logfile("server");
 	setproctitle("server (%s)", path);

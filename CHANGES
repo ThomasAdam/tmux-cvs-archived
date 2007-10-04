@@ -1,5 +1,6 @@
 04 October 2007
 
+* (nicm) -d option to attach to detach all other clients on the same session.
 * (nicm) Partial resizing support. Still buggy. A C-b S and back sometimes fixes
   it when it goes wonky.
 * (mxey) Added my tmux start script as an example (examples/start-tmux.sh).

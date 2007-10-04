@@ -26,7 +26,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
 
 YACC= yacc -d
 
-CC= cc
+CC?= cc
 INCDIRS+= -I. -I- -I/usr/local/include
 CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
 .ifdef PROFILE
