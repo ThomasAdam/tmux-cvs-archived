@@ -30,8 +30,8 @@
 void	cmd_previous_window_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_previous_window_entry = {
-	CMD_PREVIOUSWINDOW, "previous-window", "prev", 0,
-	NULL,
+	CMD_PREVIOUSWINDOW, "previous-window", "prev", "",
+	0,
 	NULL,
 	cmd_previous_window_exec,
 	NULL,

@@ -30,8 +30,8 @@
 void	cmd_last_window_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_last_window_entry = {
-	CMD_LASTWINDOW, "last-window", "last", 0,
-	NULL,
+	CMD_LASTWINDOW, "last-window", "last", "",
+	0,
 	NULL,
 	cmd_last_window_exec,
 	NULL,

@@ -28,7 +28,6 @@
  */
 
 int		 cmd_detach_session_parse(void **, int, char **, char **);
-const char	*cmd_detach_session_usage(void);
 void		 cmd_detach_session_exec(void *, struct cmd_ctx *);
 void		 cmd_detach_session_send(void *, struct buffer *);
 void		 cmd_detach_session_recv(void **, struct buffer *);
@@ -39,9 +38,9 @@ struct cmd_detach_session_data {
 };
 
 const struct cmd_entry cmd_detach_session_entry = {
-	CMD_DETACHSESSION, "detach-session", "detach", 0,
+	CMD_DETACHSESSION, "detach-session", "detach", "[-a]",
+	0,
 	cmd_detach_session_parse,
-	cmd_detach_session_usage,
 	cmd_detach_session_exec,
 	cmd_detach_session_send,
 	cmd_detach_session_recv,
@@ -74,16 +73,11 @@ cmd_detach_session_parse(void **ptr, int argc, char **argv, char **cause)
 	return (0);
 
 usage:
-	usage(cause, "%s", cmd_detach_session_usage());
+	usage(cause, "%s %s",
+	    cmd_detach_session_entry.name, cmd_detach_session_entry.usage);
 
 	cmd_detach_session_free(data);
 	return (-1);
-}
-
-const char *
-cmd_detach_session_usage(void)
-{
-	return ("detach-session [-a]");
 }
 
 void

@@ -28,7 +28,6 @@
  */
 
 int		 cmd_select_window_parse(void **, int, char **, char **);
-const char	*cmd_select_window_usage(void);
 void		 cmd_select_window_exec(void *, struct cmd_ctx *);
 void		 cmd_select_window_send(void *, struct buffer *);
 void		 cmd_select_window_recv(void **, struct buffer *);
@@ -39,9 +38,9 @@ struct cmd_select_window_data {
 };
 
 const struct cmd_entry cmd_select_window_entry = {
-	CMD_SELECTWINDOW, "select-window", "selectw", 0,
+	CMD_SELECTWINDOW, "select-window", "selectw", "[command]",
+	0,
 	cmd_select_window_parse,
-	cmd_select_window_usage,
 	cmd_select_window_exec, 
 	cmd_select_window_send,
 	cmd_select_window_recv,
@@ -91,17 +90,12 @@ cmd_select_window_parse(void **ptr, int argc, char **argv, char **cause)
 	return (0);
 
 usage:
-	usage(cause, "%s", cmd_select_window_usage());
+	usage(cause, "%s %s",
+	    cmd_select_window_entry.name, cmd_select_window_entry.usage);
 
 error:
 	cmd_select_window_free(data);
 	return (-1);
-}
-
-const char *
-cmd_select_window_usage(void)
-{
-	return ("select-window [command]");
 }
 
 void

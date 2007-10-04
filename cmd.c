@@ -98,10 +98,7 @@ cmd_parse(int argc, char **argv, char **cause)
 	return (cmd);
 
 usage:
-	if (entry->usage == NULL)
-		usage(cause, "%s", entry->name);
-	else
-		usage(cause, "%s", entry->usage());
+	usage(cause, "%s %s", entry->name, entry->usage);
 	return (NULL);
 }
 
