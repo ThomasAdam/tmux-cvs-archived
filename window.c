@@ -108,7 +108,7 @@ window_create(
 	if (name == NULL) {
 		/* XXX */
 		if (strncmp(cmd, "exec ", (sizeof "exec ") - 1) == 0)
-			copy = xstrdup(cmd + sizeof "exec ");
+			copy = xstrdup(cmd + (sizeof "exec ") - 1);
 		else
 			copy = xstrdup(cmd);
 		if ((ptr = strchr(copy, ' ')) != NULL) {
