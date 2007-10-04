@@ -30,7 +30,7 @@
 void	cmd_next_window_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_next_window_entry = {
-	CMD_NEXTWINDOW, "next-window", "next", "",
+	"next-window", "next", "",
 	0,
 	NULL,
 	cmd_next_window_exec,

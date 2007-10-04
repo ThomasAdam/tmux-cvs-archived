@@ -38,7 +38,7 @@ struct cmd_bind_key_data {
 };
 
 const struct cmd_entry cmd_bind_key_entry = {
-	CMD_BINDKEY, "bind-key", "bind", "key command [arguments]",
+	"bind-key", "bind", "key command [arguments]",
 	CMD_NOSESSION,
 	cmd_bind_key_parse,
 	cmd_bind_key_exec, 

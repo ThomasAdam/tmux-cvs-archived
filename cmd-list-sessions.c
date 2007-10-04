@@ -30,7 +30,7 @@
 void	cmd_list_sessions_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_sessions_entry = {
-	CMD_LISTSESSIONS, "list-sessions", "ls", "",
+	"list-sessions", "ls", "",
 	CMD_NOSESSION,
 	NULL,
 	cmd_list_sessions_exec,

@@ -41,7 +41,7 @@ struct cmd_set_option_data {
 };
 
 const struct cmd_entry cmd_set_option_entry = {
-	CMD_SETOPTION, "set-option", "set", "option value",
+	"set-option", "set", "option value",
 	CMD_NOSESSION,
 	cmd_set_option_parse,
 	cmd_set_option_exec, 

@@ -38,7 +38,7 @@ struct cmd_unbind_key_data {
 };
 
 const struct cmd_entry cmd_unbind_key_entry = {
-	CMD_UNBINDKEY, "unbind-key", "unbind", "key",
+	"unbind-key", "unbind", "key",
 	CMD_NOSESSION,
 	cmd_unbind_key_parse,
 	cmd_unbind_key_exec, 

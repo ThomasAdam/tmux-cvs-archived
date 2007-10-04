@@ -37,7 +37,7 @@ struct cmd_attach_session_data {
 };
 
 const struct cmd_entry cmd_attach_session_entry = {
-	CMD_NEWWINDOW, "attach-session", "attach", "[-d]",
+	"attach-session", "attach", "[-d]",
 	0,
 	cmd_attach_session_parse,
 	cmd_attach_session_exec, 

@@ -456,24 +456,6 @@ struct client_ctx {
 };
 
 /* Key/command line command. */
-enum cmd_type {
-	CMD_ATTACHSESSION,
-	CMD_BINDKEY,
-	CMD_DETACHSESSION,
-	CMD_LASTWINDOW,
-	CMD_LISTKEYS,
-	CMD_LISTSESSIONS,
-	CMD_LISTWINDOWS,
-	CMD_NEWSESSION,
-	CMD_NEWWINDOW,
-	CMD_NEXTWINDOW,
-	CMD_PREVIOUSWINDOW,
-	CMD_RENAMEWINDOW,
-	CMD_SELECTWINDOW,
-	CMD_SETOPTION,
-	CMD_UNBINDKEY,
-};
-
 struct cmd_ctx {
 	struct client  *client;
 	struct session *session;
@@ -486,7 +468,6 @@ struct cmd_ctx {
 };
 
 struct cmd_entry {
-	enum cmd_type	 type;
 	const char	*name;
 	const char	*alias;
 	const char	*usage;

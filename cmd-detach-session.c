@@ -38,7 +38,7 @@ struct cmd_detach_session_data {
 };
 
 const struct cmd_entry cmd_detach_session_entry = {
-	CMD_DETACHSESSION, "detach-session", "detach", "[-a]",
+	"detach-session", "detach", "[-a]",
 	0,
 	cmd_detach_session_parse,
 	cmd_detach_session_exec,

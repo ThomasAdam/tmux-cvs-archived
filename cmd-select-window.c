@@ -38,7 +38,7 @@ struct cmd_select_window_data {
 };
 
 const struct cmd_entry cmd_select_window_entry = {
-	CMD_SELECTWINDOW, "select-window", "selectw", "[command]",
+	"select-window", "selectw", "[command]",
 	0,
 	cmd_select_window_parse,
 	cmd_select_window_exec, 

@@ -30,7 +30,7 @@
 void	cmd_list_keys_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_keys_entry = {
-	CMD_LISTKEYS, "list-keys", "lsk", "",
+	"list-keys", "lsk", "",
 	CMD_NOSESSION,
 	NULL,
 	cmd_list_keys_exec,
