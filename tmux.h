@@ -453,6 +453,11 @@ struct client_ctx {
 	int		 loc_fd;
 	struct buffer	*loc_in;
 	struct buffer	*loc_out;
+
+#define CCTX_PAUSE 0x1
+#define CCTX_DETACH 0x2
+#define CCTX_EXIT 0x4
+	int 		 flags;
 };
 
 /* Key/command line command. */
