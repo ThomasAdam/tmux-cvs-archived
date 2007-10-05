@@ -423,6 +423,9 @@ struct session {
 	struct window	*window;
 	struct window	*last;
 	struct windows	 windows;
+
+#define SESSION_UNATTACHED 0x1	/* not attached to any clients */
+	int		 flags;
 };
 ARRAY_DECL(sessions, struct session *);
 

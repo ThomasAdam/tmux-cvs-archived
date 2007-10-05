@@ -36,6 +36,11 @@
  * 
  * This is quite inefficient - better/additional data structures are needed
  * to make it better.
+ *
+ * As a side effect, this function updates the SESSION_UNATTACHED flag. This
+ * flag is necessary to make sure unattached sessions do not limit the size of
+ * windows that are attached both to them and to other sessions which are
+ * attached.
  */
 
 void
@@ -54,15 +59,21 @@ recalculate_sizes(void)
 		ssx = ssy = UINT_MAX;
 		for (j = 0; j < ARRAY_LENGTH(&clients); j++) {
 			c = ARRAY_ITEM(&clients, j);
-			if (c == NULL || c->session != s)
+			if (c == NULL)
 				continue;
-			if (c->sx < ssx)
-				ssx = c->sx;
-			if (c->sy < ssy)
-				ssy = c->sy;
+			if (c->session == s) {
+				if (c->sx < ssx)
+					ssx = c->sx;
+				if (c->sy < ssy)
+					ssy = c->sy;
+			}
 		}
-		if (ssx == UINT_MAX || ssy == UINT_MAX)
+		if (ssx == UINT_MAX || ssy == UINT_MAX) {
+			s->flags |= SESSION_UNATTACHED;
 			continue;
+		}
+		s->flags &= ~SESSION_UNATTACHED;
+
 		if (ssy < status_lines)
 			ssy = status_lines + 1;
 		ssy -= status_lines;
@@ -84,15 +95,18 @@ recalculate_sizes(void)
 		ssx = ssy = UINT_MAX;
 		for (j = 0; j < ARRAY_LENGTH(&sessions); j++) {
 			s = ARRAY_ITEM(&sessions, j);
-			if (s == NULL || !session_has(s, w))
+			if (s == NULL || s->flags & SESSION_UNATTACHED)
 				continue;
-			if (s->sx < ssx)
-				ssx = s->sx;
-			if (s->sy < ssy)
-				ssy = s->sy;
+			if (session_has(s, w)) {
+				if (s->sx < ssx)
+					ssx = s->sx;
+				if (s->sy < ssy)
+					ssy = s->sy;
+			}
 		}
 		if (ssx == UINT_MAX || ssy == UINT_MAX)
 			continue;
+
 		if (w->screen.sx == ssx && w->screen.sy == ssy)
 			continue;
 
