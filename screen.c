@@ -284,20 +284,13 @@ screen_fill_lines(
 		screen_fill_line(s, i, data, attr, colr);
 }
 
-/* Write a single character to the screen at the cursor and move forward. */
+/* Write a single character to the screen at the cursor. */
 void
 screen_write_character(struct screen *s, u_char ch)
 {
-	if (s->cx > screen_last_x(s)) {
-		s->cx = 0;
-		screen_cursor_down_scroll(s);
-	}
-
 	s->grid_data[s->cy][s->cx] = ch;
 	s->grid_attr[s->cy][s->cx] = s->attr;
 	s->grid_colr[s->cy][s->cx] = s->colr;
-
-	s->cx++;
 }
 
 /* Move cursor up and scroll if necessary. */

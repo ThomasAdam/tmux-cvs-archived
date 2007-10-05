@@ -430,8 +430,18 @@ input_handle_character(u_char ch, struct input_ctx *ictx)
 	
 	if (ictx->s->cx > ictx->s->sx - 1 || ictx->s->cy > ictx->s->sy - 1)
 		return;
+
 	screen_write_character(ictx->s, ch);
 	input_store8(ictx->b, ch);
+
+	if (ictx->s->cx == ictx->s->sx - 1) {
+		ictx->s->cx = 0;
+		screen_cursor_down_scroll(ictx->s);
+
+		input_store8(ictx->b, '\r');
+		input_store8(ictx->b, '\n');
+	} else
+		ictx->s->cx++;
 }
 
 void
