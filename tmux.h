@@ -354,20 +354,6 @@ struct input_arg {
 	size_t		 used;
 };
 
-/* Input character classes. */
-enum input_class {
-	INPUT_C0CONTROL,
-	INPUT_SPACE,
-	INPUT_INTERMEDIATE,
-	INPUT_PARAMETER,
-	INPUT_UPPERCASE,
-	INPUT_LOWERCASE,
-	INPUT_DELETE,
-	INPUT_C1CONTROL,
-	INPUT_G1DISPLAYABLE,
-	INPUT_SPECIAL
-};
-
 /* Input parser context. */
 struct input_ctx {
 	u_char		*buf;
@@ -384,7 +370,7 @@ struct input_ctx {
 	size_t		 title_len;
 	u_int		 title_type;
 
-	void 		*(*state)(u_char, enum input_class, struct input_ctx *);
+	void 		*(*state)(u_char, struct input_ctx *);
 
 	u_char		 private;
 	ARRAY_DECL(, struct input_arg) args;

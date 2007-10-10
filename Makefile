@@ -42,7 +42,7 @@ LDFLAGS+= -Wl,-E
 CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
 CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
 CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wcast-qual -Wsign-compare
-CFLAGS+= -Wundef -Wshadow -Wbad-function-cast -Winline -Wcast-align
+CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
 
 PREFIX?= /usr/local
 INSTALLBIN= install -g bin -o root -m 555
