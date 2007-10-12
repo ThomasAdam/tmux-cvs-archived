@@ -100,7 +100,7 @@ The following is a summary of major features implemented in this version:
 
 And major missing features:
 
-- Support for VT100 line drawing characters (they will appear  as jklmx, etc).
+- Support for VT100 line drawing characters (they will appear as jklmx, etc).
 - Status line customisation, beyond presence and colour.
 - Copy and paste.
 - Scrollback.
