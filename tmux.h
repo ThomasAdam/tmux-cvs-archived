@@ -497,6 +497,7 @@ extern volatile sig_atomic_t sigterm;
 extern int	prefix_key;
 extern int	debug_level;
 extern u_int	status_lines;
+extern u_char	status_colour;
 extern char    *default_command;
 void		 usage(char **, const char *, ...);
 void		 logfile(const char *);
