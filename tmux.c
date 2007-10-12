@@ -194,6 +194,7 @@ main(int argc, char **argv)
 		goto usage;
 
 	log_open(stderr, LOG_USER, debug_level);
+	siginit();
 
 	status_lines = 1;
 	status_colour = 0x02;
