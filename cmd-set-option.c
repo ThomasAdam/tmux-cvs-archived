@@ -139,7 +139,8 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 			ctx->error(ctx, "invalid value");
 			return;
 		}
-		if (errstr != NULL || number > 7) {
+		number = screen_stringcolour(data->value);
+		if (number > 8) {
 			ctx->error(ctx, "bad colour: %s", data->value);
 			return;
 		}
@@ -157,7 +158,8 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 			ctx->error(ctx, "invalid value");
 			return;
 		}
-		if (errstr != NULL || number > 7) {
+		number = screen_stringcolour(data->value);
+		if (number > 8) {
 			ctx->error(ctx, "bad colour: %s", data->value);
 			return;
 		}

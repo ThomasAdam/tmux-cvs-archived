@@ -56,7 +56,8 @@ cmd_parse(int argc, char **argv, char **cause)
 
 	entry = NULL;
 	for (entryp = cmd_table; *entryp != NULL; entryp++) {
-		if (strcmp((*entryp)->alias, argv[0]) == 0) {
+		if ((*entryp)->alias != NULL && 
+		    strcmp((*entryp)->alias, argv[0]) == 0) {
 			entry = *entryp;
 			break;
 		}
