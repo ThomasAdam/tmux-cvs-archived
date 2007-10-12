@@ -470,6 +470,7 @@ struct cmd_entry {
 
 #define CMD_STARTSERVER 0x1
 #define CMD_NOSESSION 0x2
+#define CMD_CANTNEST 0x4
 	int		 flags;
 
 	int		 (*parse)(void **, int, char **, char **);

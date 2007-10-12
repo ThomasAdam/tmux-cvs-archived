@@ -1,5 +1,6 @@
 12 October 2007
 
+* (nicm) Add a warning if $TMUX exists on new/attach.
 * (nicm) send-prefix command. Bound to C-b by default.
 * (nicm) set status, status-fg, status-bg commands. fg and bg are as a number
   from 0 to 8 or a string ("red", "blue", etc). status may be 1/0, on/off,

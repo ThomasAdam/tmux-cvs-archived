@@ -123,6 +123,12 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 	ctx.client = c;
 	ctx.flags = 0;
 
+	if (data.sid.pid != -1 && (cmd->entry->flags & CMD_CANTNEST)) {
+		server_msg_fn_command_error(&ctx, "sessions should be nested "
+		    "with care. unset $TMUX and retry to force");
+		return (0);
+	}
+
 	if (cmd->entry->flags & CMD_NOSESSION)
 		ctx.session = NULL;
 	else {

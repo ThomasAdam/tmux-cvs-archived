@@ -40,7 +40,7 @@ struct cmd_new_session_data {
 
 const struct cmd_entry cmd_new_session_entry = {
 	"new-session", "new", "[-d] [-n session name] [command]",
-	CMD_STARTSERVER|CMD_NOSESSION,
+	CMD_STARTSERVER|CMD_NOSESSION|CMD_CANTNEST,
 	cmd_new_session_parse,
 	cmd_new_session_exec, 
 	cmd_new_session_send,
