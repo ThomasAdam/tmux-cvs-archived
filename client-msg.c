@@ -67,8 +67,7 @@ client_msg_dispatch(struct client_ctx *cctx, char **error)
 			return (0);
 		}
 	}
-	if (i == NCLIENTMSG)
-		fatalx("unexpected message");
+	fatalx("unexpected message");
 }
 
 int

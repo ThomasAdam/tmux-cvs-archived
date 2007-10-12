@@ -1,3 +1,7 @@
+12 October 2007
+
+* (nicm) Make status line mark window in yellow on bell.
+
 04 October 2007
 
 * (nicm) -d option to attach to detach all other clients on the same session.
