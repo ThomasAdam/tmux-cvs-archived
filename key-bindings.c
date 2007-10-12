@@ -103,6 +103,7 @@ key_bindings_init(void)
 		{ '7', &cmd_select_window_entry, cmd_select_window_default },
 		{ '8', &cmd_select_window_entry, cmd_select_window_default },
 		{ '9', &cmd_select_window_entry, cmd_select_window_default },
+		{ META, &cmd_send_prefix_entry, NULL },
 /*		{ 'R', &cmd_refresh_client_entry },
 		{ 'r', &cmd_refresh_client_entry },
 		{ 'I', &cmd_windo_info_entry },

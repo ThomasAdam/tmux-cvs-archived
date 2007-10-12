@@ -525,9 +525,10 @@ extern const struct cmd_entry cmd_next_window_entry;
 extern const struct cmd_entry cmd_previous_window_entry;
 extern const struct cmd_entry cmd_rename_window_entry;
 extern const struct cmd_entry cmd_select_window_entry;
-void	cmd_select_window_default(void **, int);
+extern const struct cmd_entry cmd_send_prefix_entry;
 extern const struct cmd_entry cmd_set_option_entry;
 extern const struct cmd_entry cmd_unbind_key_entry;
+void	cmd_select_window_default(void **, int);
 
 /* client.c */
 int	 client_init(char *, struct client_ctx *, int);

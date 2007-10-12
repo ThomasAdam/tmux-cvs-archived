@@ -37,7 +37,8 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_previous_window_entry,
 	&cmd_rename_window_entry,
 	&cmd_select_window_entry,
-	&cmd_set_option_entry,
+	&cmd_send_prefix_entry,
+	&cmd_set_option_entry,	
 	&cmd_unbind_key_entry,
 	NULL
 };
