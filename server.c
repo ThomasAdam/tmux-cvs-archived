@@ -33,7 +33,6 @@
 #include <syslog.h>
 #include <termios.h>
 #include <unistd.h>
-#include <util.h>
 
 #include "tmux.h"
 

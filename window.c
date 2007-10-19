@@ -26,7 +26,12 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+
+#ifdef USE_LIBUTIL_H
+#include <libutil.h>
+#else
 #include <util.h>
+#endif
 
 #include "tmux.h"
 

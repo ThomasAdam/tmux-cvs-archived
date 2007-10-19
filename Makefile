@@ -55,6 +55,11 @@ LDFLAGS+= -pg
 .endif
 LIBS+= -lutil -lncurses
 
+# FreeBSD
+.if ${OS} == "FreeBSD"
+CFLAGS+= -DUSE_LIBUTIL_H
+.endif
+
 OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
 
 CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log
