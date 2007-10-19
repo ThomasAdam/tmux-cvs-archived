@@ -39,7 +39,7 @@ struct cmd_rename_window_data {
 };
 
 const struct cmd_entry cmd_rename_window_entry = {
-	"rename-window", "renamew", "[-i index] newname",
+	"rename-window", "renamew", "[-i index] new name",
 	0,
 	cmd_rename_window_parse,
 	cmd_rename_window_exec, 

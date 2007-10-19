@@ -1,5 +1,7 @@
 19 October 2007
 
+* (nicm) -n on new-session is now -s, and -n is now the initial window name.
+  This was documented but not implemented :-/.
 * (nicm) kill-window command, bound to & by default (because it should be hard
   to hit accidently).
 * (nicm) bell-style option with three choices: "none" completely ignore bell;
