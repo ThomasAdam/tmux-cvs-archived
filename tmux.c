@@ -42,6 +42,7 @@ int		 prefix_key = META;
 u_int		 status_lines;
 u_char		 status_colour;
 char		*default_command;
+int		 bell_action;
 
 void		 sighandler(int);
 
@@ -198,6 +199,8 @@ main(int argc, char **argv)
 
 	status_lines = 1;
 	status_colour = 0x02;
+
+	bell_action = BELL_ANY;
 
 	shell = getenv("SHELL");
 	if (shell == NULL || *shell == '\0')

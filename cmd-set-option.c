@@ -171,6 +171,21 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 					server_redraw_client(c);
 			}
 		}
+	} else if (strcmp(data->option, "bell-action") == 0) { 
+		if (data->value == NULL) {
+			ctx->error(ctx, "invalid value");
+			return;			
+		}
+		if (strcmp(data->value, "any") == 0)
+			bell_action = BELL_ANY;
+		else if (strcmp(data->value, "none") == 0)
+			bell_action = BELL_NONE;
+		else if (strcmp(data->value, "current") == 0)
+			bell_action = BELL_CURRENT;
+		else {
+			ctx->error(ctx, "unknown bell-action: %s", data->value);
+			return;
+		}
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;

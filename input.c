@@ -390,7 +390,7 @@ input_handle_c0_control(u_char ch, struct input_ctx *ictx)
 		break;
 	case '\007':	/* BELL */
 		ictx->flags |= INPUT_BELL;
-		break;
+		return;
 	case '\010': 	/* BS */
 		if (ictx->s->cx > 0)
 			ictx->s->cx--;

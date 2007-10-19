@@ -113,8 +113,8 @@ recalculate_sizes(void)
 		log_debug("window size %u,%u (was %u,%u)", 
 		    ssx, ssy, w->screen.sx, w->screen.sy);
 
-		server_clear_window(w);
+		server_clear_window_cur(w);
 		window_resize(w, ssx, ssy);
-		server_redraw_window(w);
+		server_redraw_window_cur(w);
 	}
 }
