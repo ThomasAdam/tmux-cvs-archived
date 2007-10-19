@@ -214,6 +214,7 @@ main(int argc, char **argv)
 		exit(1);
 	}
 
+	memset(&cctx, 0, sizeof cctx);
 	if (!(cmd->entry->flags & CMD_NOSESSION) ||
 	    (cmd->entry->flags & CMD_CANTNEST))
 		client_fill_sessid(&data.sid, name);
