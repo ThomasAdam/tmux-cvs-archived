@@ -246,7 +246,7 @@ void *
 input_state_title_next(u_char ch, struct input_ctx *ictx)
 {
 	if (ch == '\007') {
-		ictx->title_buf[ictx->title_len] = '\0';
+		ictx->title_buf[ictx->title_len++] = '\0';
 		switch (ictx->title_type) {
 		case 0:
 			strlcpy(ictx->s->title, 
