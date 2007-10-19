@@ -20,6 +20,7 @@
 
 #include <errno.h>
 #include <libgen.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
