@@ -105,6 +105,7 @@ key_bindings_init(void)
 		{ '9', &cmd_select_window_entry, cmd_select_window_default },
 		{ 'R', &cmd_refresh_session_entry, NULL },
 		{ 'r', &cmd_refresh_session_entry, NULL },
+		{ '&', &cmd_kill_window_entry, NULL },
 		{ META, &cmd_send_prefix_entry, NULL },
 /*
 		{ 'I', &cmd_windo_info_entry },

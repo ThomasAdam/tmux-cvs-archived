@@ -1,5 +1,7 @@
 19 October 2007
 
+* (nicm) kill-window command, bound to & by default (because it should be hard
+  to hit accidently).
 * (nicm) bell-style option with three choices: "none" completely ignore bell;
   "any" pass through a bell in any window to current; "current" ignore bells
   except in current window. This applies only to the bell terminal signal,

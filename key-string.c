@@ -29,7 +29,6 @@ struct {
 	{ "A1",		KEYC_A1 },
 	{ "A3",		KEYC_A3 },
 	{ "B2",		KEYC_B2 },
-	{ "BACKSPACE",	KEYC_BACKSPACE },
 	{ "BEG",	KEYC_BEG },
 	{ "BTAB",	KEYC_BTAB },
 	{ "C1",		KEYC_C1 },

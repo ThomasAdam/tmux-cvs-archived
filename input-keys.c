@@ -28,7 +28,6 @@ struct {
 	int		 key;
 	const char	*data;
 } input_keys[] = {
-/*	{ KEYC_BACKSPACE, "\010" }, */
 	{ KEYC_DC,     "\e[3~" },
 	{ KEYC_DOWN,   "\eOB" },
 	{ KEYC_F1,     "\eOP" },
