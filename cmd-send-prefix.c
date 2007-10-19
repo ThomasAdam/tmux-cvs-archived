@@ -30,8 +30,8 @@
 void	cmd_send_prefix_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_send_prefix_entry = {
-	"send-prefix", NULL, 0,
-	NULL,
+	"send-prefix", NULL, NULL,
+	0,
 	NULL,
 	cmd_send_prefix_exec,
 	NULL,
