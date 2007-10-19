@@ -33,6 +33,13 @@
 extern cc_t	ttydefchars[];
 extern char    *__progname;
 
+#ifndef __dead
+#define __dead __attribute__ ((__noreturn__))
+#endif
+#ifndef __packed
+#define __packed __attribute__ ((__packed__))
+#endif
+
 #define MAXNAMELEN	32
 #define MAXTITLELEN	192
 
