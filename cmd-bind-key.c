@@ -26,11 +26,11 @@
  * Bind a key to a command, this recurses through cmd_*.
  */
 
-int		 cmd_bind_key_parse(void **, int, char **, char **);
-void		 cmd_bind_key_exec(void *, struct cmd_ctx *);
-void		 cmd_bind_key_send(void *, struct buffer *);
-void		 cmd_bind_key_recv(void **, struct buffer *);
-void		 cmd_bind_key_free(void *);
+int	cmd_bind_key_parse(void **, int, char **, char **);
+void	cmd_bind_key_exec(void *, struct cmd_ctx *);
+void	cmd_bind_key_send(void *, struct buffer *);
+void	cmd_bind_key_recv(void **, struct buffer *);
+void	cmd_bind_key_free(void *);
 
 struct cmd_bind_key_data {
 	int		 key;

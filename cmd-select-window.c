@@ -27,11 +27,11 @@
  * Select window by index.
  */
 
-int		 cmd_select_window_parse(void **, int, char **, char **);
-void		 cmd_select_window_exec(void *, struct cmd_ctx *);
-void		 cmd_select_window_send(void *, struct buffer *);
-void		 cmd_select_window_recv(void **, struct buffer *);
-void		 cmd_select_window_free(void *);
+int	cmd_select_window_parse(void **, int, char **, char **);
+void	cmd_select_window_exec(void *, struct cmd_ctx *);
+void	cmd_select_window_send(void *, struct buffer *);
+void	cmd_select_window_recv(void **, struct buffer *);
+void	cmd_select_window_free(void *);
 
 struct cmd_select_window_data {
 	u_int	idx;

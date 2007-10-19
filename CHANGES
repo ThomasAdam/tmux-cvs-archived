@@ -1,3 +1,7 @@
+19 October 2007
+
+* (nicm) Refresh session command.
+
 12 October 2007
 
 * (nicm) Add a warning if $TMUX exists on new/attach.

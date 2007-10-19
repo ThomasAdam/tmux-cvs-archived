@@ -28,12 +28,11 @@
  * Set an option.
  */
 
-int		 cmd_set_option_parse(void **, int, char **, char **);
-const char	*cmd_set_option_usage(void);
-void		 cmd_set_option_exec(void *, struct cmd_ctx *);
-void		 cmd_set_option_send(void *, struct buffer *);
-void		 cmd_set_option_recv(void **, struct buffer *);
-void		 cmd_set_option_free(void *);
+int	cmd_set_option_parse(void **, int, char **, char **);
+void	cmd_set_option_exec(void *, struct cmd_ctx *);
+void	cmd_set_option_send(void *, struct buffer *);
+void	cmd_set_option_recv(void **, struct buffer *);
+void	cmd_set_option_free(void *);
 
 struct cmd_set_option_data {
 	char	*option;
