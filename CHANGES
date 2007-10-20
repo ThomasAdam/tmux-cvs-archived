@@ -1,3 +1,8 @@
+20 October 2007
+
+* (nicm) Add default-command option and change default to be $SHELL rather than
+  $SHELL -l. Also try to read shell from passwd db if $SHELL isn't present.
+
 19 October 2007
 
 * (nicm) -n on new-session is now -s, and -n is now the initial window name.
