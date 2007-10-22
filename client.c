@@ -208,7 +208,7 @@ server_dead:
 	local_done();
 
 	printf("[lost server]\n");
-	return (1);
+	return (0);
 
 local_dead:
 	/* Can't do much here. Log and die. */
