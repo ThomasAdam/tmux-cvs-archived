@@ -42,7 +42,7 @@ client_init(char *path, struct client_ctx *cctx, int start_server)
 	struct stat			sb;
 	struct msg_identify_data	data;
 	struct winsize			ws;
-	size_t				sz;
+	size_t				size;
 	int				mode;
 	u_int				retries;
 
@@ -71,8 +71,8 @@ retry:
 
 	memset(&sa, 0, sizeof sa);
 	sa.sun_family = AF_UNIX;
-	sz = strlcpy(sa.sun_path, path, sizeof sa.sun_path);
-	if (sz >= sizeof sa.sun_path) {
+	size = strlcpy(sa.sun_path, path, sizeof sa.sun_path);
+	if (size >= sizeof sa.sun_path) {
 		log_warnx("%s: %s", path, strerror(ENAMETOOLONG));
 		return (-1);
 	}
