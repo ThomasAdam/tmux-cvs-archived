@@ -65,6 +65,8 @@ key_bindings_remove(int key)
 	if (i == ARRAY_LENGTH(&key_bindings))
 		return;
 
+	ARRAY_REMOVE(&key_bindings, i);
+
 	cmd_free(bd->cmd);
 	xfree(bd);
 }
