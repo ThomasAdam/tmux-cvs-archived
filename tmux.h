@@ -26,11 +26,9 @@
 #include <poll.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <termios.h>
 
 #include "array.h"
 
-extern cc_t	ttydefchars[];
 extern char    *__progname;
 
 #ifndef __dead

@@ -62,7 +62,6 @@ window_create(
 {
 	struct window	*w;
 	struct winsize	 ws;
-	struct termios	 tio;
 	int		 fd, mode;
 	char		*ptr, *copy;
 	const char     **entry;
@@ -71,15 +70,7 @@ window_create(
 	ws.ws_col = sx;
 	ws.ws_row = sy;
 
-	memset(&tio, 0, sizeof tio);
-	tio.c_iflag = TTYDEF_IFLAG;
-	tio.c_oflag = TTYDEF_OFLAG;
-	tio.c_lflag = TTYDEF_LFLAG;
-	tio.c_cflag = TTYDEF_CFLAG;
-	memcpy(&tio.c_cc, ttydefchars, sizeof tio.c_cc);
-	cfsetspeed(&tio, TTYDEF_SPEED);
-
-	switch (forkpty(&fd, NULL, &tio, &ws)) {
+	switch (forkpty(&fd, NULL, NULL, &ws)) {
 	case -1:
 		return (NULL);
 	case 0:
