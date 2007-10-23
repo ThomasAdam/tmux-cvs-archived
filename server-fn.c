@@ -23,33 +23,33 @@
 
 #include "tmux.h"
 
-/* Find session from sessid. */
+/* Find session from command message. */
 struct session *
-server_find_sessid(struct sessid *sid, char **cause)
+server_extract_session(struct msg_command_data *data, char *name, char **cause)
 {
 	struct session *s;
 	u_int		i, n;
 
-	if (*sid->name != '\0') {
-		sid->name[(sizeof sid->name) - 1] = '\0';
-		if ((s = session_find(sid->name)) == NULL) {
-			xasprintf(cause, "session not found: %s", sid->name);
+	if (name != NULL) {
+		if ((s = session_find(name)) == NULL) {
+			xasprintf(cause, "session not found: %s", name);
 			return (NULL);
 		}
 		return (s);
 	}
 
-	if (sid->pid != -1) {
-		if (sid->pid != getpid()) {
-			xasprintf(cause, "wrong server: %lld", sid->pid);
+	if (data->pid != -1) {
+		if (data->pid != getpid()) {
+			xasprintf(cause, "wrong server: %lld", data->pid);
 			return (NULL);
 		}
-		if (sid->idx > ARRAY_LENGTH(&sessions)) {
-			xasprintf(cause, "index out of range: %u", sid->idx);
+		if (data->idx > ARRAY_LENGTH(&sessions)) {
+			xasprintf(cause, "index out of range: %u", data->idx);
 			return (NULL);
 		}
-		if ((s = ARRAY_ITEM(&sessions, sid->idx)) == NULL) {
-			xasprintf(cause, "session doesn't exist: %u", sid->idx);
+		if ((s = ARRAY_ITEM(&sessions, data->idx)) == NULL) {
+			xasprintf(
+			    cause, "session doesn't exist: %u", data->idx);
 			return (NULL);
 		}
 		return (s);

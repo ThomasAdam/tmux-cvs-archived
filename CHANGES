@@ -1,5 +1,6 @@
 23 October 2007
 
+* (nicm) Lift limit on session name passed with -s.
 * (nicm) Show size in session/window lists.
 * (nicm) Pass tty up to server when client identifies and add a list-clients
   command to list connected clients.
