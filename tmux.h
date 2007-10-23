@@ -40,6 +40,10 @@ extern char    *__progname;
 #define __packed __attribute__ ((__packed__))
 #endif
 
+#ifndef TTY_NAME_MAX
+#define TTY_NAME_MAX 32
+#endif
+
 #define MAXNAMELEN	32
 #define MAXTITLELEN	192
 
