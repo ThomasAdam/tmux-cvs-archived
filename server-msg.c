@@ -160,6 +160,9 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 	c->sx = data.sx;
 	c->sy = data.sy;
 
+	data.tty[(sizeof data.tty) - 1] = '\0';
+	c->tty = xstrdup(data.tty);
+
 	c->flags |= CLIENT_TERMINAL;
 
 	return (0);

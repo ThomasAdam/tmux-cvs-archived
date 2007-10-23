@@ -309,6 +309,8 @@ server_lost_client(struct client *c)
 			ARRAY_SET(&clients, i, NULL);
 	}
 	
+	if (c->tty != NULL)
+		xfree(c->tty);
 	close(c->fd);
 	buffer_destroy(c->in);
 	buffer_destroy(c->out);

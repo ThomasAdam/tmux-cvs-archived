@@ -1,3 +1,9 @@
+23 October 2007
+
+* (nicm) Show size in session/window lists.
+* (nicm) Pass tty up to server when client identifies and add a list-clients
+  command to list connected clients.
+
 20 October 2007
 
 * (nicm) Add default-command option and change default to be $SHELL rather than

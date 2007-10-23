@@ -115,6 +115,8 @@ retry:
 
 		data.sx = ws.ws_col;
 		data.sy = ws.ws_row;
+		if (ttyname_r(STDIN_FILENO, data.tty, sizeof data.tty) != 0)
+			fatal("ttyname_r failed");
 		client_write_server(cctx, MSG_IDENTIFY, &data, sizeof data);
 	}
 
