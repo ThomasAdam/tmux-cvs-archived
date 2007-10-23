@@ -61,7 +61,8 @@ cmd_list_sessions_exec(unused void *ptr, struct cmd_ctx *ctx)
 		tim = ctime(&s->tim);
 		*strchr(tim, '\n') = '\0';
 
-		ctx->print(ctx, "%s: %u windows (created %s)", s->name, n, tim);
+		ctx->print(ctx, "%s: %u windows (created %s) [%ux%u]", s->name,
+		    n, tim, s->sx, s->sy);
 	}
 
 	if (!(ctx->flags & CMD_KEY))

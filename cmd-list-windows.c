@@ -52,8 +52,9 @@ cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 		if (w == NULL)
 			continue;
 		
-		ctx->print(ctx, "%u: %s \"%s\" (%s)",
-		    i, w->name, w->screen.title, ttyname(w->fd));
+		ctx->print(ctx,
+		    "%u: %s \"%s\" (%s) [%ux%u]", i, w->name, w->screen.title,
+		    ttyname(w->fd), w->screen.sx, w->screen.sy);
 	}
 
 	if (!(ctx->flags & CMD_KEY))
