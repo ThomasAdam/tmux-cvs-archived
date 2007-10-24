@@ -174,6 +174,8 @@ server_main(char *srv_path, int srv_fd)
 		server_handle_windows(&pfd);
 		server_handle_clients(&pfd);
 	}
+	if (pfds != NULL)
+		xfree(pfds);
 
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		if (ARRAY_ITEM(&sessions, i) != NULL)

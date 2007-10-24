@@ -85,6 +85,9 @@ logfile(const char *name)
 void
 sighandler(int sig)
 {
+	int	saved_errno;
+
+	saved_errno = errno;
 	switch (sig) {
 	case SIGWINCH:
 		sigwinch = 1;
@@ -96,6 +99,7 @@ sighandler(int sig)
 		waitpid(WAIT_ANY, NULL, WNOHANG);
 		break;
 	}
+	errno = saved_errno;
 }
 
 void
