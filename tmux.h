@@ -370,13 +370,10 @@ struct input_arg {
 struct input_ctx {
 	struct window	*w;
 	struct buffer	*b;
-	struct screen	*s;
 
 	u_char		*buf;
 	size_t		 len;
 	size_t		 off;
-
-	struct buffer	*replyb;	/* replies to information requests */
 
 	u_char		 title_buf[MAXTITLELEN];
 	size_t		 title_len;
