@@ -101,7 +101,7 @@ window_create(
 	w->in = buffer_create(BUFSIZ);
 	w->out = buffer_create(BUFSIZ);
 	screen_create(&w->screen, sx, sy);
-	input_init(&w->ictx, &w->screen);
+	input_init(w);
 
 	if (name == NULL) {
 		/* XXX */
@@ -182,7 +182,7 @@ window_destroy(struct window *w)
 {
 	close(w->fd);
 
-	input_free(&w->ictx);
+	input_free(w);
 
 	screen_destroy(&w->screen);
 
@@ -303,27 +303,9 @@ window_key(struct window *w, int key)
 	input_translate_key(w->out, key);
 }
 
-/*
- * Process window output. Output is translated into a series of escape
- * sequences and strings and returned.
- */
+/* Process output data from child process. */
 void
 window_data(struct window *w, struct buffer *b)
 {
-	FILE	*f;
-
-	if (BUFFER_USED(w->in) == 0)
-		return;
-
-	if (debug_level > 2) {
-		f = fopen("tmux-in.log", "a+");
-		fwrite(BUFFER_OUT(w->in), BUFFER_USED(w->in), 1, f);
-		fclose(f);
-	}
-
-	input_parse(&w->ictx, BUFFER_OUT(w->in), BUFFER_USED(w->in), b);
-	buffer_remove(w->in, BUFFER_USED(w->in));
-
-	if (INPUT_FLAGS(&w->ictx) & INPUT_BELL)
-		w->flags |= WINDOW_BELL;
+	input_parse(w, b);
 }
