@@ -124,8 +124,11 @@ session_destroy(struct session *s)
 	while (!ARRAY_EMPTY(&sessions) && ARRAY_LAST(&sessions) == NULL)
 		ARRAY_TRUNC(&sessions, 1);
 	
-	while (!ARRAY_EMPTY(&s->windows))
-		window_remove(&s->windows, ARRAY_FIRST(&s->windows));
+	for (i = 0; i < ARRAY_LENGTH(&s->windows); i++) {
+		if (ARRAY_ITEM(&s->windows, i) != NULL)
+			window_remove(&s->windows, ARRAY_ITEM(&s->windows, i));
+	}
+	ARRAY_FREE(&s->windows);
 
 	xfree(s->name);
 	xfree(s);
