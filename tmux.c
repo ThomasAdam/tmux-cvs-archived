@@ -238,7 +238,12 @@ main(int argc, char **argv)
 	client_write_server2(&cctx,
 	    MSG_COMMAND, &data, sizeof data, BUFFER_OUT(b), BUFFER_USED(b));
 	buffer_destroy(b);
-	
+
+	if (path != NULL)
+		xfree(path);
+	if (name != NULL)
+		xfree(name);
+
 	for (;;) {
 		pfd.fd = cctx.srv_fd;
 		pfd.events = POLLIN;
@@ -290,6 +295,12 @@ main(int argc, char **argv)
 	}
 
 out:
+	xfree(default_command);
+
+	close(cctx.srv_fd);
+	buffer_destroy(cctx.srv_in);
+	buffer_destroy(cctx.srv_out);
+
 #ifdef DEBUG
 	xmalloc_report(getpid(), "client");
 #endif
