@@ -105,6 +105,8 @@ server_start(char *path)
 		fatal("fcntl failed");
 	if (fcntl(fd, F_SETFL, mode|O_NONBLOCK) == -1)
 		fatal("fcntl failed");
+	if (fcntl(fd, F_SETFD, FD_CLOEXEC) == -1)
+		fatal("fcntl failed");		
 
 	if (daemon(1, 1) != 0)
 		fatal("daemon failed");
