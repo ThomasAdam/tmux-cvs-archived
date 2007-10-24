@@ -290,8 +290,8 @@ local_done(void)
 {
 	struct winsize	ws;
 
-	xfree(local_in);
-	xfree(local_out);
+	buffer_destroy(local_in);
+	buffer_destroy(local_out);
 
 	if (tcsetattr(local_fd, TCSANOW, &local_tio) != 0)
 		fatal("tcsetattr failed");
