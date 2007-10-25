@@ -1,3 +1,7 @@
+25 October 2007
+
+* (nicm) has-session command: checks if session exists.
+
 24 October 2007
 
 * (nicm) Support for \e6n to request cursor position. resize(1) now works.
