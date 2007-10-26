@@ -223,7 +223,7 @@ server_msg_fn_keys(struct hdr *hdr, struct client *c)
 		if (key == prefix_key)
 			c->flags |= CLIENT_PREFIX;
 		else
-			window_key(c->session->window, key);
+			input_translate_key(c->session->curw->window->out, key);
 	}
 
 	return (0);

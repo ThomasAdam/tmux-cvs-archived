@@ -49,5 +49,5 @@ cmd_send_prefix_exec(unused void *ptr, struct cmd_ctx *ctx)
 		return;
 	}
 
-	window_key(c->session->window, prefix_key);
+	input_translate_key(c->session->curw->window->out, prefix_key);
 }

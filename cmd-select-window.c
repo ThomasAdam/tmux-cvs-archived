@@ -108,10 +108,16 @@ cmd_select_window_exec(void *ptr, struct cmd_ctx *ctx)
 	if (data == NULL)
 		return;
 
-	if (session_select(s, data->idx) == 0)
+	switch (session_select(s, data->idx)) {
+	case 0:
 		server_redraw_session(s);
-	else
+		break;
+	case 1:
+		break;
+	default:
 		ctx->error(ctx, "no window %u", data->idx);
+		break;
+	}
 	
 	if (!(ctx->flags & CMD_KEY))
 		server_write_client(c, MSG_EXIT, NULL, 0);

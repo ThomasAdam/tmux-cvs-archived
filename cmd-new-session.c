@@ -133,8 +133,8 @@ cmd_new_session_exec(void *ptr, struct cmd_ctx *ctx)
 	if (c->session == NULL)
 		fatalx("session_create failed");
 	if (data->winname != NULL) {
-		xfree(c->session->window->name);
-		c->session->window->name = xstrdup(data->winname);
+		xfree(c->session->curw->window->name);
+		c->session->curw->window->name = xstrdup(data->winname);
 	}
 
 	if (data->flag_detached)

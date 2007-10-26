@@ -45,8 +45,9 @@ cmd_list_sessions_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
 	struct client	*c = ctx->client;
 	struct session	*s = ctx->session;
+	struct winlink	*wl;
 	char		*tim;
-	u_int		 i, j, n;
+	u_int		 i, n;
 
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i);
@@ -54,10 +55,8 @@ cmd_list_sessions_exec(unused void *ptr, struct cmd_ctx *ctx)
 			continue;
 
 		n = 0;
-		for (j = 0; j < ARRAY_LENGTH(&s->windows); j++) {
-			if (ARRAY_ITEM(&s->windows, j) != NULL)
-				n++;
-		}
+		RB_FOREACH(wl, winlinks, &s->windows)
+		    	n++;
 		tim = ctime(&s->tim);
 		*strchr(tim, '\n') = '\0';
 
