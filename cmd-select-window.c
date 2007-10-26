@@ -34,7 +34,7 @@ void	cmd_select_window_recv(void **, struct buffer *);
 void	cmd_select_window_free(void *);
 
 struct cmd_select_window_data {
-	u_int	idx;
+	int	idx;
 };
 
 const struct cmd_entry cmd_select_window_entry = {
@@ -81,7 +81,7 @@ cmd_select_window_parse(void **ptr, int argc, char **argv, char **cause)
 	if (argc != 1)
 		goto usage;
 
-	data->idx = strtonum(argv[0], 0, UINT_MAX, &errstr);
+	data->idx = strtonum(argv[0], 0, INT_MAX, &errstr);
 	if (errstr != NULL) {
 		xasprintf(cause, "index %s", errstr);
 		goto error;

@@ -253,11 +253,11 @@ session_previous(struct session *s)
 
 /* Move session to specific window. */ 
 int
-session_select(struct session *s, u_int i)
+session_select(struct session *s, int idx)
 {
 	struct winlink	*wl;
 
-	wl = winlink_find_by_index(&s->windows, i);
+	wl = winlink_find_by_index(&s->windows, idx);
 	if (wl == NULL)
 		return (-1);
 	if (wl == s->curw)

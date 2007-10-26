@@ -1,5 +1,6 @@
 26 October 2007
 
+* (nicm) unlink-window command.
 * (nicm) link-window command to link an existing window into another session
   (or another index in the same session). Syntax:
 

@@ -62,7 +62,7 @@ cmd_rename_window_parse(void **ptr, int argc, char **argv, char **cause)
 	while ((opt = getopt(argc, argv, "i:")) != EOF) {
 		switch (opt) {
 		case 'i':
-			data->idx = strtonum(optarg, 0, UINT_MAX, &errstr);
+			data->idx = strtonum(optarg, 0, INT_MAX, &errstr);
 			if (errstr != NULL) {
 				xasprintf(cause, "index %s", errstr);
 				goto error;
