@@ -1,5 +1,10 @@
 26 October 2007
 
+* (nicm) link-window command to link an existing window into another session
+  (or another index in the same session). Syntax:
+
+	tmux -s dstname link-window [-i dstidx] srcname srcidx
+
 * (nicm) Redo window data structures. The global array remains, but each per-
   session list is now a RB tree of winlink structures. This disassociates the
   window index from the array size (allowing arbitrary indexes) which still
