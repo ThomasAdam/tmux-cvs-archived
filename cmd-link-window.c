@@ -140,7 +140,8 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 	if (!data->flag_detached) {
 		session_select(dst, wl->idx);
 		server_redraw_session(dst);
-	}
+	} else
+		server_status_session(dst);
 
 	if (!(ctx->flags & CMD_KEY))
 		server_write_client(c, MSG_EXIT, NULL, 0);

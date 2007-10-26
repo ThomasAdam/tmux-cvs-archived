@@ -115,7 +115,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 		session_destroy(s);
 		return (NULL);
 	}
-	session_select(s, i);
+	session_select(s, 0);
 
 	return (s);
 }
