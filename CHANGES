@@ -1,3 +1,7 @@
+30 October 2007
+
+* (nicm) swap-window command. Same as link-window but swaps windows.
+
 26 October 2007
 
 * (nicm) Saving scroll region on \e7 causes problems with ncmpc so I guess

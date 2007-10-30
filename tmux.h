@@ -556,6 +556,7 @@ extern const struct cmd_entry cmd_rename_window_entry;
 extern const struct cmd_entry cmd_select_window_entry;
 extern const struct cmd_entry cmd_send_prefix_entry;
 extern const struct cmd_entry cmd_set_option_entry;
+extern const struct cmd_entry cmd_swap_window_entry;
 extern const struct cmd_entry cmd_unbind_key_entry;
 extern const struct cmd_entry cmd_unlink_window_entry;
 void	cmd_select_window_default(void **, int);
