@@ -44,7 +44,7 @@ server_extract_session(struct msg_command_data *data, char *name, char **cause)
 			return (NULL);
 		}
 		if (data->idx > ARRAY_LENGTH(&sessions)) {
-			xasprintf(cause, "index out of range: %u", data->idx);
+			xasprintf(cause, "index out of range: %d", data->idx);
 			return (NULL);
 		}
 		if ((s = ARRAY_ITEM(&sessions, data->idx)) == NULL) {

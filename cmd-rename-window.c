@@ -104,7 +104,7 @@ cmd_rename_window_exec(void *ptr, struct cmd_ctx *ctx)
 	if (data->idx == -1)
 		wl = s->curw;
 	else if ((wl = winlink_find_by_index(&s->windows, data->idx)) == NULL) {
-		ctx->error(ctx, "no window %u", data->idx);
+		ctx->error(ctx, "no window %d", data->idx);
 		return;
 	}
 	xfree(wl->window->name);

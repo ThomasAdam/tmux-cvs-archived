@@ -125,7 +125,7 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 	else {
 		wl = winlink_find_by_index(&src->windows, data->srcidx);
 		if (wl == NULL) {
-			ctx->error(ctx, "no window %u", data->srcidx);
+			ctx->error(ctx, "no window %d", data->srcidx);
 			return;
 		}
 	}

@@ -49,7 +49,7 @@ cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 
 	RB_FOREACH(wl, winlinks, &s->windows) {
 		w = wl->window;
-		ctx->print(ctx, "%u: %s \"%s\" (%s) [%ux%u]", wl->idx,
+		ctx->print(ctx, "%d: %s \"%s\" (%s) [%ux%u]", wl->idx,
 		    w->name, w->screen.title, ttyname(w->fd),
 		    w->screen.sx, w->screen.sy);
 	}

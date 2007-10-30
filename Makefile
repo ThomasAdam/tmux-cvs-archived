@@ -80,6 +80,9 @@ ${PROG}:	${OBJS}
 depend:
 		mkdep ${CFLAGS} ${INCDIRS} ${SRCS:M*.c}
 
+lint:
+		lint -cehvx ${CFLAGS:M-D*} ${SRCS:M*.c}
+
 clean:
 		rm -f ${CLEANFILES}
 

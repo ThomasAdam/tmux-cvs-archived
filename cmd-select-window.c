@@ -115,7 +115,7 @@ cmd_select_window_exec(void *ptr, struct cmd_ctx *ctx)
 	case 1:
 		break;
 	default:
-		ctx->error(ctx, "no window %u", data->idx);
+		ctx->error(ctx, "no window %d", data->idx);
 		break;
 	}
 	

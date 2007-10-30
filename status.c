@@ -47,7 +47,7 @@ status_write(struct client *c)
 		if (session_hasbell(c->session, wl))
 			flag = '!';
 		status_print(
-		    b, &size, "%u:%s%c ", wl->idx, wl->window->name, flag);
+		    b, &size, "%d:%s%c ", wl->idx, wl->window->name, flag);
 
 		if (size == 0)
 			break;

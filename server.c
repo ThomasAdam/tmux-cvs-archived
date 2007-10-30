@@ -59,11 +59,10 @@ server_start(char *path)
 {
 	struct sockaddr_un	sa;
 	size_t			size;
-	pid_t			pid;
 	mode_t			mask;
 	int		   	n, fd, mode;
 
-	switch (pid = fork()) {
+	switch (fork()) {
 	case -1:
 		log_warn("fork");
 		return (-1);

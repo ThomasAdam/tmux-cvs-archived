@@ -90,8 +90,8 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 	struct cmd_set_option_data	*data = ptr;
 	struct client			*c = ctx->client;
 	const char			*errstr;
-	u_int				 number, i;
-	int				 bool, key;
+	u_int				 i;
+	int				 number, bool, key;
 
 	if (data == NULL)
 		return;
@@ -103,7 +103,7 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 
 	number = -1;
 	if (data->value != NULL) {
-		number = strtonum(data->value, 0, UINT_MAX, &errstr);
+		number = strtonum(data->value, 0, INT_MAX, &errstr);
 		
 		bool = -1;
 		if (number == 1 || strcasecmp(data->value, "on") == 0 ||

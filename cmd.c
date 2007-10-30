@@ -113,7 +113,7 @@ usage:
 void
 cmd_exec(struct cmd *cmd, struct cmd_ctx *ctx)
 {
-	return (cmd->entry->exec(cmd->data, ctx));
+	cmd->entry->exec(cmd->data, ctx);
 }
 
 void
