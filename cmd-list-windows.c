@@ -30,8 +30,8 @@
 void	cmd_list_windows_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_windows_entry = {
-	"list-windows", "lsw", 0,
-	NULL,
+	"list-windows", "lsw", NULL,
+	0,
 	NULL,
 	cmd_list_windows_exec,
 	NULL,

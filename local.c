@@ -24,9 +24,10 @@
 #include <stdlib.h>
 #include <string.h>
 #define TTYDEFCHARS
+/* glibc requires unistd.h before termios.h for TTYDEFCHARS. */
+#include <unistd.h>	
 #include <termios.h>
 #include <term.h>
-#include <unistd.h>
 
 #include "tmux.h"
 

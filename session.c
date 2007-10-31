@@ -159,16 +159,16 @@ struct winlink *
 session_new(struct session *s, const char *name, const char *cmd, int idx)
 {
 	struct window	*w;
-	const char	*environ[] = { NULL, "TERM=screen", NULL };
+	const char	*env[] = { NULL, "TERM=screen", NULL };
 	char		 buf[256];
 	u_int		 i;
 
 	if (session_index(s, &i) != 0)
 		fatalx("session not found");
 	xsnprintf(buf, sizeof buf, "TMUX=%ld,%u", (long) getpid(), i);
-	environ[0] = buf;
+	env[0] = buf;
 	
-	if ((w = window_create(name, cmd, environ, s->sx, s->sy)) == NULL)
+	if ((w = window_create(name, cmd, env, s->sx, s->sy)) == NULL)
 		return (NULL);
 	return (session_attach(s, w, idx));
 }

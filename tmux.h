@@ -23,16 +23,32 @@
 #define RB_AUGMENT(x) do {} while (0)
 
 #include <sys/param.h>
-#include <sys/tree.h>
+
+#ifndef NO_QUEUE_H
 #include <sys/queue.h>
+#else
+#include "compat/queue.h"
+#endif
+
+#ifndef NO_TREE_H
+#include <sys/tree.h>
+#else
+#include "compat/tree.h"
+#endif
 
 #include <poll.h>
+#include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "array.h"
 
 extern char    *__progname;
+
+#ifndef INFTIM
+#define INFTIM -1
+#endif
 
 #ifndef __dead
 #define __dead __attribute__ ((__noreturn__))
@@ -510,6 +526,21 @@ struct binding {
 	struct cmd	*cmd;
 };
 ARRAY_DECL(bindings, struct binding *);
+
+#ifdef NO_STRTONUM
+/* strtonum.c */
+long long	 strtonum(const char *, long long, long long, const char **);
+#endif
+
+#ifdef NO_STRLCPY
+/* strlcpy.c */
+size_t	 	 strlcpy(char *, const char *, size_t);
+#endif
+
+#ifdef NO_STRLCAT
+/* strlcat.c */
+size_t	 	 strlcat(char *, const char *, size_t);
+#endif
 
 /* tmux.c */
 extern volatile sig_atomic_t sigwinch;

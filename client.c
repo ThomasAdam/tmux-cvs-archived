@@ -137,7 +137,9 @@ client_main(struct client_ctx *cctx)
 	int		 timeout;
 
 	logfile("client");
+#ifndef NO_SETPROCTITLE
 	setproctitle("client");
+#endif
 
 	siginit();
 	if ((cctx->loc_fd = local_init(&cctx->loc_in, &cctx->loc_out)) == -1)

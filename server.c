@@ -77,7 +77,9 @@ server_start(char *path)
 #endif
 
 	logfile("server");
+#ifndef NO_SETPROCTITLE
 	setproctitle("server (%s)", path);
+#endif
 	log_debug("server started, pid %ld", (long) getpid());
 
 	memset(&sa, 0, sizeof sa);
