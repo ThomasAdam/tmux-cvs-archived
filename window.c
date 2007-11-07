@@ -45,17 +45,17 @@
  *
  * A window has two buffers attached, these are filled and emptied by the main
  * server poll loop. Output data is received from pty's in screen format,
- * translated and returned as a series of escape sequences and strings.
- * Input data is received in screen format and written directly to the pty
- * (translation is done in the client).
+ * translated and returned as a series of escape sequences and strings via
+ * input_parse (in input.c). Input data is received as key codes and written
+ * directly via input_translate_key.
  *
  * Each window also has a "virtual" screen (screen.c) which contains the
  * current state and is redisplayed when the window is reattached to a client.
  *
  * Windows are stored directly on a global array and wrapped in any number of
- * winlink structs to be linked onto local session RB trees A reference count
+ * winlink structs to be linked onto local session RB trees. A reference count
  * is maintained and a window removed from the global list and destroyed when
- * it reaches zero
+ * it reaches zero.
  */
 
 /* Global window list. */

@@ -40,18 +40,16 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 		if (n == -1) {
 			if (errno != EINTR && errno != EAGAIN)
 				return (-1);
-			return (0);
-		}
-		buffer_add(in, n);
+		} else
+			buffer_add(in, n);
 	}
 	if (BUFFER_USED(out) > 0 && pfd->revents & POLLOUT) {
 		n = write(pfd->fd, BUFFER_OUT(out), BUFFER_USED(out));
 		if (n == -1) {
 			if (errno != EINTR && errno != EAGAIN)
 				return (-1);
-			return (0);
-		}
-		buffer_remove(out, n);
+		} else
+			buffer_remove(out, n);
 	}
 	return (0);
 }
