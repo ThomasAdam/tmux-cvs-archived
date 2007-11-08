@@ -1,3 +1,7 @@
+08 November 2007
+
+* (nicm) Check for required terminal capabilities on start.
+
 31 October 2007
 
 * (nicm) Linux port.

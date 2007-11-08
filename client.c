@@ -136,14 +136,14 @@ client_main(struct client_ctx *cctx)
 	char		*error;
 	int		 timeout;
 
+	siginit();
+	if ((cctx->loc_fd = local_init(&cctx->loc_in, &cctx->loc_out)) == -1)
+		return (1);
+
 	logfile("client");
 #ifndef NO_SETPROCTITLE
 	setproctitle("client");
 #endif
-
-	siginit();
-	if ((cctx->loc_fd = local_init(&cctx->loc_in, &cctx->loc_out)) == -1)
-		return (1);
 
 	error = NULL;
 	timeout = INFTIM;
