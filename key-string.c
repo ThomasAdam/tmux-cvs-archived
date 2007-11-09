@@ -174,7 +174,7 @@ struct {
 	{ "SUSPEND",	KEYC_SUSPEND },
 	{ "UNDO",	KEYC_UNDO },
 	{ "UP",		KEYC_UP },
-	{ "^@",		0 },
+	{ "^ ",		0 },
 	{ "^A", 	1 },
 	{ "^B",		2 },
 	{ "^C",		3 },
