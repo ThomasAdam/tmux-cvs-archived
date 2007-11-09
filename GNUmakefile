@@ -75,6 +75,7 @@ depend: $(SRCS)
 
 install:
 	$(INSTALLBIN) $(PROG) $(DESTDIR)$(PREFIX)/bin/$(PROG)
+	$(INSTALLMAN) $(PROG).1 $(DESTDIR)$(PREFIX)/man/man1/
 
 clean:
 	rm -f $(CLEANFILES)

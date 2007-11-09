@@ -87,3 +87,4 @@ clean:
 
 install:	all
 		${INSTALLBIN} ${PROG} ${DESTDIR}${PREFIX}/bin/${PROG}
+		${INSTALLMAN} ${PROG}.1 ${DESTDIR}${PREFIX}/man/man1/
