@@ -35,15 +35,15 @@ is a terminal multiplexer; it enables a number of terminals (or windows) to be
 accessed and controlled from a single terminal.
 .Pp
 .Nm
-is a server-client system. A server is created automatically when necessary
-and holds a number of
+runs as a server-client system. A server is created automatically when
+necessary and holds a number of
 .Em sessions ,
 each of which may have a number of
 .Em windows
-connected to it.
-A server is controlled by issuing commands with the
+connected to it. Any number of clients may connect to a session, or the server
+may be controlled by issuing commands with the
 .Nm
-binary which communicates using a socket in
+binary. Communication takes place through a socket, by default placed in
 .Pa /tmp .
 .Pp
 The options are as follows:
