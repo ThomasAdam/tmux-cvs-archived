@@ -1,3 +1,7 @@
+09 November 2007
+
+* (nicm) rename-session command.
+
 08 November 2007
 
 * (nicm) Check for required terminal capabilities on start.

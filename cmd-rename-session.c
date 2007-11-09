@@ -24,50 +24,40 @@
 #include "tmux.h"
 
 /*
- * Rename window by index.
+ * Change session name.
  */
 
-int	cmd_rename_window_parse(void **, int, char **, char **);
-void	cmd_rename_window_exec(void *, struct cmd_ctx *);
-void	cmd_rename_window_send(void *, struct buffer *);
-void	cmd_rename_window_recv(void **, struct buffer *);
-void	cmd_rename_window_free(void *);
+int	cmd_rename_session_parse(void **, int, char **, char **);
+void	cmd_rename_session_exec(void *, struct cmd_ctx *);
+void	cmd_rename_session_send(void *, struct buffer *);
+void	cmd_rename_session_recv(void **, struct buffer *);
+void	cmd_rename_session_free(void *);
 
-struct cmd_rename_window_data {
-	int	 idx;
+struct cmd_rename_session_data {
 	char	*newname;
 };
 
-const struct cmd_entry cmd_rename_window_entry = {
-	"rename-window", "renamew", "[-i index] new-name",
+const struct cmd_entry cmd_rename_session_entry = {
+	"rename-session", "rename", "new-name",
 	0,
-	cmd_rename_window_parse,
-	cmd_rename_window_exec, 
-	cmd_rename_window_send,
-	cmd_rename_window_recv,
-	cmd_rename_window_free
+	cmd_rename_session_parse,
+	cmd_rename_session_exec, 
+	cmd_rename_session_send,
+	cmd_rename_session_recv,
+	cmd_rename_session_free
 };
 
 int
-cmd_rename_window_parse(void **ptr, int argc, char **argv, char **cause)
+cmd_rename_session_parse(void **ptr, int argc, char **argv, char **cause)
 {
-	struct cmd_rename_window_data	*data;
-	const char			*errstr;
+	struct cmd_rename_session_data	*data;
 	int				 opt;
 
 	*ptr = data = xmalloc(sizeof *data);
-	data->idx = -1;
 	data->newname = NULL;
 
-	while ((opt = getopt(argc, argv, "i:")) != EOF) {
+	while ((opt = getopt(argc, argv, "")) != EOF) {
 		switch (opt) {
-		case 'i':
-			data->idx = strtonum(optarg, 0, INT_MAX, &errstr);
-			if (errstr != NULL) {
-				xasprintf(cause, "index %s", errstr);
-				goto error;
-			}
-			break;
 		default:
 			goto usage;
 		}
@@ -83,52 +73,42 @@ cmd_rename_window_parse(void **ptr, int argc, char **argv, char **cause)
 
 usage:
 	usage(cause, "%s %s",
-	    cmd_rename_window_entry.name, cmd_rename_window_entry.usage);
+	    cmd_rename_session_entry.name, cmd_rename_session_entry.usage);
 
-error:
-	cmd_rename_window_free(data);
+	cmd_rename_session_free(data);
 	return (-1);
 }
 
 void
-cmd_rename_window_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_rename_session_exec(void *ptr, struct cmd_ctx *ctx)
 {
-	struct cmd_rename_window_data	*data = ptr;
+	struct cmd_rename_session_data	*data = ptr;
 	struct client			*c = ctx->client;
 	struct session			*s = ctx->session;
-	struct winlink			*wl;
 
 	if (data == NULL)
 		return;
 
-	if (data->idx == -1)
-		wl = s->curw;
-	else if ((wl = winlink_find_by_index(&s->windows, data->idx)) == NULL) {
-		ctx->error(ctx, "no window %d", data->idx);
-		return;
-	}
-	xfree(wl->window->name);
-	wl->window->name = xstrdup(data->newname);
-
-	server_status_session(s);
+	xfree(s->name);
+	s->name = xstrdup(data->newname);
 	
 	if (!(ctx->flags & CMD_KEY))
 		server_write_client(c, MSG_EXIT, NULL, 0);
 }
 
 void
-cmd_rename_window_send(void *ptr, struct buffer *b)
+cmd_rename_session_send(void *ptr, struct buffer *b)
 {
-	struct cmd_rename_window_data	*data = ptr;
+	struct cmd_rename_session_data	*data = ptr;
 
 	buffer_write(b, data, sizeof *data);
 	cmd_send_string(b, data->newname);
 }
 
 void
-cmd_rename_window_recv(void **ptr, struct buffer *b)
+cmd_rename_session_recv(void **ptr, struct buffer *b)
 {
-	struct cmd_rename_window_data	*data;
+	struct cmd_rename_session_data	*data;
 
 	*ptr = data = xmalloc(sizeof *data);
 	buffer_read(b, data, sizeof *data);
@@ -136,9 +116,9 @@ cmd_rename_window_recv(void **ptr, struct buffer *b)
 }
 
 void
-cmd_rename_window_free(void *ptr)
+cmd_rename_session_free(void *ptr)
 {
-	struct cmd_rename_window_data	*data = ptr;
+	struct cmd_rename_session_data	*data = ptr;
 
 	if (data->newname != NULL)
 		xfree(data->newname);

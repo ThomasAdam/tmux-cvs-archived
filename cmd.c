@@ -40,6 +40,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_next_window_entry,
 	&cmd_previous_window_entry,
 	&cmd_refresh_session_entry,
+	&cmd_rename_session_entry,
 	&cmd_rename_window_entry,
 	&cmd_select_window_entry,
 	&cmd_send_prefix_entry,
