@@ -25,7 +25,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       cmd-list-windows.c cmd-attach-session.c cmd-send-prefix.c \
       cmd-refresh-session.c cmd-kill-window.c cmd-list-clients.c \
       cmd-has-session.c cmd-link-window.c cmd-unlink-window.c \
-      cmd-swap-window.c cmd-rename-session.c
+      cmd-swap-window.c cmd-rename-session.c cmd-kill-session.c
 
 CC?= cc
 INCDIRS+= -I. -I- -I/usr/local/include
