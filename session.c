@@ -124,8 +124,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 void
 session_destroy(struct session *s)
 {
-	struct winlink	*wl;
-	u_int		 i;
+	u_int	i;
 
 	if (session_index(s, &i) != 0)
 		fatalx("session not found");
@@ -133,11 +132,8 @@ session_destroy(struct session *s)
 	while (!ARRAY_EMPTY(&sessions) && ARRAY_LAST(&sessions) == NULL)
 		ARRAY_TRUNC(&sessions, 1);
 	
-	while (!RB_EMPTY(&s->windows)) {
-		wl = RB_ROOT(&s->windows);
-		RB_REMOVE(winlinks, &s->windows, wl);
-		winlink_remove(&s->windows, wl);
-	}
+	while (!RB_EMPTY(&s->windows))
+		winlink_remove(&s->windows, RB_ROOT(&s->windows));
 
 	xfree(s->name);
 	xfree(s);
