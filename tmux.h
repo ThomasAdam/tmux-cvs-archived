@@ -595,7 +595,7 @@ extern const struct cmd_entry cmd_unlink_window_entry;
 void	cmd_select_window_default(void **, int);
 
 /* client.c */
-int	 client_init(char *, struct client_ctx *, int);
+int	 client_init(const char *, struct client_ctx *, int);
 int	 client_flush(struct client_ctx *);
 int	 client_main(struct client_ctx *);
 
@@ -622,7 +622,7 @@ const char *key_string_lookup_key(int);
 
 /* server.c */
 extern struct clients clients;
-int	 server_start(char *);
+int	 server_start(const char *);
 
 /* server-msg.c */
 int	 server_msg_dispatch(struct client *);
