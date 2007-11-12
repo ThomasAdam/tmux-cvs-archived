@@ -1,5 +1,8 @@
 12 November 2007
 
+* (nicm) If the terminal supports default colours (AX present), force black 
+  background and white foreground to default. This is useful on transparent
+  *terms for programs which don't do it themselves (like most(1)).
 * (nicm) Fill in the rest of the man page.
 * (nicm) kill-session command.
 
