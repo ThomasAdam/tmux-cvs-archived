@@ -38,6 +38,7 @@ And major missing features:
 - Copy and paste.
 - Scrollback.
 - Mouse support.
+- No support for programs changing termios(4) settings or other tty(4) ioctls.
 
 A more extensive, but rough, todo list is included in the TODO file.
 
