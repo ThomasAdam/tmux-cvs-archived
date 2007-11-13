@@ -102,15 +102,13 @@ void
 cmd_select_window_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct cmd_select_window_data	*data = ptr;
-	struct client			*c = ctx->client;
-	struct session			*s = ctx->session;
 
 	if (data == NULL)
 		return;
 
-	switch (session_select(s, data->idx)) {
+	switch (session_select(ctx->session, data->idx)) {
 	case 0:
-		server_redraw_session(s);
+		server_redraw_session(ctx->session);
 		break;
 	case 1:
 		break;
@@ -120,7 +118,7 @@ cmd_select_window_exec(void *ptr, struct cmd_ctx *ctx)
 	}
 	
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void

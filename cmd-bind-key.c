@@ -92,7 +92,6 @@ void
 cmd_bind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
 {
 	struct cmd_bind_key_data	*data = ptr;
-	struct client			*c = ctx->client;
 
 	if (data == NULL)
 		return;
@@ -101,7 +100,7 @@ cmd_bind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
 	data->cmd = NULL;	/* avoid free */
 
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void

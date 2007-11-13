@@ -83,17 +83,15 @@ void
 cmd_rename_session_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct cmd_rename_session_data	*data = ptr;
-	struct client			*c = ctx->client;
-	struct session			*s = ctx->session;
 
 	if (data == NULL)
 		return;
 
-	xfree(s->name);
-	s->name = xstrdup(data->newname);
+	xfree(ctx->session->name);
+	ctx->session->name = xstrdup(data->newname);
 	
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void

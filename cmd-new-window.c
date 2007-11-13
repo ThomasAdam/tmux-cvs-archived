@@ -106,8 +106,6 @@ cmd_new_window_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct cmd_new_window_data	*data = ptr;
 	struct cmd_new_window_data	 std = { NULL, NULL, -1, 0 };
-	struct client			*c = ctx->client;
-	struct session			*s = ctx->session;
 	struct winlink			*wl;
 	char				*cmd;
 
@@ -120,18 +118,19 @@ cmd_new_window_exec(void *ptr, struct cmd_ctx *ctx)
 
 	if (data->idx < 0)
 		data->idx = -1;
-	if ((wl = session_new(s, data->name, cmd, data->idx)) == NULL) {
+	wl = session_new(ctx->session, data->name, cmd, data->idx);
+	if (wl == NULL) {
 		ctx->error(ctx, "command failed: %s", cmd);
 		return;
 	}
 	if (!data->flag_detached) {
-		session_select(s, wl->idx);
-		server_redraw_session(s);
+		session_select(ctx->session, wl->idx);
+		server_redraw_session(ctx->session);
 	} else
-		server_status_session(s);
+		server_status_session(ctx->session);
 	
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void

@@ -88,7 +88,7 @@ void
 cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 {
 	struct cmd_set_option_data	*data = ptr;
-	struct client			*c = ctx->client;
+	struct client			*c;
 	const char			*errstr;
 	u_int				 i;
 	int				 number, bool, key;
@@ -199,7 +199,7 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 	}
 
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void

@@ -42,7 +42,6 @@ const struct cmd_entry cmd_list_keys_entry = {
 void
 cmd_list_keys_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
-	struct client	*c = ctx->client;
 	struct binding	*bd;
 	const char	*key;
 	u_int		 i;
@@ -55,5 +54,5 @@ cmd_list_keys_exec(unused void *ptr, struct cmd_ctx *ctx)
 	}
 
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }

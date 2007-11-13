@@ -46,18 +46,17 @@ void
 cmd_kill_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
 	struct client	*c;
-	struct session	*s = ctx->session;
 	u_int		 i;
 	
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
-		if (c->session == s) {
+		if (c->session == ctx->session) {
 			c->session = NULL;
 			server_write_client(c, MSG_EXIT, NULL, 0);
 		}
 	}
 
-	session_destroy(s);
+	session_destroy(ctx->session);
 	
 	if (!(ctx->flags & CMD_KEY))
 		server_write_client(ctx->client, MSG_EXIT, NULL, 0);

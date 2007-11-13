@@ -94,26 +94,25 @@ void
 cmd_rename_window_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct cmd_rename_window_data	*data = ptr;
-	struct client			*c = ctx->client;
-	struct session			*s = ctx->session;
+	struct winlinks			*wwl = &ctx->session->windows;
 	struct winlink			*wl;
 
 	if (data == NULL)
 		return;
 
 	if (data->idx == -1)
-		wl = s->curw;
-	else if ((wl = winlink_find_by_index(&s->windows, data->idx)) == NULL) {
+		wl = ctx->session->curw;
+	else if ((wl = winlink_find_by_index(wwl, data->idx)) == NULL) {
 		ctx->error(ctx, "no window %d", data->idx);
 		return;
 	}
 	xfree(wl->window->name);
 	wl->window->name = xstrdup(data->newname);
 
-	server_status_session(s);
+	server_status_session(ctx->session);
 	
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(c, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
 }
 
 void
