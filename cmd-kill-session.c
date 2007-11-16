@@ -34,7 +34,7 @@ void	cmd_kill_session_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_kill_session_entry = {
 	"kill-session", NULL, "",
-	0,
+	CMD_NOCLIENT,
 	NULL,
 	cmd_kill_session_exec,
 	NULL,
@@ -59,5 +59,5 @@ cmd_kill_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 	session_destroy(ctx->session);
 	
 	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

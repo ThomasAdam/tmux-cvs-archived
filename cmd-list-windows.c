@@ -31,7 +31,7 @@ void	cmd_list_windows_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_windows_entry = {
 	"list-windows", "lsw", NULL,
-	0,
+	CMD_NOCLIENT,
 	NULL,
 	cmd_list_windows_exec,
 	NULL,
@@ -52,6 +52,6 @@ cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 		    w->screen.sx, w->screen.sy);
 	}
 
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

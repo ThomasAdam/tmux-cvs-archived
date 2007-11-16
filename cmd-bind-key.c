@@ -39,7 +39,7 @@ struct cmd_bind_key_data {
 
 const struct cmd_entry cmd_bind_key_entry = {
 	"bind-key", "bind", "key command [arguments]",
-	CMD_NOSESSION,
+	CMD_NOCLIENT|CMD_NOSESSION,
 	cmd_bind_key_parse,
 	cmd_bind_key_exec, 
 	cmd_bind_key_send,
@@ -99,8 +99,8 @@ cmd_bind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
 	key_bindings_add(data->key, data->cmd);
 	data->cmd = NULL;	/* avoid free */
 
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void

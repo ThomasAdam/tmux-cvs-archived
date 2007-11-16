@@ -42,7 +42,7 @@ struct cmd_link_window_data {
 
 const struct cmd_entry cmd_link_window_entry = {
 	"link-window", "linkw", "[-i index] name index",
-	0,
+	CMD_NOCLIENT,
 	cmd_link_window_parse,
 	cmd_link_window_exec, 
 	cmd_link_window_send,
@@ -142,8 +142,8 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 	} else
 		server_status_session(dst);
 
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void

@@ -31,7 +31,7 @@ void	cmd_previous_window_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_previous_window_entry = {
 	"previous-window", "prev", "",
-	0,
+	CMD_NOCLIENT,
 	NULL,
 	cmd_previous_window_exec,
 	NULL,
@@ -47,6 +47,6 @@ cmd_previous_window_exec(unused void *ptr, struct cmd_ctx *ctx)
 	else
 		ctx->error(ctx, "no previous window"); 
 	
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

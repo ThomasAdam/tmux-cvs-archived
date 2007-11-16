@@ -38,7 +38,7 @@ struct cmd_unbind_key_data {
 
 const struct cmd_entry cmd_unbind_key_entry = {
 	"unbind-key", "unbind", "key",
-	CMD_NOSESSION,
+	CMD_NOCLIENT|CMD_NOSESSION,
 	cmd_unbind_key_parse,
 	cmd_unbind_key_exec, 
 	cmd_unbind_key_send,
@@ -91,8 +91,8 @@ cmd_unbind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
 
 	key_bindings_remove(data->key);
 
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void

@@ -19,31 +19,30 @@
 #include <sys/types.h>
 
 #include <getopt.h>
-#include <string.h>
 
 #include "tmux.h"
 
 /*
- * Cause client to exit with 0 if session exists, or 1 if it doesn't. This
- * is handled in the caller since this doesn't have flag CMD_NOSESSION, so
- * all that is necessary is to exit.
+ * Refresh client.
  */
 
-void	cmd_has_session_exec(void *, struct cmd_ctx *);
+void	cmd_refresh_client_exec(void *, struct cmd_ctx *);
 
-const struct cmd_entry cmd_has_session_entry = {
-	"has-session", "has", "",
-	CMD_NOCLIENT,
+const struct cmd_entry cmd_refresh_client_entry = {
+	"refresh-client", "refresh", "",
+	0,
 	NULL,
-	cmd_has_session_exec,
+	cmd_refresh_client_exec,
 	NULL,
 	NULL,
 	NULL
 };
 
 void
-cmd_has_session_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_refresh_client_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
+	server_redraw_client(ctx->client);
+
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

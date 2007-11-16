@@ -1,5 +1,9 @@
 16 November 2007
 
+* (nicm) Accept "-c client-tty" on command line to allow client manipulation
+  commands, and change detach-/refresh-session to detach-/refresh-client (this
+  loses the -a behaviour, but at some point -session versions may return, and
+  -c will allow fnmatch(3)).
 * (nicm) List available commands on ambiguous command.
 
 12 November 2007

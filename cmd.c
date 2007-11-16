@@ -26,7 +26,7 @@
 const struct cmd_entry *cmd_table[] = {
 	&cmd_attach_session_entry,
 	&cmd_bind_key_entry,
-	&cmd_detach_session_entry,
+	&cmd_detach_client_entry,
 	&cmd_has_session_entry,
 	&cmd_kill_session_entry,
 	&cmd_kill_window_entry,
@@ -40,7 +40,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_new_window_entry,
 	&cmd_next_window_entry,
 	&cmd_previous_window_entry,
-	&cmd_refresh_session_entry,
+	&cmd_refresh_client_entry,
 	&cmd_rename_session_entry,
 	&cmd_rename_window_entry,
 	&cmd_select_window_entry,

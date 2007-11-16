@@ -40,7 +40,7 @@ struct cmd_rename_window_data {
 
 const struct cmd_entry cmd_rename_window_entry = {
 	"rename-window", "renamew", "[-i index] new-name",
-	0,
+	CMD_NOCLIENT,
 	cmd_rename_window_parse,
 	cmd_rename_window_exec, 
 	cmd_rename_window_send,
@@ -111,8 +111,8 @@ cmd_rename_window_exec(void *ptr, struct cmd_ctx *ctx)
 
 	server_status_session(ctx->session);
 	
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void

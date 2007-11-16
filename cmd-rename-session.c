@@ -39,7 +39,7 @@ struct cmd_rename_session_data {
 
 const struct cmd_entry cmd_rename_session_entry = {
 	"rename-session", "rename", "new-name",
-	0,
+	CMD_NOCLIENT,
 	cmd_rename_session_parse,
 	cmd_rename_session_exec, 
 	cmd_rename_session_send,
@@ -90,8 +90,8 @@ cmd_rename_session_exec(void *ptr, struct cmd_ctx *ctx)
 	xfree(ctx->session->name);
 	ctx->session->name = xstrdup(data->newname);
 	
-	if (!(ctx->flags & CMD_KEY))
-		server_write_client(ctx->client, MSG_EXIT, NULL, 0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void
