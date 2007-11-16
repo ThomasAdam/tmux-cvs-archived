@@ -1,5 +1,7 @@
 16 November 2007
 
+* (nicm) Split in-client display into two columns. This is a hack but not a lot
+  more so than that bit is already and it helps with lots of keys.
 * (nicm) switch-client command to switch client between different sessions. This
   is pretty cool:
 
