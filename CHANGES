@@ -1,3 +1,7 @@
+16 November 2007
+
+* (nicm) List available commands on ambiguous command.
+
 12 November 2007
 
 * (nicm) If the terminal supports default colours (AX present), force black 
