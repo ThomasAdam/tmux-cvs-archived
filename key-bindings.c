@@ -159,7 +159,7 @@ key_bindings_error(struct cmd_ctx *ctx, const char *fmt, ...)
 void
 key_bindings_print(struct cmd_ctx *ctx, const char *fmt, ...)
 {
-	struct client	*c = ctx->cmdclient;
+	struct client	*c = ctx->client;
 	struct hdr	 hdr;
 	va_list		 ap;
 	char		*msg;
