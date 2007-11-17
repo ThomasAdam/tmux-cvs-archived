@@ -1,3 +1,7 @@
+17 November 2007
+
+* (nicm) Add -k option to link-window to kill target window if it exists.
+
 16 November 2007
 
 * (nicm) Split in-client display into two columns. This is a hack but not a lot
