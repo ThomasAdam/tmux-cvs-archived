@@ -128,9 +128,11 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 
 	s->dx = sx;
 	s->dy = sy;
-
+       
 	s->rupper = 0;
 	s->rlower = s->dy - 1;
+
+	s->ysize = dy;
 
 	if (sy < oy) {
 		ny = oy - sy;
