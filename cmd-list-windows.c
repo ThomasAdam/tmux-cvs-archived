@@ -49,7 +49,7 @@ cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 		w = wl->window;
 		ctx->print(ctx, "%d: %s \"%s\" (%s) [%ux%u]",
 		    wl->idx, w->name, w->screen.title, ttyname(w->fd),
-		    w->screen.sx, w->screen.sy);
+		    screen_size_x(&w->screen), screen_size_y(&w->screen));
 	}
 
 	if (ctx->cmdclient != NULL)
