@@ -653,7 +653,7 @@ void	 server_clear_window_cur(struct window *);
 void	 server_clear_window_all(struct window *);
 void	 server_redraw_window_cur(struct window *);
 void	 server_redraw_window_all(struct window *);
-void	 server_write_message(struct client *, const char *, ...);
+void printflike2 server_write_message(struct client *, const char *, ...);
 
 /* status.c */
 void	 status_write(struct client *c);

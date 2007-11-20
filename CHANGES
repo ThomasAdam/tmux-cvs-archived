@@ -1,5 +1,7 @@
 20 November 2007
 
+* Fix format string error with "must specify a client" message. Also
+  sprinkle some printflike tags.
 * tmux 0.1 released.
 
 17 November 2007

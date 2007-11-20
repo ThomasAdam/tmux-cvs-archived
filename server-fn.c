@@ -327,7 +327,7 @@ server_status_window_all(struct window *w)
 	}
 }
 
-void
+void printflike2
 server_write_message(struct client *c, const char *fmt, ...)
 {
 	struct screen	*s = &c->session->curw->window->screen;
