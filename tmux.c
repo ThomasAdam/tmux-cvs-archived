@@ -219,8 +219,19 @@ main(int argc, char **argv)
 		    "%s/%s-%lu", _PATH_TMP, __progname, (u_long) getuid());
 	}
 	if (realpath(path, rpath) == NULL) {
-		log_warn("%s", path);
-		exit(1);
+		if (errno != ENOENT) {
+			log_warn("%s", path);
+			exit(1);
+		}
+		/*
+		 * Linux appears to fill in the buffer fine but then returns
+		 * ENOENT if the file doesn't exist. But since it returns an
+		 * error, we can't rely on the buffer. Grr.
+		 */
+		if (strlcpy(rpath, path, sizeof rpath) >= sizeof rpath) {
+			log_warnx("%s: %s", path, strerror(ENAMETOOLONG));
+			exit(1);
+		}
 	}
 	xfree(path);
 
