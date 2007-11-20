@@ -3,7 +3,7 @@
 .PHONY: clean
 
 PROG= tmux
-VERSION= 1.5
+VERSION= 0.2
 
 DATE= $(shell date +%Y%m%d-%H%M)
 

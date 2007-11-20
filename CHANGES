@@ -1,3 +1,7 @@
+20 November 2007
+
+* tmux 0.1 released.
+
 17 November 2007
 
 * (nicm) Add -k option to link-window to kill target window if it exists.
