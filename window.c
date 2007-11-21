@@ -276,8 +276,6 @@ window_resize(struct window *w, u_int sx, u_int sy)
 void
 window_parse(struct window *w, struct buffer *b)
 {
-	if (w->mode != NULL)
-		w->screen.mode |= MODE_HIDDEN;
 	input_parse(w, b);
 }
 

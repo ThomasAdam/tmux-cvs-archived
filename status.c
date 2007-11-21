@@ -57,7 +57,7 @@ status_write(struct client *c)
 
 	input_store_two(b, CODE_ATTRIBUTES, s->attr, s->colr);
 	input_store_two(b, CODE_CURSORMOVE, s->cy + 1, s->cx + 1);
-	if (!(s->mode & MODE_HIDDEN) && s->mode & MODE_CURSOR)
+	if (!(s->mode & MODE_BACKGROUND) && s->mode & MODE_CURSOR)
 		input_store_zero(b, CODE_CURSORON);
 }
 
