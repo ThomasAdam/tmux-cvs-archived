@@ -1,5 +1,7 @@
 21 November 2007
 
+* Make command output (eg list-keys) go to a scrollable window similar to
+  scroll mode.
 * Redo screen redrawing so it is a) readable b) split into utility functions
   that can be used outside screen.c. Use these to make scroll mode only
   redraw what it has to which gets rid of irritating flickering status box and
