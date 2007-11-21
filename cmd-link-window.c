@@ -147,8 +147,10 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 		winlink_remove(&dst->windows, wl2);
 
 		/* Force select/redraw if current. */
-		if (wl2 == dst->curw)
+		if (wl2 == dst->curw) {
 			data->flag_detached = 0;
+			dst->curw = NULL;
+		}
 		if (wl2 == dst->lastw)
 			dst->lastw = NULL;
 
