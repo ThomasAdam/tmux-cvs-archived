@@ -243,11 +243,6 @@ server_msg_fn_keys(struct hdr *hdr, struct client *c)
 	if (hdr->size & 0x1)
 		fatalx("bad MSG_KEYS size");
 
-	if (c->flags & CLIENT_HOLD) {
-		server_redraw_client(c);
-		c->flags &= ~CLIENT_HOLD;
-	}
-
 	size = hdr->size;
 	while (size != 0) {
 		key = (int16_t) input_extract16(c->in);

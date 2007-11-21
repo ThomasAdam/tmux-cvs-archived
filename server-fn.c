@@ -113,12 +113,10 @@ server_write_window_cur(
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
-		if (c != NULL &&
-		    c->session != NULL && c->session->curw->window == w) {
-			if (c->flags & CLIENT_HOLD) /* XXX OUTPUT only */
-				continue;
+		if (c == NULL || c->session == NULL)
+			continue;
+		if (c->session->curw->window == w)
 			server_write_client(c, type, buf, len);
-		}
 	}
 }
 
@@ -133,11 +131,8 @@ server_write_window_all(
 		c = ARRAY_ITEM(&clients, i);
 		if (c == NULL || c->session == NULL)
 			continue;
-		if (session_has(c->session, w)) {
-			if (c->flags & CLIENT_HOLD) /* XXX OUTPUT only */
-				continue;
+		if (session_has(c->session, w))
 			server_write_client(c, type, buf, len);
-		}
 	}
 }
 

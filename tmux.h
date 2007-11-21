@@ -514,7 +514,6 @@ struct client {
 
 #define CLIENT_TERMINAL 0x1
 #define CLIENT_PREFIX 0x2
-#define CLIENT_HOLD 0x4
 	int		 flags;
 
 	struct session	*session;
