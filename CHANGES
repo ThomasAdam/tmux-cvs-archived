@@ -1,5 +1,7 @@
 21 November 2007
 
+* Create every line as zero length and only expand it as data is written,
+  rather than creating at full size immediately.
 * Make command output (eg list-keys) go to a scrollable window similar to
   scroll mode.
 * Redo screen redrawing so it is a) readable b) split into utility functions
