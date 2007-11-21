@@ -152,7 +152,7 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 		for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 			/* XXX fnmatch, multi clients etc */
 			c = ARRAY_ITEM(&clients, i);
-			if (strcmp(client, c->tty) == 0)
+			if (c != NULL && strcmp(client, c->tty) == 0)
 				ctx.client = c;
 		}
 		if (ctx.client == NULL) {
