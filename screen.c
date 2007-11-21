@@ -160,8 +160,8 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 			if (my > ny)
 				my = ny;
 
-			screen_display_free_lines(s, 0, my);
-			screen_display_move_lines(s, 0, my, oy - my);
+			screen_free_lines(s, s->hsize, my);
+			screen_move_lines(s, s->hsize, my, oy - my);
 
 			s->cy -= my;
 			oy -= my;
@@ -172,7 +172,7 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 			/*
 			 * Remove any remaining lines from the bottom.
 			 */
-			screen_display_free_lines(s, oy, ny);
+			screen_free_lines(s, s->hsize + oy - ny, ny);
 			if (s->cy >= sy)
 				s->cy = sy - 1;
 		}
@@ -187,7 +187,7 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 
 	/* Size increasing. */
 	if (sy > oy)
-		screen_display_make_lines(s, oy, sy - oy);
+		screen_make_lines(s, s->hsize + oy, sy - oy);
 
 	s->rupper = 0;
 	s->rlower = s->dy - 1;
