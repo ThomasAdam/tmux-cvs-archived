@@ -55,7 +55,7 @@ struct {
 
 /* Translate a key code from client into an output key sequence. */
 void
-input_translate_key(struct buffer *b, int key)
+input_key(struct buffer *b, int key)
 {
 	u_int	i;
 

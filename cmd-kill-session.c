@@ -58,6 +58,6 @@ cmd_kill_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 
 	session_destroy(ctx->session);
 	
-	if (!(ctx->flags & CMD_KEY))
+	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

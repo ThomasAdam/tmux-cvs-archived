@@ -346,7 +346,7 @@ server_handle_window(struct window *w)
 	u_int		 i;
 
 	b = buffer_create(BUFSIZ);
-	input_parse(w, b);
+	window_parse(w, b);
 	if (BUFFER_USED(b) != 0) {
 		server_write_window_cur(
 		    w, MSG_DATA, BUFFER_OUT(b), BUFFER_USED(b));

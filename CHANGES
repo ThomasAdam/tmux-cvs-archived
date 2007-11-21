@@ -1,3 +1,10 @@
+21 November 2007
+
+* Initial support for scroll history. = to enter scrolling mode, and then
+  vi keys or up/down/pgup/pgdown to navigate. Q to exit. No horizontal history
+  yet (need per-line sizes) and a few kinks to be worked out (resizing while in
+  history mode will probably cause trouble).
+
 20 November 2007
 
 * Fix format string error with "must specify a client" message. Also

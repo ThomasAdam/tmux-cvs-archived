@@ -104,8 +104,11 @@ recalculate_sizes(void)
 					ssy = s->sy;
 			}
 		}
-		if (ssx == UINT_MAX || ssy == UINT_MAX)
+		if (ssx == UINT_MAX || ssy == UINT_MAX) {
+			w->screen.mode |= MODE_HIDDEN;
 			continue;
+		}
+		w->screen.mode &= ~MODE_HIDDEN;
 
 		if (screen_size_x(&w->screen) == ssx &&
 		    screen_size_y(&w->screen) == ssy)
