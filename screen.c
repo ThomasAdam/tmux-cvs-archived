@@ -154,15 +154,16 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 		if (s->cy != 0) {
 			/*
 			 * The cursor is not at the start. Try to remove as
-			 * many lines as possible from the top.
+			 * many lines as possible from the top. (Up to the
+			 * cursor line.)
 			 */
 			my = s->cy;
 			if (my > ny)
 				my = ny;
 
 			screen_free_lines(s, s->hsize, my);
-			screen_move_lines(s, s->hsize, my, oy - my);
-
+			screen_move_lines(s, s->hsize, s->hsize + my, oy - my);
+				
 			s->cy -= my;
 			oy -= my;
 		} 
