@@ -44,7 +44,7 @@ cmd_scroll_mode_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
 	struct window	*w = ctx->session->curw->window;
 
-	if (ctx->flags & CMD_KEY) {
+	if (w->mode == NULL && ctx->flags & CMD_KEY) {
 		w->mode = &window_scroll_mode;
 		w->mode->init(w);
 		server_redraw_window_all(w);
