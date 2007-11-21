@@ -97,11 +97,11 @@ window_scroll_key(struct window *w, int key)
 
 		recalculate_sizes();
 		server_redraw_window_all(w);
-		break;
+		return;
 	case 'k':
 	case 'K':
 	case KEYC_UP:
-		if (data->off <  data->size)
+		if (data->off < data->size)
 			data->off++;
 		break;
 	case 'j':
