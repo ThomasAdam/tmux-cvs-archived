@@ -51,9 +51,9 @@ cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 		w = wl->window;
 
 		sy = w->screen.hsize + w->screen.dy;
-		size = sizeof *w;
+		size = 0;
 		for (i = 0; i < sy; i++)
-			size += 4 + w->screen.grid_size[i] * 3;
+			size += w->screen.grid_size[i] * 3;
 		size += sy * (sizeof *w->screen.grid_data);
 		size += sy * (sizeof *w->screen.grid_attr);
 		size += sy * (sizeof *w->screen.grid_colr);
