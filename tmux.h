@@ -354,6 +354,7 @@ struct screen {
 	u_char	       **grid_data;
 	u_char	       **grid_attr;
 	u_char	       **grid_colr;
+	u_int		*grid_size;
 
  	u_int		 dx;		/* display x size */
 	u_int		 dy;		/* display y size */
@@ -748,7 +749,8 @@ u_char	 screen_stringcolour(const char *);
 void	 screen_create(struct screen *, u_int, u_int);
 void	 screen_destroy(struct screen *);
 void	 screen_resize(struct screen *, u_int, u_int);
-void	 screen_draw(struct screen *, struct buffer *, u_int, u_int, u_int);
+void	 screen_draw(
+    	     struct screen *, struct buffer *, u_int, u_int, u_int, u_int);
 void	 screen_make_lines(struct screen *, u_int, u_int);
 void	 screen_free_lines(struct screen *, u_int, u_int);
 void	 screen_move_lines(struct screen *, u_int, u_int, u_int);

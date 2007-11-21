@@ -287,7 +287,7 @@ window_draw(struct window *w, struct buffer *b, u_int py, u_int ny)
 	if (w->mode != NULL)
 		w->mode->draw(w, b, py, ny);
 	else
-		screen_draw(&w->screen, b, py, ny, 0);
+		screen_draw(&w->screen, b, py, ny, 0, 0);
 }
 
 void

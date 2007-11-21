@@ -193,6 +193,8 @@ screen_display_scroll_region_up(struct screen *s)
 			    s->grid_attr, sy + 1, sizeof *s->grid_attr);
 			s->grid_colr = xrealloc(
 			    s->grid_colr, sy + 1, sizeof *s->grid_colr);
+			s->grid_size = xrealloc(
+			    s->grid_size, sy + 1, sizeof *s->grid_size);
 		}
 		screen_display_make_lines(s, screen_last_y(s), 1);
 		return;
