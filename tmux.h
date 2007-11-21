@@ -448,7 +448,9 @@ struct window {
 #define WINDOW_BELL 0x1
 
 	struct screen	 screen;
+
 	const struct window_mode *mode;
+	void		*modedata;
 
 	u_int		 references;
 };
