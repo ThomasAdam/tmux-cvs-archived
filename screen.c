@@ -205,7 +205,7 @@ screen_resize(struct screen *s, u_int sx, u_int sy)
 void
 screen_destroy(struct screen *s)
 {
-	screen_free_lines(s, 0, s->dy);
+	screen_free_lines(s, 0, s->dy + s->hsize);
 	xfree(s->grid_data);
 	xfree(s->grid_attr);
 	xfree(s->grid_colr);

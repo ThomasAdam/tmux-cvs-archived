@@ -180,9 +180,10 @@ screen_display_scroll_region_up(struct screen *s)
 
 		if (s->hsize == s->hlimit) {
 			/*
-			 * If the limit is hit, shift the whole thing up.
-			 * XXX this is inefficient, is there a better way?
+			 * If the limit is hit, free the first and shift
+			 * the whole thing up.
 			 */
+			screen_free_lines(s, 0, 1);
 			screen_move_lines(s, 0, 1, sy - 1);
 		} else {
 			s->hsize++;

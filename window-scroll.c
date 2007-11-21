@@ -95,7 +95,7 @@ window_scroll_draw(struct window *w, struct buffer *b, u_int py, u_int ny)
 	struct screen_draw_ctx		 ctx;
 
 	if (s->hsize != data->size) {
-		data->ox += s->hsize - data->size;
+		data->oy += s->hsize - data->size;
 		data->size = s->hsize;
 	}
 
