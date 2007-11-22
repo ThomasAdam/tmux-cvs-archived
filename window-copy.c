@@ -184,7 +184,7 @@ window_copy_key(struct window *w, int key)
 			data->oy -= sy;
 		break;
 	case '\000':	/* C-space */
-		data->sel.flag = 1;
+		data->sel.flag = !data->sel.flag;
 		data->sel.sx = data->cx + data->ox;
 		data->sel.sy = data->size + data->cy - data->oy;
 		oy = -1;	/* XXX */
