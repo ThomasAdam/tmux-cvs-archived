@@ -74,7 +74,7 @@ window_more_init(struct window *w)
 	ARRAY_INIT(&data->list);
 	data->top = 0;
 
-	w->screen.mode |= MODE_BACKGROUND;
+	w->screen.mode |= (MODE_BACKGROUND|MODE_NOCURSOR);
 }
 
 void
@@ -90,6 +90,7 @@ window_more_draw_position(struct window *w, struct screen_draw_ctx *ctx)
 	size_t	 			 len;
 	char				*line;
 	size_t				 n;
+
 
 	len = xsnprintf(
 	    buf, sizeof buf, "[%u/%u]", data->top, ARRAY_LENGTH(&data->list));
@@ -185,7 +186,7 @@ window_more_key(struct window *w, int key)
 		w->mode = NULL;
 		xfree(w->modedata);
 
-		w->screen.mode &= ~MODE_BACKGROUND;
+		w->screen.mode &= ~(MODE_BACKGROUND|MODE_NOCURSOR);
 
 		recalculate_sizes();
 		server_redraw_window_all(w);

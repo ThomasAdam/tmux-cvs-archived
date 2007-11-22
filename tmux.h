@@ -341,6 +341,7 @@ struct msg_resize_data {
 #define MODE_SAVED   0x10
 #define MODE_HIDDEN  0x20
 #define MODE_BACKGROUND 0x40
+#define MODE_NOCURSOR 0x80
 
 /*
  * Virtual screen. This is stored as three blocks of 8-bit values, one for
