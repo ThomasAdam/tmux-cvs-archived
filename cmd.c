@@ -26,6 +26,7 @@
 const struct cmd_entry *cmd_table[] = {
 	&cmd_attach_session_entry,
 	&cmd_bind_key_entry,
+	&cmd_copy_mode_entry,
 	&cmd_detach_client_entry,
 	&cmd_has_session_entry,
 	&cmd_kill_session_entry,

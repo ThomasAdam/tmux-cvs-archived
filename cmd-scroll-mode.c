@@ -30,7 +30,7 @@
 void	cmd_scroll_mode_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_scroll_mode_entry = {
-	"scroll-mode", "scroll", "",
+	"scroll-mode", NULL, "",
 	CMD_NOCLIENT,
 	NULL,
 	cmd_scroll_mode_exec, 
