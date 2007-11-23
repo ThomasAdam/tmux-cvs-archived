@@ -37,13 +37,14 @@ const char	*malloc_options = "AFGJPX";
 
 volatile sig_atomic_t sigwinch;
 volatile sig_atomic_t sigterm;
+char		*default_command;
+char		*paste_buffer;
+int		 bell_action;
 int		 debug_level;
 int		 prefix_key = META;
-u_int		 status_lines;
 u_char		 status_colour;
-char		*default_command;
-int		 bell_action;
 u_int		 history_limit;
+u_int		 status_lines;
 
 void		 sighandler(int);
 
@@ -216,6 +217,8 @@ main(int argc, char **argv)
 	bell_action = BELL_ANY;
 
 	history_limit = 2000;
+
+	paste_buffer = NULL;
 
 	if (path == NULL) {
 		xasprintf(&path,

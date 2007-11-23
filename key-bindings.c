@@ -110,6 +110,7 @@ key_bindings_init(void)
 		{ '&', &cmd_kill_window_entry, NULL },
 		{ '=', &cmd_scroll_mode_entry, NULL },
 		{ '[', &cmd_copy_mode_entry, NULL },
+		{ ']', &cmd_paste_buffer_entry, NULL },
 		{ META, &cmd_send_prefix_entry, NULL },
 	};
 	u_int		 i;
