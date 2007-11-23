@@ -620,6 +620,7 @@ extern int	 prefix_key;
 extern int	 debug_level;
 extern u_int	 status_lines;
 extern u_char	 status_colour;
+extern u_int	 history_limit;
 extern char     *default_command;
 void		 usage(char **, const char *, ...);
 void		 logfile(const char *);

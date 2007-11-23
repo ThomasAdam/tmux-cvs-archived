@@ -193,6 +193,16 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 		}
 		xfree(default_command);
 		default_command = xstrdup(data->value);
+	} else if (strcmp(data->option, "history-limit") == 0) {
+		if (data->value == NULL) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
+		if (number > SHRT_MAX) {
+			ctx->error(ctx, "history-limit too big: %u", number);
+			return;
+		}
+		history_limit = number;
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;

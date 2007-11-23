@@ -91,7 +91,7 @@ screen_create(struct screen *s, u_int dx, u_int dy)
 	s->rlower = s->dy - 1;
 
 	s->hsize = 0;
-	s->hlimit = SHRT_MAX;
+	s->hlimit = history_limit;
 
 	s->attr = SCREEN_DEFATTR;
 	s->colr = SCREEN_DEFCOLR;
