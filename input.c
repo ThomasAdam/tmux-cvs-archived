@@ -535,9 +535,10 @@ input_handle_sequence(u_char ch, struct input_ctx *ictx)
 	u_int		  i;
 	struct input_arg *iarg;
 	
-	log_debug2("-- sq %zu: %hhu (%c): %u [sx=%u, sy=%u, cx=%u, cy=%u]",
-	    ictx->off, ch, ch, ARRAY_LENGTH(&ictx->args),
-	    screen_size_x(s), screen_size_y(s), s->cx, s->cy);
+	log_debug2("-- sq %zu: %hhu (%c): %u [sx=%u, sy=%u, cx=%u, cy=%u, "
+	    "ru=%u, rl=%u]", ictx->off, ch, ch, ARRAY_LENGTH(&ictx->args),
+	    screen_size_x(s), screen_size_y(s), s->cx, s->cy, s->rupper,
+	    s->rlower);
 	for (i = 0; i < ARRAY_LENGTH(&ictx->args); i++) {
 		iarg = &ARRAY_ITEM(&ictx->args, i);
 		if (*iarg->data != '\0')
