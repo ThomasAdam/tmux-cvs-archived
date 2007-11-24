@@ -230,6 +230,9 @@ server_msg_fn_resize(struct hdr *hdr, struct client *c)
 
 	recalculate_sizes();
 
+	/* Always redraw this client. */
+	server_redraw_client(c);
+
 	return (0);
 }
 
