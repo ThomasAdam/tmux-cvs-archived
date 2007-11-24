@@ -260,6 +260,8 @@ screen_display_insert_lines(struct screen *s, u_int py, u_int ny)
 
 	if (py + ny > screen_last_y(s))
 		ny = screen_last_y(s) - py;
+	if (ny == 0)
+		return;	
 
 	/*
 	 * Insert range of ny lines at py:
@@ -295,6 +297,8 @@ screen_display_insert_lines_region(struct screen *s, u_int py, u_int ny)
 
 	if (py + ny > s->rlower)
 		ny = s->rlower - py;
+	if (ny == 0)
+		return;
 
 	/*
 	 * Insert range of ny lines at py:
@@ -330,6 +334,8 @@ screen_display_delete_lines(struct screen *s, u_int py, u_int ny)
 
 	if (py + ny > screen_last_y(s))
 		ny = screen_last_y(s) - py;
+	if (ny == 0)
+		return;
 
 	/*
 	 * Delete range of ny lines at py:
@@ -365,6 +371,8 @@ screen_display_delete_lines_region(struct screen *s, u_int py, u_int ny)
 
 	if (py + ny > s->rlower)
 		ny = s->rlower - py;
+	if (ny == 0)
+		return;
 
 	/*
 	 * Delete range of ny lines at py:
