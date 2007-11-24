@@ -374,8 +374,8 @@ struct screen {
 
 	u_int		 saved_cx;
 	u_int		 saved_cy;
-	u_int		 saved_attr;
-	u_int		 saved_colr;
+	u_char		 saved_attr;
+	u_char		 saved_colr;
 	
 	int		 mode;
 };
@@ -402,8 +402,8 @@ struct screen_draw_ctx {
 	u_int		 ox;
 	u_int		 oy;
 
-	u_int		 attr;
-	u_int		 colr;
+	u_char		 attr;
+	u_char		 colr;
 
 	struct screen_draw_sel sel;
 };
