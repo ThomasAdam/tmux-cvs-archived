@@ -278,8 +278,9 @@ screen_draw_start(struct screen_draw_ctx *ctx,
 	ctx->ox = ox;
 	ctx->oy = oy;
 
-	ctx->cx = s->cx;
-	ctx->cy = s->cy;
+	/* Resetting the scroll region homes the cursor so start at 0,0. */
+	ctx->cx = 0;
+	ctx->cy = 0;
 
 	ctx->sel.flag = 0;
 

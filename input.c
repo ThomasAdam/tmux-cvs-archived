@@ -484,8 +484,6 @@ input_handle_private_two(u_char ch, struct input_ctx *ictx)
 		if (!screen_hidden(s)) {
 			input_store_two(
 			    ictx->b, CODE_ATTRIBUTES, s->attr, s->colr);
-			input_store_two(ictx->b, CODE_SCROLLREGION,
-			    s->rupper + 1, s->rlower + 1);
 			input_store_two(
 			    ictx->b, CODE_CURSORMOVE, s->cy + 1, s->cx + 1);
 		}
