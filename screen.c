@@ -450,7 +450,7 @@ screen_draw_line(struct screen_draw_ctx *ctx, u_int py)
 void
 screen_draw_lines(struct screen_draw_ctx *ctx, u_int py, u_int ny)
 {
-	u_int		 i;
+	u_int	i;
 
 	for (i = py; i < py + ny; i++)
 		screen_draw_line(ctx, i);
