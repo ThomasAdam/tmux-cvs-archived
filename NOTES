@@ -30,11 +30,10 @@ The following is a summary of major features implemented in this version:
   system.
 - A optional status line (enabled by default).
 - Window history and copy and paste.
+- Support for VT100 line drawing characters.
 
 And major missing features:
 
-- Support for VT100 line drawing characters (they will appear as jklmx, etc). 
-  This is most noticable in ncmpc and in elinks if configured with VT100 frames.
 - Status line customisation, beyond presence and colour.
 - Mouse support.
 - No support for programs changing termios(4) settings or other tty(4) ioctls.

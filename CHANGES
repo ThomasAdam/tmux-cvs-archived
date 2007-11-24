@@ -1,4 +1,8 @@
-3 November 2007
+24 November 2007
+
+* Support for alt charset mode (VT100 graphics characters).
+
+23 November 2007
 
 * Mostly complete copy & paste. Copy mode entered with C-b [ (copy-mode
   command). In copy mode, arrow keys/page up/page down/hjkl/C-u/C-f navigate,
