@@ -204,8 +204,8 @@ struct local_key local_keys[] = {
 };
 
 /* tty file descriptor and local terminal buffers. */
-int		 local_fd;
-int		 local_log;
+int		 local_fd = -1;
+int		 local_log = -1;
 struct buffer	*local_in;
 struct buffer	*local_out;
 struct termios	 local_tio;
