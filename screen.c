@@ -461,7 +461,7 @@ screen_draw_line(struct screen_draw_ctx *ctx, u_int py)
 		screen_draw_cells(ctx, 0, py, screen_size_x(ctx->s));
 	else {
 		screen_draw_cells(ctx, 0, py, cx);
-		screen_draw_move(ctx, cx, cy);
+		screen_draw_move(ctx, cx, py);
 		input_store_zero(ctx->b, CODE_CLEARENDOFLINE);
 	}
 }
