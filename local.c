@@ -243,7 +243,7 @@ local_init(struct buffer **in, struct buffer **out)
 		NULL
 	};
 
-	if ((tty = ttyname(STDOUT_FILENO)) == NULL)
+	if ((tty = ttyname(STDIN_FILENO)) == NULL)
 		fatal("ttyname failed");
 	if ((local_fd = open(tty, O_RDWR)) == -1)
 		fatal("open failed");

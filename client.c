@@ -102,7 +102,7 @@ retry:
 	cctx->srv_in = buffer_create(BUFSIZ);
 	cctx->srv_out = buffer_create(BUFSIZ);
 
-	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO)) {
+	if (isatty(STDIN_FILENO)) {
 		if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1) {
 			log_warn("ioctl(TIOCGWINSZ)");
 			return (-1);

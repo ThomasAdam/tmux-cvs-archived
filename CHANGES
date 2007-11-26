@@ -1,3 +1,7 @@
+26 November 2007
+
+* Add ^A and ^E to copy mode to move to start-of-line/end-of-line.
+
 24 November 2007
 
 * Support for alt charset mode (VT100 graphics characters).
