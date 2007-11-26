@@ -313,7 +313,7 @@ window_copy_find_length(struct window *w, u_int py)
 	u_int		 px;
 
 	px = s->grid_size[py];
-	while (px > 0 && s->grid_data[py][px] == SCREEN_DEFDATA)
+	while (px > 0 && s->grid_data[py][px - 1] == SCREEN_DEFDATA)
 		px--;
 	return (px);
 }
