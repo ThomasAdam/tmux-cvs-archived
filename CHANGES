@@ -1,5 +1,7 @@
 26 November 2007
 
+* Rather than shifting up one line at a time once the history is full,
+  shift by 10% of the history each time. This is faster.
 * Add ^A and ^E to copy mode to move to start-of-line/end-of-line.
 
 24 November 2007
