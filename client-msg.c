@@ -84,6 +84,19 @@ client_msg_fn_error(struct hdr *hdr, struct client_ctx *cctx, char **error)
 }
 
 int
+client_msg_fn_detach(
+    struct hdr *hdr, unused struct client_ctx *cctx, unused char **error)
+{
+	if (hdr->size != 0)
+		fatalx("bad MSG_DETACH size");
+
+	client_write_server(cctx, MSG_EXITING, NULL, 0);
+	cctx->flags |= CCTX_DETACH;
+	
+	return (0);
+}
+
+int
 client_msg_fn_exit(
     struct hdr *hdr, unused struct client_ctx *cctx, unused char **error)
 {
@@ -91,6 +104,7 @@ client_msg_fn_exit(
 		fatalx("bad MSG_EXIT size");
 
 	client_write_server(cctx, MSG_EXITING, NULL, 0);
+	cctx->flags |= CCTX_EXIT;
 
 	return (0);
 }
@@ -101,20 +115,6 @@ client_msg_fn_exited(
 {
 	if (hdr->size != 0)
 		fatalx("bad MSG_EXITED size");
-
-	cctx->flags |= CCTX_EXIT;
-
-	return (-1);
-}
-
-int
-client_msg_fn_detach(
-    struct hdr *hdr, unused struct client_ctx *cctx, unused char **error)
-{
-	if (hdr->size != 0)
-		fatalx("bad MSG_DETACH size");
-
-	cctx->flags |= CCTX_DETACH;
 
 	return (-1);
 }
