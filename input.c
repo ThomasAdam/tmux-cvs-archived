@@ -432,11 +432,11 @@ input_handle_c0_control(u_char ch, struct input_ctx *ictx)
 		input_write(ictx, TTY_CURSORMOVE, s->cy, s->cx);
 		return;
 	case '\016':	/* SO */
-		s->attr |= ATTR_DRAWING;
+		s->attr |= ATTR_CHARSET;
 		input_write(ictx, TTY_ATTRIBUTES, s->attr, s->colr);
 		return;
 	case '\017':	/* SI */
-		s->attr &= ~ATTR_DRAWING;
+		s->attr &= ~ATTR_CHARSET;
 		input_write(ictx, TTY_ATTRIBUTES, s->attr, s->colr);
 		return;
 	default:
@@ -1057,7 +1057,7 @@ input_handle_sequence_sgr(struct input_ctx *ictx)
 			switch (m) {
 			case 0:
 			case 10:
-				s->attr = 0;
+				s->attr &= ATTR_CHARSET;
 				s->colr = SCREEN_DEFCOLR;
 				break;
 			case 1:

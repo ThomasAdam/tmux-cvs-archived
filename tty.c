@@ -201,7 +201,7 @@ tty_puts(struct tty *tty, const char *s)
 void
 tty_putc(struct tty *tty, char ch)
 {
-	if (tty->attr & ATTR_DRAWING)
+	if (tty->attr & ATTR_CHARSET)
 		ch = tty_get_acs(tty, ch);
 	buffer_write8(tty->out, ch);
 }
@@ -346,7 +346,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 
 	/* If any bits are being cleared, reset everything. */
 	if (tty->attr & ~attr) {
-		if ((tty->attr & ATTR_DRAWING) &&
+		if ((tty->attr & ATTR_CHARSET) &&
 		    exit_alt_charset_mode != NULL)
 			tty_puts(tty, exit_alt_charset_mode);
 		tty_puts(tty, exit_attribute_mode);
@@ -372,7 +372,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 		tty_puts(tty, enter_reverse_mode);
 	if ((attr & ATTR_HIDDEN) && enter_secure_mode != NULL)
 		tty_puts(tty, enter_secure_mode);
-	if ((attr & ATTR_DRAWING) && enter_alt_charset_mode != NULL)
+	if ((attr & ATTR_CHARSET) && enter_alt_charset_mode != NULL)
 		tty_puts(tty, enter_alt_charset_mode);
 
 	fg = (colr >> 4) & 0xf;

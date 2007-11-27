@@ -332,7 +332,7 @@ struct msg_resize_data {
 #define ATTR_REVERSE 0x10
 #define ATTR_HIDDEN 0x20
 #define ATTR_ITALICS 0x40
-#define ATTR_DRAWING 0x80	/* line drawing character set */
+#define ATTR_CHARSET 0x80	/* alternative character set */
 
 /* Modes. */
 #define MODE_CURSOR 0x001
