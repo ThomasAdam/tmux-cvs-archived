@@ -140,6 +140,8 @@ tty_close(struct tty *tty)
 	tty_keys_free(tty);
 
 	close(tty->fd);
+	tty->fd = -1;
+
 	buffer_destroy(tty->in);
 	buffer_destroy(tty->out);
 }
@@ -150,10 +152,14 @@ tty_free(struct tty *tty)
 	if (tty->fd != -1)
 		tty_close(tty);
 
-	if (tty->path != NULL)
+	if (tty->path != NULL) {
 		xfree(tty->path);
-	if (tty->term != NULL)
+		tty->path = NULL;
+	}
+	if (tty->term != NULL) {
 		xfree(tty->term);
+		tty->term = NULL;
+	}
 }
 
 void
