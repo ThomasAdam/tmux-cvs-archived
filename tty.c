@@ -51,7 +51,7 @@ int
 tty_open(struct tty *tty, char **cause)
 {
 	struct termios	 tio;
-	int		 error;
+	int		 error, what;
 
 	tty->fd = open(tty->path, O_RDWR|O_NONBLOCK);
 	if (tty->fd == -1) {
@@ -102,6 +102,10 @@ tty_open(struct tty *tty, char **cause)
 	cfsetspeed(&tio, TTYDEF_SPEED);
 	if (tcsetattr(tty->fd, TCSANOW, &tio) != 0)
 		fatal("tcsetattr failed");
+
+	what = 0;
+	if (ioctl(tty->fd, TIOCFLUSH, &what) != 0)
+		fatal("ioctl(TIOCFLUSH)");
 
 	if (enter_ca_mode != NULL)
 		tty_puts(tty, enter_ca_mode);
