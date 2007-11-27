@@ -833,6 +833,7 @@ void	 screen_draw_start_session(
 void	 screen_draw_start(struct screen_draw_ctx *, struct screen *s,
 	     void (*)(void *, int, ...), void *, u_int, u_int);
 void	 screen_draw_stop(struct screen_draw_ctx *);
+void	 screen_draw_set_offset(struct screen_draw_ctx *, u_int, u_int);
 void	 screen_draw_set_selection(
     	     struct screen_draw_ctx *, int, u_int, u_int, u_int, u_int);
 int	 screen_draw_check_selection(struct screen_draw_ctx *, u_int, u_int);

@@ -74,6 +74,7 @@ tty_open(struct tty *tty, char **cause)
 			break;
 		default:
 			xasprintf(cause, "unknown error");
+			break;
 		}
 		return (-1);
 	}

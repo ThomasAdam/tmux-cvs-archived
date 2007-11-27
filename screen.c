@@ -323,6 +323,14 @@ screen_draw_start(struct screen_draw_ctx *ctx, struct screen *s,
 	ctx->write(ctx->data, TTY_CURSOROFF);
 }
 
+/* Set offset. */
+void
+screen_draw_set_offset(struct screen_draw_ctx *ctx, u_int ox, u_int oy)
+{
+	ctx->ox = ox;
+	ctx->oy = oy;
+}
+
 /* Set selection. */
 void
 screen_draw_set_selection(struct screen_draw_ctx *ctx, 

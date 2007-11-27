@@ -120,6 +120,7 @@ window_copy_draw(
 		data->oy += s->hsize - data->size;
 		data->size = s->hsize;
 	}
+	screen_draw_set_offset(ctx, data->ox, data->oy);
 
 	if (py != 0)
 		screen_draw_lines(ctx, py, ny);
