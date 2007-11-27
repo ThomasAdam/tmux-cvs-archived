@@ -53,3 +53,24 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 	}
 	return (0);
 }
+
+/* Flush buffer output to socket. */
+void
+buffer_flush(int fd, struct buffer *in, struct buffer *out)
+{
+	struct pollfd	pfd;
+
+	while (BUFFER_USED(out) > 0) {
+		pfd.fd = fd;
+		pfd.events = POLLIN|POLLOUT;
+
+		if (poll(&pfd, 1, INFTIM) == -1) {
+			if (errno == EAGAIN || errno == EINTR)
+				continue;
+			fatal("poll failed");
+		}
+
+		if (buffer_poll(&pfd, in, out) != 0)
+			break;
+	}
+}

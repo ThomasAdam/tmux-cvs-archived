@@ -204,5 +204,5 @@ key_bindings_dispatch(int key, struct client *c)
 	cmd_exec(bd->cmd, &ctx);
 	
 	if (c->session->curw->window->mode == &window_more_mode)
-		server_redraw_window_all(c->session->curw->window);
+		server_redraw_window(c->session->curw->window);
 }

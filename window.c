@@ -274,24 +274,18 @@ window_resize(struct window *w, u_int sx, u_int sy)
 }
 
 void
-window_parse(struct window *w, struct buffer *b)
+window_parse(struct window *w)
 {
-	input_parse(w, b);
+	input_parse(w);
 }
 
 void
-window_draw(struct window *w, struct buffer *b, u_int py, u_int ny)
+window_draw(struct window *w, struct screen_draw_ctx *ctx, u_int py, u_int ny)
 {
-	struct screen		*s = &w->screen;
-	struct screen_draw_ctx	 ctx;
-
 	if (w->mode != NULL)
-		w->mode->draw(w, b, py, ny);
-	else {
-		screen_draw_start(&ctx, s, b, 0, 0);
-		screen_draw_lines(&ctx, py, ny);
-		screen_draw_stop(&ctx);
-	}
+		w->mode->draw(w, ctx, py, ny);
+	else
+		screen_draw_lines(ctx, py, ny);
 }
 
 void
@@ -300,5 +294,5 @@ window_key(struct window *w, int key)
 	if (w->mode != NULL)
 		w->mode->key(w, key);
 	else
-		input_key(w->out, key);	
+		input_key(w, key);	
 }

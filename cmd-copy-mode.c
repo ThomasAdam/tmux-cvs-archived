@@ -47,7 +47,7 @@ cmd_copy_mode_exec(unused void *ptr, struct cmd_ctx *ctx)
 	if (w->mode == NULL && ctx->flags & CMD_KEY) {
 		w->mode = &window_copy_mode;
 		w->mode->init(w);
-		server_redraw_window_all(w);
+		server_redraw_window(w);
 	}
 
 	if (ctx->cmdclient != NULL)
