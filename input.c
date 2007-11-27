@@ -913,6 +913,10 @@ input_handle_sequence_sm(struct input_ctx *ictx)
 			s->mode |= MODE_CURSOR;
 			input_write(ictx, TTY_CURSORON);
 			break;
+		case 1000:
+			s->mode |= MODE_MOUSE;
+			input_write(ictx, TTY_MOUSEON);
+			break;
 		default:
 			log_debug("unknown SM [%hhu]: %u", ictx->private, n);
 			break;
@@ -953,6 +957,10 @@ input_handle_sequence_rm(struct input_ctx *ictx)
 		case 25:	/* TCEM */
 			s->mode &= ~MODE_CURSOR;
 			input_write(ictx, TTY_CURSOROFF);
+			break;
+		case 1000:
+			s->mode &= ~MODE_MOUSE;
+			input_write(ictx, TTY_MOUSEOFF);
 			break;
 		default:
 			log_debug("unknown RM [%hhu]: %u", ictx->private, n);

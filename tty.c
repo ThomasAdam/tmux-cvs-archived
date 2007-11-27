@@ -324,7 +324,15 @@ tty_vwrite(struct tty *tty, int cmd, va_list ap)
 	case TTY_KKEYPADON:
 		if (keypad_xmit != NULL)
 			tty_puts(tty, keypad_xmit);
+		break;
 #endif
+	case TTY_MOUSEOFF:
+		if (key_mouse != NULL)
+			tty_puts(tty, "\e[?1000l");
+		break;
+	case TTY_MOUSEON:
+		if (key_mouse != NULL)
+			tty_puts(tty, "\e[?1000h");
 		break;
 	case TTY_TITLE:
 		break;
