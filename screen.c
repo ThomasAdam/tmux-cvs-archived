@@ -321,6 +321,7 @@ screen_draw_start(struct screen_draw_ctx *ctx, struct screen *s,
 
 	ctx->write(ctx->data, TTY_SCROLLREGION, 0, screen_last_y(s));
 	ctx->write(ctx->data, TTY_CURSOROFF);
+	ctx->write(ctx->data, TTY_MOUSEOFF);
 }
 
 /* Set offset. */
@@ -412,6 +413,8 @@ screen_draw_stop(struct screen_draw_ctx *ctx)
 		if (s->mode & MODE_CURSOR)
 			ctx->write(ctx->data, TTY_CURSORON);
 	}
+	if (s->mode & MODE_MOUSE)
+		ctx->write(ctx->data, TTY_MOUSEON);
 }
 
 /* Insert lines. */
