@@ -62,8 +62,6 @@ extern char    *__progname;
 #define TTY_NAME_MAX 32
 #endif
 
-#define MAXTITLELEN	128
-
 /* Fatal errors. */
 #define fatal(msg) log_fatal("%s: %s", __func__, msg);
 #define fatalx(msg) log_fatalx("%s: %s", __func__, msg);
@@ -355,7 +353,7 @@ struct msg_resize_data {
  * Each block is y by x in size, row then column order. Sizes are 0-based.
  */
 struct screen {
-	char		 title[MAXTITLELEN];
+	char		*title;
 
 	u_char	       **grid_data;
 	u_char	       **grid_attr;
@@ -447,9 +445,13 @@ struct input_ctx {
 	size_t		 len;
 	size_t		 off;
 
-	u_char		 title_buf[MAXTITLELEN];
-	size_t		 title_len;
-	u_int		 title_type;
+#define MAXSTRINGLEN	1024
+	u_char		*string_buf;
+	size_t		 string_len;
+	int		 string_type;
+#define STRING_TITLE 0
+#define STRING_NAME 1
+#define STRING_IGNORE 2
 
 	void 		*(*state)(u_char, struct input_ctx *);
 
@@ -938,6 +940,8 @@ uint8_t		 buffer_read8(struct buffer *);
 uint16_t 	 buffer_read16(struct buffer *);
 
 /* buffer-poll.c */
+void		 buffer_set(
+		     struct pollfd *, int, struct buffer *, struct buffer *);
 int		 buffer_poll(struct pollfd *, struct buffer *, struct buffer *);
 void		 buffer_flush(int, struct buffer *n, struct buffer *);
 

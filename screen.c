@@ -97,7 +97,7 @@ screen_create(struct screen *s, u_int dx, u_int dy)
 	s->colr = SCREEN_DEFCOLR;
 
 	s->mode = MODE_CURSOR;
-	*s->title = '\0';
+	s->title = xstrdup("");
 
 	s->grid_data = xmalloc(dy * (sizeof *s->grid_data));
 	s->grid_attr = xmalloc(dy * (sizeof *s->grid_attr));
@@ -260,6 +260,7 @@ screen_set_cell(struct screen *s,
 void
 screen_destroy(struct screen *s)
 {
+	xfree(s->title);
 	screen_free_lines(s, 0, s->dy + s->hsize);
 	xfree(s->grid_data);
 	xfree(s->grid_attr);

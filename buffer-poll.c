@@ -24,6 +24,17 @@
 
 #include "tmux.h"
 
+/* Set up pollfd for buffers. */
+void
+buffer_set(
+    struct pollfd *pfd, int fd, unused struct buffer *in, struct buffer *out)
+{
+	pfd->fd = fd;
+	pfd->events = POLLIN;
+	if (BUFFER_USED(out) > 0)
+		pfd->events |= POLLOUT;
+}
+
 /* Fill buffers from socket based on poll results. */
 int
 buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
@@ -61,8 +72,7 @@ buffer_flush(int fd, struct buffer *in, struct buffer *out)
 	struct pollfd	pfd;
 
 	while (BUFFER_USED(out) > 0) {
-		pfd.fd = fd;
-		pfd.events = POLLIN|POLLOUT;
+		buffer_set(&pfd, fd, in, out);
 
 		if (poll(&pfd, 1, INFTIM) == -1) {
 			if (errno == EAGAIN || errno == EINTR)
