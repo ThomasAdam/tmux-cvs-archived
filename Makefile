@@ -49,8 +49,9 @@ CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wcast-qual -Wsign-compare
 CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
 
 PREFIX?= /usr/local
-INSTALLBIN= install -d -g bin -o root -m 555
-INSTALLMAN= install -d -g bin -o root -m 444
+INSTALLDIR= install -d
+INSTALLBIN= install -g bin -o root -m 555
+INSTALLMAN= install -g bin -o root -m 444
 
 LDFLAGS+= -L/usr/local/lib
 .ifdef PROFILE
@@ -109,5 +110,7 @@ update-index.html:
 		sed "s/%%VERSION%%/${VERSION}/g" index.html.in >index.html
 
 install:	all
+		${INSTALLDIR} ${DESTDIR}${PREFIX}/bin
 		${INSTALLBIN} ${PROG} ${DESTDIR}${PREFIX}/bin/${PROG}
+		${INSTALLDIR} ${DESTDIR}${PREFIX}/man/man1
 		${INSTALLMAN} ${PROG}.1 ${DESTDIR}${PREFIX}/man/man1/
