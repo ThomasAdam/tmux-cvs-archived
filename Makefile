@@ -49,8 +49,8 @@ CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wcast-qual -Wsign-compare
 CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
 
 PREFIX?= /usr/local
-INSTALLBIN= install -g bin -o root -m 555
-INSTALLMAN= install -g bin -o root -m 444
+INSTALLBIN= install -d -g bin -o root -m 555
+INSTALLMAN= install -d -g bin -o root -m 444
 
 LDFLAGS+= -L/usr/local/lib
 .ifdef PROFILE
