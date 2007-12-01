@@ -65,8 +65,7 @@ server_start(const char *path)
 
 	switch (fork()) {
 	case -1:
-		log_warn("fork");
-		return (-1);
+		fatal("fork");
 	case 0:
 		break;
 	default:
