@@ -406,9 +406,6 @@ struct screen_draw_ctx {
 	u_int		 ox;
 	u_int		 oy;
 
-	u_char		 attr;
-	u_char		 colr;
-
 	struct screen_draw_sel sel;
 };
 
