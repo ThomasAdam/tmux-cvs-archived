@@ -101,6 +101,8 @@ screen_write_put_character(struct screen_write_ctx *ctx, u_char ch)
 
 	if (s->cx == screen_size_x(s)) {
 		s->cx = 0;
+		if (ctx->write != NULL)
+			ctx->write(ctx->data, TTY_CHARACTER, '\r');
 		screen_write_cursor_down_scroll(ctx);
 	} else if (!screen_in_x(s, s->cx) || !screen_in_y(s, s->cy))
 		return;

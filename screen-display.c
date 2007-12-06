@@ -68,7 +68,7 @@ screen_display_fill_area(struct screen *s, u_int px, u_int py,
 		return;
 	if (!screen_in_x(s, px) || !screen_in_y(s, py))
 		return;
-	if (!screen_in_x(s, px + nx - 1) || !screen_in_y(s, py - ny - 1))
+	if (!screen_in_x(s, px + nx - 1) || !screen_in_y(s, py + ny - 1))
 		return;
 	screen_fill_area(
 	    s, screen_x(s, px), screen_y(s, py), nx, ny, data, attr, colr);
