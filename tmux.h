@@ -428,6 +428,29 @@ struct screen_write_ctx {
 #define screen_below_y(s, y) \
 	((y) < screen_size_y(s) ? screen_size_y(s) - (y) : 0)
 
+#define SCREEN_DEBUG(s) do {						\
+	log_warnx("%s: cx=%u,cy=%u sx=%u,sy=%u", __func__,		\
+	    s->cx, s->cy, screen_size_x(s), screen_size_y(s));		\
+} while (0)
+#define SCREEN_DEBUG1(s, n) do {					\
+	log_warnx("%s: cx=%u,cy=%u sx=%u,sy=%u n=%u m=%u", __func__,	\
+	    s->cx, s->cy, screen_size_x(s), screen_size_y(s), n);	\
+} while (0)
+#define SCREEN_DEBUG2(s, n, m) do {					\
+	log_warnx("%s: cx=%u,cy=%u sx=%u,sy=%u n=%u m=%u", __func__,	\
+	    s->cx, s->cy, screen_size_x(s), screen_size_y(s), n, m);	\
+} while (0)
+#define SCREEN_DEBUG3(s, n, m, o) do {					\
+	log_warnx("%s: cx=%u,cy=%u sx=%u,sy=%u n=%u m=%u o=%u",		\
+	    __func__, s->cx, s->cy, screen_size_x(s), screen_size_y(s), \
+	    n, m, o);							\
+} while (0)
+#define SCREEN_DEBUG4(s, n, m, o, p) do {				\
+	log_warnx("%s: cx=%u,cy=%u sx=%u,sy=%u n=%u m=%u o=%u p=%u",	\
+	    __func__, s->cx, s->cy, screen_size_x(s), screen_size_y(s), \
+	    n, m, o, p);					       	\
+} while (0)
+
 /* Screen default contents. */
 #define SCREEN_DEFDATA ' '
 #define SCREEN_DEFATTR 0
