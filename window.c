@@ -244,9 +244,8 @@ window_destroy(struct window *w)
 
 	input_free(w);
 
+	window_reset_mode(w);
 	screen_destroy(&w->base);
-	if (w->mode != NULL)
-		w->mode->free(w);
 
 	buffer_destroy(w->in);
 	buffer_destroy(w->out);
@@ -274,6 +273,35 @@ window_resize(struct window *w, u_int sx, u_int sy)
 	if (ioctl(w->fd, TIOCSWINSZ, &ws) == -1)
 		fatal("ioctl failed");
 	return (0);
+}
+
+int
+window_set_mode(struct window *w, const struct window_mode *mode)
+{
+	struct screen	*s;
+
+	if (w->mode != NULL || w->mode == mode)
+		return (1);
+
+	w->mode = mode;
+
+	if ((s = w->mode->init(w)) != NULL)
+		w->screen = s;
+	server_redraw_window(w);
+	return (0);
+}
+
+void
+window_reset_mode(struct window *w)
+{
+	if (w->mode == NULL)
+		return;
+
+	w->mode->free(w);
+	w->mode = NULL;
+
+	w->screen = &w->base;
+	server_redraw_window(w);
 }
 
 void

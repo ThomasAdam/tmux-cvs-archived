@@ -467,7 +467,7 @@ struct input_ctx {
  * right function to handle input and output.
  */
 struct window_mode {
-	void	(*init)(struct window *);
+	struct screen *(*init)(struct window *);
 	void	(*free)(struct window *);
 	void	(*resize)(struct window *, u_int, u_int);
 	void	(*key)(struct window *, int);
@@ -905,6 +905,8 @@ struct window	*window_create(
     		     const char *, const char *, const char **, u_int, u_int);
 void		 window_destroy(struct window *);
 int		 window_resize(struct window *, u_int, u_int);
+int		 window_set_mode(struct window *, const struct window_mode *);
+void		 window_reset_mode(struct window *);
 void		 window_parse(struct window *);
 void		 window_key(struct window *, int);
 

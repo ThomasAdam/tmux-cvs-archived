@@ -165,11 +165,7 @@ key_bindings_print(struct cmd_ctx *ctx, const char *fmt, ...)
 	struct window	*w = ctx->session->curw->window;
 	va_list		 ap;
 
-	if (w->mode == NULL) {
-		w->mode = &window_more_mode;
-		w->mode->init(w);
-		server_redraw_window(w);
-	} else if (w->mode != &window_more_mode)
+	if (window_set_mode(w, &window_more_mode) != 0)
 		return;
 
 	va_start(ap, fmt);
