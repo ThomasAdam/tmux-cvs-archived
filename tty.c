@@ -73,8 +73,8 @@ tty_open(struct tty *tty, char **cause)
 	tty->in = buffer_create(BUFSIZ);
 	tty->out = buffer_create(BUFSIZ);
 
-	tty->attr = SCREEN_DEFATTR;
-	tty->colr = SCREEN_DEFCOLR;
+	tty->attr = 0;
+	tty->colr = 0x70;
 
 	tty_keys_init(tty);
 
@@ -546,7 +546,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 		    exit_alt_charset_mode != NULL)
 			tty_puts(tty, exit_alt_charset_mode);
 		tty_puts(tty, exit_attribute_mode);
-		tty->colr = 0x88;
+		tty->colr = 0x70;
 		tty->attr = 0;
 	}
 

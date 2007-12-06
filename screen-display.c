@@ -378,8 +378,8 @@ screen_display_insert_characters(struct screen *s, u_int px, u_int py, u_int nx)
 	}
 
 	memset(&s->grid_data[py][px], SCREEN_DEFDATA, nx);
-	memset(&s->grid_attr[py][px], SCREEN_DEFATTR, nx);
-	memset(&s->grid_colr[py][px], SCREEN_DEFCOLR, nx);
+	memset(&s->grid_attr[py][px], s->attr, nx);
+	memset(&s->grid_colr[py][px], s->colr, nx);
 }
 
 /* Delete characters. */
@@ -417,8 +417,8 @@ screen_display_delete_characters(struct screen *s, u_int px, u_int py, u_int nx)
 	}
 
 	memset(&s->grid_data[py][screen_size_x(s) - nx], SCREEN_DEFDATA, nx);
-	memset(&s->grid_attr[py][screen_size_x(s) - nx], SCREEN_DEFATTR, nx);
-	memset(&s->grid_colr[py][screen_size_x(s) - nx], SCREEN_DEFCOLR, nx);
+	memset(&s->grid_attr[py][screen_size_x(s) - nx], s->attr, nx);
+	memset(&s->grid_colr[py][screen_size_x(s) - nx], s->colr, nx);
 }
 
 /* Fill cells from another screen, with an offset. */

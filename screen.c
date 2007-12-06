@@ -299,7 +299,8 @@ screen_set_cell(struct screen *s,
 {
 	if (cx >= s->grid_size[cy]) {
 		if (data == SCREEN_DEFDATA &&
-		    attr == SCREEN_DEFATTR && colr == SCREEN_DEFCOLR)
+		    attr == SCREEN_DEFATTR &&
+		    colr == SCREEN_DEFCOLR)
 			return;
 		screen_expand_line(s, cy, cx + 1);
 	}
@@ -332,6 +333,12 @@ screen_make_lines(struct screen *s, u_int py, u_int ny)
 		s->grid_attr[i] = NULL;
 		s->grid_colr[i] = NULL;
 		s->grid_size[i] = 0;
+	}
+
+	/* XXX should this be done in the callers? */
+	if (s->attr != SCREEN_DEFATTR || s->colr != SCREEN_DEFCOLR) {
+		screen_fill_area(s, 0, py,
+		    screen_size_x(s), ny, SCREEN_DEFDATA, s->attr, s->colr);
 	}
 }
 
