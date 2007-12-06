@@ -47,7 +47,7 @@ cmd_kill_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
 	struct client	*c;
 	u_int		 i;
-	
+
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
 		if (c->session == ctx->session) {
@@ -57,7 +57,7 @@ cmd_kill_session_exec(unused void *ptr, struct cmd_ctx *ctx)
 	}
 
 	session_destroy(ctx->session);
-	
+
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

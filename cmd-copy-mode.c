@@ -33,7 +33,7 @@ const struct cmd_entry cmd_copy_mode_entry = {
 	"copy-mode", NULL, "",
 	CMD_NOCLIENT,
 	NULL,
-	cmd_copy_mode_exec, 
+	cmd_copy_mode_exec,
 	NULL,
 	NULL,
 	NULL

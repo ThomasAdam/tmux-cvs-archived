@@ -1,3 +1,11 @@
+06 December 2007
+
+* Another major reorganisation, this time of screen handling. A new set of
+  functions, screen_write_*, are now used to write to a screen and a tty
+  simultaneously. These are used by the input parser to update the base
+  window screen and also by the different modes which now interpose their own
+  screen.
+
 30 November 2007
 
 * Support \ek...\e\ to set window name.

@@ -40,7 +40,7 @@ const struct cmd_entry cmd_unbind_key_entry = {
 	"unbind-key", "unbind", "key",
 	CMD_NOCLIENT|CMD_NOSESSION,
 	cmd_unbind_key_parse,
-	cmd_unbind_key_exec, 
+	cmd_unbind_key_exec,
 	cmd_unbind_key_send,
 	cmd_unbind_key_recv,
 	cmd_unbind_key_free
@@ -59,7 +59,7 @@ cmd_unbind_key_parse(void **ptr, int argc, char **argv, char **cause)
 		default:
 			goto usage;
 		}
-	}	
+	}
 	argc -= optind;
 	argv += optind;
 	if (argc != 1)

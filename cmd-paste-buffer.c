@@ -34,7 +34,7 @@ const struct cmd_entry cmd_paste_buffer_entry = {
 	"paste-buffer", NULL, "paste",
 	CMD_NOCLIENT,
 	NULL,
-	cmd_paste_buffer_exec, 
+	cmd_paste_buffer_exec,
 	NULL,
 	NULL,
 	NULL

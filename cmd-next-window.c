@@ -45,8 +45,8 @@ cmd_next_window_exec(unused void *ptr, struct cmd_ctx *ctx)
 	if (session_next(ctx->session) == 0)
 		server_redraw_session(ctx->session);
 	else
-		ctx->error(ctx, "no next window"); 
-	
+		ctx->error(ctx, "no next window");
+
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

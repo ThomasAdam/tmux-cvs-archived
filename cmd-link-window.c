@@ -45,7 +45,7 @@ const struct cmd_entry cmd_link_window_entry = {
 	"link-window", "linkw", "[-dk] [-i index] name index",
 	CMD_NOCLIENT,
 	cmd_link_window_parse,
-	cmd_link_window_exec, 
+	cmd_link_window_exec,
 	cmd_link_window_send,
 	cmd_link_window_recv,
 	cmd_link_window_free
@@ -83,7 +83,7 @@ cmd_link_window_parse(void **ptr, int argc, char **argv, char **cause)
 		default:
 			goto usage;
 		}
-	}	
+	}
 	argc -= optind;
 	argv += optind;
 	if (argc != 2)
@@ -116,7 +116,7 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 
 	if (data == NULL)
 		return;
-	
+
 	if ((src = session_find(data->srcname)) == NULL) {
 		ctx->error(ctx, "session not found: %s", data->srcname);
 		return;
@@ -155,7 +155,7 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 			dst->lastw = NULL;
 
 		/*
-		 * Can't error out after this or there could be an empty 
+		 * Can't error out after this or there could be an empty
 		 * session!
 		 */
 	}

@@ -259,7 +259,7 @@ tty_keys_next(struct tty *tty, int *code)
 	}
 	xfree(s);
 	if (tk == NULL) {
-		/* 
+		/*
 		 * XXX Pass through unchanged.
 		 */
 		*code = '\e';

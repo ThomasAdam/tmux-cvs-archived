@@ -37,7 +37,7 @@ CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
 CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wcast-qual -Wsign-compare
 CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
 
-LDFLAGS+= 
+LDFLAGS+=
 LIBS+= -lncurses
 
 PREFIX?= /usr/local

@@ -44,6 +44,6 @@ cmd_send_prefix_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
 	window_key(ctx->client->session->curw->window, prefix_key);
 
-	if (ctx->cmdclient != NULL)	
+	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

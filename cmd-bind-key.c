@@ -41,7 +41,7 @@ const struct cmd_entry cmd_bind_key_entry = {
 	"bind-key", "bind", "key command [arguments]",
 	CMD_NOCLIENT|CMD_NOSESSION,
 	cmd_bind_key_parse,
-	cmd_bind_key_exec, 
+	cmd_bind_key_exec,
 	cmd_bind_key_send,
 	cmd_bind_key_recv,
 	cmd_bind_key_free
@@ -61,7 +61,7 @@ cmd_bind_key_parse(void **ptr, int argc, char **argv, char **cause)
 		default:
 			goto usage;
 		}
-	}	
+	}
 	argc -= optind;
 	argv += optind;
 	if (argc < 1)

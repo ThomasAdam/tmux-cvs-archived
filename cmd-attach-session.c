@@ -40,7 +40,7 @@ const struct cmd_entry cmd_attach_session_entry = {
 	"attach-session", "attach", "[-d]",
 	CMD_CANTNEST|CMD_NOCLIENT,
 	cmd_attach_session_parse,
-	cmd_attach_session_exec, 
+	cmd_attach_session_exec,
 	cmd_attach_session_send,
 	cmd_attach_session_recv,
 	cmd_attach_session_free
@@ -63,7 +63,7 @@ cmd_attach_session_parse(void **ptr, int argc, char **argv, char **cause)
 		default:
 			goto usage;
 		}
-	}	
+	}
 	argc -= optind;
 	argv += optind;
 	if (argc != 0)

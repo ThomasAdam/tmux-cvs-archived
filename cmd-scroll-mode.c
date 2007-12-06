@@ -33,7 +33,7 @@ const struct cmd_entry cmd_scroll_mode_entry = {
 	"scroll-mode", NULL, "",
 	CMD_NOCLIENT,
 	NULL,
-	cmd_scroll_mode_exec, 
+	cmd_scroll_mode_exec,
 	NULL,
 	NULL,
 	NULL

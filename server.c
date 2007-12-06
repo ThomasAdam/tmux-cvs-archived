@@ -107,7 +107,7 @@ server_start(const char *path)
 	if (fcntl(fd, F_SETFL, mode|O_NONBLOCK) == -1)
 		fatal("fcntl failed");
 	if (fcntl(fd, F_SETFD, FD_CLOEXEC) == -1)
-		fatal("fcntl failed");		
+		fatal("fcntl failed");
 
 	if (daemon(1, 1) != 0)
 		fatal("daemon failed");
@@ -231,7 +231,7 @@ server_handle_windows(struct pollfd **pfd)
 		if ((w = ARRAY_ITEM(&windows, i)) != NULL) {
 			if (buffer_poll(*pfd, w->in, w->out) != 0)
 				server_lost_window(w);
-			else 
+			else
 				server_handle_window(w);
 		}
 		(*pfd)++;
@@ -371,7 +371,7 @@ server_lost_client(struct client *c)
 		if (ARRAY_ITEM(&clients, i) == c)
 			ARRAY_SET(&clients, i, NULL);
 	}
-	
+
 	tty_free(&c->tty);
 
 	close(c->fd);

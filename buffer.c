@@ -215,7 +215,7 @@ uint16_t
 buffer_read16(struct buffer *b)
 {
 	uint16_t	n;
-	
+
 	n = BUFFER_OUT(b)[0] | (BUFFER_OUT(b)[1] << 8);
 	buffer_remove(b, 2);
 	return (n);

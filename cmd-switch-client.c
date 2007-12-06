@@ -42,7 +42,7 @@ const struct cmd_entry cmd_switch_client_entry = {
 	"switch-client", "switchc", "session-name",
 	CMD_NOSESSION,
 	cmd_switch_client_parse,
-	cmd_switch_client_exec, 
+	cmd_switch_client_exec,
 	cmd_switch_client_send,
 	cmd_switch_client_recv,
 	cmd_switch_client_free
@@ -62,7 +62,7 @@ cmd_switch_client_parse(void **ptr, int argc, char **argv, char **cause)
 		default:
 			goto usage;
 		}
-	}	
+	}
 	argc -= optind;
 	argv += optind;
 	if (argc != 1)
@@ -88,14 +88,14 @@ cmd_switch_client_exec(void *ptr, struct cmd_ctx *ctx)
 
 	if (data == NULL)
 		return;
-	
+
 	if ((s = session_find(data->name)) == NULL) {
 		ctx->error(ctx, "session not found: %s", data->name);
 		return;
 	}
 
 	ctx->client->session = s;
-	
+
 	recalculate_sizes();
 	server_redraw_client(ctx->client);
 
