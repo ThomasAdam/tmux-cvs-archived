@@ -385,8 +385,8 @@ screen_write_fill_end_of_screen(struct screen_write_ctx *ctx)
 
 	screen_fill_area(s, s->cx, s->cy,
 	    screen_right_x(s, s->cx), 1, SCREEN_DEFDATA, s->attr, s->colr);
-	screen_fill_area(s, 0, s->cy + 1,
-	    screen_below_y(s, s->cy + 1), 1, SCREEN_DEFDATA, s->attr, s->colr);
+	screen_fill_area(s, 0, s->cy + 1, screen_size_x(s),
+	    screen_below_y(s, s->cy + 1), SCREEN_DEFDATA, s->attr, s->colr);
 
 	if (ctx->write != NULL) {
 		ctx->write(ctx->data, TTY_CLEARENDOFLINE);
