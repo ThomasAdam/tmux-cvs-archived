@@ -39,6 +39,10 @@ screen_display_make_lines(struct screen *s, u_int py, u_int ny)
 		return;
 	}
 	screen_make_lines(s, screen_y(s, py), ny);
+	if (s->attr != SCREEN_DEFATTR || s->colr != SCREEN_DEFCOLR) {
+		screen_display_fill_area(s, 0, py,
+		    screen_size_x(s), ny, SCREEN_DEFDATA, s->attr, s->colr);
+	}
 }
 
 /* Free a region of lines. */

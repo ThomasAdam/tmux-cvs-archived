@@ -334,12 +334,6 @@ screen_make_lines(struct screen *s, u_int py, u_int ny)
 		s->grid_colr[i] = NULL;
 		s->grid_size[i] = 0;
 	}
-
-	/* XXX should this be done in the callers? */
-	if (s->attr != SCREEN_DEFATTR || s->colr != SCREEN_DEFCOLR) {
-		screen_fill_area(s, 0, py,
-		    screen_size_x(s), ny, SCREEN_DEFDATA, s->attr, s->colr);
-	}
 }
 
 /* Free a range of ny lines at py. */
