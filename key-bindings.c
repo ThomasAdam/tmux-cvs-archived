@@ -165,8 +165,7 @@ key_bindings_print(struct cmd_ctx *ctx, const char *fmt, ...)
 	struct window	*w = ctx->session->curw->window;
 	va_list		 ap;
 
-	if (window_set_mode(w, &window_more_mode) != 0)
-		return;
+	window_set_mode(w, &window_more_mode);
 
 	va_start(ap, fmt);
 	window_more_vadd(w, fmt, ap);
