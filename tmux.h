@@ -556,11 +556,19 @@ struct tty_key {
 	RB_ENTRY(tty_key) entry;
 };
 
+struct tty_term {
+	char		*name;
+	TERMINAL	*term;
+	u_int		 references;
+
+	TAILQ_ENTRY(tty_term) entry;
+};
+
 struct tty {
 	char		*path;
 
-	char		*term;
-	TERMINAL        *termp;
+	char		*termname;
+	struct tty_term	*term;
 
 	int		 fd;
 	struct buffer	*in;

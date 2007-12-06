@@ -32,7 +32,12 @@
 #include "tmux.h"
 
 #ifdef DEBUG
+#ifdef __OpenBSD__
 const char	*malloc_options = "AFGJPX";
+#endif
+#ifdef __FreeBSD__
+const char	*_malloc_options = "AJX";
+#endif
 #endif
 
 volatile sig_atomic_t sigwinch;
