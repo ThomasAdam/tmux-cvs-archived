@@ -167,8 +167,10 @@ tty_find_term(char *name, int fd, char **cause)
 	int		 error;
 	
 	TAILQ_FOREACH(term, &tty_terms, entry) {
-		if (strcmp(term->name, name) == 0)
+		if (strcmp(term->name, name) == 0) {
+			term->references++;
 			return (term);
+		}
 	}
 
 	term = xmalloc(sizeof *term);
