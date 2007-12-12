@@ -253,8 +253,6 @@ server_msg_fn_exiting(struct hdr *hdr, struct client *c)
 	
 	tty_close(&c->tty);
 
-	recalculate_sizes();
-
 	server_write_client(c, MSG_EXITED, NULL, 0);
 
 	return (0);
