@@ -47,7 +47,7 @@
  * server poll loop. Output data is received from pty's in screen format,
  * translated and returned as a series of escape sequences and strings via
  * input_parse (in input.c). Input data is received as key codes and written
- * directly via input_translate_key.
+ * directly via input_key.
  *
  * Each window also has a "virtual" screen (screen.c) which contains the
  * current state and is redisplayed when the window is reattached to a client.

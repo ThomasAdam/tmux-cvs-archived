@@ -1,3 +1,7 @@
+02 January 2008
+
+* Don't attempt to reset the tty on exit if it has been closed externally.
+
 06 December 2007
 
 * Restore checks for required termcap entries and add a few more obvious
