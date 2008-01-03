@@ -144,7 +144,7 @@ screen_create(struct screen *s, u_int dx, u_int dy)
 	s->attr = SCREEN_DEFATTR;
 	s->colr = SCREEN_DEFCOLR;
 
-	s->mode = MODE_CURSOR;
+	s->mode = MODE_CURSOR|MODE_KCURSOR|MODE_KKEYPAD;
 	s->title = xstrdup("");
 
 	s->grid_data = xmalloc(dy * (sizeof *s->grid_data));

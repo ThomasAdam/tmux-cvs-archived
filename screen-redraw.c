@@ -161,14 +161,6 @@ screen_redraw_clear_screen(struct screen_redraw_ctx *ctx)
 	}
 }
 
-/* Clear to end of line. */
-void
-screen_redraw_clear_end_of_line(struct screen_redraw_ctx *ctx)
-{
-	if (ctx->s->cx < screen_last_x(ctx->s))
-		ctx->write(ctx->data, TTY_CLEARENDOFLINE);
-}
-
 /* Redraw single cell. */
 void
 screen_redraw_cell(struct screen_redraw_ctx *ctx, u_int px, u_int py)

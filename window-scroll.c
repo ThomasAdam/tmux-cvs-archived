@@ -66,7 +66,7 @@ window_scroll_init(struct window *w)
 
 	s = &data->screen;
 	screen_create(s, screen_size_x(&w->base), screen_size_y(&w->base));
-	s->mode = 0;
+	s->mode &= ~MODE_CURSOR;
 
 	screen_write_start(&ctx, s, NULL, NULL);
 	for (i = 0; i < screen_size_y(s); i++)

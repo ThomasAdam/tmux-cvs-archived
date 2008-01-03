@@ -892,7 +892,6 @@ void	screen_redraw_move_cursor(struct screen_redraw_ctx *, u_int, u_int);
 void	screen_redraw_set_attributes(struct screen_redraw_ctx *, u_int, u_int);
 void printflike2 screen_redraw_write_string(
     	     struct screen_redraw_ctx *, const char *, ...);
-void	screen_redraw_clear_end_of_line(struct screen_redraw_ctx *);
 void	screen_redraw_clear_screen(struct screen_redraw_ctx *);
 void	screen_redraw_cell(struct screen_redraw_ctx *, u_int, u_int);
 void	screen_redraw_area(
