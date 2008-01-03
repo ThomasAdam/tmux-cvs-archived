@@ -138,7 +138,7 @@ screen_redraw_write_string(struct screen_redraw_ctx *ctx, const char *fmt, ...)
 	va_end(ap);
 
 	for (ptr = msg; *ptr != '\0'; ptr++) {
-		if (ctx->s->cx > screen_last_x(s))
+		if (ctx->s->cx > screen_size_x(s))
 			break;
 		if (*ptr < 0x20)
 			continue;
@@ -165,7 +165,8 @@ screen_redraw_clear_screen(struct screen_redraw_ctx *ctx)
 void
 screen_redraw_clear_end_of_line(struct screen_redraw_ctx *ctx)
 {
-	ctx->write(ctx->data, TTY_CLEARENDOFLINE);
+	if (ctx->s->cx < screen_last_x(ctx->s))
+		ctx->write(ctx->data, TTY_CLEARENDOFLINE);
 }
 
 /* Redraw single cell. */
