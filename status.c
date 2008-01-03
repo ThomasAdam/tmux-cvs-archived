@@ -49,7 +49,7 @@ status_write_client(struct client *c)
 		screen_redraw_write_string(
 		    &ctx, "%d:%s%c ", wl->idx, wl->window->name, flag);
 
-		if (ctx.s->cx > screen_size_x(ctx.s))
+		if (ctx.s->cx > screen_last_x(ctx.s))
 			break;
 	}
 	screen_redraw_clear_end_of_line(&ctx);
