@@ -32,6 +32,7 @@ CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
 ifdef DEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -rdynamic
+LIBS+= -ldl
 endif
 CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
 CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
@@ -42,6 +43,7 @@ LDFLAGS+=
 LIBS+= -lncurses
 
 PREFIX?= /usr/local
+INSTALLDIR= install -d
 INSTALLBIN= install -g bin -o root -m 555
 INSTALLMAN= install -g bin -o root -m 444
 
@@ -78,7 +80,9 @@ depend: $(SRCS)
 	$(CC) $(CFLAGS) $(INCDIRS) -MM $(SRCS) > .depend
 
 install:
+	$(INSTALLDIR) $(DESTDIR)$(PREFIX)/bin
 	$(INSTALLBIN) $(PROG) $(DESTDIR)$(PREFIX)/bin/$(PROG)
+	$(INSTALLDIR) $(DESTDIR)$(PREFIX)/man/man1
 	$(INSTALLMAN) $(PROG).1 $(DESTDIR)$(PREFIX)/man/man1/
 
 clean:
