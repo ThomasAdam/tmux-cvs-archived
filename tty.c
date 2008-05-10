@@ -255,10 +255,6 @@ tty_find_term(char *name, int fd, char **cause)
 		xasprintf(cause, "parm_ich missing");
 		goto error;
 	}
-	if (parm_dch == NULL && delete_character == NULL) {
-		xasprintf(cause, "parm_dch missing");
-		goto error;
-	}
 	if (scroll_reverse == NULL) {
 		xasprintf(cause, "scroll_reverse missing");
 		goto error;
@@ -477,9 +473,12 @@ tty_vwrite(struct tty *tty, unused struct screen *s, int cmd, va_list ap)
 		ua = va_arg(ap, u_int);
 		if (parm_dch != NULL)
 			tty_puts(tty, tparm(parm_dch, ua));
-		else {
+		else if (delete_character != NULL) {
 			while (ua-- > 0)
 				tty_puts(tty, delete_character);
+		} else {
+			while (ua-- > 0)
+				tty_putc(tty, '\008');
 		}
 		break;
 	case TTY_CURSORON:
