@@ -478,7 +478,7 @@ tty_vwrite(struct tty *tty, unused struct screen *s, int cmd, va_list ap)
 				tty_puts(tty, delete_character);
 		} else {
 			while (ua-- > 0)
-				tty_putc(tty, '\008');
+				tty_putc(tty, '\010');
 		}
 		break;
 	case TTY_CURSORON:
