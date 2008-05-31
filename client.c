@@ -130,6 +130,19 @@ client_main(struct client_ctx *cctx)
 		if (sigwinch)
 			client_handle_winch(cctx);
 
+		switch (client_msg_dispatch(cctx, &error)) {
+		case -1:
+			goto out;
+		case 0:
+			/* May be more in buffer, don't let poll block. */
+			timeout = 0;
+			break;
+		default:
+			/* Out of data, poll may block. */
+			timeout = INFTIM;
+			break;
+		}
+
 		pfd.fd = cctx->srv_fd;
 		pfd.events = POLLIN;
 		if (BUFFER_USED(cctx->srv_out) > 0)
@@ -143,19 +156,6 @@ client_main(struct client_ctx *cctx)
 
 		if (buffer_poll(&pfd, cctx->srv_in, cctx->srv_out) != 0)
 			goto server_dead;
-
-		switch (client_msg_dispatch(cctx, &error)) {
-		case -1:
-			goto out;
-		case 0:
-			/* May be more in buffer, don't let poll block. */
-			timeout = 0;
-			break;
-		default:
-			/* Out of data, poll may block. */
-			timeout = INFTIM;
-			break;
-		}
 	}
 
 out:
