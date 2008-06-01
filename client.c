@@ -44,6 +44,7 @@ client_init(const char *path, struct client_ctx *cctx, int start_server)
 	size_t				size;
 	int				mode;
 	u_int				retries;
+	struct buffer		       *b;
 
 	retries = 0;
 retry:
@@ -99,8 +100,12 @@ retry:
 		data.sy = ws.ws_row;
 		if (ttyname_r(STDIN_FILENO, data.tty, sizeof data.tty) != 0)
 			fatal("ttyname_r failed");
-		client_write_server(cctx, MSG_IDENTIFY, &data, sizeof data);
-		cmd_send_string(cctx->srv_out, getenv("TERM"));
+
+		b = buffer_create(BUFSIZ);
+		cmd_send_string(b, getenv("TERM"));
+		client_write_server2(cctx, MSG_IDENTIFY,
+		    &data, sizeof data, BUFFER_OUT(b), BUFFER_USED(b));
+		buffer_destroy(b);
 	}
 
 	return (0);
