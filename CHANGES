@@ -1,5 +1,7 @@
 01 June 2008
 
+* Bug fix: don't die if -k passed to link-window and the destination doesn't
+  exist.
 * New command, send-keys, will send a set of keys to a window.
 
 31 May 2008

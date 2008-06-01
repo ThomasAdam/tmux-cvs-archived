@@ -39,8 +39,7 @@
  *
  * As a side effect, this function updates the SESSION_UNATTACHED flag. This
  * flag is necessary to make sure unattached sessions do not limit the size of
- * windows that are attached both to them and to other sessions which are
- * attached.
+ * windows that are attached both to them and to other (attached) sessions.
  */
 
 void
