@@ -1,3 +1,7 @@
+01 June 2008
+
+* New command, send-keys, will send a set of keys to a window.
+
 31 May 2008
 
 * Fix so tmux doesn't hang if the initial window fails for some reason. This
