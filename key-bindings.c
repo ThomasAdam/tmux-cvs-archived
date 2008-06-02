@@ -188,6 +188,7 @@ key_bindings_dispatch(int key, struct client *c)
 	if (i == ARRAY_LENGTH(&key_bindings))
 		return;
 
+	ctx.msgdata = NULL;
 	ctx.cursession = c->session;
 	ctx.curclient = c;
 

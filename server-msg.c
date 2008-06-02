@@ -122,9 +122,9 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 	ctx.error = server_msg_fn_command_error;
 	ctx.print = server_msg_fn_command_print;
 
+	ctx.msgdata = &data;
 	ctx.curclient = NULL;
 	ctx.cursession = NULL;
-	ctx.msgdata = &data;
 
 	ctx.cmdclient = c;
 	ctx.flags = 0;

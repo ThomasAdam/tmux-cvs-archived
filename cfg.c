@@ -121,6 +121,7 @@ load_cfg(const char *path, char **cause)
 				goto error;
 			}
 
+			ctx.msgdata = NULL;
 			ctx.cursession = NULL;
 			ctx.curclient = NULL;
 			
