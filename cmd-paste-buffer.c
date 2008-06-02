@@ -31,25 +31,29 @@
 void	cmd_paste_buffer_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_paste_buffer_entry = {
-	"paste-buffer", NULL, "paste",
-	CMD_NOCLIENT,
-	NULL,
+	"paste-buffer", "paste",
+	CMD_SESSIONONLY_USAGE,
+	0,
+	cmd_sessiononly_parse,
 	cmd_paste_buffer_exec,
-	NULL,
-	NULL,
-	NULL
+	cmd_sessiononly_send,
+	cmd_sessiononly_recv,
+	cmd_sessiononly_free
 };
 
 void
 cmd_paste_buffer_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
-	struct window	*w = ctx->session->curw->window;
+	struct session	*s;
+	struct window	*w;
 
-	if (ctx->flags & CMD_KEY) {
-		if (paste_buffer != NULL && *paste_buffer != '\0') {
-			buffer_write(
-			    w->out, paste_buffer, strlen(paste_buffer));
-		}
+	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+		return;
+	w = s->curw->window;
+
+	if (ctx->flags & CMD_KEY &&
+	    paste_buffer != NULL && *paste_buffer != '\0') {
+		buffer_write(w->out, paste_buffer, strlen(paste_buffer));
 	}
 
 	if (ctx->cmdclient != NULL)

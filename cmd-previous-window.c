@@ -30,20 +30,26 @@
 void	cmd_previous_window_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_previous_window_entry = {
-	"previous-window", "prev", "",
-	CMD_NOCLIENT,
-	NULL,
+	"previous-window", "prev",
+	CMD_SESSIONONLY_USAGE,
+	0,
+	cmd_sessiononly_parse,
 	cmd_previous_window_exec,
-	NULL,
-	NULL,
-	NULL
+	cmd_sessiononly_send,
+	cmd_sessiononly_recv,
+	cmd_sessiononly_free
 };
 
 void
-cmd_previous_window_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_previous_window_exec(void *ptr, struct cmd_ctx *ctx)
 {
-	if (session_previous(ctx->session) == 0)
-		server_redraw_session(ctx->session);
+	struct session	*s;
+
+	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+		return;
+
+	if (session_previous(s) == 0)
+		server_redraw_session(s);
 	else
 		ctx->error(ctx, "no previous window");
 

@@ -30,19 +30,25 @@
 void	cmd_send_prefix_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_send_prefix_entry = {
-	"send-prefix", NULL, NULL,
+	"send-prefix", NULL,
+	CMD_CLIENTONLY_USAGE,
 	0,
-	NULL,
+	cmd_clientonly_parse,
 	cmd_send_prefix_exec,
-	NULL,
-	NULL,
-	NULL
+	cmd_clientonly_send,
+	cmd_clientonly_recv,
+	cmd_clientonly_free
 };
 
 void
-cmd_send_prefix_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_send_prefix_exec(void *ptr, struct cmd_ctx *ctx)
 {
-	window_key(ctx->client->session->curw->window, prefix_key);
+	struct client	*c;
+
+	if ((c = cmd_clientonly_get(ptr, ctx)) == NULL)
+		return;
+
+	window_key(c->session->curw->window, prefix_key);
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

@@ -30,24 +30,29 @@
 void	cmd_list_windows_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_windows_entry = {
-	"list-windows", "lsw", NULL,
-	CMD_NOCLIENT,
-	NULL,
+	"list-windows", "lsw",
+	CMD_SESSIONONLY_USAGE,
+	0,
+	cmd_sessiononly_parse,
 	cmd_list_windows_exec,
-	NULL,
-	NULL,
-	NULL
+	cmd_sessiononly_send,
+	cmd_sessiononly_recv,
+	cmd_sessiononly_free
 };
 
 void
 cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
+	struct session		*s;
 	struct winlink		*wl;
 	struct window		*w;
 	u_int			 i;
 	unsigned long long	 size;
 
-	RB_FOREACH(wl, winlinks, &ctx->session->windows) {
+	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+		return;
+
+	RB_FOREACH(wl, winlinks, &s->windows) {
 		w = wl->window;
 
 		size = 0;

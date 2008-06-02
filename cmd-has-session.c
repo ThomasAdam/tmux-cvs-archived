@@ -32,8 +32,9 @@
 void	cmd_has_session_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_has_session_entry = {
-	"has-session", "has", "",
-	CMD_NOCLIENT,
+	"has-session", "has",
+	"",
+	0,
 	NULL,
 	cmd_has_session_exec,
 	NULL,

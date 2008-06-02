@@ -62,6 +62,7 @@ server_start(const char *path)
 	size_t			size;
 	mode_t			mask;
 	int		   	n, fd, mode;
+	char		       *cause;
 
 	switch (fork()) {
 	case -1:
@@ -109,6 +110,13 @@ server_start(const char *path)
 	if (fcntl(fd, F_SETFD, FD_CLOEXEC) == -1)
 		fatal("fcntl failed");
 
+ 	/* Load configuration. */
+	if (cfg_file != NULL && load_cfg(cfg_file, &cause) != 0) {
+		log_warnx("%s", cause);
+		xfree(cause);
+		exit(1);
+	}
+
 	if (daemon(1, 1) != 0)
 		fatal("daemon failed");
 	log_debug("server daemonised, pid now %ld", (long) getpid());
@@ -135,7 +143,7 @@ server_main(const char *srv_path, int srv_fd)
 	ARRAY_INIT(&sessions);
 
 	key_bindings_init();
-
+ 
 	pfds = NULL;
 	while (!sigterm) {
 		/* Initialise pollfd array. */

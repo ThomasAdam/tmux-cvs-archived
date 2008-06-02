@@ -31,8 +31,9 @@
 void	cmd_list_clients_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_clients_entry = {
-	"list-clients", "lsc", "",
-	CMD_NOCLIENT|CMD_NOSESSION,
+	"list-clients", "lsc",
+	"",
+	0,
 	NULL,
 	cmd_list_clients_exec,
 	NULL,

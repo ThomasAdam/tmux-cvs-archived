@@ -28,7 +28,7 @@
  * Set an option.
  */
 
-int	cmd_set_option_parse(void **, int, char **, char **);
+int	cmd_set_option_parse(struct cmd *, void **, int, char **, char **);
 void	cmd_set_option_exec(void *, struct cmd_ctx *);
 void	cmd_set_option_send(void *, struct buffer *);
 void	cmd_set_option_recv(void **, struct buffer *);
@@ -40,8 +40,9 @@ struct cmd_set_option_data {
 };
 
 const struct cmd_entry cmd_set_option_entry = {
-	"set-option", "set", "option value",
-	CMD_NOCLIENT|CMD_NOSESSION,
+	"set-option", "set",
+	"option value",
+	0,
 	cmd_set_option_parse,
 	cmd_set_option_exec,
 	cmd_set_option_send,
@@ -50,7 +51,8 @@ const struct cmd_entry cmd_set_option_entry = {
 };
 
 int
-cmd_set_option_parse(void **ptr, int argc, char **argv, char **cause)
+cmd_set_option_parse(
+    struct cmd *self, void **ptr, int argc, char **argv, char **cause)
 {
 	struct cmd_set_option_data	*data;
 	int				 opt;
@@ -77,8 +79,7 @@ cmd_set_option_parse(void **ptr, int argc, char **argv, char **cause)
 	return (0);
 
 usage:
-	usage(cause, "%s %s",
-	    cmd_set_option_entry.name, cmd_set_option_entry.usage);
+	usage(cause, "%s %s", self->entry->name, self->entry->usage);
 
 	cmd_set_option_free(data);
 	return (-1);

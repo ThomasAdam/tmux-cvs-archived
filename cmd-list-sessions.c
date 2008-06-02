@@ -32,7 +32,7 @@ void	cmd_list_sessions_exec(void *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_sessions_entry = {
 	"list-sessions", "ls", "",
-	CMD_NOCLIENT|CMD_NOSESSION,
+	0,
 	NULL,
 	cmd_list_sessions_exec,
 	NULL,

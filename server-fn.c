@@ -23,57 +23,6 @@
 
 #include "tmux.h"
 
-/* Find session from command message. */
-struct session *
-server_extract_session(struct msg_command_data *data, char *name, char **cause)
-{
-	struct session *s;
-	u_int		i, n;
-
-	if (name != NULL) {
-		if ((s = session_find(name)) == NULL) {
-			xasprintf(cause, "session not found: %s", name);
-			return (NULL);
-		}
-		return (s);
-	}
-
-	if (data->pid != -1) {
-		if (data->pid != getpid()) {
-			xasprintf(cause, "wrong server: %lld", data->pid);
-			return (NULL);
-		}
-		if (data->idx > ARRAY_LENGTH(&sessions)) {
-			xasprintf(cause, "index out of range: %d", data->idx);
-			return (NULL);
-		}
-		if ((s = ARRAY_ITEM(&sessions, data->idx)) == NULL) {
-			xasprintf(
-			    cause, "session doesn't exist: %u", data->idx);
-			return (NULL);
-		}
-		return (s);
-	}
-
-	s = NULL;
-	n = 0;
-	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
-		if (ARRAY_ITEM(&sessions, i) != NULL) {
-			s = ARRAY_ITEM(&sessions, i);
-			n++;
-		}
-	}
-	if (s == NULL) {
-		xasprintf(cause, "no sessions found");
-		return (NULL);
-	}
-	if (n != 1) {
-		xasprintf(cause, "multiple sessions and session not specified");
-		return (NULL);
-	}
-	return (s);
-}
-
 void
 server_write_client(
     struct client *c, enum hdrtype type, const void *buf, size_t len)
