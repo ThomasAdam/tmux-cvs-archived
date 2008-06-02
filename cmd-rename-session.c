@@ -79,7 +79,7 @@ cmd_rename_session_parse(
 	return (0);
 
 usage:
-	usage(cause, "%s %s", self->entry->name, self->entry->usage);
+	xasprintf(cause, "usage: %s %s", self->entry->name, self->entry->usage);
 
 	cmd_rename_session_free(data);
 	return (-1);

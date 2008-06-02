@@ -95,7 +95,7 @@ cmd_send_keys_parse(
 	return (0);
 
 usage:
-	usage(cause, "%s %s", self->entry->name, self->entry->usage);
+	xasprintf(cause, "usage: %s %s", self->entry->name, self->entry->usage);
 
 	cmd_send_keys_free(data);
 	return (-1);

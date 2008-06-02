@@ -82,7 +82,7 @@ cmd_bind_key_parse(
 	return (0);
 
 usage:
-	usage(cause, "%s %s", self->entry->name, self->entry->usage);
+	xasprintf(cause, "usage: %s %s", self->entry->name, self->entry->usage);
 
 error:
 	cmd_bind_key_free(data);

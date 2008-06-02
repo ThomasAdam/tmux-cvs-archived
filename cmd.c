@@ -51,6 +51,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_send_keys_entry,
 	&cmd_send_prefix_entry,
 	&cmd_set_option_entry,
+	&cmd_start_server_entry,
 	&cmd_swap_window_entry,
 	&cmd_switch_client_entry,
 	&cmd_unbind_key_entry,
@@ -128,7 +129,7 @@ ambiguous:
 	return (NULL);
 
 usage:
-	usage(cause, "%s %s", entry->name, entry->usage);
+	xasprintf(cause, "usage: %s %s", entry->name, entry->usage);
 	return (NULL);
 }
 
