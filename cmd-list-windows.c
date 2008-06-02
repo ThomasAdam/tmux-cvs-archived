@@ -18,7 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
 #include <unistd.h>
 
 #include "tmux.h"
@@ -41,7 +40,7 @@ const struct cmd_entry cmd_list_windows_entry = {
 };
 
 void
-cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_list_windows_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct session		*s;
 	struct winlink		*wl;

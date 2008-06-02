@@ -18,9 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
-#include <unistd.h>
-
 #include "tmux.h"
 
 /*

@@ -90,7 +90,7 @@ error:
 }
 
 void
-cmd_bind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
+cmd_bind_key_exec(void *ptr, struct cmd_ctx *ctx)
 {
 	struct cmd_bind_key_data	*data = ptr;
 
