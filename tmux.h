@@ -766,7 +766,7 @@ extern const struct cmd_entry cmd_unlink_window_entry;
 void	cmd_select_window_default(void **, int);
 
 /* cmd-generic.c */
-#define CMD_CLIENTONLY_USAGE "[-c client-name]"
+#define CMD_CLIENTONLY_USAGE "[-c client-tty]"
 int	cmd_clientonly_parse(struct cmd *, void **, int, char **, char **);
 void	cmd_clientonly_exec(void *, struct cmd_ctx *);
 void	cmd_clientonly_send(void *, struct buffer *);

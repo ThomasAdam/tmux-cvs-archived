@@ -44,7 +44,7 @@ struct cmd_link_window_data {
 
 const struct cmd_entry cmd_link_window_entry = {
 	"link-window", "linkw",
-	"[-dk] [-s session-name] [-i index] session-name index",
+	"[-dk] [-i index] [-s session-name] session-name index",
 	0,
 	cmd_link_window_parse,
 	cmd_link_window_exec,

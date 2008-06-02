@@ -40,7 +40,7 @@ struct cmd_send_keys_data {
 };
 
 const struct cmd_entry cmd_send_keys_entry = {
-	"send-keys", "send", "[-c client-name] key ...",
+	"send-keys", "send", "[-c client-tty] key ...",
 	0,
 	cmd_send_keys_parse,
 	cmd_send_keys_exec,

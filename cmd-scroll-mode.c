@@ -48,8 +48,7 @@ cmd_scroll_mode_exec(void *ptr, struct cmd_ctx *ctx)
 	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
 		return;
 
-	if (ctx->flags & CMD_KEY)
-		window_set_mode(s->curw->window, &window_scroll_mode);
+	window_set_mode(s->curw->window, &window_scroll_mode);
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

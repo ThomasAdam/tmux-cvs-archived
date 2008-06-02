@@ -51,10 +51,8 @@ cmd_paste_buffer_exec(unused void *ptr, struct cmd_ctx *ctx)
 		return;
 	w = s->curw->window;
 
-	if (ctx->flags & CMD_KEY &&
-	    paste_buffer != NULL && *paste_buffer != '\0') {
+	if (paste_buffer != NULL && *paste_buffer != '\0')
 		buffer_write(w->out, paste_buffer, strlen(paste_buffer));
-	}
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

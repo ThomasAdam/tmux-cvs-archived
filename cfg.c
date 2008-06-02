@@ -153,7 +153,7 @@ load_cfg(const char *path, char **causep)
 	return (0);
 
 error:
-	while (--argc > 0)
+	while (--argc >= 0)
 		xfree(argv[argc]);
 	xfree(argv);
 
