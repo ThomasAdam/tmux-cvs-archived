@@ -45,7 +45,8 @@ const struct cmd_entry cmd_bind_key_entry = {
 	cmd_bind_key_exec,
 	cmd_bind_key_send,
 	cmd_bind_key_recv,
-	cmd_bind_key_free
+	cmd_bind_key_free,
+	NULL
 };
 
 int

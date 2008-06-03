@@ -47,7 +47,8 @@ const struct cmd_entry cmd_set_option_entry = {
 	cmd_set_option_exec,
 	cmd_set_option_send,
 	cmd_set_option_recv,
-	cmd_set_option_free
+	cmd_set_option_free,
+	NULL
 };
 
 int

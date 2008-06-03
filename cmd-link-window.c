@@ -50,7 +50,8 @@ const struct cmd_entry cmd_link_window_entry = {
 	cmd_link_window_exec,
 	cmd_link_window_send,
 	cmd_link_window_recv,
-	cmd_link_window_free
+	cmd_link_window_free,
+	NULL
 };
 
 int

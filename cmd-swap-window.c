@@ -49,7 +49,8 @@ const struct cmd_entry cmd_swap_window_entry = {
 	cmd_swap_window_exec,
 	cmd_swap_window_send,
 	cmd_swap_window_recv,
-	cmd_swap_window_free
+	cmd_swap_window_free,
+	NULL
 };
 
 int

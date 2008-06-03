@@ -1,5 +1,7 @@
 03 June 2008
 
+* If no command is specified, assume new-session. As a byproduct, clean up 
+  command default values into seperate init functions.
 * kill-server command.
 
 02 June 2008

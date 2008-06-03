@@ -34,8 +34,8 @@ const struct cmd_entry cmd_unlink_window_entry = {
 	cmd_unlink_window_exec,
 	cmd_windowonly_send,
 	cmd_windowonly_recv,
-	cmd_windowonly_free
-
+	cmd_windowonly_free,
+	NULL
 };
 
 void

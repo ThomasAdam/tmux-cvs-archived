@@ -37,6 +37,7 @@ const struct cmd_entry cmd_list_clients_entry = {
 	cmd_list_clients_exec,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 

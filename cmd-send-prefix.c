@@ -34,7 +34,8 @@ const struct cmd_entry cmd_send_prefix_entry = {
 	cmd_send_prefix_exec,
 	cmd_clientonly_send,
 	cmd_clientonly_recv,
-	cmd_clientonly_free
+	cmd_clientonly_free,
+	NULL
 };
 
 void

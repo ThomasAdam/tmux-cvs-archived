@@ -654,6 +654,7 @@ struct cmd_entry {
 	void		 (*send)(void *, struct buffer *);
 	void	         (*recv)(void **, struct buffer *);
 	void		 (*free)(void *);
+	void		 (*init)(void **, int);
 };
 
 /* Key binding. */
@@ -764,7 +765,6 @@ extern const struct cmd_entry cmd_swap_window_entry;
 extern const struct cmd_entry cmd_switch_client_entry;
 extern const struct cmd_entry cmd_unbind_key_entry;
 extern const struct cmd_entry cmd_unlink_window_entry;
-void	cmd_select_window_default(void **, int);
 
 /* cmd-generic.c */
 #define CMD_CLIENTONLY_USAGE "[-c client-tty]"

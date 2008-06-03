@@ -18,6 +18,7 @@
 
 #include <sys/types.h>
 
+#include <string.h>
 #include <time.h>
 
 #include "tmux.h"
@@ -33,6 +34,7 @@ const struct cmd_entry cmd_list_sessions_entry = {
 	0,
 	NULL,
 	cmd_list_sessions_exec,
+	NULL,
 	NULL,
 	NULL,
 	NULL

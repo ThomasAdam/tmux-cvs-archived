@@ -36,7 +36,8 @@ const struct cmd_entry cmd_paste_buffer_entry = {
 	cmd_paste_buffer_exec,
 	cmd_windowonly_send,
 	cmd_windowonly_recv,
-	cmd_windowonly_free
+	cmd_windowonly_free,
+	NULL
 };
 
 void

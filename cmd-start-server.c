@@ -34,6 +34,7 @@ const struct cmd_entry cmd_start_server_entry = {
 	cmd_start_server_exec,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 

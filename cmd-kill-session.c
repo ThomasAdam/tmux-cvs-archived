@@ -37,7 +37,8 @@ const struct cmd_entry cmd_kill_session_entry = {
 	cmd_kill_session_exec,
 	cmd_sessiononly_send,
 	cmd_sessiononly_recv,
-	cmd_sessiononly_free
+	cmd_sessiononly_free,
+	NULL
 };
 
 void

@@ -46,7 +46,8 @@ const struct cmd_entry cmd_rename_session_entry = {
 	cmd_rename_session_exec,
 	cmd_rename_session_send,
 	cmd_rename_session_recv,
-	cmd_rename_session_free
+	cmd_rename_session_free,
+	NULL
 };
 
 int

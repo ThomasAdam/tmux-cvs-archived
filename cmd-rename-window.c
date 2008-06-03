@@ -47,7 +47,8 @@ const struct cmd_entry cmd_rename_window_entry = {
 	cmd_rename_window_exec,
 	cmd_rename_window_send,
 	cmd_rename_window_recv,
-	cmd_rename_window_free
+	cmd_rename_window_free,
+	NULL
 };
 
 int

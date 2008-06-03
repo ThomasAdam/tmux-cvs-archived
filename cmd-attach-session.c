@@ -45,7 +45,8 @@ const struct cmd_entry cmd_attach_session_entry = {
 	cmd_attach_session_exec,
 	cmd_attach_session_send,
 	cmd_attach_session_recv,
-	cmd_attach_session_free
+	cmd_attach_session_free,
+	NULL
 };
 
 int

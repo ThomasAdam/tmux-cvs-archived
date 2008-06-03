@@ -47,7 +47,8 @@ const struct cmd_entry cmd_switch_client_entry = {
 	cmd_switch_client_exec,
 	cmd_switch_client_send,
 	cmd_switch_client_recv,
-	cmd_switch_client_free
+	cmd_switch_client_free,
+	NULL
 };
 
 int
