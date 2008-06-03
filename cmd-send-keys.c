@@ -24,7 +24,7 @@
 #include "tmux.h"
 
 /*
- * Change session name.
+ * Send keys to client.
  */
 
 int	cmd_send_keys_parse(struct cmd *, void **, int, char **, char **);

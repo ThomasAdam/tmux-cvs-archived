@@ -1,3 +1,7 @@
+03 June 2008
+
+* kill-server command.
+
 02 June 2008
 
 * New command, start-server (alias "start"), to start the tmux server and do

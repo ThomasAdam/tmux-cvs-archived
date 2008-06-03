@@ -737,6 +737,7 @@ extern const struct cmd_entry cmd_bind_key_entry;
 extern const struct cmd_entry cmd_copy_mode_entry;
 extern const struct cmd_entry cmd_detach_client_entry;
 extern const struct cmd_entry cmd_has_session_entry;
+extern const struct cmd_entry cmd_kill_server_entry;
 extern const struct cmd_entry cmd_kill_session_entry;
 extern const struct cmd_entry cmd_kill_window_entry;
 extern const struct cmd_entry cmd_last_window_entry;
