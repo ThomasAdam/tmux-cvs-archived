@@ -44,7 +44,7 @@ const struct cmd_entry cmd_kill_server_entry = {
 void
 cmd_kill_server_exec(unused void *ptr, struct cmd_ctx *ctx)
 {
-	kill(getpid(), SIGTERM);
+	sigterm = 1;
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

@@ -536,7 +536,7 @@ RB_HEAD(winlinks, winlink);
 /* Client session. */
 struct session {
 	char		*name;
-	time_t		 tim;
+	struct timespec	 ts;
 
 	u_int		 sx;
 	u_int		 sy;

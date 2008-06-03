@@ -41,7 +41,7 @@ struct cmd_switch_client_data {
 
 const struct cmd_entry cmd_switch_client_entry = {
 	"switch-client", "switchc",
-	"session-name",
+	"[-c client-tty] session-name",
 	0,
 	cmd_switch_client_parse,
 	cmd_switch_client_exec,

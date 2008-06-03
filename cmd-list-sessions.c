@@ -56,7 +56,7 @@ cmd_list_sessions_exec(unused void *ptr, struct cmd_ctx *ctx)
 		n = 0;
 		RB_FOREACH(wl, winlinks, &s->windows)
 		    	n++;
-		tim = ctime(&s->tim);
+		tim = ctime(&s->ts.tv_sec);
 		*strchr(tim, '\n') = '\0';
 
 		ctx->print(ctx, "%s: %u windows"

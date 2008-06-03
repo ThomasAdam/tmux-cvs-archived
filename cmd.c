@@ -17,6 +17,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include <fnmatch.h>
 #include <getopt.h>
@@ -253,18 +254,18 @@ struct session *
 cmd_lookup_session(const char *sname)
 {
 	struct session	*s, *newest = NULL;
-	time_t		 tim;
+	struct timespec	*ts;
 	u_int		 i;
 
-	tim = 0;
+	ts = NULL;
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i); 
 		if (s == NULL || fnmatch(sname, s->name, 0) != 0)
 			continue;
 
-		if (s->tim > tim) {
+		if (ts == NULL || timespeccmp(&s->ts, ts, >)) {
 			newest = s;
-			tim = s->tim;
+			ts = &s->ts;
 		}
 	}
 
@@ -305,7 +306,7 @@ cmd_find_session(struct cmd_ctx *ctx, const char *cname, const char *sname)
 	struct client		*c;
 	struct msg_command_data	*data = ctx->msgdata;
 	u_int			 i;
-	time_t			 tim;
+	struct timespec		*ts;
 
 	if (cname != NULL) {
 		if ((c = cmd_lookup_client(cname)) == NULL) {
@@ -342,12 +343,12 @@ cmd_find_session(struct cmd_ctx *ctx, const char *cname, const char *sname)
 		return (s);
 	}
 
-	tim = 0;
+	ts = NULL;
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i); 
-		if (s != NULL && s->tim > tim) {
+		if (s != NULL && (ts == NULL || timespeccmp(&s->ts, ts, >))) {
 			newest = ARRAY_ITEM(&sessions, i);
-			tim = s->tim;
+			ts = &s->ts;
 		}
 	}
 	if (newest == NULL)
