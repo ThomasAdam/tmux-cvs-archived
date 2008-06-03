@@ -41,12 +41,13 @@ const struct cmd_entry cmd_send_prefix_entry = {
 void
 cmd_send_prefix_exec(void *ptr, struct cmd_ctx *ctx)
 {
+	struct session	*s;
 	struct winlink	*wl;
 
-	if ((wl = cmd_windowonly_get(ptr, ctx, NULL)) == NULL)
+	if ((wl = cmd_windowonly_get(ptr, ctx, &s)) == NULL)
 		return;
 
-	window_key(wl->window, prefix_key);
+	window_key(wl->window, options_get_number(&s->options, "prefix-key"));
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

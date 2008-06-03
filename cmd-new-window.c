@@ -138,12 +138,12 @@ cmd_new_window_exec(void *ptr, struct cmd_ctx *ctx)
 	struct winlink			*wl;
 	char				*cmd;
 
-	cmd = data->cmd;
-	if (cmd == NULL)
-		cmd = default_command;
-
 	if ((s = cmd_find_session(ctx, data->cname, data->sname)) == NULL)
 		return;
+
+	cmd = data->cmd;
+	if (cmd == NULL)
+		cmd = options_get_string(&s->options, "default-command");
 
 	if (data->idx < 0)
 		data->idx = -1;

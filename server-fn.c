@@ -182,6 +182,9 @@ server_write_message(struct client *c, const char *fmt, ...)
 	va_list				ap;
 	char			       *msg;
 	size_t				size;
+	u_int				slines;
+
+	slines = options_get_number(&c->session->options, "status-lines");
 
 	screen_redraw_start_client(&ctx, c);
 	screen_redraw_move_cursor(&ctx, 0, c->sy - 1);
@@ -203,7 +206,7 @@ server_write_message(struct client *c, const char *fmt, ...)
 	buffer_flush(c->tty.fd, c->tty.in, c->tty.out);
 	usleep(750000);
 
-	if (status_lines == 0) {
+	if (slines == 0) {
 		screen_redraw_lines(&ctx, c->sy - 1, 1);
 		screen_redraw_stop(&ctx);
 	} else {

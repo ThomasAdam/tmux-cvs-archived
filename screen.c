@@ -128,7 +128,7 @@ screen_stringcolour(const char *s)
 
 /* Create a new screen. */
 void
-screen_create(struct screen *s, u_int dx, u_int dy)
+screen_create(struct screen *s, u_int dx, u_int dy, u_int hlimit)
 {
 	s->dx = dx;
 	s->dy = dy;
@@ -139,7 +139,7 @@ screen_create(struct screen *s, u_int dx, u_int dy)
 	s->rlower = s->dy - 1;
 
 	s->hsize = 0;
-	s->hlimit = history_limit;
+	s->hlimit = hlimit;
 
 	s->attr = SCREEN_DEFATTR;
 	s->colr = SCREEN_DEFCOLR;
