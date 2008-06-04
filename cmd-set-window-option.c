@@ -151,7 +151,7 @@ cmd_set_window_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 		    strcasecmp(data->value, "no") == 0)
 			bool = 0;
 	} else
-		bool = 1;
+		bool = -2;
 
 	if (strcmp(data->option, "monitor-activity") == 0) {
 		if (bool == -1) {
@@ -159,10 +159,14 @@ cmd_set_window_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 			return;
 		}
 
-		if (bool)
-			wl->window->flags |= WINDOW_MONITOR;
-		else 
-			wl->window->flags &= ~WINDOW_MONITOR;
+		if (bool == -2)
+			wl->window->flags ^= WINDOW_MONITOR;
+		else {
+			if (bool)
+				wl->window->flags |= WINDOW_MONITOR;
+			else 
+				wl->window->flags &= ~WINDOW_MONITOR;
+		}
 
 		for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 			s = ARRAY_ITEM(&sessions, i); 
