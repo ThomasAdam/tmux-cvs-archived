@@ -242,6 +242,18 @@ cmd_set_option_exec(void *ptr, unused struct cmd_ctx *ctx)
 			return;
 		}
 		options_set_number(oo, "history-limit", number);
+	} else if (strcmp(data->option, "status-left") == 0) {
+		if (data->value == NULL) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
+		options_set_string(oo, "status-left", "%s", data->value);
+	} else if (strcmp(data->option, "status-right") == 0) {
+		if (data->value == NULL) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
+		options_set_string(oo, "status-right", "%s", data->value);
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;

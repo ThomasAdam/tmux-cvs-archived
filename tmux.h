@@ -619,6 +619,7 @@ struct client {
 	struct buffer	*out;
 
 	struct tty 	 tty;
+	struct timespec	 status_ts;
 
 	u_int		 sx;
 	u_int		 sy;
