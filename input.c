@@ -223,6 +223,8 @@ input_parse(struct window *w)
 	else
 		screen_write_start(&ictx->ctx, &w->base, NULL, NULL);
 
+	if (ictx->off != ictx->len)
+		w->flags |= WINDOW_ACTIVITY;
 	while (ictx->off < ictx->len) {
 		ch = ictx->buf[ictx->off++];
 		ictx->state(ch, ictx);
@@ -481,8 +483,7 @@ input_handle_character(u_char ch, struct input_ctx *ictx)
 {
 	log_debug2("-- ch %zu: %hhu (%c)", ictx->off, ch, ch);
 
-	if (screen_write_put_character(&ictx->ctx, ch))
-		ictx->w->flags |= WINDOW_ACTIVITY;
+	screen_write_put_character(&ictx->ctx, ch);
 }
 
 void

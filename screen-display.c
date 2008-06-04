@@ -22,14 +22,6 @@
 
 #include "tmux.h"
 
-/* Get a cell. */
-void
-screen_display_get_cell(struct screen *s,
-    u_int px, u_int py, u_char *data, u_char *attr, u_char *colr)
-{
-	screen_get_cell(s, screen_x(s, px), screen_y(s, py), data, attr, colr);
-}
-
 /* Set a cell. */
 void
 screen_display_set_cell(
