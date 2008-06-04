@@ -919,6 +919,8 @@ void	 input_parse(struct window *);
 void	 input_key(struct window *, int);
 
 /* screen-display.c */
+void	 screen_display_get_cell(
+    	     struct screen *, u_int, u_int, u_char *, u_char *, u_char *);
 void	 screen_display_set_cell(
     	     struct screen *, u_int, u_int, u_char, u_char, u_char);
 void	 screen_display_make_lines(struct screen *, u_int, u_int);
@@ -946,7 +948,7 @@ void	 screen_write_start(struct screen_write_ctx *,
     	    struct screen *, void (*)(void *, int, ...), void *);
 void	 screen_write_stop(struct screen_write_ctx *);
 void	 screen_write_set_title(struct screen_write_ctx *, char *);
-void	 screen_write_put_character(struct screen_write_ctx *, u_char);
+int	 screen_write_put_character(struct screen_write_ctx *, u_char);
 size_t printflike2 screen_write_put_string_rjust(
 	     struct screen_write_ctx *, const char *, ...);
 void printflike2 screen_write_put_string(
