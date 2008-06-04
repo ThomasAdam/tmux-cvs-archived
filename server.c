@@ -296,16 +296,15 @@ server_handle_clients(struct pollfd **pfd)
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
 
-		/* XXX REDRAW FLAGS */
-		if (c->session != NULL && options_get_number(
-		    &c->session->options, "status-lines") != 0) {
-			if (clock_gettime(CLOCK_REALTIME, &now) != 0)
-				fatal("clock_gettime");
-			if (timespeccmp(&now, &c->status_ts, >))
-				server_status_client(c);
-		}
-
 		if (c != NULL) {
+			if (c->session != NULL && options_get_number(
+			    &c->session->options, "status-lines") != 0) {
+				if (clock_gettime(CLOCK_REALTIME, &now) != 0)
+					fatal("clock_gettime");
+				if (timespeccmp(&now, &c->status_ts, >))
+					server_status_client(c);
+			}
+			
 			log_debug("testing client %d (%d)", (*pfd)->fd, c->fd);
 			if (buffer_poll(*pfd, c->in, c->out) != 0) {
 				server_lost_client(c);
