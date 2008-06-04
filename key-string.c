@@ -201,6 +201,11 @@ struct {
 	{ "^X",		24 },
 	{ "^Y",		25 },
 	{ "^Z",		26 },
+	{ "^[",		27 },
+	{ "^\\",	28 },
+	{ "^]",		29 },
+	{ "^^",		30 },
+	{ "^_",		31 }
 };
 #define NKEYSTRINGS (sizeof key_string_table / sizeof key_string_table[0])
 

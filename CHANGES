@@ -1,5 +1,7 @@
 04 June 2008
 
+* Add some vi(1) key bindings in copy mode, and support binding ^[, ^\, ^]
+  ^^ and ^_. Both from/prompted by Will Maier.
 * setw monitor-activity and set status without arguments now toggle the current
   value; suggested by merdely.
 * New command set-window-option (alias setw) to set the single current window
