@@ -1,5 +1,7 @@
 04 June 2008
 
+* setw monitor-activity and set status without arguments now toggle the current
+  value; suggested by merdely.
 * New command set-window-option (alias setw) to set the single current window
   option: monitor-activity to determine whether window activity is shown in
   the status bar for that window (default off).
