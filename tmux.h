@@ -681,6 +681,22 @@ struct cmd_entry {
 	void		 (*init)(void **, int);
 };
 
+/* Generic command data. */
+struct cmd_clientonly_data {
+	char	*cname;
+};
+
+struct cmd_sessiononly_data {
+	char	*cname;
+	char	*sname;
+};
+
+struct cmd_windowonly_data {
+	char	*cname;
+	char	*sname;
+	int	 idx;
+};
+
 /* Key binding. */
 struct binding {
 	int		 key;

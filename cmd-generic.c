@@ -23,21 +23,6 @@
 
 #include "tmux.h"
 
-struct cmd_clientonly_data {
-	char	*cname;
-};
-
-struct cmd_sessiononly_data {
-	char	*cname;
-	char	*sname;
-};
-
-struct cmd_windowonly_data {
-	char	*cname;
-	char	*sname;
-	int	 idx;
-};
-
 int
 cmd_clientonly_parse(
     struct cmd *self, void **ptr, int argc, char **argv, char **cause)
