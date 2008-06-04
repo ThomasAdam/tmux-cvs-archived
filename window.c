@@ -186,6 +186,7 @@ window_create(const char *name,
 	w->in = buffer_create(BUFSIZ);
 	w->out = buffer_create(BUFSIZ);
 	w->mode = NULL;
+	w->flags = 0;
 	screen_create(&w->base, sx, sy, hlimit);
 	w->screen = &w->base;
 	input_init(w);

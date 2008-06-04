@@ -118,15 +118,10 @@ cmd_rename_window_exec(void *ptr, struct cmd_ctx *ctx)
 	if (data == NULL)
 		return;
 
-	if ((s = cmd_find_session(ctx, data->cname, data->sname)) == NULL)
+	wl = cmd_find_window(ctx, data->cname, data->sname, data->idx, &s);
+	if (wl == NULL)
 		return;
 
-	if (data->idx == -1)
-		wl = s->curw;
-	else if ((wl = winlink_find_by_index(&s->windows, data->idx)) == NULL) {
-		ctx->error(ctx, "no window %d", data->idx);
-		return;
-	}
 	xfree(wl->window->name);
 	wl->window->name = xstrdup(data->newname);
 
