@@ -1,5 +1,8 @@
 04 June 2008
 
+* Change so active/bell windows are inverted in status line.
+* Activity monitoring - window with activity are marked in status line. No
+  way to disable this/filter windows yet.
 * Brought select-window command into line with everything else; it now uses
   -i for the window index.
 * Strings to display on the left and right of the status bar may now be set

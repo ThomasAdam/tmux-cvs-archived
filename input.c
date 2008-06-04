@@ -223,6 +223,8 @@ input_parse(struct window *w)
 	else
 		screen_write_start(&ictx->ctx, &w->base, NULL, NULL);
 
+	if (ictx->off != ictx->len)
+		w->flags |= WINDOW_ACTIVITY;
 	while (ictx->off < ictx->len) {
 		ch = ictx->buf[ictx->off++];
 		ictx->state(ch, ictx);

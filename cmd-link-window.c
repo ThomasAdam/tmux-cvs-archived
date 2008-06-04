@@ -168,7 +168,7 @@ cmd_link_window_exec(void *ptr, struct cmd_ctx *ctx)
 		 * Can't use session_detach as it will destroy session if this
 		 * makes it empty.
 		 */
-		session_cancelbell(s, wl2);
+		session_alert_cancel(s, wl2);
 		winlink_remove(&s->windows, wl2);
 
 		/* Force select/redraw if current. */
