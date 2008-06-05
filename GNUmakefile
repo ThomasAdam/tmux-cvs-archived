@@ -45,6 +45,7 @@ LDFLAGS+=
 LIBS+= -lncurses
 
 PREFIX?= /usr/local
+MANDIR?= $(PREFIX)/man/man1
 INSTALLDIR= install -d
 INSTALLBIN= install -g bin -o root -m 555
 INSTALLMAN= install -g bin -o root -m 444
@@ -84,8 +85,8 @@ depend: $(SRCS)
 install:
 	$(INSTALLDIR) $(DESTDIR)$(PREFIX)/bin
 	$(INSTALLBIN) $(PROG) $(DESTDIR)$(PREFIX)/bin/$(PROG)
-	$(INSTALLDIR) $(DESTDIR)$(PREFIX)/man/man1
-	$(INSTALLMAN) $(PROG).1 $(DESTDIR)$(PREFIX)/man/man1/
+	$(INSTALLDIR) $(DESTDIR)$(MANDIR)
+	$(INSTALLMAN) $(PROG).1 $(DESTDIR)$(MANDIR)
 
 clean:
 	rm -f $(CLEANFILES)
