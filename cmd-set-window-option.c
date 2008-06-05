@@ -33,6 +33,7 @@ void	cmd_set_window_option_exec(struct cmd *, struct cmd_ctx *);
 void	cmd_set_window_option_send(struct cmd *, struct buffer *);
 void	cmd_set_window_option_recv(struct cmd *, struct buffer *);
 void	cmd_set_window_option_free(struct cmd *);
+void	cmd_set_window_option_print(struct cmd *, char *, size_t);
 
 struct cmd_set_window_option_data {
 	char	*cname;
@@ -52,7 +53,7 @@ const struct cmd_entry cmd_set_window_option_entry = {
 	cmd_set_window_option_recv,
 	cmd_set_window_option_free,
 	NULL,
-	NULL
+	cmd_set_window_option_print
 };
 
 int
@@ -221,4 +222,19 @@ cmd_set_window_option_free(struct cmd *self)
 	if (data->value != NULL)
 		xfree(data->value);
 	xfree(data);
+}
+
+void
+cmd_set_window_option_print(struct cmd *self, char *buf, size_t len)
+{
+	struct cmd_set_window_option_data	*data = self->data;
+	size_t					 off = 0;
+
+	off += xsnprintf(buf, len, "%s", self->entry->name);
+	if (data == NULL)
+		return;
+	if (off < len && data->option != NULL)
+		off += xsnprintf(buf + off, len - off, " %s", data->option);
+	if (off < len && data->value != NULL)
+		off += xsnprintf(buf + off, len - off, " %s", data->value);	
 }
