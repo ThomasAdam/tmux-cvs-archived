@@ -122,7 +122,7 @@ key_bindings_init(void)
 		cmd->entry = table[i].entry;
 		cmd->data = NULL;
 		if (cmd->entry->init != NULL)
-			cmd->entry->init(&cmd->data, table[i].key);
+			cmd->entry->init(cmd, table[i].key);
 		key_bindings_add(table[i].key, cmd);
 	}
 }

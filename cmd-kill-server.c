@@ -27,7 +27,7 @@
  * Kill the server and do nothing else.
  */
 
-void	cmd_kill_server_exec(void *, struct cmd_ctx *);
+void	cmd_kill_server_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_kill_server_entry = {
 	"kill-server", NULL,
@@ -38,11 +38,12 @@ const struct cmd_entry cmd_kill_server_entry = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 
 void
-cmd_kill_server_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_kill_server_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	sigterm = 1;
 

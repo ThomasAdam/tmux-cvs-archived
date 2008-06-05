@@ -27,7 +27,7 @@
  * Note this deliberately has no alias to make it hard to hit by accident.
  */
 
-void	cmd_kill_session_exec(void *, struct cmd_ctx *);
+void	cmd_kill_session_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_kill_session_entry = {
 	"kill-session", NULL,
@@ -38,17 +38,18 @@ const struct cmd_entry cmd_kill_session_entry = {
 	cmd_sessiononly_send,
 	cmd_sessiononly_recv,
 	cmd_sessiononly_free,
-	NULL
+	NULL,
+	cmd_sessiononly_print
 };
 
 void
-cmd_kill_session_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_kill_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct session	*s;
 	struct client	*c;
 	u_int		 i;
 
-	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+	if ((s = cmd_sessiononly_get(self, ctx)) == NULL)
 		return;
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {

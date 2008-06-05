@@ -267,7 +267,7 @@ main(int argc, char **argv)
 	if (argc == 0) {
 		cmd = xmalloc(sizeof *cmd);
 		cmd->entry = &cmd_new_session_entry;
-		cmd->entry->init(&cmd->data, 0);
+		cmd->entry->init(cmd, 0);
 	} else if ((cmd = cmd_parse(argc, argv, &cause)) == NULL) {
 		log_warnx("%s", cause);
 		exit(1);

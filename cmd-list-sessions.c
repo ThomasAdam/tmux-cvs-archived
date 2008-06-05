@@ -27,7 +27,7 @@
  * List all sessions.
  */
 
-void	cmd_list_sessions_exec(void *, struct cmd_ctx *);
+void	cmd_list_sessions_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_sessions_entry = {
 	"list-sessions", "ls", "",
@@ -37,11 +37,12 @@ const struct cmd_entry cmd_list_sessions_entry = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 
 void
-cmd_list_sessions_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_list_sessions_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct session	*s;
 	struct winlink	*wl;

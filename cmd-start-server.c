@@ -24,7 +24,7 @@
  * Start the server and do nothing else.
  */
 
-void	cmd_start_server_exec(void *, struct cmd_ctx *);
+void	cmd_start_server_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_start_server_entry = {
 	"start-server", "start",
@@ -35,11 +35,12 @@ const struct cmd_entry cmd_start_server_entry = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 
 void
-cmd_start_server_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_start_server_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

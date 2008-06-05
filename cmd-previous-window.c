@@ -24,7 +24,7 @@
  * Move to previous window.
  */
 
-void	cmd_previous_window_exec(void *, struct cmd_ctx *);
+void	cmd_previous_window_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_previous_window_entry = {
 	"previous-window", "prev",
@@ -35,15 +35,16 @@ const struct cmd_entry cmd_previous_window_entry = {
 	cmd_sessiononly_send,
 	cmd_sessiononly_recv,
 	cmd_sessiononly_free,
-	NULL
+	NULL,
+	cmd_sessiononly_print
 };
 
 void
-cmd_previous_window_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_previous_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct session	*s;
 
-	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+	if ((s = cmd_sessiononly_get(self, ctx)) == NULL)
 		return;
 
 	if (session_previous(s) == 0)

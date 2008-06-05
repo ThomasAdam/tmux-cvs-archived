@@ -27,7 +27,7 @@
  * List all clients.
  */
 
-void	cmd_list_clients_exec(void *, struct cmd_ctx *);
+void	cmd_list_clients_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_clients_entry = {
 	"list-clients", "lsc",
@@ -38,11 +38,12 @@ const struct cmd_entry cmd_list_clients_entry = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
 	NULL
 };
 
 void
-cmd_list_clients_exec(unused void *ptr, struct cmd_ctx *ctx)
+cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct client	*c;
 	u_int		 i;

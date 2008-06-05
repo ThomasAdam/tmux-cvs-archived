@@ -114,7 +114,7 @@ cmd_parse(int argc, char **argv, char **cause)
 	cmd = xmalloc(sizeof *cmd);
 	cmd->entry = entry;
 	if (entry->parse != NULL) {
-		if (entry->parse(cmd, &cmd->data, argc, argv, cause) != 0) {
+		if (entry->parse(cmd, argc, argv, cause) != 0) {
 			xfree(cmd);
 			return (NULL);
 		}
@@ -143,7 +143,7 @@ usage:
 void
 cmd_exec(struct cmd *cmd, struct cmd_ctx *ctx)
 {
-	cmd->entry->exec(cmd->data, ctx);
+	cmd->entry->exec(cmd, ctx);
 }
 
 void
@@ -164,7 +164,7 @@ cmd_send(struct cmd *cmd, struct buffer *b)
 	buffer_write(b, &n, sizeof n);
 
 	if (cmd->entry->send != NULL)
-		cmd->entry->send(cmd->data, b);
+		cmd->entry->send(cmd, b);
 }
 
 struct cmd *
@@ -189,7 +189,7 @@ cmd_recv(struct buffer *b)
 	cmd->entry = *entryp;
 
 	if (cmd->entry->recv != NULL)
-		cmd->entry->recv(&cmd->data, b);
+		cmd->entry->recv(cmd, b);
 	return (cmd);
 }
 
@@ -197,7 +197,7 @@ void
 cmd_free(struct cmd *cmd)
 {
 	if (cmd->data != NULL && cmd->entry->free != NULL)
-		cmd->entry->free(cmd->data);
+		cmd->entry->free(cmd);
 	xfree(cmd);
 }
 

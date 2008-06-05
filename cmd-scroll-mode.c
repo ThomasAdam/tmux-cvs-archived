@@ -24,7 +24,7 @@
  * Enter scroll mode. Only valid when bound to a key.
  */
 
-void	cmd_scroll_mode_exec(void *, struct cmd_ctx *);
+void	cmd_scroll_mode_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_scroll_mode_entry = {
 	"scroll-mode", NULL,
@@ -35,15 +35,16 @@ const struct cmd_entry cmd_scroll_mode_entry = {
 	cmd_windowonly_send,
 	cmd_windowonly_recv,
 	cmd_windowonly_free,
+	NULL,
 	NULL
 };
 
 void
-cmd_scroll_mode_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_scroll_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct winlink	*wl;
 
-	if ((wl = cmd_windowonly_get(ptr, ctx, NULL)) == NULL)
+	if ((wl = cmd_windowonly_get(self, ctx, NULL)) == NULL)
 		return;
 
 	window_set_mode(wl->window, &window_scroll_mode);

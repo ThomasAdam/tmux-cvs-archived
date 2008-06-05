@@ -24,7 +24,7 @@
  * Cause client to report an error and exit with 1 if session doesn't exist.
  */
 
-void	cmd_has_session_exec(void *, struct cmd_ctx *);
+void	cmd_has_session_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_has_session_entry = {
 	"has-session", "has",
@@ -35,15 +35,16 @@ const struct cmd_entry cmd_has_session_entry = {
 	cmd_sessiononly_send,
 	cmd_sessiononly_recv,
 	cmd_sessiononly_free,
-	NULL
+	NULL,
+	cmd_sessiononly_print
 };
 
 void
-cmd_has_session_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_has_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct session	*s;
 
-	if ((s = cmd_sessiononly_get(ptr, ctx)) == NULL)
+	if ((s = cmd_sessiononly_get(self, ctx)) == NULL)
 		return;
 
 	if (ctx->cmdclient != NULL)

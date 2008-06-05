@@ -24,7 +24,7 @@
  * Detach a client.
  */
 
-void	cmd_detach_client_exec(void *, struct cmd_ctx *);
+void	cmd_detach_client_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_detach_client_entry = {
 	"detach-client", "detach",
@@ -35,15 +35,16 @@ const struct cmd_entry cmd_detach_client_entry = {
 	cmd_clientonly_send,
 	cmd_clientonly_recv,
 	cmd_clientonly_free,
-	NULL
+	NULL,
+	cmd_clientonly_print
 };
 
 void
-cmd_detach_client_exec(void *ptr, struct cmd_ctx *ctx)
+cmd_detach_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct client	*c;
 
-	if ((c = cmd_clientonly_get(ptr, ctx)) == NULL)
+	if ((c = cmd_clientonly_get(self, ctx)) == NULL)
 		return;
 
 	server_write_client(c, MSG_DETACH, NULL, 0);
