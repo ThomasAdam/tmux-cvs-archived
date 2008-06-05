@@ -169,6 +169,7 @@ cmd_send_keys_print(struct cmd *self, char *buf, size_t len)
 	off += xsnprintf(buf, len, "%s", self->entry->name);
 	if (data == NULL)
 		return;
+	if (off < len && data->target != NULL)
 		off += xsnprintf(buf + off, len - off, " -t %s", data->target);
 	if (off < len && data->idx != -1)
 		off += xsnprintf(buf + off, len - off, " -i %d", data->idx);

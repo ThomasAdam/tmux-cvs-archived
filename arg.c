@@ -79,7 +79,7 @@ arg_parse_client(const char *arg)
 		if (arg2[n - 1] == ':')
 			arg2[n - 1] = '\0';
 
-		/* Try and lookup the client name. */
+		/* Try and look up the client name. */
 		c = arg_lookup_client(arg2);
 		xfree(arg2);
 		return (c);
@@ -154,7 +154,7 @@ arg_parse_window(const char *arg, struct session **s, int *idx)
 		return (0);
 	}
 
-	/* If missing, try as an index, else lookup immediately. */
+	/* If missing, try as an index, else look up immediately. */
 	if (ptr == NULL) {
 		*idx = strtonum(arg2, 0, INT_MAX, &errstr);
 		if (errstr == NULL) {
