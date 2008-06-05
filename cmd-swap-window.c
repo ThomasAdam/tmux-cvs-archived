@@ -55,6 +55,9 @@ cmd_swap_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if ((wl_dst = cmd_find_window(ctx, data->dst, &dst)) == NULL)
 		return;
 
+	if (wl_dst->window == wl_src->window)
+		goto out;
+
 	w = wl_dst->window;
 	wl_dst->window = wl_src->window;
 	wl_src->window = w;
@@ -68,6 +71,7 @@ cmd_swap_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (src != dst)
 		server_redraw_session(dst);
 
+out:
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
