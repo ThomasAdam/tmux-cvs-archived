@@ -41,13 +41,13 @@ const struct cmd_entry cmd_bind_key_entry = {
 	"bind-key", "bind",
 	"key command [arguments]",
 	0,
+	NULL,
 	cmd_bind_key_parse,
 	cmd_bind_key_exec,
 	cmd_bind_key_send,
 	cmd_bind_key_recv,
 	cmd_bind_key_free,
-	NULL,
-	NULL
+	NULL /* XXX */
 };
 
 int

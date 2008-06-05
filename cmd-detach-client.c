@@ -28,23 +28,24 @@ void	cmd_detach_client_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_detach_client_entry = {
 	"detach-client", "detach",
-	CMD_CLIENTONLY_USAGE,
+	CMD_TARGET_CLIENT_USAGE,
 	0,
-	cmd_clientonly_parse,
+	cmd_target_init,
+	cmd_target_parse,
 	cmd_detach_client_exec,
-	cmd_clientonly_send,
-	cmd_clientonly_recv,
-	cmd_clientonly_free,
-	NULL,
-	cmd_clientonly_print
+	cmd_target_send,
+	cmd_target_recv,
+	cmd_target_free,
+	cmd_target_print
 };
 
 void
 cmd_detach_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct client	*c;
+	struct cmd_target_data	*data = self->data;
+	struct client		*c;
 
-	if ((c = cmd_clientonly_get(self, ctx)) == NULL)
+	if ((c = cmd_find_client(ctx, data->target)) == NULL)
 		return;
 
 	server_write_client(c, MSG_DETACH, NULL, 0);

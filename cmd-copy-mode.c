@@ -28,23 +28,24 @@ void	cmd_copy_mode_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_copy_mode_entry = {
 	"copy-mode", NULL, 
-	CMD_WINDOWONLY_USAGE,
+	CMD_TARGET_WINDOW_USAGE,
 	0,
-	cmd_windowonly_parse,
+	cmd_target_init,
+	cmd_target_parse,
 	cmd_copy_mode_exec,
-	cmd_windowonly_send,
-	cmd_windowonly_recv,
-	cmd_windowonly_free,
-	NULL,
+	cmd_target_send,
+	cmd_target_recv,
+	cmd_target_free,
 	NULL
 };
 
 void
 cmd_copy_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct winlink	*wl;
+	struct cmd_target_data	*data = self->data;
+	struct winlink		*wl;
 
-	if ((wl = cmd_windowonly_get(self, ctx, NULL)) == NULL)
+	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return;
 
 	window_set_mode(wl->window, &window_copy_mode);

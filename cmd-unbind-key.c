@@ -33,19 +33,19 @@ void	cmd_unbind_key_recv(struct cmd *, struct buffer *);
 void	cmd_unbind_key_free(struct cmd *);
 
 struct cmd_unbind_key_data {
-	int		 key;
+	int	key;
 };
 
 const struct cmd_entry cmd_unbind_key_entry = {
 	"unbind-key", "unbind",
 	"key",
 	0,
+	NULL,
 	cmd_unbind_key_parse,
 	cmd_unbind_key_exec,
 	cmd_unbind_key_send,
 	cmd_unbind_key_recv,
 	cmd_unbind_key_free,
-	NULL,
 	NULL
 };
 
