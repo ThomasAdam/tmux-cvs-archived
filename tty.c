@@ -467,6 +467,7 @@ tty_vwrite(struct tty *tty, unused struct screen *s, int cmd, va_list ap)
 			while (ua-- > 0)
 				tty_putc(tty, ' ');
 			tty_puts(tty, exit_insert_mode);
+			tty_puts(tty, tparm(cursor_address, s->cy, s->cx));
 		}
 		break;
 	case TTY_DELETECHARACTER:
