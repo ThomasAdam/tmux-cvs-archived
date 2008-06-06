@@ -63,6 +63,7 @@ cmd_kill_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		} else
 			server_redraw_client(c);
 	}
+	recalculate_sizes();
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

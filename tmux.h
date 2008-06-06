@@ -527,6 +527,7 @@ struct window {
 #define WINDOW_HIDDEN 0x2
 #define WINDOW_ACTIVITY 0x4
 #define WINDOW_MONITOR 0x8
+#define WINDOW_AGGRESSIVE 0x10
 
 	struct screen	*screen;
 	struct screen	 base;

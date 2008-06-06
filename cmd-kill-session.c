@@ -60,6 +60,7 @@ cmd_kill_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 			server_write_client(c, MSG_EXIT, NULL, 0);
 		}
 	}
+	recalculate_sizes();
 
 	session_destroy(s);
 

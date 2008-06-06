@@ -70,6 +70,7 @@ cmd_swap_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	server_redraw_session(src);
 	if (src != dst)
 		server_redraw_session(dst);
+	recalculate_sizes();
 
 out:
 	if (ctx->cmdclient != NULL)

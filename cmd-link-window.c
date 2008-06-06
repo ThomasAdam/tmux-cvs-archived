@@ -108,6 +108,7 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		session_select(s, wl_dst->idx);
 		server_redraw_session(s);
 	}
+	recalculate_sizes();
 
 out:
 	if (ctx->cmdclient != NULL)
