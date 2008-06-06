@@ -55,7 +55,8 @@ session_alert_add(struct session *s, struct window *w, int type)
 		if (wl == s->curw)
 			continue;
 
-		if (wl->window == w && !session_alert_has(s, wl, type)) {
+		if (wl->window == w &&
+		    !session_alert_has(s, wl, type)) {
 			sa = xmalloc(sizeof *sa);
 			sa->wl = wl;
 			sa->type = type;
@@ -71,6 +72,19 @@ session_alert_has(struct session *s, struct winlink *wl, int type)
 
 	TAILQ_FOREACH(sa, &s->alerts, entry) {
 		if (sa->wl == wl && sa->type == type)
+			return (1);
+	}
+
+	return (0);
+}
+
+int
+session_alert_has_window(struct session *s, struct window *w, int type)
+{
+	struct session_alert	*sa;
+
+	TAILQ_FOREACH(sa, &s->alerts, entry) {
+		if (sa->wl->window == w && sa->type == type)
 			return (1);
 	}
 
