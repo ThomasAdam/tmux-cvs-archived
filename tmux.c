@@ -174,7 +174,7 @@ main(int argc, char **argv)
 	int	 		 n, opt;
 
 	client = path = name = NULL;
-        while ((opt = getopt(argc, argv, "c:f:S:s:vV")) != EOF) {
+        while ((opt = getopt(argc, argv, "f:S:vV")) != EOF) {
                 switch (opt) {
 		case 'f':
 			cfg_file = xstrdup(optarg);

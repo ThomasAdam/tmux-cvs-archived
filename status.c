@@ -17,10 +17,10 @@
  */
 
 #include <sys/types.h>
-#include <sys/time.h>
 
 #include <stdarg.h>
 #include <string.h>
+#include <time.h>
 
 #include "tmux.h"
 

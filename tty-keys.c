@@ -26,6 +26,7 @@ struct {
 	const char	*name;
 	int	 	 code;
 } tty_keys[] = {
+/*	{ "kb",	   KEYC_BACKSPACE }, */
 	{ "kBEG",  KEYC_SBEG },
 	{ "kCAN",  KEYC_SCANCEL },
 	{ "kCMD",  KEYC_SCOMMAND },
@@ -259,6 +260,11 @@ tty_keys_next(struct tty *tty, int *code)
 	}
 	xfree(s);
 	if (tk == NULL) {
+		size = tty->ksize;
+		if (size > BUFFER_USED(tty->in))
+			size = BUFFER_USED(tty->in);
+		log_debug(
+		    "unmatched key: %.*s", (int) size, BUFFER_OUT(tty->in));
 		/*
 		 * XXX Pass through unchanged.
 		 */

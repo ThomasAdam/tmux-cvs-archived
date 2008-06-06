@@ -63,7 +63,7 @@ SRCS+= compat/strlcpy.c compat/strlcat.c compat/strtonum.c
 CFLAGS+= $(shell getconf LFS_CFLAGS) -D_GNU_SOURCE \
          -DNO_STRLCPY -DNO_STRLCAT -DNO_STRTONUM -DNO_SETPROCTITLE \
          -DNO_QUEUE_H -DNO_TREE_H -DUSE_PTY_H
-LDFLAGS+= -lresolv -lutil
+LDFLAGS+= -lrt -lutil
 # Required for LLONG_MAX and friends
 CFLAGS+= -std=c99
 endif

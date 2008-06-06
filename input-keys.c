@@ -28,6 +28,8 @@ struct {
 	int		 key;
 	const char	*data;
 } input_keys[] = {
+/*	{ KEYC_BACKSPACE, "\010" }, */
+
 	{ KEYC_DC,     "\e[3~" },
 	{ KEYC_F1,     "\eOP" },
 	{ KEYC_F10,    "\e[21~" },
@@ -108,12 +110,14 @@ input_key(struct window *w, int key)
 #endif
 	
 	for (i = 0; i < NINPUTKEYS; i++) {
-		if (input_keys[i].key == key) {
-			log_debug2(
-			    "found key %d: \"%s\"", key, input_keys[i].data);
-			buffer_write(w->out,
-			    input_keys[i].data, strlen(input_keys[i].data));
-			return;
-		}
+		if (input_keys[i].key == key)
+			break;
 	}
+	if (i == NINPUTKEYS) {
+		log_debug2("key %d missing", key);
+		return;
+	}
+
+	log_debug2("found key %d: \"%s\"", key, input_keys[i].data);
+	buffer_write(w->out, input_keys[i].data, strlen(input_keys[i].data));
 }

@@ -66,6 +66,7 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return;
 	}
 
+	wl_dst = NULL;
 	if (idx != -1)
 		wl_dst = winlink_find_by_index(&s->windows, idx);
 	if (wl_dst != NULL) {
