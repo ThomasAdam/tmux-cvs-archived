@@ -52,9 +52,6 @@ status_write_client(struct client *c)
 	strftime(rbuf, sizeof rbuf, right, localtime(&(c->status_ts.tv_sec)));
 	rlen = strlen(rbuf) + 1;
 
-	c->status_ts.tv_sec += 
-	    options_get_number(&c->session->options, "status-interval");
-
 	screen_redraw_start_client(&ctx, c);
 	screen_redraw_move_cursor(&ctx, llen, c->sy - slines);
 	screen_redraw_set_attributes(&ctx, 0, scolour);
