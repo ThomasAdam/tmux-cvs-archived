@@ -121,8 +121,14 @@ recalculate_sizes(void)
 		log_debug("window size %u,%u (was %u,%u)", ssx, ssy,
 		    screen_size_x(&w->base), screen_size_y(&w->base));
 
-		server_clear_window(w);
 		window_resize(w, ssx, ssy);
-		server_redraw_window(w);
+
+		for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
+			c = ARRAY_ITEM(&clients, i);
+			if (c == NULL || c->session == NULL)
+				continue;
+			if (c->session->curw->window == w)
+				c->flags |= (CLIENT_CLEAR|CLIENT_REDRAW);
+		}
 	}
 }

@@ -275,9 +275,18 @@ void
 server_check_redraw(struct client *c)
 {
 	struct screen_redraw_ctx	ctx;
+	struct screen			screen;
 
 	if (c == NULL || c->session == NULL)
 		return;
+
+	if (c->flags & CLIENT_CLEAR) {
+		screen_create(&screen, c->sx, c->sy - 1, 0);
+		screen_redraw_start(&ctx, &screen, tty_write_client, c);
+		screen_redraw_clear_screen(&ctx);
+		screen_redraw_stop(&ctx);
+		screen_destroy(&screen);
+	}
 	
 	if (c->flags & CLIENT_REDRAW) {
 		screen_redraw_start_client(&ctx, c);
@@ -287,7 +296,7 @@ server_check_redraw(struct client *c)
 	} else if (c->flags & CLIENT_STATUS)
 		status_write_client(c);	
 
-	c->flags &= ~(CLIENT_REDRAW|CLIENT_STATUS);
+	c->flags &= ~(CLIENT_CLEAR|CLIENT_REDRAW|CLIENT_STATUS);
 }
 
 /* Check for status line redraw on client. */
