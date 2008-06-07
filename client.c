@@ -51,11 +51,9 @@ client_init(const char *path, struct client_ctx *cctx, int start_server)
 	retries = 0;
 retry:
 	if (stat(path, &sb) != 0) {
-		if (start_server && errno == ENOENT && retries < 10) {
-			if (pid == 0)
-				pid = server_start(path);
-			usleep(10000);
-			retries++;
+		if (start_server && errno == ENOENT) {
+			if (server_start(path) != 0)
+				goto no_start;
 			goto retry;
 		}
 		goto fail;
@@ -81,9 +79,8 @@ retry:
 		if (start_server && errno == ECONNREFUSED && retries < 10) {
 			if (unlink(path) != 0)
 				goto fail;
-			usleep(10000);
-			retries++;
-			goto retry;
+			if (server_start(path) != 0)
+				goto no_start;
 		}
 		goto fail;
 	}
@@ -111,6 +108,10 @@ retry:
 	}
 
 	return (0);
+
+no_start:
+	log_warnx("server failed to start");
+	return (1);
 
 fail:
 	log_warn("server not found");

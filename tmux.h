@@ -895,7 +895,7 @@ const char *key_string_lookup_key(int);
 
 /* server.c */
 extern struct clients clients;
-pid_t	 server_start(const char *);
+int	 server_start(const char *);
 
 /* server-msg.c */
 int	 server_msg_dispatch(struct client *);
