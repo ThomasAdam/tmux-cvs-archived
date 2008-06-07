@@ -649,6 +649,8 @@ struct client {
 #define CLIENT_TERMINAL 0x1
 #define CLIENT_PREFIX 0x2
 #define CLIENT_MOUSE 0x4
+#define CLIENT_REDRAW 0x8
+#define CLIENT_STATUS 0x10
 	int		 flags;
 
 	struct session	*session;
