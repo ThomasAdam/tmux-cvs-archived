@@ -333,7 +333,7 @@ tty_putc(struct tty *tty, char ch)
 }
 
 void
-tty_vwrite(struct tty *tty, unused struct screen *s, int cmd, va_list ap)
+tty_vwrite(struct tty *tty, struct screen *s, int cmd, va_list ap)
 {
 	char	ch;
 	u_int	i, ua, ub;
