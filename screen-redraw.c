@@ -149,18 +149,6 @@ screen_redraw_write_string(struct screen_redraw_ctx *ctx, const char *fmt, ...)
 	xfree(msg);
 }
 
-/* Clear screen. */
-void
-screen_redraw_clear_screen(struct screen_redraw_ctx *ctx)
-{
-	u_int	i;
-
-	for (i = 0; i < screen_size_y(ctx->s); i++) {
-		screen_redraw_move_cursor(ctx, 0, i);
-		ctx->write(ctx->data, TTY_CLEARLINE);
-	}
-}
-
 /* Redraw single cell. */
 void
 screen_redraw_cell(struct screen_redraw_ctx *ctx, u_int px, u_int py)
