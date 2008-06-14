@@ -183,6 +183,6 @@ server_write_message(struct client *c, const char *fmt, ...)
 		screen_redraw_stop(&ctx);
 	} else {
 		screen_redraw_stop(&ctx);
-		status_write_client(c);
+		server_status_client(c);
 	}
 }

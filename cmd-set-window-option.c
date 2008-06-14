@@ -166,6 +166,34 @@ cmd_set_window_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 
 		recalculate_sizes();
+	} else if (strcmp(data->option, "force-width") == 0) {
+		if (data->value == NULL || number == -1) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
+		if (errstr != NULL) {
+			ctx->error(ctx, "force-width %s", errstr);
+			return;
+		}
+		if (number == 0)
+			wl->window->limitx = UINT_MAX;
+		else
+			wl->window->limitx = number;
+		recalculate_sizes();
+	} else if (strcmp(data->option, "force-height") == 0) {
+		if (data->value == NULL || number == -1) {
+			ctx->error(ctx, "invalid value");
+			return;
+		}
+		if (errstr != NULL) {
+			ctx->error(ctx, "force-height %s", errstr);
+			return;
+		}
+		if (number == 0)
+			wl->window->limity = UINT_MAX;
+		else
+			wl->window->limity = number;
+		recalculate_sizes();
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;

@@ -114,6 +114,11 @@ recalculate_sizes(void)
 		}
 		w->flags &= ~WINDOW_HIDDEN;
 
+		if (ssx > w->limitx)
+			ssx = w->limitx;
+		if (ssy > w->limity)
+			ssy = w->limity;
+
 		if (screen_size_x(&w->base) == ssx &&
 		    screen_size_y(&w->base) == ssy)
 			continue;
