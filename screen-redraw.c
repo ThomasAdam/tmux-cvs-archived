@@ -181,12 +181,12 @@ screen_redraw_area(
 void
 screen_redraw_lines(struct screen_redraw_ctx *ctx, u_int py, u_int ny)
 {
-	screen_redraw_area(ctx, 0, py, screen_size_x(ctx->s), py + ny);
+	screen_redraw_area(ctx, 0, py, screen_size_x(ctx->s), ny);
 }
 
 /* Draw set of columns. */
 void
 screen_redraw_columns(struct screen_redraw_ctx *ctx, u_int px, u_int nx)
 {
-	screen_redraw_area(ctx, px, 0, px + nx, screen_size_y(ctx->s));
+	screen_redraw_area(ctx, px, 0, nx, screen_size_y(ctx->s));
 }
