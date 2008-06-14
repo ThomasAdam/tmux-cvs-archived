@@ -1,3 +1,7 @@
+14 June 2008
+
+* Don't die on empty strings in config file, reported by Will Maier.
+
 08 June 2008
 
 * Set socket mode +x if any sessions are attached and -x if not.
