@@ -36,7 +36,7 @@ status_redraw(struct client *c)
 	u_char		 		scolour;
 	u_int		 		slines;
 
-	scolour = options_get_number(&c->session->options, "status-colour");
+	scolour = options_get_colours(&c->session->options, "status-colour");
 	slines = options_get_number(&c->session->options, "status-lines");
 	if (slines == 0 || c->sy <= slines)
 		return;

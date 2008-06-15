@@ -485,7 +485,7 @@ server_handle_client(struct client *c)
 	struct window	*w = c->session->curw->window;
 	int		 key, prefix;
 
-	prefix = options_get_number(&c->session->options, "prefix-key");
+	prefix = options_get_key(&c->session->options, "prefix-key");
 	while (tty_keys_next(&c->tty, &key) == 0) {
 		if (c->flags & CLIENT_PREFIX) {
 			key_bindings_dispatch(key, c);
