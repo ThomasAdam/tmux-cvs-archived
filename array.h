@@ -59,9 +59,9 @@
 #define ARRAY_REMOVE(a, i) do {						\
 	if (((u_int) (i)) >= (a)->num)					\
 		abort();						\
-	if (i < (a)->num - 1) {						\
+	if ((i) < (a)->num - 1) {					\
 		memmove((a)->list + (i), (a)->list + (i) + 1, 		\
-		    ARRAY_ITEMSIZE(a) * ((a)->num - (i) - 1)); 		\
+		    ARRAY_ITEMSIZE(a) * ((a)->num - (i) - 1));		\
 	}								\
 	(a)->num--;							\
         if ((a)->num == 0)						\

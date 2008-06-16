@@ -44,7 +44,8 @@ key_bindings_add(int key, struct cmd *cmd)
 	if (i == ARRAY_LENGTH(&key_bindings)) {
 		bd = xmalloc(sizeof *bd);
 		ARRAY_ADD(&key_bindings, bd);
-	}
+	} else
+		cmd_free(bd->cmd);
 
 	bd->key = key;
 	bd->cmd = cmd;

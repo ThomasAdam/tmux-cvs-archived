@@ -112,6 +112,7 @@ cmd_parse(int argc, char **argv, char **cause)
 
 	cmd = xmalloc(sizeof *cmd);
 	cmd->entry = entry;
+	cmd->data = NULL;
 	if (entry->parse != NULL) {
 		if (entry->parse(cmd, argc, argv, cause) != 0) {
 			xfree(cmd);
