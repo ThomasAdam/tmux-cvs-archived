@@ -281,8 +281,12 @@ cmd_find_client(struct cmd_ctx *ctx, const char *arg)
 	
 	if ((c = arg_parse_client(arg)) == NULL)
 		c = ctx->curclient;
-	if (c == NULL)
-		ctx->error(ctx, "client not found: %s", arg);
+	if (c == NULL) {
+		if (arg != NULL)
+			ctx->error(ctx, "client not found: %s", arg);
+		else
+			ctx->error(ctx, "no client found");
+	}
 	return (c);
 }
 
@@ -295,8 +299,12 @@ cmd_find_session(struct cmd_ctx *ctx, const char *arg)
 		s = ctx->cursession;
 	if (s == NULL)
 		s = cmd_current_session(ctx);
-	if (s == NULL)
-		ctx->error(ctx, "session not found: %s", arg);
+	if (s == NULL) {
+		if (arg != NULL)
+			ctx->error(ctx, "session not found: %s", arg);
+		else
+			ctx->error(ctx, "no session found");
+	}
 	return (s);
 }
 
