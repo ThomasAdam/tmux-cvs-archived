@@ -56,6 +56,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_set_option_entry,
 	&cmd_set_window_option_entry,
 	&cmd_show_options_entry,
+	&cmd_show_window_options_entry,
 	&cmd_start_server_entry,
 	&cmd_swap_window_entry,
 	&cmd_switch_client_entry,
