@@ -123,6 +123,7 @@ load_cfg(const char *path, char **causep)
 
 			ctx.error = cfg_error;
 			ctx.print = cfg_print;
+			ctx.info = cfg_print;
 
 			ctx.cmdclient = NULL;
 			ctx.flags = 0;

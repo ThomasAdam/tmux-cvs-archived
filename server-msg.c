@@ -34,6 +34,8 @@ void printflike2 server_msg_fn_command_error(
     	    struct cmd_ctx *, const char *, ...);
 void printflike2 server_msg_fn_command_print(
     	    struct cmd_ctx *, const char *, ...);
+void printflike2 server_msg_fn_command_info(
+    	    struct cmd_ctx *, const char *, ...);
 
 struct server_msg {
 	enum hdrtype	type;
@@ -105,6 +107,23 @@ server_msg_fn_command_print(struct cmd_ctx *ctx, const char *fmt, ...)
 	xfree(msg);
 }
 
+void printflike2
+server_msg_fn_command_info(struct cmd_ctx *ctx, const char *fmt, ...)
+{
+	va_list	ap;
+	char   *msg;
+
+	if (be_quiet)
+		return;
+
+	va_start(ap, fmt);
+	xvasprintf(&msg, fmt, ap);
+	va_end(ap);
+
+	server_write_client(ctx->cmdclient, MSG_PRINT, msg, strlen(msg));
+	xfree(msg);
+}
+
 int
 server_msg_fn_command(struct hdr *hdr, struct client *c)
 {
@@ -121,6 +140,7 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 
 	ctx.error = server_msg_fn_command_error;
 	ctx.print = server_msg_fn_command_print;
+	ctx.info = server_msg_fn_command_info;
 
 	ctx.msgdata = &data;
 	ctx.curclient = NULL;

@@ -48,6 +48,7 @@ struct options	 global_options;
 char		*paste_buffer;
 
 int		 debug_level;
+int		 be_quiet;
 
 void		 sighandler(int);
 __dead void	 usage(void);
@@ -174,13 +175,16 @@ main(int argc, char **argv)
 	int	 		 n, opt;
 
 	client = path = name = NULL;
-        while ((opt = getopt(argc, argv, "f:S:vV")) != EOF) {
+        while ((opt = getopt(argc, argv, "f:S:qvV")) != EOF) {
                 switch (opt) {
 		case 'f':
 			cfg_file = xstrdup(optarg);
 			break;
 		case 'S':
 			path = xstrdup(optarg);
+			break;
+		case 'q':
+			be_quiet = 1;
 			break;
 		case 'v':
 			debug_level++;

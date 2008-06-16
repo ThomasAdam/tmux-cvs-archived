@@ -1,5 +1,7 @@
 16 June 2008
 
+* Add some information messages when window options are changed, suggested by
+  Mike Erdely. Also add a -q command-line option to suppress them.
 * show-window-options (showw) command.
 
 15 June 2008

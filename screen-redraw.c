@@ -138,8 +138,6 @@ screen_redraw_write_string(struct screen_redraw_ctx *ctx, const char *fmt, ...)
 	va_end(ap);
 
 	for (ptr = msg; *ptr != '\0'; ptr++) {
-		if (ctx->s->cx > screen_last_x(s))
-			break;
 		if (*ptr < 0x20)
 			continue;
 		ctx->write(ctx->data, TTY_CHARACTER, *ptr);
