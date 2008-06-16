@@ -44,7 +44,7 @@ struct cmd_set_option_data {
 
 const struct cmd_entry cmd_set_option_entry = {
 	"set-option", "set",
-	"[-t target-window] option value",
+	"[-t target-session] option value",
 	0,
 	NULL,
 	cmd_set_option_parse,

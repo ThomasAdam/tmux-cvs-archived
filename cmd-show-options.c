@@ -46,7 +46,7 @@ struct cmd_show_options_data {
  */
 const struct cmd_entry cmd_show_options_entry = {
 	"show-options", "show",
-	"[-t target-window]",
+	"[-t target-session]",
 	0,
 	NULL,
 	cmd_show_options_parse,
