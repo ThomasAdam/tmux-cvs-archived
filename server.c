@@ -626,7 +626,7 @@ server_update_socket(const char *path)
 	n = 0;
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i);
-		if (!(s->flags & SESSION_UNATTACHED)) {
+		if (s != NULL && !(s->flags & SESSION_UNATTACHED)) {
 			n++;
 			break;
 		}
