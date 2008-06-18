@@ -1,5 +1,7 @@
 18 June 2008
 
+* Show arrows at either end of status line when scrolled if more windows
+  exist. Highlight the arrow if a hidden window has activity or bell.
 * Scroll the status line to show the current window if necessary. Also handle
   windows smaller than needed better (show a blank status line instead of
   hanging or crashing).
