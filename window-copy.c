@@ -71,7 +71,7 @@ struct window_copy_mode_data {
 
 	u_int	selx;
 	u_int	sely;
-	
+
 	u_int	cx;
 	u_int	cy;
 };

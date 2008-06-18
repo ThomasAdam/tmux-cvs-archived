@@ -60,7 +60,7 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 			buffer_add(in, n);
 	}
 	if (BUFFER_USED(out) > 0 && pfd->revents & POLLOUT) {
-		n = write(pfd->fd, BUFFER_OUT(out), BUFFER_USED(out));	
+		n = write(pfd->fd, BUFFER_OUT(out), BUFFER_USED(out));
 		log_debug("buffer_poll: fd=%d, write=%zd", pfd->fd, n);
 		if (n == -1) {
 			if (errno != EINTR && errno != EAGAIN)

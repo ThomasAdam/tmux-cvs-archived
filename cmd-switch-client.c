@@ -103,7 +103,7 @@ cmd_switch_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return;
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
 		return;
-	
+
 	c->session = s;
 
 	recalculate_sizes();

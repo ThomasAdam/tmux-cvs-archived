@@ -45,7 +45,7 @@
  * ----------- array base + hsize + dy
  *
  * The screen_x/screen_y macros are used to convert a cell on the displayed
- * area to an absolute position in the arrays. 
+ * area to an absolute position in the arrays.
  *
  * Screen handling code is split into four files:
  *
@@ -54,7 +54,7 @@
  *	screen-display.c: Basic functions for manipulating the displayed
  *			  part of the screen. x,y coordinates passed to these
  *			  are relative to the display. These are largely
- *			  utility functions for screen-write.c. 
+ *			  utility functions for screen-write.c.
  *	screen-redraw.c: Functions for redrawing all or part of a screen to
  *			 one or more ttys. A context is filled via one of the
  *			 screen_redraw_start* variants which sets up (removes

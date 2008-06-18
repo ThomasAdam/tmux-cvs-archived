@@ -108,7 +108,7 @@ input_key(struct window *w, int key)
 		}
 	}
 #endif
-	
+
 	for (i = 0; i < NINPUTKEYS; i++) {
 		if (input_keys[i].key == key)
 			break;

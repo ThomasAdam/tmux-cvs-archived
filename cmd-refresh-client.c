@@ -47,7 +47,7 @@ cmd_refresh_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if ((c = cmd_find_client(ctx, data->target)) == NULL)
 		return;
-	
+
 	server_redraw_client(c);
 
 	if (ctx->cmdclient != NULL)

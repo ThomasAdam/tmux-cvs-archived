@@ -338,5 +338,5 @@ cmd_set_option_print(struct cmd *self, char *buf, size_t len)
 	if (off < len && data->option != NULL)
 		off += xsnprintf(buf + off, len - off, " %s", data->option);
 	if (off < len && data->value != NULL)
-		off += xsnprintf(buf + off, len - off, " %s", data->value);	
+		off += xsnprintf(buf + off, len - off, " %s", data->value);
 }

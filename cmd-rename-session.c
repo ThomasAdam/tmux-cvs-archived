@@ -32,7 +32,7 @@ void	cmd_rename_session_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_rename_session_entry = {
 	"rename-session", "rename",
 	CMD_TARGET_SESSION_USAGE " new-name",
-	CMD_ONEARG,	
+	CMD_ONEARG,
 	cmd_target_init,
 	cmd_target_parse,
 	cmd_rename_session_exec,

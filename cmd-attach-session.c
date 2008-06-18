@@ -50,7 +50,7 @@ cmd_attach_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if (ctx->flags & CMD_KEY)
 		return;
-	
+
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
 		return;
 

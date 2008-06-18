@@ -58,12 +58,12 @@ __dead void	 usage(void);
 
 #ifdef NO_PROGNAME
 const char      *__progname = "tmux";
-#endif     
+#endif
 
 __dead void
 usage(void)
 {
-	fprintf(stderr, 
+	fprintf(stderr,
 	    "usage: %s [-v] [-f file] [-S socket-path] [command [flags]]\n",
 	    __progname);
 	exit(1);
@@ -240,7 +240,7 @@ main(int argc, char **argv)
 		if (access(cfg_file, R_OK) != 0) {
 			log_warn("%s", cfg_file);
 			exit(1);
-		}		
+		}
 	}
 
 	if (path == NULL) {

@@ -119,7 +119,7 @@ cmd_show_options_exec(struct cmd *self, struct cmd_ctx *ctx)
 			ctx->print(ctx, "%s %lld", o->name, o->value.number);
 			break;
 		case OPTIONS_KEY:
-			ctx->print(ctx, "%s %s", o->name, 
+			ctx->print(ctx, "%s %s", o->name,
 			    key_string_lookup_key(o->value.key));
 			break;
 		case OPTIONS_COLOURS:

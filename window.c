@@ -165,7 +165,7 @@ winlink_previous(unused struct winlinks *wwl, struct winlink *wl)
 }
 
 struct window *
-window_create(const char *name, 
+window_create(const char *name,
     const char *cmd, const char **env, u_int sx, u_int sy, u_int hlimit)
 {
 	struct window	*w;
@@ -189,7 +189,7 @@ window_create(const char *name,
 		sigreset();
 		log_debug("started child: cmd=%s; pid=%d", cmd, (int) getpid());
 		log_close();
-		
+
 		execl(_PATH_BSHELL, "sh", "-c", cmd, (char *) NULL);
 		fatal("execl failed");
 	}

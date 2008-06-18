@@ -94,7 +94,7 @@ window_more_init(struct window *w)
 	s = &data->screen;
 	screen_create(s, screen_size_x(&w->base), screen_size_y(&w->base), 0);
 	s->mode &= ~MODE_CURSOR;
-	
+
 	return (s);
 }
 

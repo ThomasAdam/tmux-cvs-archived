@@ -439,7 +439,7 @@ screen_display_copy_area(struct screen *dst, struct screen *src,
 	}
 	if (!screen_in_x(dst, px) || !screen_in_y(dst, py)) {
 		SCREEN_DEBUG4(dst, px, py, nx, ny);
-		return; 
+		return;
 	}
 	if (!screen_in_x(dst, px + nx - 1) || !screen_in_y(dst, py + ny - 1)) {
 		SCREEN_DEBUG4(dst, px, py, nx, ny);

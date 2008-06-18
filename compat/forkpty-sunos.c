@@ -39,12 +39,12 @@ forkpty(int *master,
 		goto out;
 	if (unlockpt(*master) != 0)
 		goto out;
-	
+
 	if ((path = ptsname(*master)) == NULL)
 		goto out;
 	if ((slave = open(path, O_RDWR|O_NOCTTY)) == -1)
 		goto out;
-	
+
 	switch (pid = fork()) {
 	case -1:
 		goto out;
@@ -59,10 +59,10 @@ forkpty(int *master,
 			fatal("ioctl failed");
 		if (ioctl(slave, I_PUSH, "ldterm") == -1)
 			fatal("ioctl failed");
-		
+
 		if (ioctl(slave, TIOCSWINSZ, ws) == -1)
 			fatal("ioctl failed");
-		
+
 		dup2(slave, 0);
 		dup2(slave, 1);
 		dup2(slave, 2);

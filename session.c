@@ -121,7 +121,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 	RB_INIT(&s->windows);
 	TAILQ_INIT(&s->alerts);
 	options_init(&s->options, &global_options);
-	
+
 	s->sx = sx;
 	s->sy = sy;
 
