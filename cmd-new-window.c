@@ -44,7 +44,7 @@ struct cmd_new_window_data {
 
 const struct cmd_entry cmd_new_window_entry = {
 	"new-window", "neww",
-	"[-d] [-t target-window] [-n window-name] [command]",
+	"[-d] [-n window-name] [-t target-window] [command]",
 	0,
 	cmd_new_window_init,
 	cmd_new_window_parse,
