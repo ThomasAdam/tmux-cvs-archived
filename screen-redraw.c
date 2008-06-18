@@ -129,9 +129,8 @@ screen_redraw_set_attributes(
 void printflike2
 screen_redraw_write_string(struct screen_redraw_ctx *ctx, const char *fmt, ...)
 {
-	struct screen	*s = ctx->s;
-	va_list		 ap;
-	char   		*msg, *ptr;
+	va_list	 ap;
+	char   	*msg, *ptr;
 
 	va_start(ap, fmt);
 	xvasprintf(&msg, fmt, ap);
