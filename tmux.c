@@ -56,6 +56,10 @@ int		 be_quiet;
 void		 sighandler(int);
 __dead void	 usage(void);
 
+#ifdef NO_PROGNAME
+const char      *__progname = "tmux";
+#endif     
+
 __dead void
 usage(void)
 {

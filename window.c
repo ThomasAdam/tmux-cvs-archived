@@ -37,7 +37,9 @@
 #ifdef USE_PTY_H
 #include <pty.h>
 #else
+#ifndef NO_FORKPTY
 #include <util.h>
+#endif
 #endif
 #endif
 
@@ -185,7 +187,7 @@ window_create(const char *name,
 				fatal("putenv failed");
 		}
 		sigreset();
-		log_debug("started child: cmd=%s; pid=%d", cmd, getpid());
+		log_debug("started child: cmd=%s; pid=%d", cmd, (int) getpid());
 		log_close();
 		
 		execl(_PATH_BSHELL, "sh", "-c", cmd, (char *) NULL);

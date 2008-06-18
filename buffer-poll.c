@@ -42,7 +42,8 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 	ssize_t	n;
 
 	log_debug("buffer_poll (%d): fd=%d, revents=%d; out=%zu in=%zu",
-	    getpid(), pfd->fd, pfd->revents, BUFFER_USED(out), BUFFER_USED(in));
+	    (int) getpid(),
+	    pfd->fd, pfd->revents, BUFFER_USED(out), BUFFER_USED(in));
 
 	if (pfd->revents & (POLLERR|POLLNVAL|POLLHUP))
 		return (-1);
