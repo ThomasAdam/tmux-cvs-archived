@@ -88,7 +88,7 @@ tty_open(struct tty *tty, char **cause)
 	memcpy(&tio, &tty->tio, sizeof tio);
 	tio.c_iflag &= ~(IXON|IXOFF|ICRNL|INLCR|IGNCR|IMAXBEL|IUCLC|ISTRIP);
 	tio.c_iflag |= IGNBRK;
-	tio.c_oflag &= ~(OPOST|ONLCR|OCRNL|ONLRET|OLCUC|OFILL);
+	tio.c_oflag &= ~(OPOST|ONLCR|OCRNL|ONLRET|OLCUC);
 	tio.c_lflag &= ~(IEXTEN|ICANON|ECHO|ECHOE|ECHONL|ECHOCTL|ECHOPRT|ECHOKE|ECHOCTL|ISIG);
 	tio.c_cc[VMIN] = 1; 
         tio.c_cc[VTIME] = 0;
