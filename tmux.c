@@ -212,6 +212,7 @@ main(int argc, char **argv)
 	options_set_string(
 	    &global_options, "status-right", "%%H:%%M %%d-%%b-%%y");
 	options_set_number(&global_options, "status-interval", 15);
+	options_set_number(&global_options, "set-titles", 1);
 
 	paste_buffer = NULL;
 

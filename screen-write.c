@@ -92,9 +92,6 @@ screen_write_set_title(struct screen_write_ctx *ctx, char *title)
 
 	xfree(s->title);
 	s->title = title;
-
-	if (ctx->write != NULL)
-		ctx->write(ctx->data, TTY_TITLE, s->title);
 }
 
 /* Put a character. */

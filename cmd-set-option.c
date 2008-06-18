@@ -272,6 +272,14 @@ cmd_set_option_exec(struct cmd *self, unused struct cmd_ctx *ctx)
 			return;
 		}
 		options_set_number(oo, "status-interval", number);
+	} else if (strcmp(data->option, "set-titles") == 0) {
+		if (bool == -1) {
+			ctx->error(ctx, "bad value: %s", data->value);
+			return;
+		}
+		if (bool == -2)
+			bool = !options_get_number(oo, "set-titles");
+		options_set_number(oo, "set-titles", bool);
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;

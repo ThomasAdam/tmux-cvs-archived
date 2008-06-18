@@ -343,6 +343,14 @@ tty_putc(struct tty *tty, char ch)
 }
 
 void
+tty_set_title(struct tty *tty, const char *title)
+{
+	tty_puts(tty, "\e]0;");
+	tty_puts(tty, title);
+	tty_putc(tty, '\007');
+}
+
+void
 tty_vwrite(struct tty *tty, struct screen *s, int cmd, va_list ap)
 {
 	char	ch;
@@ -543,8 +551,6 @@ tty_vwrite(struct tty *tty, struct screen *s, int cmd, va_list ap)
 	case TTY_MOUSEON:
 		if (key_mouse != NULL)
 			tty_puts(tty, "\e[?1000h");
-		break;
-	case TTY_TITLE:
 		break;
 	case TTY_ATTRIBUTES:
 		ua = va_arg(ap, u_int);
