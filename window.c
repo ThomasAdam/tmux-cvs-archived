@@ -20,13 +20,16 @@
 #include <sys/ioctl.h>
 
 #include <fcntl.h>
-#include <paths.h>
 #include <signal.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+
+#ifndef NO_PATHS_H
+#include <paths.h>
+#endif
 
 #ifdef USE_LIBUTIL_H
 #include <libutil.h>

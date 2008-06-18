@@ -51,6 +51,13 @@ INSTALLDIR= install -d
 INSTALLBIN= install -g bin -o root -m 555
 INSTALLMAN= install -g bin -o root -m 444
 
+ifeq ($(shell uname),SunOS)
+INCDIRS+= -Icompat
+SRCS+= compat/strtonum.c
+CFLAGS+= -DNO_STRTONUM -DNO_TREE_H -DNO_PATHS_H -DNO_SETPROCTITLE \
+	-DNO_DAEMON
+endif 
+
 ifeq ($(shell uname),Darwin)
 INCDIRS+= -Icompat
 SRCS+= compat/strtonum.c

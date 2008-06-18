@@ -70,6 +70,11 @@ extern char    *__progname;
 #define TTY_NAME_MAX 32
 #endif
 
+#ifdef NO_PATHS_H
+#define	_PATH_BSHELL	"/bin/sh"
+#define	_PATH_TMP	"/tmp/"
+#endif
+
 /* Default configuration file. */
 #define DEFAULT_CFG ".tmux.conf"
 

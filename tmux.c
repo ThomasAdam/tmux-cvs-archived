@@ -20,7 +20,6 @@
 #include <sys/wait.h>
 
 #include <errno.h>
-#include <paths.h>
 #include <poll.h>
 #include <pwd.h>
 #include <signal.h>
@@ -28,6 +27,10 @@
 #include <string.h>
 #include <syslog.h>
 #include <unistd.h>
+
+#ifndef NO_PATHS_H
+#include <paths.h>
+#endif
 
 #include "tmux.h"
 
