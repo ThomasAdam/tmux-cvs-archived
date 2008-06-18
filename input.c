@@ -143,7 +143,8 @@ input_start_string(struct input_ctx *ictx, int type)
 void
 input_abort_string(struct input_ctx *ictx)
 {
-	xfree(ictx->string_buf);
+	if (ictx->string_buf != NULL)
+		xfree(ictx->string_buf);
 	ictx->string_buf = NULL;
 }
 
