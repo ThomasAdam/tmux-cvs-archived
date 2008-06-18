@@ -760,6 +760,11 @@ size_t	 	 strlcpy(char *, const char *, size_t);
 size_t	 	 strlcat(char *, const char *, size_t);
 #endif
 
+#ifdef NO_DAEMON
+/* daemon.c */
+size_t	 	 daemon(int, int);
+#endif
+
 /* tmux.c */
 extern volatile sig_atomic_t sigwinch;
 extern volatile sig_atomic_t sigterm;

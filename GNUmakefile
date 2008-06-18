@@ -53,7 +53,7 @@ INSTALLMAN= install -g bin -o root -m 444
 
 ifeq ($(shell uname),SunOS)
 INCDIRS+= -Icompat
-SRCS+= compat/strtonum.c
+SRCS+= compat/strtonum.c compat/daemon.c
 CFLAGS+= -DNO_STRTONUM -DNO_TREE_H -DNO_PATHS_H -DNO_SETPROCTITLE \
 	-DNO_DAEMON
 endif 
