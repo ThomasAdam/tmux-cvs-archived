@@ -765,6 +765,12 @@ size_t	 	 strlcat(char *, const char *, size_t);
 size_t	 	 daemon(int, int);
 #endif
 
+#ifdef NO_FORKPTY
+/* forkpty.c */
+pid_t		 forkpty(
+    		     int *, int *, char *, struct termios *, struct winsize *);
+#endif
+
 /* tmux.c */
 extern volatile sig_atomic_t sigwinch;
 extern volatile sig_atomic_t sigterm;
