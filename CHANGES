@@ -1,3 +1,13 @@
+18 June 2008
+
+* Scroll the status line to show the current window if necessary. Also handle
+  windows smaller than needed better (show a blank status line instead of
+  hanging or crashing).
+
+17 June 2008
+
+* tmux 0.3 released.
+
 16 June 2008
 
 * Add some information messages when window options are changed, suggested by
