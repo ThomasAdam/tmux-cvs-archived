@@ -36,7 +36,7 @@
 #include "compat/tree.h"
 #endif
 
-#include <curses.h>
+#include <ncurses.h>
 #include <limits.h>
 #include <poll.h>
 #include <signal.h>

@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
-#include <curses.h>
+#include <ncurses.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
