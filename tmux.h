@@ -780,6 +780,12 @@ int	 	 daemon(int, int);
 pid_t		 forkpty(int *, char *, struct termios *, struct winsize *);
 #endif
 
+#ifdef NO_ASPRINTF
+/* asprintf.c */
+int	asprintf(char **, const char *, ...);
+int	vasprintf(char **, const char *, va_list);
+#endif
+
 /* tmux.c */
 extern volatile sig_atomic_t sigwinch;
 extern volatile sig_atomic_t sigterm;
