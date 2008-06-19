@@ -26,7 +26,12 @@
 void
 server_set_client_message(struct client *c, const char *msg)
 {
-	struct timespec	ts = { 0, 750000000L };
+	struct timespec	ts;
+	int		delay;
+
+	delay = options_get_number(&c->session->options, "display-time");
+	ts.tv_sec = delay / 1000;
+	ts.tv_nsec = (delay % 1000) * 1000000L;
 
 	c->message_string = xstrdup(msg);
 	if (clock_gettime(CLOCK_REALTIME, &c->message_timer) != 0)

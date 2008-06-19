@@ -1,3 +1,8 @@
+20 June 2008
+
+* New option, display-time, sets the time status line messages stay on screen
+  (unless a key is pressed). Set in milliseconds, default is 750 (0.75 seconds).
+
 19 June 2008
 
 * Use "status" consistently for status line option, and prefix for "prefix" key
