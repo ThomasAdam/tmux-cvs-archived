@@ -413,9 +413,12 @@ status_prompt_key(struct client *c, int key)
 		}
 		break;
  	case '\r':	/* enter */
-		c->prompt_callback(c->prompt_data, c->prompt_buffer);
-		server_clear_client_prompt(c);
-		break;
+		if (*c->prompt_buffer != '\0') {
+			c->prompt_callback(c->prompt_data, c->prompt_buffer);
+			server_clear_client_prompt(c);
+			break;
+		}
+		/* FALLTHROUGH */
 	case '\e':	/* escape */
 		c->prompt_callback(c->prompt_data, NULL);
 		server_clear_client_prompt(c);
