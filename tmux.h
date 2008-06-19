@@ -651,6 +651,9 @@ struct tty {
 
 	u_char		 acs[UCHAR_MAX + 1];
 
+#define TTY_NOCURSOR 0x1
+	int		 flags;
+
 	size_t		 ksize;	/* maximum key size */
 	RB_HEAD(tty_keys, tty_key) ktree;
 };
