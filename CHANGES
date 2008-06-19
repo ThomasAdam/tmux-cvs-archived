@@ -1,3 +1,7 @@
+19 June 2008
+
+* Show status messages properly, without blocking the server.
+
 18 June 2008
 
 * New option, set-titles. On by default, this attempts to set the window title
