@@ -73,6 +73,8 @@ cmd_command_prompt_callback(void *data, char *s)
 		return;
 
 	if ((cmd = cmd_string_parse(s, &cause)) == NULL) {
+		if (cause == NULL)
+			return;
 		*cause = toupper((u_char) *cause);
 		server_set_client_message(c, cause);
 		xfree(cause);

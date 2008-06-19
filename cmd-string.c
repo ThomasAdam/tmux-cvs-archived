@@ -39,6 +39,10 @@ cmd_string_getc(const char *s, size_t *p)
 	return (s[(*p)++]);
 }
 
+/* 
+ * Parse command string. Return command or NULL on error. If returning NULL,
+ * cause is error string, or NULL for empty command.
+ */ 
 struct cmd *
 cmd_string_parse(const char *s, char **cause)
 {
@@ -56,6 +60,8 @@ cmd_string_parse(const char *s, char **cause)
 
 	cmd = NULL;
 
+	*cause = NULL;
+	
 	p = 0;
 	for (;;) {
 		ch = cmd_string_getc(s, &p);
@@ -94,7 +100,7 @@ cmd_string_parse(const char *s, char **cause)
 			if (ch != EOF)
 				break;
 			if (argc == 0)
-				goto error;
+				goto out;
 				
 			cmd = cmd_parse(argc, argv, cause);
 			goto out;

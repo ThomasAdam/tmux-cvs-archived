@@ -78,17 +78,11 @@ load_cfg(const char *path, char **cause)
 		}
 		n++;
 
-		/* Trim spaces from start and end. */
-		while (*buf != '\0' && (*buf == ' ' || *buf == '\t'))
-			*buf++ = '\0';
-		len = strlen(buf);
-		while (len > 0 && (buf[len - 1] == ' ' || buf[len - 1] == '\t'))
-			buf[--len] = '\0';
-		if (*buf == '\0')
-			continue;
-
-		if ((cmd = cmd_string_parse(buf, cause)) == NULL)
+		if ((cmd = cmd_string_parse(buf, cause)) == NULL) {
+			if (*cause == NULL)
+				continue;
 			goto error;
+		}
 		cfg_cause = NULL;
 
 		ctx.msgdata = NULL;
