@@ -323,7 +323,7 @@ status_prompt_redraw(struct client *c)
 		return;
 	offset = 0;
 
-	xx = strlen(c->prompt_string) + 1;
+	xx = strlen(c->prompt_string);
 	if (xx > c->sx)
 		xx = c->sx;
 	yy = c->sy - 1;		
@@ -332,7 +332,7 @@ status_prompt_redraw(struct client *c)
 	screen_redraw_set_attributes(&ctx, ATTR_REVERSE, 0x88);
 
 	screen_redraw_move_cursor(&ctx, 0, yy);
-	screen_redraw_write_string(&ctx, "%.*s ", (int) xx, c->prompt_string);
+	screen_redraw_write_string(&ctx, "%.*s", (int) xx, c->prompt_string);
 
 	left = c->sx - xx;
 	if (left != 0) {
