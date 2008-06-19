@@ -188,7 +188,7 @@ server_main(const char *srv_path, int srv_fd)
 
 		/* Do the poll. */
 		log_debug("polling %d fds", nfds);
-		if ((nfds = poll(pfds, nfds, 500)) == -1) {
+		if ((nfds = poll(pfds, nfds, 100)) == -1) {
 			if (errno == EAGAIN || errno == EINTR)
 				continue;
 			fatal("poll failed");

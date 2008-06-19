@@ -2,6 +2,7 @@
 
 * New option, display-time, sets the time status line messages stay on screen
   (unless a key is pressed). Set in milliseconds, default is 750 (0.75 seconds).
+  The timer is only checked every 100 ms or so.
 
 19 June 2008
 
