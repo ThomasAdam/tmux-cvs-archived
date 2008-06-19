@@ -1,5 +1,7 @@
 19 June 2008
 
+* Use "status" consistently for status line option, and prefix for "prefix" key
+  option.
 * Allow commands to be entered at a prompt. This is triggered with the
   command-prompt command, bound to : by default.
 * Show status messages properly, without blocking the server.

@@ -148,15 +148,15 @@ cmd_set_option_exec(struct cmd *self, unused struct cmd_ctx *ctx)
 			ctx->error(ctx, "unknown key: %s", data->value);
 			return;
 		}
-		options_set_key(oo, "prefix-key", key);
+		options_set_key(oo, "prefix", key);
 	} else if (strcmp(data->option, "status") == 0) {
 		if (flag == -1) {
 			ctx->error(ctx, "bad value: %s", data->value);
 			return;
 		}
 		if (flag == -2)
-			flag = !options_get_number(oo, "status-lines");
-		options_set_number(oo, "status-lines", flag);
+			flag = !options_get_number(oo, "status");
+		options_set_number(oo, "status", flag);
 		recalculate_sizes();
 	} else if (strcmp(data->option, "status-fg") == 0) {
 		if (data->value == NULL) {

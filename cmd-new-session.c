@@ -116,7 +116,7 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct client			*c = ctx->cmdclient;
 	struct session			*s;
 	char				*cmd, *cause;
-	u_int				 sx, sy, slines;
+	u_int				 sx, sy;
 
 	if (ctx->flags & CMD_KEY)
 		return;
@@ -148,10 +148,12 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 		sy = c->sy;
 	}
 
-	slines = options_get_number(&global_options, "status-lines");
-	if (sy < slines)
-		sy = slines + 1;
-	sy -= slines;
+	if (options_get_number(&global_options, "status")) {
+		if (sy == 0)
+			sy = 1;
+		else
+			sy--;
+	}
 
 	if (!data->flag_detached && tty_open(&c->tty, &cause) != 0) {
 		ctx->error(ctx, "%s", cause);
