@@ -109,6 +109,7 @@ key_bindings_init(void)
 		{ '[', &cmd_copy_mode_entry },
 		{ ']', &cmd_paste_buffer_entry },
 		{ ':', &cmd_command_prompt_entry },
+		{ ';', &cmd_command_prompt_entry },
 		{ META, &cmd_send_prefix_entry },
 	};
 	u_int		 i;
