@@ -1,5 +1,7 @@
 19 June 2008
 
+* Allow commands to be entered at a prompt. This is triggered with the
+  command-prompt command, bound to : by default.
 * Show status messages properly, without blocking the server.
 
 18 June 2008

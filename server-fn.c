@@ -200,18 +200,3 @@ server_status_window(struct window *w)
 			server_status_session(s);
 	}
 }
-
-void printflike2
-server_write_message(struct client *c, const char *fmt, ...)
-{
-	va_list	ap;
-	char   *msg;
-
-	va_start(ap, fmt);
-	xvasprintf(&msg, fmt, ap);
-	va_end(ap);
-
-	server_set_client_message(c, msg);
-
-	xfree(msg);
-}
