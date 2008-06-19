@@ -93,7 +93,9 @@ cmd_string_parse(const char *s, char **cause)
 
 			if (ch != EOF)
 				break;
-
+			if (argc == 0)
+				goto error;
+				
 			cmd = cmd_parse(argc, argv, cause);
 			goto out;
 		default:
