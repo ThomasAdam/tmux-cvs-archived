@@ -49,6 +49,35 @@ server_clear_client_message(struct client *c)
 }
 
 void
+server_set_client_prompt(
+    struct client *c, const char *msg, void (*fn)(void *, char *), void *data)
+{
+	c->prompt_string = xstrdup(msg);
+
+	c->prompt_buffer = xstrdup("");
+	c->prompt_index = 0;
+
+	c->prompt_callback = fn;
+	c->prompt_data = data;
+
+	c->flags |= CLIENT_STATUS;
+}
+
+void
+server_clear_client_prompt(struct client *c)
+{
+	if (c->prompt_string == NULL)
+		return;
+
+	xfree(c->prompt_string);
+	c->prompt_string = NULL;
+
+	xfree(c->prompt_buffer);
+
+	c->flags |= CLIENT_STATUS;
+}
+
+void
 server_write_client(
     struct client *c, enum hdrtype type, const void *buf, size_t len)
 {

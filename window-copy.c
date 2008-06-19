@@ -180,7 +180,7 @@ window_copy_key(struct window *w, int key)
 		screen_clear_selection(&data->screen);
 		break;
 	case '\027':	/* C-w */
-	case '\r':	/* enter */
+ 	case '\r':	/* enter */
 		window_copy_copy_selection(w);
 		window_reset_mode(w);
 		break;
