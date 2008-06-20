@@ -120,6 +120,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 	s->curw = s->lastw = NULL;
 	RB_INIT(&s->windows);
 	TAILQ_INIT(&s->alerts);
+	paste_init_stack(&s->buffers);
 	options_init(&s->options, &global_options);
 
 	s->sx = sx;
@@ -165,6 +166,7 @@ session_destroy(struct session *s)
 
 	session_alert_cancel(s, NULL);
 	options_free(&s->options);
+	paste_free_stack(&s->buffers);
 
 	while (!RB_EMPTY(&s->windows))
 		winlink_remove(&s->windows, RB_ROOT(&s->windows));
