@@ -97,9 +97,12 @@ paste_free_index(struct paste_stack *ps, u_int idx)
 }
 
 void
-paste_add(struct paste_stack *ps, const char *data)
+paste_add(struct paste_stack *ps, const char *data, u_int limit)
 {
 	struct paste_buffer	*pb;
+
+	while (ARRAY_LENGTH(ps) >= limit)
+		ARRAY_TRUNC(ps, 1);
 
 	pb = xmalloc(sizeof *pb);
 	ARRAY_INSERT(ps, 0, pb);

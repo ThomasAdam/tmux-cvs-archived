@@ -220,6 +220,7 @@ main(int argc, char **argv)
 	    &global_options, "status-right", "%%H:%%M %%d-%%b-%%y");
 	options_set_number(&global_options, "status-interval", 15);
 	options_set_number(&global_options, "set-titles", 1);
+	options_set_number(&global_options, "buffer-limit", 9);
 
 	if (cfg_file == NULL) {
 		home = getenv("HOME");
