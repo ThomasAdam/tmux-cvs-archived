@@ -18,40 +18,46 @@
 
 #include <sys/types.h>
 
+#include <getopt.h>
+#include <stdlib.h>
+
 #include "tmux.h"
 
 /*
- * Send prefix key as a key.
+ * Delete a paste buffer.
  */
 
-void	cmd_send_prefix_exec(struct cmd *, struct cmd_ctx *);
+void	cmd_delete_buffer_exec(struct cmd *, struct cmd_ctx *);
 
-const struct cmd_entry cmd_send_prefix_entry = {
-	"send-prefix", NULL,
-	CMD_TARGET_WINDOW_USAGE,
+const struct cmd_entry cmd_delete_buffer_entry = {
+	"delete-buffer", "deleteb",
+	CMD_BUFFER_SESSION_USAGE,
 	0,
-	cmd_target_init,
-	cmd_target_parse,
-	cmd_send_prefix_exec,
-	cmd_target_send,
-	cmd_target_recv,
-	cmd_target_free,
-	cmd_target_print
+	cmd_buffer_init,
+	cmd_buffer_parse,
+	cmd_delete_buffer_exec,
+	cmd_buffer_send,
+	cmd_buffer_recv,
+	cmd_buffer_free,
+	cmd_buffer_print
 };
 
 void
-cmd_send_prefix_exec(struct cmd *self, struct cmd_ctx *ctx)
+cmd_delete_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct cmd_target_data	*data = self->data;
+	struct cmd_buffer_data	*data = self->data;
 	struct session		*s;
-	struct winlink		*wl;
 
-	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
+	if ((s = cmd_find_session(ctx, data->target)) == NULL)
 		return;
 
-	window_key(
-	    wl->window, ctx->curclient, options_get_key(&s->options, "prefix"));
-
+	if (data->buffer == -1)
+		paste_free_top(&s->buffers);
+	else {
+		if (paste_free_index(&s->buffers, data->buffer) != 0)
+			ctx->error(ctx, "no buffer %d", data->buffer);
+	}
+	
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

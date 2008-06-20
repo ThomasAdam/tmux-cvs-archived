@@ -542,7 +542,7 @@ server_handle_client(struct client *c)
 		} else if (key == prefix)
 			c->flags |= CLIENT_PREFIX;
 		else
-			window_key(w, key);
+			window_key(w, c, key);
 	}
 }
 

@@ -121,7 +121,7 @@ cmd_send_keys_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return;
 
 	for (i = 0; i < data->nkeys; i++)
-		window_key(wl->window, data->keys[i]);
+		window_key(wl->window, ctx->curclient, data->keys[i]);
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

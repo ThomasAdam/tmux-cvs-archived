@@ -29,30 +29,45 @@
 void	cmd_paste_buffer_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_paste_buffer_entry = {
-	"paste-buffer", "paste",
-	CMD_TARGET_WINDOW_USAGE,
-	0,
-	cmd_target_init,
-	cmd_target_parse,
+	"paste-buffer", "pasteb",
+	CMD_BUFFER_WINDOW_USAGE,
+	CMD_DFLAG,
+	cmd_buffer_init,
+	cmd_buffer_parse,
 	cmd_paste_buffer_exec,
-	cmd_target_send,
-	cmd_target_recv,
-	cmd_target_free,
-	cmd_target_print
+	cmd_buffer_send,
+	cmd_buffer_recv,
+	cmd_buffer_free,
+	cmd_buffer_print
 };
 
 void
 cmd_paste_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct cmd_target_data	*data = self->data;
+	struct cmd_buffer_data	*data = self->data;
 	struct winlink		*wl;
-
-	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
+	struct session		*s;
+	struct paste_buffer	*pb;
+	
+	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
 		return;
 
-	if (paste_buffer != NULL && *paste_buffer != '\0') {
-		buffer_write(
-		    wl->window->out, paste_buffer, strlen(paste_buffer));
+	if (data->buffer == -1)
+		pb = paste_get_top(&s->buffers);
+	else {
+		if ((pb = paste_get_top(&s->buffers)) == NULL)
+			ctx->error(ctx, "no buffer %d", data->buffer);
+	}
+	
+	if (pb != NULL)
+		buffer_write(wl->window->out, pb->data, strlen(pb->data));
+
+	/* Delete the buffer if -d. */
+	if (ctx->flags & CMD_DFLAG) {
+		if (data->buffer == -1)
+			paste_free_top(&s->buffers);
+		else
+			paste_free_index(&s->buffers, data->buffer);
 	}
 
 	if (ctx->cmdclient != NULL)

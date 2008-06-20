@@ -105,7 +105,7 @@ paste_add(struct paste_stack *ps, const char *data)
 	ARRAY_INSERT(ps, 0, pb);
 
 	pb->data = xstrdup(data);
-	if (clock_gettime(CLOCK_REALTIME, &pb->created) != 0)
+	if (clock_gettime(CLOCK_REALTIME, &pb->ts) != 0)
 		fatal("clock_gettime");
 }
 
@@ -121,7 +121,7 @@ paste_replace(struct paste_stack *ps, u_int idx, const char *data)
 	xfree(pb->data);
 
 	pb->data = xstrdup(data);
-	if (clock_gettime(CLOCK_REALTIME, &pb->created) != 0)
+	if (clock_gettime(CLOCK_REALTIME, &pb->ts) != 0)
 		fatal("clock_gettime");
 
 	return (0);

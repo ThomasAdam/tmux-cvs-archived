@@ -323,10 +323,10 @@ window_parse(struct window *w)
 }
 
 void
-window_key(struct window *w, int key)
+window_key(struct window *w, struct client *c, int key)
 {
 	if (w->mode != NULL)
-		w->mode->key(w, key);
+		w->mode->key(w, c, key);
 	else
 		input_key(w, key);
 }
