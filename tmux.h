@@ -652,6 +652,7 @@ struct tty {
 	u_char		 acs[UCHAR_MAX + 1];
 
 #define TTY_NOCURSOR 0x1
+#define TTY_FREEZE 0x2
 	int		 flags;
 
 	size_t		 ksize;	/* maximum key size */

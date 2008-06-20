@@ -350,6 +350,9 @@ tty_vwrite(struct tty *tty, struct screen *s, int cmd, va_list ap)
 	char	ch;
 	u_int	i, ua, ub;
 
+	if (tty->flags & TTY_FREEZE)
+		return;
+	
 	if (tty->term == NULL) /* XXX XXX */
 		return;
 	set_curterm(tty->term->term);

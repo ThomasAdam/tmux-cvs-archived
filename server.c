@@ -304,10 +304,14 @@ server_check_redraw(struct client *c)
 	struct screen			screen;
 	u_int				xx, yy, sx, sy;
 	char			        title[BUFSIZ];
+	int				flags;
 
 	if (c == NULL || c->session == NULL)
 		return;
 	s = c->session;
+
+	flags = c->tty.flags & TTY_FREEZE;
+	c->tty.flags &= ~TTY_FREEZE;
 
 	if (options_get_number(&s->options, "set-titles")) {
 		xsnprintf(title, sizeof title,
@@ -362,6 +366,8 @@ server_check_redraw(struct client *c)
 		else
 			status_redraw(c);
 	}
+
+	c->tty.flags |= flags;
 
 	c->flags &= ~(CLIENT_REDRAW|CLIENT_STATUS);
 }
