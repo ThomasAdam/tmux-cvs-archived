@@ -54,8 +54,8 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
 		return;
 
-	if (s->sx > 35) {
-		size = s->sx - 35;
+	if (s->sx > 35) {	/* leave three for ... */
+		size = s->sx - 32;
 		tmp = xmalloc(size + 1);
 	} else {
 		size = 0;
@@ -75,6 +75,7 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 			if (out == size) {
 				tmp[out - 1] = '.';
 				tmp[out - 2] = '.';
+				tmp[out - 3] = '.';
 			}
 
 			ctx->print(ctx, "%d: "
