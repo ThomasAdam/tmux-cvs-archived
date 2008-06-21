@@ -54,7 +54,6 @@ tmux does not: use xterm-color or rxvt for colour.
 
 There are the following known issues:
 
-- tmux on the console on OpenBSD (usually TERM=wsvt25) is broken beyond use.
 - cons25 on the FreeBSD console lies about its support for scroll regions,
   reports are that using TERM=screen pretty much works okay.
 - Darwin/OS X's poll(2) is broken and doesn't support polling pty(4)s; as tmux

@@ -372,6 +372,7 @@ status_prompt_redraw(struct client *c)
 void
 status_prompt_key(struct client *c, int key)
 {
+	char   *s;
 	size_t	size;
 
 	size = strlen(c->prompt_buffer);
@@ -399,6 +400,20 @@ status_prompt_key(struct client *c, int key)
 			c->prompt_index = size;
 			c->flags |= CLIENT_STATUS;
 		}
+		break;
+	case '\011':
+		if (strchr(c->prompt_buffer, ' ') != NULL)
+			break;
+		if (c->prompt_index != strlen(c->prompt_buffer))
+			break;
+		
+		s = cmd_complete(c->prompt_buffer);
+		xfree(c->prompt_buffer);
+
+		c->prompt_buffer = s;
+		c->prompt_index = strlen(c->prompt_buffer);
+
+		c->flags |= CLIENT_STATUS;
 		break;
 	case '\010':
 	case '\177':

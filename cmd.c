@@ -70,6 +70,50 @@ const struct cmd_entry *cmd_table[] = {
 	NULL
 };
 
+char *
+cmd_complete(const char *s)
+{
+	const struct cmd_entry 	      **entryp;
+	ARRAY_DECL(, const char *)	list;
+	char			       *prefix;
+	u_int			 	i;
+	size_t			 	j;
+
+	if (*s == '\0')
+		return (xstrdup(s));
+
+	/* First, build a list of all the possible matches. */
+	ARRAY_INIT(&list);
+	for (entryp = cmd_table; *entryp != NULL; entryp++) {
+		if (strncmp((*entryp)->name, s, strlen(s)) != 0)
+			continue;
+		ARRAY_ADD(&list, (*entryp)->name);
+	}
+	
+	/* If none, bail now with the original string. */
+	if (ARRAY_LENGTH(&list) == 0) {
+		ARRAY_FREE(&list);
+		return (xstrdup(s));
+	}
+	
+	/* Now loop through the list and find the longest common prefix. */
+	prefix = xstrdup(ARRAY_FIRST(&list));
+	for (i = 1; i < ARRAY_LENGTH(&list); i++) {
+		s = ARRAY_ITEM(&list, i);
+
+		j = strlen(s);
+		if (j > strlen(prefix))
+			j = strlen(prefix);
+		for (; j > 0; j--) {
+			if (prefix[j - 1] != s[j - 1])
+				prefix[j - 1] = '\0';
+		}
+	}
+
+	ARRAY_FREE(&list);
+	return (prefix);
+}
+
 struct cmd *
 cmd_parse(int argc, char **argv, char **cause)
 {
