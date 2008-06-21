@@ -26,8 +26,9 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       cmd-switch-client.c cmd-has-session.c cmd-scroll-mode.c cmd-copy-mode.c \
       cmd-paste-buffer.c cmd-new-session.c cmd-start-server.c \
       cmd-kill-server.c cmd-set-window-option.c cmd-show-options.c \
-      cmd-show-window-options.c cmd-command-prompt.c \
-      window-scroll.c window-more.c window-copy.c options.c \
+      cmd-show-window-options.c cmd-command-prompt.c cmd-set-buffer.c \
+      cmd-show-buffer.c cmd-list-buffers.c cmd-delete-buffer.c \
+      window-scroll.c window-more.c window-copy.c options.c paste.c \
       tty.c tty-keys.c tty-write.c screen-write.c screen-redraw.c
 
 CC?= gcc
