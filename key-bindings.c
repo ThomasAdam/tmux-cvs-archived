@@ -215,7 +215,6 @@ key_bindings_dispatch(int key, struct client *c)
 	ctx.info = key_bindings_info;
 
 	ctx.cmdclient = NULL;
-	ctx.flags = CMD_KEY;
 
 	cmd_exec(bd->cmd, &ctx);
 }

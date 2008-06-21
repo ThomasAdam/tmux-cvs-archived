@@ -147,7 +147,6 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 	ctx.cursession = NULL;
 
 	ctx.cmdclient = c;
-	ctx.flags = 0;
 
 	/* XXX */
 	if (data.pid != -1 && (cmd->entry->flags & CMD_CANTNEST)) {

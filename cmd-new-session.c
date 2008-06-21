@@ -118,7 +118,7 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	char				*cmd, *cause;
 	u_int				 sx, sy;
 
-	if (ctx->flags & CMD_KEY)
+	if (ctx->curclient != NULL)
 		return;
 
 	if (!data->flag_detached) {

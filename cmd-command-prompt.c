@@ -90,7 +90,6 @@ cmd_command_prompt_callback(void *data, char *s)
 	ctx.info = key_bindings_info;
 
 	ctx.cmdclient = NULL;
-	ctx.flags = CMD_KEY;
 
 	cmd_exec(cmd, &ctx);
 }

@@ -48,7 +48,7 @@ cmd_attach_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct session		*s;
 	char			*cause;
 
-	if (ctx->flags & CMD_KEY)
+	if (ctx->curclient != NULL)
 		return;
 
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)

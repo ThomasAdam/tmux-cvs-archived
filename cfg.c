@@ -94,7 +94,6 @@ load_cfg(const char *path, char **cause)
 		ctx.info = cfg_print;
 
 		ctx.cmdclient = NULL;
-		ctx.flags = 0;
 
 		cfg_cause = NULL;
 		cmd_exec(cmd, &ctx);

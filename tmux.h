@@ -725,9 +725,6 @@ struct cmd_ctx {
 	void		(*print)(struct cmd_ctx *, const char *, ...);
 	void		(*info)(struct cmd_ctx *, const char *, ...);
 	void		(*error)(struct cmd_ctx *, const char *, ...);
-
-#define CMD_KEY 0x1
-	int		flags;
 };
 
 struct cmd {
