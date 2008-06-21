@@ -115,8 +115,6 @@ tty_open(struct tty *tty, char **cause)
 		tty_raw(tty, ena_acs);
 	tty_raw(tty, clear_screen);
 
-	abort();
-
 	tty_keys_init(tty);
 
 	tty_fill_acs(tty);
