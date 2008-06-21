@@ -96,6 +96,13 @@ cmd_complete(const char *s)
 		return (xstrdup(s));
 	}
 	
+	/* If an exact match, return it, with a trailing space. */
+	if (ARRAY_LENGTH(&list) == 1) {
+		xasprintf(&s, "%s ", ARRAY_FIRST(&list));
+		ARRAY_FREE(&list);
+		return (s);
+	}
+
 	/* Now loop through the list and find the longest common prefix. */
 	prefix = xstrdup(ARRAY_FIRST(&list));
 	for (i = 1; i < ARRAY_LENGTH(&list); i++) {
