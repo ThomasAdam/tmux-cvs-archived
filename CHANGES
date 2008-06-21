@@ -1,5 +1,8 @@
 21 June 2008
 
+* Only attempt to set the title where TERM looks like an xterm (contains
+  "xterm", "rxvt" or is "screen"). I hate this but I don't see a better way:
+  setting the title actually kills some other terminals pretty much dead.
 * Strip padding out of terminfo(5) strings. Currently the padding is just
   ignored, this may need to be altered if there are any software terminals
   out there that actually need it.
