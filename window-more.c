@@ -172,7 +172,7 @@ window_more_write_line(struct window *w, struct screen_write_ctx *ctx, u_int py)
 
 	if (py == 0) {
 		screen_write_set_attributes(
-		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x70);
+		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x88);
 		screen_write_move_cursor(ctx, 0, 0);
 		size = screen_write_put_string_rjust(
 		    ctx, "[%u/%u]", data->top, ARRAY_LENGTH(&data->list));

@@ -154,7 +154,7 @@ window_scroll_write_line(
 
 	if (py == 0) {
 		screen_write_set_attributes(
-		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x70);
+		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x88);
 		screen_write_move_cursor(ctx, 0, 0);
 		size = screen_write_put_string_rjust(
 		    ctx, "[%u,%u/%u]", data->ox, data->oy, w->base.hsize);
