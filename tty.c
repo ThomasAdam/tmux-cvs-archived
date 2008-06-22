@@ -78,7 +78,7 @@ tty_open(struct tty *tty, char **cause)
 	tty->out = buffer_create(BUFSIZ);
 
 	tty->attr = 0;
-	tty->colr = 0x70;
+	tty->colr = 0x88;
 
 	tty->flags = 0;
 
@@ -619,7 +619,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 		    exit_alt_charset_mode != NULL)
 			tty_puts(tty, exit_alt_charset_mode);
 		tty_puts(tty, exit_attribute_mode);
-		tty->colr = 0x70;
+		tty->colr = 0x88;
 		tty->attr = 0;
 	}
 
@@ -646,14 +646,9 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 
 	fg = (colr >> 4) & 0xf;
 	if (fg != ((tty->colr >> 4) & 0xf)) {
-		if (tigetflag("AX") == TRUE) {
-			if (fg == 7)
-				fg = 8;
-		} else {
-			if (fg == 8)
-				fg = 7;
-		}
-
+		if (tigetflag("AX") != TRUE && fg == 8)
+			fg = 7;
+		
 		if (fg == 8)
 			tty_puts(tty, "\e[39m");
 		else if (set_a_foreground != NULL)
@@ -662,13 +657,8 @@ tty_attributes(struct tty *tty, u_char attr, u_char colr)
 
 	bg = colr & 0xf;
 	if (bg != (tty->colr & 0xf)) {
-		if (tigetflag("AX") == TRUE) {
-			if (bg == 0)
-				bg = 8;
-		} else {
-			if (bg == 8)
-				bg = 0;
-		}
+		if (tigetflag("AX") != TRUE && bg == 8)
+			bg = 0;
 
 		if (bg == 8)
 			tty_puts(tty, "\e[49m");
