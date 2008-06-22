@@ -812,6 +812,11 @@ int	asprintf(char **, const char *, ...);
 int	vasprintf(char **, const char *, va_list);
 #endif
 
+#ifdef NO_FGETLN
+/* fgetln.c */
+char   *fgetln(FILE *, size_t *);
+#endif
+
 /* tmux.c */
 extern volatile sig_atomic_t sigwinch;
 extern volatile sig_atomic_t sigterm;
