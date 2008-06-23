@@ -444,7 +444,7 @@ status_prompt_key(struct client *c, int key)
 			break;
 		}
 		/* FALLTHROUGH */
-	case '\e':	/* escape */
+	case '\033':	/* escape */
 		c->prompt_callback(c->prompt_data, NULL);
 		server_clear_client_prompt(c);
 		break;

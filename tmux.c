@@ -176,11 +176,11 @@ main(int argc, char **argv)
 	struct hdr	 	 hdr;
 	const char		*shell;
 	struct passwd		*pw;
-	char			*client, *path, *name, *cause, *home;
+	char			*path, *cause, *home;
 	char			 rpath[MAXPATHLEN];
 	int	 		 n, opt;
 
-	client = path = name = NULL;
+	path = NULL;
         while ((opt = getopt(argc, argv, "f:qS:Vv")) != EOF) {
                 switch (opt) {
 		case 'f':

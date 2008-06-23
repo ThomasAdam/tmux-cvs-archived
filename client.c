@@ -44,10 +44,8 @@ client_init(const char *path, struct client_ctx *cctx, int start_server)
 	int				mode;
 	u_int				retries;
 	struct buffer		       *b;
-	pid_t				pid;
 	char			       *name;
 
-	pid = 0;
 	retries = 0;
 retry:
 	if (stat(path, &sb) != 0) {
