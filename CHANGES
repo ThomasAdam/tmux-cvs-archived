@@ -1,5 +1,6 @@
 23 June 2008
 
+* list-commands command (alias lscm).
 * Split information about options into a table and use it to parse options
   on input (allowing abbreviations) and to print them with show-options
   (meaning that bell-action gets a proper string). This turned out a bit ugly
