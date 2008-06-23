@@ -800,13 +800,11 @@ struct set_option_entry {
 		SET_OPTION_STRING,
 		SET_OPTION_NUMBER,
 		SET_OPTION_KEY,		
-		SET_OPTION_FG,
-		SET_OPTION_BG,
+		SET_OPTION_COLOUR,
 		SET_OPTION_FLAG,
 		SET_OPTION_CHOICE
 	} type;
-	const char	*option;
-	
+
 	u_int		 minimum;
 	u_int		 maximum;
 	

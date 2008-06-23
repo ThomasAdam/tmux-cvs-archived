@@ -210,7 +210,8 @@ main(int argc, char **argv)
 
 	options_init(&global_options, NULL);
 	options_set_number(&global_options, "status", 1);
-	options_set_number(&global_options, "status-colour", 0x02);
+	options_set_number(&global_options, "status-fg", 0);
+	options_set_number(&global_options, "status-bg", 2);
 	options_set_number(&global_options, "bell-action", BELL_ANY);
 	options_set_number(&global_options, "history-limit", 2000);
 	options_set_number(&global_options, "display-time", 750);
