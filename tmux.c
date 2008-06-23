@@ -210,11 +210,11 @@ main(int argc, char **argv)
 
 	options_init(&global_options, NULL);
 	options_set_number(&global_options, "status", 1);
-	options_set_colours(&global_options, "status-colour", 0x02);
+	options_set_number(&global_options, "status-colour", 0x02);
 	options_set_number(&global_options, "bell-action", BELL_ANY);
 	options_set_number(&global_options, "history-limit", 2000);
 	options_set_number(&global_options, "display-time", 750);
-	options_set_key(&global_options, "prefix", META);
+	options_set_number(&global_options, "prefix", META);
 	options_set_string(&global_options, "status-left", "%s", ""); /* ugh */
 	options_set_string(
 	    &global_options, "status-right", "%%H:%%M %%d-%%b-%%y");

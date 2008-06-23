@@ -48,7 +48,7 @@ status_redraw(struct client *c)
 
 	if (clock_gettime(CLOCK_REALTIME, &c->status_timer) != 0)
 		fatal("clock_gettime failed");
-	colr = options_get_colours(&s->options, "status-colour");
+	colr = options_get_number(&s->options, "status-colour");
 
 	yy = c->sy - 1;
 	if (yy == 0)

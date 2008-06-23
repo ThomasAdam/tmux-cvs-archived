@@ -527,7 +527,7 @@ server_handle_client(struct client *c)
 	struct window	*w = c->session->curw->window;
 	int		 key, prefix;
 
-	prefix = options_get_key(&c->session->options, "prefix");
+	prefix = options_get_number(&c->session->options, "prefix");
 	while (tty_keys_next(&c->tty, &key) == 0) {
 		server_clear_client_message(c);
 		if (c->prompt_string != NULL) {
