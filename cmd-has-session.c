@@ -43,7 +43,6 @@ void
 cmd_has_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
-	struct session		*s;
 
 	if (cmd_find_session(ctx, data->target) == NULL)
 		return;
