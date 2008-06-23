@@ -255,7 +255,18 @@ off:
 size_t
 status_width(struct winlink *wl)
 {
+#ifndef BROKEN_VSNPRINTF
 	return (xsnprintf(NULL, 0, "%d:%s ", wl->idx, wl->window->name));
+#else
+	char	*s; 
+	size_t	n; 
+	
+	xasprintf(&s, "%d:%s ", wl->idx, wl->window->name); 
+	n = strlen(s); 
+	xfree(s); 
+
+	return (n); 
+#endif
 }
 
 char *
