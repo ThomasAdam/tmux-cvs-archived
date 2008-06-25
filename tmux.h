@@ -971,6 +971,7 @@ extern const struct cmd_entry cmd_scroll_mode_entry;
 extern const struct cmd_entry cmd_select_window_entry;
 extern const struct cmd_entry cmd_send_keys_entry;
 extern const struct cmd_entry cmd_send_prefix_entry;
+extern const struct cmd_entry cmd_select_prompt_entry;
 extern const struct cmd_entry cmd_set_buffer_entry;
 extern const struct cmd_entry cmd_set_option_entry;
 extern const struct cmd_entry cmd_set_window_option_entry;
