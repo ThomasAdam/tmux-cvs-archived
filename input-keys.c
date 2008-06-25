@@ -68,8 +68,14 @@ input_key(struct window *w, int key)
 {
 	u_int	i;
 
-	log_debug2("writing key %d", key);
-	if (key != KEYC_NONE && key >= 0) {
+	log_debug2("writing key %x", key);
+
+	if (KEYC_ISESCAPE(key)) {
+		buffer_write8(w->out, '\033');
+		key = KEYC_REMOVEESCAPE(key);
+	}
+
+	if (key != KEYC_NONE && key < KEYC_OFFSET) {
 		buffer_write8(w->out, (uint8_t) key);
 		return;
 	}
