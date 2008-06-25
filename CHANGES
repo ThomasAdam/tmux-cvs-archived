@@ -1,5 +1,6 @@
 25 June 2008
 
+* Slim down default key bindings: support lowercase only.
 * Handle escaped keys properly (parse eg \033b into a single key code) and
   use this to change copy mode next/previous work to M-f and M-b to match
   emacs.
