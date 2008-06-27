@@ -717,9 +717,9 @@ window_copy_cursor_previous_word(struct window *w)
 {
 	struct window_copy_mode_data	*data = w->modedata;
 	struct screen			*s = &data->screen;
-	u_int				 px, py, skip;
+	u_int				 ox, px, py, skip;
 
-	px = data->ox + data->cx;
+	ox = px = data->ox + data->cx;
 	py = screen_y(&w->base, data->cy) - data->oy;
 
 	skip = 1;
@@ -729,19 +729,21 @@ window_copy_cursor_previous_word(struct window *w)
 			skip = 0;
 	}
 	for (;;) {
-		while (px == 0) {
-			if (data->cy == 0) {
-				if (w->base.hsize == 0 ||
-				    data->oy >= w->base.hsize - 1)
-					goto out;
-			}
+		if (px == 0) {
+			if (ox != 0)
+				break;
 
-			window_copy_cursor_up(w);
-			
-			py = screen_y(&w->base, data->cy) - data->oy;
-			px = window_copy_find_length(w, py);
-			if (px != 0)
-				goto out;
+			while (px == 0) {
+				if (data->cy == 0 && (w->base.hsize == 0 ||
+				    data->oy >= w->base.hsize - 1))
+					goto out;
+				
+				window_copy_cursor_up(w);
+				
+				py = screen_y(&w->base, data->cy) - data->oy;
+				px = window_copy_find_length(w, py);
+			}
+			goto out;
 		}
 		
 		if (skip) {
