@@ -350,7 +350,7 @@ status_prompt_redraw(struct client *c)
 		if (c->prompt_index < left)
 			size = strlen(c->prompt_buffer);
 		else {
-			offset = c->prompt_index - left;
+			offset = c->prompt_index - left - 1;
 			if (c->prompt_index == strlen(c->prompt_buffer))
 				left--;
 			size = left;
