@@ -63,7 +63,7 @@ __dead void
 usage(void)
 {
 	fprintf(stderr,
-	    "usage: %s [-v] [-f file] [-S socket-path] [command [flags]]\n",
+	    "usage: %s [-qVv] [-f file] [-S socket-path] [command [flags]]\n",
 	    __progname);
 	exit(1);
 }
