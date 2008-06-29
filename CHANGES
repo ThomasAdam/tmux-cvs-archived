@@ -1,3 +1,18 @@
+29 June 2008
+
+* Zombie windows. These are not closed when the child process dies. May be
+  set for a window with the new "remain-on-exit" option; the default setting
+  of this flag for new windows may be set with the "remain-by-default" session
+  option.
+
+  A window may be restarted with the respawn-window command:
+
+  	respawn-window [-k] [command]
+	
+  If -k is given, any existing process running in the window is killed;
+  if command is omitted, the same command as when the window was first
+  created is used.
+
 27 June 2008
 
 * Handle nonexistent session or client to -t properly.

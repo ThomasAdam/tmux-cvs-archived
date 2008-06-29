@@ -64,6 +64,7 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "display-time", SET_OPTION_NUMBER, 1, INT_MAX, NULL },
 	{ "history-limit", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
 	{ "prefix", SET_OPTION_KEY, 0, 0, NULL },
+	{ "remain-by-default", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "set-titles", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "status", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "status-bg", SET_OPTION_COLOUR, 0, 0, NULL },

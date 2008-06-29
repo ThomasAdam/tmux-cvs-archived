@@ -203,6 +203,10 @@ session_new(struct session *s, const char *name, const char *cmd, int idx)
 	hlimit = options_get_number(&s->options, "history-limit");
 	if ((w = window_create(name, cmd, env, s->sx, s->sy, hlimit)) == NULL)
 		return (NULL);
+
+	if (options_get_number(&s->options, "remain-by-default"))
+		w->flags |= WINDOW_ZOMBIFY;
+	
 	return (session_attach(s, w, idx));
 }
 

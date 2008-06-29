@@ -222,6 +222,7 @@ main(int argc, char **argv)
 	options_set_number(&global_options, "status-interval", 15);
 	options_set_number(&global_options, "set-titles", 1);
 	options_set_number(&global_options, "buffer-limit", 9);
+	options_set_number(&global_options, "remain-by-default", 0);
 
 	if (cfg_file == NULL) {
 		home = getenv("HOME");

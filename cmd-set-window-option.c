@@ -218,6 +218,20 @@ cmd_set_window_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 		    s->name, wl->idx, number);
 
 		recalculate_sizes();
+	} else if (strcmp(data->option, "remain-on-exit") == 0) {
+		if (flag == -1) {
+			ctx->error(ctx, "bad value: %s", data->value);
+			return;
+		}
+
+		if (flag == -2)
+			wl->window->flags ^= WINDOW_ZOMBIFY;
+		else {
+			if (flag)
+				wl->window->flags |= WINDOW_ZOMBIFY;
+			else
+				wl->window->flags &= ~WINDOW_ZOMBIFY;
+		}
 	} else {
 		ctx->error(ctx, "unknown option: %s", data->option);
 		return;
