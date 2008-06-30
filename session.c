@@ -191,7 +191,7 @@ struct winlink *
 session_new(struct session *s, const char *name, const char *cmd, int idx)
 {
 	struct window	*w;
-	const char	*env[] = { NULL, "TERM=screen", NULL };
+	const char	*env[] = { NULL /* TMUX= */, "TERM=screen", NULL };
 	char		 buf[256];
 	u_int		 i, hlimit;
 

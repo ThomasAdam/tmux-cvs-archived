@@ -45,7 +45,7 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
 	struct session		*s;
-	const char		*env[] = { NULL, "TERM=screen", NULL };
+	const char		*env[] = { "TERM=screen", NULL };
 
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
 		return;
