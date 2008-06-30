@@ -287,6 +287,8 @@ window_destroy(struct window *w)
 	buffer_destroy(w->in);
 	buffer_destroy(w->out);
 
+	if (w->cmd != NULL)
+		xfree(w->cmd);
 	xfree(w->name);
 	xfree(w);
 }
