@@ -248,7 +248,7 @@ window_spawn(struct window *w, const char *cmd, const char **envp)
 				fatal("putenv failed");
 		}
 		sigreset();
-		log_debug("new child: cmd=%s; pid=%d", w->cmd, (int) getpid());
+		log_debug("new child: cmd=%s; pid=%ld", w->cmd, (long) getpid());
 		log_close();
 
 		execl(_PATH_BSHELL, "sh", "-c", w->cmd, (char *) NULL);

@@ -45,7 +45,7 @@ client_fill_session(struct msg_command_data *data)
 		return;
 	data->idx = ll;
 
-	ll = strtonum(buf, 0, LLONG_MAX, &errstr);
+	ll = strtonum(buf, 0, LONG_MAX, &errstr);
 	if (errstr != NULL)
 		return;
 	data->pid = ll;

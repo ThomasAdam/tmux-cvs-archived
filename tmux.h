@@ -355,7 +355,7 @@ struct hdr {
 };
 
 struct msg_command_data {
-	long long	pid;			/* pid from $TMUX or -1 */
+	pid_t		pid;			/* pid from $TMUX or -1 */
 	u_int		idx;			/* index from $TMUX */
 
 	size_t		namelen;

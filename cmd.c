@@ -309,7 +309,7 @@ cmd_current_session(struct cmd_ctx *ctx)
 
 	if (data != NULL && data->pid != -1) {
 		if (data->pid != getpid()) {
-			ctx->error(ctx, "wrong server: %lld", data->pid);
+			ctx->error(ctx, "wrong server: %ld", (long) data->pid);
 			return (NULL);
 		}
 		if (data->idx > ARRAY_LENGTH(&sessions)) {
