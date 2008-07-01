@@ -172,7 +172,15 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 	buffer_read(c->in, &data, sizeof data);
 	term = cmd_recv_string(c->in);
 
-	log_debug("identify msg from client: %u,%u", data.sx, data.sy);
+	log_debug("identify msg from client: %u,%u (%d)", 
+	    data.sx, data.sy, data.version);
+
+	if (data.version != PROTOCOL_VERSION) {
+#define MSG "protocol version mismatch"
+		server_write_client(c, MSG_ERROR, MSG, (sizeof MSG) - 1);
+#undef MSG
+		return (0);
+	}
 
 	c->sx = data.sx;
 	c->sy = data.sy;

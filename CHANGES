@@ -1,5 +1,7 @@
 01 July 2008
 
+* Protocol versioning. Clients which identify as a different version from the
+  server will be rejected.
 * tmux 0.4 released.
 
 29 June 2008

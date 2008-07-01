@@ -93,6 +93,7 @@ retry:
 	if (isatty(STDIN_FILENO)) {
 		if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
 			fatal("ioctl(TIOCGWINSZ)");
+		data.version = PROTOCOL_VERSION;
 		data.sx = ws.ws_col;
 		data.sy = ws.ws_row;
 		*data.tty = '\0';
