@@ -3,7 +3,7 @@
 .PHONY: clean
 
 PROG= tmux
-VERSION= 0.4
+VERSION= 0.5
 
 DATE= $(shell date +%Y%m%d-%H%M)
 
@@ -85,10 +85,10 @@ endif
 
 ifeq ($(shell uname),Linux)
 INCDIRS+= -Icompat
-SRCS+= compat/strlcpy.c compat/strlcat.c compat/strtonum.c
+SRCS+= compat/strlcpy.c compat/strlcat.c compat/strtonum.c compat/fgetln.c
 CFLAGS+= $(shell getconf LFS_CFLAGS) -D_GNU_SOURCE \
          -DNO_STRLCPY -DNO_STRLCAT -DNO_STRTONUM -DNO_SETPROCTITLE \
-         -DNO_QUEUE_H -DNO_TREE_H -DUSE_PTY_H -std=c99
+         -DNO_QUEUE_H -DNO_TREE_H -DUSE_PTY_H -DNO_FGETLN -std=c99
 LIBS+= -lrt -lutil
 endif
 

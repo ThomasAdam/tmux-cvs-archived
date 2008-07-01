@@ -4,7 +4,7 @@
 .PHONY: clean update-index.html upload-index.html
 
 PROG= tmux
-VERSION= 0.4
+VERSION= 0.5
 
 OS!= uname
 REL!= uname -r

@@ -1,3 +1,7 @@
+01 July 2008
+
+* tmux 0.4 released.
+
 29 June 2008
 
 * Zombie windows. These are not closed when the child process dies. May be
