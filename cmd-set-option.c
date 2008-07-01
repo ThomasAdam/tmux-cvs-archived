@@ -55,7 +55,7 @@ const struct cmd_entry cmd_set_option_entry = {
 	cmd_set_option_print
 };
 
-const char *set_option_bell_action_choices[] = { "none", "any", "current" };
+const char *set_option_bell_action_choices[] = { "none", "any", "current", NULL };
 const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "bell-action",
 	  SET_OPTION_CHOICE, 0, 0, set_option_bell_action_choices },
