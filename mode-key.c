@@ -27,6 +27,7 @@ struct mode_key_entry {
 
 const struct mode_key_entry mode_key_table_vi[] = {
 	{ MODEKEY_BOL, '0' },
+	{ MODEKEY_BOL, '^' },
 	{ MODEKEY_CLEARSEL, '\033' },
 	{ MODEKEY_COPYSEL, '\r' },
 	{ MODEKEY_DOWN, 'j' },
