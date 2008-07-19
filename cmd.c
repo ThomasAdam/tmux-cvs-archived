@@ -150,6 +150,10 @@ cmd_parse(int argc, char **argv, char **cause)
 		if (entry != NULL)
 			goto ambiguous;
 		entry = *entryp;
+
+		/* Bail now if an exact match. */
+		if (strcmp(entry->name, argv[0]) == 0)
+			break;
 	}
 	if (entry == NULL) {
 		xasprintf(cause, "unknown command: %s", argv[0]);

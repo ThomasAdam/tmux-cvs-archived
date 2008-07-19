@@ -168,6 +168,9 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 		entry = &set_option_table[i];
 
+		/* Bail now if an exact match. */
+		if (strcmp(entry->name, data->option) == 0)
+			break;
 	}
 	if (entry == NULL) {
 		ctx->error(ctx, "unknown option: %s", data->option);

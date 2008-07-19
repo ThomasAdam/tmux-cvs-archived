@@ -1,3 +1,7 @@
+19 July 2008
+
+* Unbreak "set status" - tmux thought it was ambiguous, reported by rivo nurges.
+
 02 July 2008
 
 * Split vi and emacs mode keys into two tables and add an option (mode-keys)
