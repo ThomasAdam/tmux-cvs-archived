@@ -115,6 +115,8 @@ arg_parse_session(const char *arg)
 			xfree(arg2);
 			return (c->session);
 		}
+
+		xfree(arg2);
 	}
 
 	return (NULL);

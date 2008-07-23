@@ -253,8 +253,10 @@ tty_keys_find(struct tty *tty, char *buf, size_t len, size_t *size)
 
 		tl.string = s;
 		tk = RB_FIND(tty_keys, &tty->ktree, &tl);
-		if (tk != NULL)
+		if (tk != NULL) {
+			xfree(s);
 			return (tk);
+		}
 	}
 	xfree(s);
 
