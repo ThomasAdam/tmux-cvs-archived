@@ -570,24 +570,6 @@ tty_vwrite(struct tty *tty, struct screen *s, int cmd, va_list ap)
 		if (exit_insert_mode != NULL)
 			tty_puts(tty, exit_insert_mode);
 		break;
-	case TTY_KCURSOROFF:
-		t = tigetstr("CE");
-		if (t != (char *) 0 && t != (char *) -1)
-			tty_puts(tty, t);
-		break;
-	case TTY_KCURSORON:
-		t = tigetstr("CS");
-		if (t != (char *) 0 && t != (char *) -1)
-			tty_puts(tty, t);
-		break;
-	case TTY_KKEYPADOFF:
-		if (keypad_local != NULL)
-			tty_puts(tty, keypad_local);
-		break;
-	case TTY_KKEYPADON:
-		if (keypad_xmit != NULL)
-			tty_puts(tty, keypad_xmit);
-		break;
 #endif
 	case TTY_MOUSEOFF:
 		if (key_mouse != NULL)

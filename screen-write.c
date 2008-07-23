@@ -466,10 +466,6 @@ screen_write_set_mode(struct screen_write_ctx *ctx, int mode)
 
 	if (mode & MODE_INSERT)
 		ctx->write(ctx->data, TTY_INSERTON);
-	if (mode & MODE_KCURSOR)
-		ctx->write(ctx->data, TTY_KCURSORON);
-	if (mode & MODE_KKEYPAD)
-		ctx->write(ctx->data, TTY_KKEYPADON);
 	if (mode & MODE_MOUSE)
 		ctx->write(ctx->data, TTY_MOUSEON);
 }
@@ -487,10 +483,6 @@ screen_write_clear_mode(struct screen_write_ctx *ctx, int mode)
 
 	if (mode & MODE_INSERT)
 		ctx->write(ctx->data, TTY_INSERTOFF);
-	if (mode & MODE_KCURSOR)
-		ctx->write(ctx->data, TTY_KCURSOROFF);
-	if (mode & MODE_KKEYPAD)
-		ctx->write(ctx->data, TTY_KKEYPADOFF);
 	if (mode & MODE_MOUSE)
 		ctx->write(ctx->data, TTY_MOUSEOFF);
 }
