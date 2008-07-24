@@ -1242,7 +1242,7 @@ void		 winlink_remove(struct winlinks *, struct winlink *);
 struct winlink	*winlink_next(struct winlinks *, struct winlink *);
 struct winlink	*winlink_previous(struct winlinks *, struct winlink *);
 struct window	*window_create(const char *,
-    const char *, const char **, u_int, u_int, u_int);
+		     const char *, const char **, u_int, u_int, u_int);
 int		 window_spawn(struct window *, const char *, const char **);
 void		 window_destroy(struct window *);
 int		 window_resize(struct window *, u_int, u_int);
