@@ -517,11 +517,6 @@ struct screen_write_ctx {
 	    n, m, o, p);					       	\
 } while (0)
 
-/* Screen default contents. */
-#define SCREEN_DEFDATA ' '
-#define SCREEN_DEFATTR 0
-#define SCREEN_DEFCOLR 0x88	/* default on default ;-) */
-
 /* Input parser sequence argument. */
 struct input_arg {
 	u_char		 data[64];

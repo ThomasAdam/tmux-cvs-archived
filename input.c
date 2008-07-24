@@ -1055,7 +1055,7 @@ input_handle_sequence_sgr(struct input_ctx *ictx)
 	n = ARRAY_LENGTH(&ictx->args);
 	if (n == 0) {
 		attr = 0;
-		colr = SCREEN_DEFCOLR;
+		colr = 0x88;
 	} else {
 		attr = s->attr;
 		colr = s->colr;
@@ -1066,7 +1066,7 @@ input_handle_sequence_sgr(struct input_ctx *ictx)
 			case 0:
 			case 10:
 				attr &= ATTR_CHARSET;
-				colr = SCREEN_DEFCOLR;
+				colr = 0x88;
 				break;
 			case 1:
 				attr |= ATTR_BRIGHT;
