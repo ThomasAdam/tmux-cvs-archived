@@ -179,7 +179,7 @@ struct {
 	{ "pmous", KEYC_MOUSE },
 
 	/*
-	 * Number keypad.
+	 * Numeric keypad.
 	 *
 	 * This is totally confusing and I still don't quite understand how it
 	 * all fits together in relation to termcap...

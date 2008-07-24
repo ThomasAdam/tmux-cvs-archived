@@ -144,7 +144,7 @@ screen_create(struct screen *s, u_int dx, u_int dy, u_int hlimit)
 	s->attr = SCREEN_DEFATTR;
 	s->colr = SCREEN_DEFCOLR;
 
-	s->mode = MODE_CURSOR|MODE_KCURSOR|MODE_KKEYPAD;
+	s->mode = MODE_CURSOR|MODE_KCURSOR;
 	s->title = xstrdup("");
 
 	s->grid_data = xmalloc(dy * (sizeof *s->grid_data));
@@ -169,7 +169,7 @@ screen_reset(struct screen *s)
 	s->attr = SCREEN_DEFATTR;
 	s->colr = SCREEN_DEFCOLR;
 
-	s->mode = MODE_CURSOR|MODE_KCURSOR|MODE_KKEYPAD;
+	s->mode = MODE_CURSOR|MODE_KCURSOR;
 
 	screen_display_fill_area(s, 0, 0, 
 	    screen_size_x(s), screen_size_y(s), ' ', 0, 0x88);
