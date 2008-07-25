@@ -1025,7 +1025,7 @@ extern const struct cmd_entry cmd_unbind_key_entry;
 extern const struct cmd_entry cmd_unlink_window_entry;
 
 /* cmd-string.c */
-struct cmd *cmd_string_parse(const char *, char **);
+int	cmd_string_parse(const char *, struct cmd **, char **);
 
 /* cmd-generic.c */
 #define CMD_TARGET_WINDOW_USAGE "[-t target-window]"

@@ -78,11 +78,13 @@ load_cfg(const char *path, char **cause)
 		}
 		n++;
 
-		if ((cmd = cmd_string_parse(buf, cause)) == NULL) {
+		if (cmd_string_parse(buf, &cmd, cause) != 0) {
 			if (*cause == NULL)
 				continue;
 			goto error;
 		}
+		if (cmd == NULL)
+			continue;
 		cfg_cause = NULL;
 
 		ctx.msgdata = NULL;
