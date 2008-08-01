@@ -49,7 +49,7 @@ cmd_string_ungetc(unused const char *s, size_t *p)
 }
 
 /* 
- * Parse command string. Return -1 on error. If returning 1, cause is error
+ * Parse command string. Returns -1 on error. If returning -1, cause is error
  * string, or NULL for empty command.
  */ 
 int
