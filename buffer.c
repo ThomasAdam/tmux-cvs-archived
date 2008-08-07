@@ -71,7 +71,12 @@ buffer_ensure(struct buffer *b, size_t size)
 		b->off = 0;
 	}
 
-	ENSURE_FOR(b->base, b->space, b->size, size);
+	if (SIZE_MAX - b->size < size)
+		fatalx("size too big");
+	while (b->space < b->size + size) {
+		b->base = xrealloc(b->base, 2, b->space);
+		b->space *= 2;
+	}
 }
 
 /* Adjust buffer after data appended. */

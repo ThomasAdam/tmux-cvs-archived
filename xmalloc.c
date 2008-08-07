@@ -26,63 +26,6 @@
 
 #include "tmux.h"
 
-void *
-ensure_for(void *buf, size_t *len, size_t size, size_t adj)
-{
-	if (adj == 0)
-		fatalx("zero adj");
-
-	if (SIZE_MAX - size < adj)
-		fatalx("size + adj > SIZE_MAX");
-	size += adj;
-
-	if (*len == 0) {
-		*len = BUFSIZ;
-		buf = xmalloc(*len);
-	}
-
-	while (*len <= size) {
-		buf = xrealloc(buf, 2, *len);
-		*len *= 2;
-	}
-
-	return (buf);
-}
-
-void *
-ensure_size(void *buf, size_t *len, size_t nmemb, size_t size)
-{
-	if (nmemb == 0 || size == 0)
-		fatalx("zero size");
-	if (SIZE_MAX / nmemb < size)
-		fatalx("nmemb * size > SIZE_MAX");
-
-	if (*len == 0) {
-		*len = BUFSIZ;
-		buf = xmalloc(*len);
-	}
-
-	while (*len <= nmemb * size) {
-		buf = xrealloc(buf, 2, *len);
-		*len *= 2;
-	}
-
-	return (buf);
-}
-
-char *
-xmemstrdup(const char *buf, size_t len)
-{
-	char	*s;
-
-	s = xmalloc(len + 1);
-	if (len > 0)
-		memcpy(s, buf, len);
-	s[len] = '\0';
-
-	return (s);
-}
-
 char *
 xstrdup(const char *s)
 {

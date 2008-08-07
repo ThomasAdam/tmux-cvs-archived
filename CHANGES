@@ -1,3 +1,7 @@
+07 August 2008
+
+* Lose some unused/useless wrapper functions.
+
 25 July 2008
 
 * Shell variables may now be defined and used in configuration file. Define

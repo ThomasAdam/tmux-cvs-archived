@@ -115,17 +115,6 @@ extern const char    *__progname;
 #define printflike3 __attribute__ ((format (printf, 3, 4)))
 #define printflike4 __attribute__ ((format (printf, 4, 5)))
 
-/* Ensure buffer size. */
-#define ENSURE_SIZE(buf, len, size) do {				\
-	(buf) = ensure_size(buf, &(len), 1, size);			\
-} while (0)
-#define ENSURE_SIZE2(buf, len, nmemb, size) do {			\
-	(buf) = ensure_size(buf, &(len), nmemb, size);			\
-} while (0)
-#define ENSURE_FOR(buf, len, size, adj) do {				\
-	(buf) = ensure_for(buf, &(len), size, adj);			\
-} while (0)
-
 /* Buffer macros. */
 #define BUFFER_USED(b) ((b)->size)
 #define BUFFER_FREE(b) ((b)->space - (b)->off - (b)->size)
@@ -1321,9 +1310,6 @@ __dead void	 log_fatal(const char *, ...);
 __dead void	 log_fatalx(const char *, ...);
 
 /* xmalloc.c */
-void		*ensure_size(void *, size_t *, size_t, size_t);
-void		*ensure_for(void *, size_t *, size_t, size_t);
-char		*xmemstrdup(const char *, size_t);
 char		*xstrdup(const char *);
 void		*xcalloc(size_t, size_t);
 void		*xmalloc(size_t);
