@@ -92,7 +92,7 @@ CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log index.html
 all:		${PROG}
 
 ${PROG}:	${OBJS}
-		${CC} ${LDFLAGS} -o ${PROG} ${LIBS} ${OBJS}
+		${CC} ${LDFLAGS} -o ${PROG} ${OBJS} ${LIBS}
 
 depend:
 		mkdep ${CFLAGS} ${INCDIRS} ${SRCS:M*.c}
