@@ -71,15 +71,13 @@ usage(void)
 void
 logfile(const char *name)
 {
-	FILE	*f;
 	char	*path;
 
 	log_close();
 	if (debug_level > 0) {
 		xasprintf(
 		    &path, "%s-%s-%ld.log", __progname, name, (long) getpid());
-		f = fopen(path, "w");
-		log_open(f, LOG_DAEMON, debug_level);
+		log_open_file(debug_level, path);
 		xfree(path);
 	}
 }
@@ -205,7 +203,7 @@ main(int argc, char **argv)
 	argc -= optind;
 	argv += optind;
 
-	log_open(stderr, LOG_USER, debug_level);
+	log_open_tty(debug_level);
 	siginit();
 
 	options_init(&global_options, NULL);
