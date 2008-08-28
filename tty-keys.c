@@ -17,9 +17,9 @@
  */
 
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include <string.h>
-#include <time.h>
 
 #include "tmux.h"
 
@@ -299,7 +299,7 @@ tty_keys_next(struct tty *tty, int *code)
 {
 	struct tty_key	*tk;
 	size_t		 size;
-	struct timespec	 ts;
+	struct timeval	 tv;
 
 	size = BUFFER_USED(tty->in);
 	if (size == 0)
@@ -324,20 +324,20 @@ tty_keys_next(struct tty *tty, int *code)
 
 	/* Escape but no key string. If the timer isn't started, start it. */ 
 	if (!(tty->flags & TTY_ESCAPE)) {
-		ts.tv_sec = 0;
-		ts.tv_nsec = 500 * 1000000L;
-		if (clock_gettime(CLOCK_REALTIME, &tty->key_timer) != 0)
-			fatal("clock_gettime");
-		timespecadd(&tty->key_timer, &ts, &tty->key_timer);
+		tv.tv_sec = 0;
+		tv.tv_usec = 500 * 1000L;
+		if (gettimeofday(&tty->key_timer, NULL) != 0)
+			fatal("gettimeofday");
+		timeradd(&tty->key_timer, &tv, &tty->key_timer);
 
 		tty->flags |= TTY_ESCAPE;
 		return (1);
 	}
 
 	/* Otherwise, if the timer hasn't expired, wait. */
-	if (clock_gettime(CLOCK_REALTIME, &ts) != 0)
-		fatal("clock_gettime");
-	if (!timespeccmp(&tty->key_timer, &ts, >))
+	if (gettimeofday(&tv, NULL) != 0)
+		fatal("gettimeofday");
+	if (!timercmp(&tty->key_timer, &tv, >))
 		return (1);
 	tty->flags &= ~TTY_ESCAPE;
 

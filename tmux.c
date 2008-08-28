@@ -20,7 +20,6 @@
 #include <sys/wait.h>
 
 #include <errno.h>
-#include <poll.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdlib.h>

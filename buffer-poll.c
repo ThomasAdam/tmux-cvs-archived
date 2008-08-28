@@ -19,7 +19,6 @@
 #include <sys/types.h>
 
 #include <errno.h>
-#include <poll.h>
 #include <unistd.h>
 
 #include "tmux.h"
@@ -45,8 +44,10 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 	    (long) getpid(),
 	    pfd->fd, pfd->revents, BUFFER_USED(out), BUFFER_USED(in));
 
+#ifndef BROKEN_POLL
 	if (pfd->revents & (POLLERR|POLLNVAL|POLLHUP))
 		return (-1);
+#endif
 	if (pfd->revents & POLLIN) {
 		buffer_ensure(in, BUFSIZ);
 		n = read(pfd->fd, BUFFER_IN(in), BUFFER_FREE(in));
