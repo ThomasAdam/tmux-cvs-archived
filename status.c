@@ -25,7 +25,7 @@
 #include "tmux.h"
 
 size_t	status_width(struct winlink *);
-char   *status_print(struct session *, struct winlink *, u_char *);
+char   *status_print(struct session *, struct winlink *, u_short *);
 
 /* Draw status for client on the last lines of given context. */
 void
@@ -38,7 +38,8 @@ status_redraw(struct client *c)
 	char				lbuf[BUFSIZ], rbuf[BUFSIZ];
 	size_t				llen, rlen, offset, xx, yy;
 	size_t				size, start, width;
-	u_char		 		attr, fg, bg;
+	u_short		 		attr;
+	u_char				fg, bg;
 	struct tm		       *tm;
 	time_t				t;
 	int				larrow, rarrow;
@@ -275,7 +276,7 @@ status_width(struct winlink *wl)
 }
 
 char *
-status_print(struct session *s, struct winlink *wl, u_char *attr)
+status_print(struct session *s, struct winlink *wl, u_short *attr)
 {
 	char   *text, flag;
 

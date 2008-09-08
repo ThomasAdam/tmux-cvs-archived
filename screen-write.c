@@ -172,7 +172,7 @@ screen_write_put_string(struct screen_write_ctx *ctx, const char *fmt, ...)
 /* Set screen attributes. */
 void
 screen_write_set_attributes(
-    struct screen_write_ctx *ctx, u_char attr, u_char fg, u_char bg)
+    struct screen_write_ctx *ctx, u_short attr, u_char fg, u_char bg)
 {
 	struct screen	*s = ctx->s;
 
