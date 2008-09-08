@@ -648,7 +648,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char fg, u_char bg)
 		} else {
 			if (fg > 7)
 				fg = 8;
-			if (fg == 8 && tty->term->flags & TERM_HASDEFAULTS)
+			if (fg == 8 && !(tty->term->flags & TERM_HASDEFAULTS))
 				fg = 7;
 			if (fg == 8)
 				tty_puts(tty, "\033[39m");
@@ -664,7 +664,7 @@ tty_attributes(struct tty *tty, u_char attr, u_char fg, u_char bg)
 		} else {
 			if (bg > 7)
 				bg = 8;
-			if (bg == 8 && tty->term->flags & TERM_HASDEFAULTS)
+			if (bg == 8 && !(tty->term->flags & TERM_HASDEFAULTS))
 				bg = 0;
 			if (bg == 8)
 				tty_puts(tty, "\033[49m");
