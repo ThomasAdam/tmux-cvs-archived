@@ -344,8 +344,8 @@ server_check_redraw(struct client *c)
 			if (sx < xx)
 				screen_redraw_columns(&ctx, sx, xx - sx);
 			if (sy < yy)  {
-				screen_fill_area(&screen,
-				    0, sy, xx, 1, '-', 0, 0x88);
+				screen_fill_area(
+				    &screen, 0, sy, xx, 1, '-', 0, 8, 8);
 				screen_redraw_lines(&ctx, sy, yy - sy);
 			}
 			screen_redraw_stop(&ctx);

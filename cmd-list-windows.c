@@ -63,7 +63,8 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 			size += w->base.grid_size[i] * 3;
 		size += w->base.hsize * (sizeof *w->base.grid_data);
 		size += w->base.hsize * (sizeof *w->base.grid_attr);
-		size += w->base.hsize * (sizeof *w->base.grid_colr);
+		size += w->base.hsize * (sizeof *w->base.grid_fg);
+		size += w->base.hsize * (sizeof *w->base.grid_bg);
 		size += w->base.hsize * (sizeof *w->base.grid_size);
 
 		if (w->fd != -1)

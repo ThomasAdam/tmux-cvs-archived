@@ -169,14 +169,14 @@ window_more_write_line(struct window *w, struct screen_write_ctx *ctx, u_int py)
 
 	if (py == 0) {
 		screen_write_set_attributes(
-		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x88);
+		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 8, 8);
 		screen_write_move_cursor(ctx, 0, 0);
 		size = screen_write_put_string_rjust(
 		    ctx, "[%u/%u]", data->top, ARRAY_LENGTH(&data->list));
 	} else
 		size = 0;
 
-	screen_write_set_attributes(ctx, 0, 0x88);
+	screen_write_set_attributes(ctx, 0, 8, 8);
 	screen_write_move_cursor(ctx, 0, py);
 	if (data->top + py  < ARRAY_LENGTH(&data->list)) {
 		msg = ARRAY_ITEM(&data->list, data->top + py);

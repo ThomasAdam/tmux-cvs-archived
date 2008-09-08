@@ -211,11 +211,11 @@ window_copy_write_line(
 
 	if (py == 0) {
 		screen_write_set_attributes(
-		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 0x88);
+		    ctx, ATTR_BRIGHT|ATTR_REVERSE, 8, 8);
 		screen_write_move_cursor(ctx, 0, 0);
 		size = screen_write_put_string_rjust(
 		    ctx, "[%u,%u/%u]", data->ox, data->oy, w->base.hsize);
-		screen_write_set_attributes(ctx, 0, 0x88);
+		screen_write_set_attributes(ctx, 0, 8, 8);
 	} else
 		size = 0;
 	screen_write_move_cursor(ctx, 0, py);
