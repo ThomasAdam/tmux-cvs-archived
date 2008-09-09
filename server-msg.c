@@ -187,6 +187,8 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 
 	data.tty[(sizeof data.tty) - 1] = '\0';
 	tty_init(&c->tty, data.tty, xstrdup(term));
+	if (data.flags & IDENTIFY_UTF8)
+		c->tty.flags |= TTY_UTF8;
 	xfree(term);
 
 	c->flags |= CLIENT_TERMINAL;

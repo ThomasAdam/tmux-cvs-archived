@@ -34,7 +34,8 @@
 void	client_handle_winch(struct client_ctx *);
 
 int
-client_init(const char *path, struct client_ctx *cctx, int start_server)
+client_init(
+    const char *path, struct client_ctx *cctx, int start_server, int flags)
 {
 	struct sockaddr_un		sa;
 	struct stat			sb;
@@ -94,6 +95,7 @@ retry:
 		if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
 			fatal("ioctl(TIOCGWINSZ)");
 		data.version = PROTOCOL_VERSION;
+		data.flags = flags;
 		data.sx = ws.ws_col;
 		data.sy = ws.ws_row;
 		*data.tty = '\0';

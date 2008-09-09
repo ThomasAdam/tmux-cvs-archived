@@ -155,6 +155,8 @@ screen_create(struct screen *s, u_int dx, u_int dy, u_int hlimit)
 	s->grid_size = xmalloc(dy * (sizeof *s->grid_size));
 	screen_make_lines(s, 0, dy);
 
+	utf8_init(&s->utf8_table, UTF8_LIMIT);
+
 	screen_clear_selection(s);
 }
 
@@ -348,6 +350,7 @@ screen_set_cell(struct screen *s,
 void
 screen_destroy(struct screen *s)
 {
+	utf8_free(&s->utf8_table);
 	xfree(s->title);
 	screen_free_lines(s, 0, s->dy + s->hsize);
 	xfree(s->grid_data);

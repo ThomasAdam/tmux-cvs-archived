@@ -31,7 +31,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       cmd-list-commands.c cmd-move-window.c cmd-select-prompt.c \
       cmd-respawn-window.c \
       window-scroll.c window-more.c window-copy.c options.c paste.c \
-      tty.c tty-keys.c tty-write.c screen-write.c screen-redraw.c
+      tty.c tty-keys.c tty-write.c screen-write.c screen-redraw.c utf8.c
 
 CC?= gcc
 INCDIRS+= -I. -I-

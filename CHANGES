@@ -1,3 +1,8 @@
+09 September 2008
+
+* Initial UTF-8 support. A bit ugly and with a limit of 4096 UTF-8
+  characters per window.
+
 08 September 2008
 
 * 256 colour support. tmux attempts to autodetect the terminal by looking

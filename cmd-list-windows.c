@@ -72,10 +72,12 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 		else
 			name = "";
 		ctx->print(ctx,
-		    "%d: %s \"%s\" (%s) [%ux%u] [history %u/%u, %llu bytes]",
+		    "%d: %s \"%s\" (%s) [%ux%u] [history %u/%u, %llu bytes] "
+		    "[UTF8 table %u/%u]",
 		    wl->idx, w->name, w->base.title, name,
 		    screen_size_x(&w->base), screen_size_y(&w->base),
-		    w->base.hsize, w->base.hlimit, size);
+		    w->base.hsize, w->base.hlimit, size,
+		    ARRAY_LENGTH(&w->base.utf8_table.array), UTF8_LIMIT);
 	}
 
 	if (ctx->cmdclient != NULL)
