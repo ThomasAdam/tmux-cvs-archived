@@ -92,7 +92,7 @@ window_more_init(struct window *w)
 	data->top = 0;
 
 	s = &data->screen;
-	screen_create(s, screen_size_x(&w->base), screen_size_y(&w->base), 0);
+	screen_init(s, screen_size_x(&w->base), screen_size_y(&w->base), 0);
 	s->mode &= ~MODE_CURSOR;
 
 	return (s);
@@ -108,7 +108,7 @@ window_more_free(struct window *w)
 		xfree(ARRAY_ITEM(&data->list, i));
 	ARRAY_FREE(&data->list);
 
-	screen_destroy(&data->screen);
+	screen_free(&data->screen);
 	xfree(data);
 }
 

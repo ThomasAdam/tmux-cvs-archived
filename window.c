@@ -182,7 +182,7 @@ window_create(const char *name,
 	w->flags = 0;
 
 	w->limitx = w->limity = UINT_MAX;
-	screen_create(&w->base, sx, sy, hlimit);
+	screen_init(&w->base, sx, sy, hlimit);
 	w->screen = &w->base;
 
 	input_init(w);
@@ -282,7 +282,7 @@ window_destroy(struct window *w)
 	input_free(w);
 
 	window_reset_mode(w);
-	screen_destroy(&w->base);
+	screen_free(&w->base);
 
 	buffer_destroy(w->in);
 	buffer_destroy(w->out);

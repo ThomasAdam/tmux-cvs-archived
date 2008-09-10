@@ -68,7 +68,7 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		ctx->error(ctx, "respawn failed: %s:%d", s->name, wl->idx);
 		return;
 	}
-	screen_reset(&wl->window->base);
+	screen_reinit(&wl->window->base);
 
 	recalculate_sizes();
 	server_redraw_window(wl->window);

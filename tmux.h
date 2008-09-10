@@ -1255,9 +1255,9 @@ void	screen_redraw_lines(struct screen_redraw_ctx *, u_int, u_int);
 void	screen_redraw_columns(struct screen_redraw_ctx *, u_int, u_int);
 
 /* screen.c */
-void	 screen_create(struct screen *, u_int, u_int, u_int);
-void	 screen_reset(struct screen *);
-void	 screen_destroy(struct screen *);
+void	 screen_init(struct screen *, u_int, u_int, u_int);
+void	 screen_reinit(struct screen *);
+void	 screen_free(struct screen *);
 void	 screen_resize(struct screen *, u_int, u_int);
 void	 screen_expand_line(struct screen *, u_int, u_int);
 void	 screen_reduce_line(struct screen *, u_int, u_int);

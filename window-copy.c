@@ -97,7 +97,7 @@ window_copy_init(struct window *w)
 	data->cy = w->base.cy;
 
 	s = &data->screen;
-	screen_create(s, screen_size_x(&w->base), screen_size_y(&w->base), 0);
+	screen_init(s, screen_size_x(&w->base), screen_size_y(&w->base), 0);
 	s->cx = data->cx;
 	s->cy = data->cy;
 
@@ -115,7 +115,7 @@ window_copy_free(struct window *w)
 {
 	struct window_copy_mode_data	*data = w->modedata;
 
-	screen_destroy(&data->screen);
+	screen_free(&data->screen);
 	xfree(data);
 }
 
