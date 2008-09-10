@@ -135,7 +135,7 @@ cmd_show_options_exec(struct cmd *self, struct cmd_ctx *ctx)
 		case SET_OPTION_COLOUR:
 			vn = options_get_number(oo, entry->name);
  			ctx->print(ctx, "%s %s",
-			    entry->name, screen_colourstring(vn));
+			    entry->name, colour_tostring(vn));
 			break;
 		case SET_OPTION_FLAG:
 			vn = options_get_number(oo, entry->name);

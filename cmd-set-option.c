@@ -271,7 +271,7 @@ set_option_colour(struct cmd_ctx *ctx, struct options *oo,
 		return;
 	}
 	
-	if ((colour = screen_stringcolour(value)) > 8) {
+	if ((colour = colour_fromstring(value)) > 8) {
 		ctx->error(ctx, "bad colour: %s", value);
 		return;
 	}
