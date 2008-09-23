@@ -394,6 +394,8 @@ tty_puts(struct tty *tty, const char *s)
 	const char	*t;
 
 	t = tty_strip(s);
+	if (*t == '\0')
+		return;
 	buffer_write(tty->out, t, strlen(t));
 
 	if (tty->log_fd != -1)
