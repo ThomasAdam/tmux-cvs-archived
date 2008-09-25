@@ -57,7 +57,7 @@ cmd_unbind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 
 	self->data = data = xmalloc(sizeof *data);
 
-	while ((opt = getopt(argc, argv, "")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "")) != EOF) {
 		switch (opt) {
 		default:
 			goto usage;

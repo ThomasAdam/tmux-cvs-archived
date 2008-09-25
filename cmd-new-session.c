@@ -75,7 +75,7 @@ cmd_new_session_parse(struct cmd *self, int argc, char **argv, char **cause)
 	self->entry->init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, "ds:n:")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "ds:n:")) != EOF) {
 		switch (opt) {
 		case 'd':
 			data->flag_detached = 1;

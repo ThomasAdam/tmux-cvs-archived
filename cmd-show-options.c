@@ -67,7 +67,7 @@ cmd_show_options_parse(struct cmd *self, int argc, char **argv, char **cause)
 	data->target = NULL;
 	data->flag_global = 1;
 
-	while ((opt = getopt(argc, argv, "t:s:")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "t:s:")) != EOF) {
 		switch (opt) {
 		case 't':
 			if (data->target == NULL)

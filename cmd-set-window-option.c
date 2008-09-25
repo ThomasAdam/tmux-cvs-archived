@@ -66,7 +66,7 @@ cmd_set_window_option_parse(
 	data->option = NULL;
 	data->value = NULL;
 
-	while ((opt = getopt(argc, argv, "t:")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "t:")) != EOF) {
 		switch (opt) {
 		case 't':
 			if (data->target == NULL)

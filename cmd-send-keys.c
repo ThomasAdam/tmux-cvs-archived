@@ -67,7 +67,7 @@ cmd_send_keys_parse(struct cmd *self, int argc, char **argv, char **cause)
 	data->nkeys = 0;
 	data->keys = NULL;
 
-	while ((opt = getopt(argc, argv, "t:")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "t:")) != EOF) {
 		switch (opt) {
 		case 't':
 			if (data->target == NULL)

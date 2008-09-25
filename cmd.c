@@ -162,7 +162,7 @@ cmd_parse(int argc, char **argv, char **cause)
 
 	optind = 1;
 	if (entry->parse == NULL) {
-		while ((opt = getopt(argc, argv, "")) != EOF) {
+		while ((opt = getopt(argc, argv, GETOPT_PREFIX "")) != EOF) {
 			switch (opt) {
 			default:
 				goto usage;

@@ -104,7 +104,7 @@ cmd_set_option_parse(struct cmd *self, int argc, char **argv, char **cause)
 	data->option = NULL;
 	data->value = NULL;
 
-	while ((opt = getopt(argc, argv, "t:s:")) != EOF) {
+	while ((opt = getopt(argc, argv, GETOPT_PREFIX "t:s:")) != EOF) {
 		switch (opt) {
 		case 't':
 			if (data->target == NULL)

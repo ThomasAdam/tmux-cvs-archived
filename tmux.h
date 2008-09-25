@@ -58,6 +58,10 @@
 
 extern const char    *__progname;
 
+#ifndef GETOPT_PREFIX
+#define GETOPT_PREFIX ""
+#endif
+
 #ifndef INFTIM
 #define INFTIM -1
 #endif
