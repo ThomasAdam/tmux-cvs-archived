@@ -12,7 +12,9 @@ DATE= $(shell date +%Y%m%d-%H%M)
 META?= \002
 
 SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
-      xmalloc.c xmalloc-debug.c input.c input-keys.c screen.c screen-display.c \
+      xmalloc.c xmalloc-debug.c input.c input-keys.c \
+      screen.c screen-write.c screen-redraw.c \
+      grid.c grid-view.c \
       window.c session.c log.c client.c client-msg.c client-fn.c cfg.c \
       key-string.c key-bindings.c resize.c arg.c mode-key.c \
       cmd.c cmd-generic.c cmd-string.c \
@@ -31,7 +33,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       cmd-list-commands.c cmd-move-window.c cmd-select-prompt.c \
       cmd-respawn-window.c \
       window-scroll.c window-more.c window-copy.c options.c paste.c \
-      tty.c tty-keys.c tty-write.c screen-write.c screen-redraw.c utf8.c
+      tty.c tty-keys.c tty-write.c colour.c utf8.c
 
 CC?= gcc
 INCDIRS+= -I. -I-
