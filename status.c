@@ -21,6 +21,7 @@
 
 #include <stdarg.h>
 #include <string.h>
+#include <time.h>
 
 #include "tmux.h"
 
