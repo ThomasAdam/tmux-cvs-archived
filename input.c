@@ -657,6 +657,9 @@ input_handle_standard_two(u_char ch, struct input_ctx *ictx)
 		ictx->saved_cx = 0;
 		ictx->saved_cy = 0;
 
+		screen_write_scrollregion(
+		    &ictx->ctx, 0, screen_size_y(ictx->ctx.s) - 1);
+
 		screen_write_insertmode(&ictx->ctx, 0);
 		screen_write_kcursormode(&ictx->ctx, 0);
 		screen_write_kkeypadmode(&ictx->ctx, 0);
