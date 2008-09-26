@@ -61,8 +61,8 @@ const char      *__progname = "tmux";
 __dead void
 usage(void)
 {
-	fprintf(stderr,
-	    "usage: %s [-2dquVv] [-f file] [-S socket-path] [command [flags]]\n",
+	fprintf(stderr, "usage: "
+	    "%s [-2dquVv] [-f file] [-S socket-path] [command [flags]]\n",
 	    __progname);
 	exit(1);
 }

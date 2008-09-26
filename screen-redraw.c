@@ -132,7 +132,7 @@ screen_redraw_cell(struct screen_redraw_ctx *ctx, u_int px, u_int py)
 		ctx->write(ctx->data, TTY_CURSORMOVE, ctx->s->cx, ctx->s->cy);
 	}
 
-	gc = grid_view_peek_cell(ctx->s->grid, px, py); 
+	gc = grid_view_peek_cell(ctx->s->grid, px, py);
         if (screen_check_selection(ctx->s, px, py)) {
 		memcpy(&hc, gc, sizeof hc);
 		hc.attr |= GRID_ATTR_REVERSE;

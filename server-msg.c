@@ -172,7 +172,7 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 	buffer_read(c->in, &data, sizeof data);
 	term = cmd_recv_string(c->in);
 
-	log_debug("identify msg from client: %u,%u (%d)", 
+	log_debug("identify msg from client: %u,%u (%d)",
 	    data.sx, data.sy, data.version);
 
 	if (data.version != PROTOCOL_VERSION) {

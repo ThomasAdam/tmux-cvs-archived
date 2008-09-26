@@ -51,8 +51,8 @@ screen_reinit(struct screen *s)
 	/* XXX */
 	grid_clear_lines(
 	    s->grid, s->grid->hsize, s->grid->hsize + s->grid->sy - 1);
-	
-	screen_clear_selection(s);	
+
+	screen_clear_selection(s);
 }
 
 /* Destroy a screen. */
@@ -150,7 +150,7 @@ screen_resize_y(struct screen *s, u_int sy)
 		}
 
 		if (sy < oy) {
-			/* Remove any remaining lines from the bottom. */	
+			/* Remove any remaining lines from the bottom. */
 			grid_view_delete_lines(gd, sy, oy - sy);
 			if (s->cy >= sy)
 				s->cy = sy - 1;
@@ -171,7 +171,7 @@ screen_resize_y(struct screen *s, u_int sy)
 	}
 
 	gd->sy = sy;
-		
+
 	s->rupper = 0;
 	s->rlower = screen_size_y(s) - 1;
 }

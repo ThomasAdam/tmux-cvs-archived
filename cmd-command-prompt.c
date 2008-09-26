@@ -82,7 +82,7 @@ cmd_command_prompt_callback(void *data, char *s)
 	}
 	if (cmd == NULL)
 		return;
-	
+
 	ctx.msgdata = NULL;
 	ctx.cursession = c->session;
 	ctx.curclient = c;

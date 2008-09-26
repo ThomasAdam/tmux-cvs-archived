@@ -261,7 +261,7 @@ window_spawn(struct window *w, const char *cmd, const char **envp)
 		fatal("fcntl failed");
 	if (fcntl(w->fd, F_SETFD, FD_CLOEXEC) == -1)
 		fatal("fcntl failed");
-	
+
 	return (0);
 }
 

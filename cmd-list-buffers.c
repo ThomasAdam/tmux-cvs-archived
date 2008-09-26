@@ -61,7 +61,7 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 		size = 0;
 		tmp = NULL;
 	}
-	
+
 	idx = 0;
 	while ((pb = paste_walk_stack(&s->buffers, &idx)) != NULL) {
 		if (tmp != NULL) {

@@ -206,7 +206,7 @@ session_new(struct session *s, const char *name, const char *cmd, int idx)
 
 	if (options_get_number(&s->options, "remain-by-default"))
 		w->flags |= WINDOW_ZOMBIFY;
-	
+
 	return (session_attach(s, w, idx));
 }
 

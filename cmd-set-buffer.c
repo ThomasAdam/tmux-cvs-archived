@@ -59,7 +59,7 @@ cmd_set_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		if (paste_replace(&s->buffers, data->buffer, data->arg) != 0)
 			ctx->error(ctx, "no buffer %d", data->buffer);
 	}
-	
+
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

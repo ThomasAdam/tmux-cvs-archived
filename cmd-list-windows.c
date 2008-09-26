@@ -65,7 +65,7 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 			size += gd->size[i] * sizeof **gd->data;
 		size += gd->hsize * (sizeof *gd->data);
 		size += gd->hsize * (sizeof *gd->size);
-		
+
 		if (w->fd != -1)
 			name = ttyname(w->fd);
 		else

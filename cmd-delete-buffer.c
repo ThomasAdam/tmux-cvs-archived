@@ -57,7 +57,7 @@ cmd_delete_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		if (paste_free_index(&s->buffers, data->buffer) != 0)
 			ctx->error(ctx, "no buffer %d", data->buffer);
 	}
-	
+
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

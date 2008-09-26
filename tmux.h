@@ -433,12 +433,12 @@ struct grid_cell {
 	u_char	fg;
 	u_char	bg;
 } __packed;
-	
+
 /* Grid data. */
 struct grid_data {
 	u_int	sx;
 	u_int	sy;
-	
+
 	u_int	hsize;
 	u_int	hlimit;
 
@@ -824,7 +824,7 @@ struct set_option_entry {
 	enum {
 		SET_OPTION_STRING,
 		SET_OPTION_NUMBER,
-		SET_OPTION_KEY,		
+		SET_OPTION_KEY,
 		SET_OPTION_COLOUR,
 		SET_OPTION_FLAG,
 		SET_OPTION_CHOICE
@@ -832,7 +832,7 @@ struct set_option_entry {
 
 	u_int		 minimum;
 	u_int		 maximum;
-	
+
 	const char     **choices;
 };
 extern const struct set_option_entry set_option_table[];

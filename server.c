@@ -389,7 +389,7 @@ server_check_timers(struct client *c)
 
 	if (gettimeofday(&tv, NULL) != 0)
 		fatal("gettimeofday");
-	
+
 	if (c->message_string != NULL && timercmp(&tv, &c->message_timer, >))
 		server_clear_client_message(c);
 

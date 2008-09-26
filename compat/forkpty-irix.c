@@ -50,7 +50,7 @@ forkpty(int *master,
 		close(*master);
 
 		setsid();
-		
+
 		old = signal(SIGHUP, SIG_IGN);
 		vhangup();
 		signal(SIGHUP, old);

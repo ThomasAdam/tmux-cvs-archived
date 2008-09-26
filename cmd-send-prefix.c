@@ -49,7 +49,7 @@ cmd_send_prefix_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
 		return;
-	
+
 	key = options_get_number(&s->options, "prefix");
 	window_key(wl->window, ctx->curclient, key);
 
