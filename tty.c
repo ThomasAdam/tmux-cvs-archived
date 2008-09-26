@@ -801,7 +801,8 @@ tty_cmd_clearendofscreen(struct tty *tty, struct screen *s, unused va_list ap)
 	if (clr_eol != NULL) {
 		for (i = s->cy; i < screen_size_y(s); i++) {
 			tty_puts(tty, clr_eol);
-			tty_puts(tty, cursor_down);
+			if (i != screen_size_y(s) - 1)
+				tty_puts(tty, cursor_down);
 		}
 	} else {
 		for (i = s->cx; i < screen_size_y(s); i++)
@@ -848,7 +849,8 @@ tty_cmd_clearscreen(struct tty *tty, struct screen *s, unused va_list ap)
 		tty_puts(tty, tparm(cursor_address, 0, 0));
 		for (i = 0; i < screen_size_y(s); i++) {
 			tty_puts(tty, clr_eol);
-			tty_puts(tty, cursor_down);
+			if (i != screen_size_y(s) - 1)
+				tty_puts(tty, cursor_down);
 		}
 	} else {
  		tty_puts(tty, tparm(cursor_address, 0, 0));
