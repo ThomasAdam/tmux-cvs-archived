@@ -177,6 +177,7 @@ grid_view_insert_cells(struct grid_data *gd, u_int px, u_int py, u_int nx)
 	GRID_DEBUG(gd, "px=%u, py=%u, nx=%u", px, py, nx);
 
 	px = grid_view_x(gd, px);
+	py = grid_view_y(gd, py);
 
 	sx = grid_view_x(gd, gd->sx);
 
@@ -192,6 +193,7 @@ grid_view_delete_cells(struct grid_data *gd, u_int px, u_int py, u_int nx)
 	GRID_DEBUG(gd, "px=%u, py=%u, nx=%u", px, py, nx);
 
 	px = grid_view_x(gd, px);
+	py = grid_view_y(gd, py);
 
 	sx = grid_view_x(gd, gd->sx);
 
