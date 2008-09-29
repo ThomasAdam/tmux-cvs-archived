@@ -108,6 +108,7 @@ screen_resize_x(struct screen *s, u_int sx)
 		 * If the character after the last is wide or padding, remove
 		 * it and any leading padding.
 		 */
+		gc = &grid_default_cell;
 		for (xx = sx; xx > 0; xx--) {
 			gc = grid_peek_cell(gd, xx - 1, yy);
 			if (!(gc->flags & GRID_FLAG_PADDING))
