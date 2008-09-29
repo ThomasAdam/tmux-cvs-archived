@@ -93,6 +93,9 @@ screen_resize_x(struct screen *s, u_int sx)
 	const struct grid_cell	*gc;
 	u_int			 xx, yy;
 
+	if (sx == 0)
+		fatalx("zero size");
+
 	/* If getting larger, not much to do. */
 	if (sx > screen_size_x(s)) {
 		gd->sx = sx;
@@ -128,6 +131,9 @@ screen_resize_y(struct screen *s, u_int sy)
 {
 	struct grid_data	*gd = s->grid;
 	u_int			 oy, yy, ny;
+
+	if (sy == 0)
+		fatalx("zero size");
 
 	/* Size decreasing. */
 	if (sy < screen_size_y(s)) {
