@@ -380,7 +380,7 @@ void
 server_check_timers(struct client *c)
 {
 	struct session	*s;
-	struct timeval	 tv, tv2;
+	struct timeval	 tv;
 	u_int		 interval;
 
 	if (c == NULL || c->session == NULL)
@@ -399,9 +399,8 @@ server_check_timers(struct client *c)
 	if (interval == 0)
 		return;
 
-	memcpy(&tv2, &tv, sizeof tv2);
-	tv2.tv_sec -= interval;
-	if (timercmp(&c->status_timer, &tv2, <))
+	tv.tv_sec -= interval;
+	if (timercmp(&c->status_timer, &tv, <))
 		c->flags |= CLIENT_STATUS;
 }
 
