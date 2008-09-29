@@ -70,6 +70,9 @@ cmd_select_prompt_callback(void *data, char *s)
 	char		 msg[128];
 	u_int		 idx;
 
+	if (s == NULL)
+		return;
+
 	idx = strtonum(s, 0, UINT_MAX, &errstr);
 	if (errstr != NULL) {
 		xsnprintf(msg, sizeof msg, "Index %s: %s", errstr, s);
