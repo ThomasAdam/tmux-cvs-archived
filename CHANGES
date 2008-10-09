@@ -1,5 +1,6 @@
 09 October 2008
 
+* Translate 256 colours into 16 if 256 is not available, same as screen does.
 * Better support for OSC command (only to set window title now), and also
   support using APC for the same purpose (some Linux default shell profiles do
   this).

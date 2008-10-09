@@ -1136,6 +1136,7 @@ void	 input_key(struct window *, int);
 /* colour.c */
 const char *colour_tostring(u_char);
 u_char	 colour_fromstring(const char *);
+u_char	 colour_translate256(u_char);
 
 /* grid.c */
 extern const struct grid_cell grid_default_cell;

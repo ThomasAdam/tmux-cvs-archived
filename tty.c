@@ -980,11 +980,14 @@ tty_attributes_fg(struct tty *tty, const struct grid_cell *gc)
 			tty_puts(tty, s);
 			return;
 		}
-
-		if (fg > 15)
-			fg = 8;
-		else if (fg > 7)
-			fg -= 8;
+		fg = colour_translate256(fg);
+		if (fg & 8) {
+			fg &= 7;
+			if (enter_bold_mode != NULL)
+				tty_puts(tty, enter_bold_mode);
+			tty->cell.attr |= GRID_ATTR_BRIGHT;
+		} else if (tty->cell.attr & GRID_ATTR_BRIGHT)
+			tty_reset(tty);
 	}
 
 	if (fg == 8 &&
@@ -1010,11 +1013,16 @@ tty_attributes_bg(struct tty *tty, const struct grid_cell *gc)
 			tty_puts(tty, s);
 			return;
 		}
-
-		if (bg > 15)
-			bg = 8;
-		else if (bg > 7)
-			bg -= 8;
+		bg = colour_translate256(bg);
+		if (bg & 8) {
+			/*
+			 * Bold background; not sure how widely this is 
+			 * supported...
+			 */
+			xsnprintf(s, sizeof s, "\033[%hhum", 92 + bg);
+			tty_puts(tty, s);
+			return;			
+		}
 	}
 
 	if (bg == 8 &&
