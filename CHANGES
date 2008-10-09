@@ -1,3 +1,9 @@
+09 October 2008
+
+* Better support for OSC command (only to set window title now), and also
+  support using APC for the same purpose (some Linux default shell profiles do
+  this).
+
 25 September 2008
 
 * Large internal rewrite to better support 256 colours and UTF-8. Screen data

@@ -524,9 +524,9 @@ struct input_ctx {
 	u_char		*string_buf;
 	size_t		 string_len;
 	int		 string_type;
-#define STRING_TITLE 0
-#define STRING_NAME 1
-#define STRING_IGNORE 2
+#define STRING_SYSTEM 0
+#define STRING_APPLICATION 1
+#define STRING_NAME 2
 
 	u_char		 utf8_buf[4];
 	u_int		 utf8_len;
