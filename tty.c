@@ -1016,12 +1016,15 @@ tty_attributes_bg(struct tty *tty, const struct grid_cell *gc)
 		bg = colour_translate256(bg);
 		if (bg & 8) {
 			/*
-			 * Bold background; not sure how widely this is 
-			 * supported...
+			 * Bold background; can't do this on standard
+			 * terminals...
 			 */
+#if 0
 			xsnprintf(s, sizeof s, "\033[%hhum", 92 + bg);
 			tty_puts(tty, s);
 			return;			
+#endif 		       
+			bg &= 7;
 		}
 	}
 
