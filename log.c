@@ -65,7 +65,7 @@ log_open_tty(int level)
 	tzset();
 }
 
-/* Open logging to tty. */
+/* Open logging to file. */
 void
 log_open_file(int level, const char *path)
 {

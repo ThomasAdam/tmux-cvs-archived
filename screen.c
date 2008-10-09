@@ -48,9 +48,7 @@ screen_reinit(struct screen *s)
 
 	s->mode = MODE_CURSOR;
 
-	/* XXX */
-	grid_clear_lines(
-	    s->grid, s->grid->hsize, s->grid->hsize + s->grid->sy - 1);
+	grid_clear_lines(s->grid, s->grid->hsize, s->grid->sy - 1);
 
 	screen_clear_selection(s);
 }
