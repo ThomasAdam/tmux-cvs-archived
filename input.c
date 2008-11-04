@@ -604,9 +604,11 @@ input_handle_private_two(u_char ch, struct input_ctx *ictx)
 	log_debug2("-- p2 %zu: %hhu (%c)", ictx->off, ch, ch);
 
 	switch (ch) {
+#if 0
 	case '0':	/* Don't know? */
 		ictx->cell.attr |= GRID_ATTR_CHARSET;
 		break;
+#endif
 	case '=':	/* DECKPAM */
 		screen_write_kkeypadmode(&ictx->ctx, 1);
 		log_debug("kkeypad on (application mode)");
@@ -637,9 +639,11 @@ input_handle_standard_two(u_char ch, struct input_ctx *ictx)
 	log_debug2("-- s2 %zu: %hhu (%c)", ictx->off, ch, ch);
 
 	switch (ch) {
+#if 0
 	case 'B':	/* Don't know? */
 		ictx->cell.attr &= ~GRID_ATTR_CHARSET;
 		break;
+#endif
 	case 'c':	/* RIS */
 		memcpy(&ictx->cell, &grid_default_cell, sizeof ictx->cell);
 
