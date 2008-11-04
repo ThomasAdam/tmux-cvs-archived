@@ -532,6 +532,7 @@ struct input_ctx {
 	u_int		 utf8_len;
 	u_int		 utf8_off;
 
+	u_char		 intermediate;
 	void 		*(*state)(u_char, struct input_ctx *);
 
 	u_char		 private;
