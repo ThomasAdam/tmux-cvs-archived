@@ -138,7 +138,7 @@ screen_write_cursorup(struct screen_write_ctx *ctx, u_int ny)
 
 	s->cy -= ny;
 
-	if (ctx != NULL)
+	if (ctx->write != NULL)
 		ctx->write(ctx->data, TTY_CURSORUP, ny);
 }
 
