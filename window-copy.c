@@ -276,7 +276,7 @@ window_copy_redraw_screen(struct window *w)
 {
 	struct window_copy_mode_data	*data = w->modedata;
 
-	window_copy_redraw_lines(w, 0, screen_size_x(&data->screen));
+	window_copy_redraw_lines(w, 0, screen_size_y(&data->screen));
 }
 
 void
