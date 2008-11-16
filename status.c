@@ -277,7 +277,7 @@ status_print(struct session *s, struct winlink *wl, struct grid_cell *gc)
 	char   *text, flag;
 
 	flag = ' ';
- 	if (wl == s->lastw)
+ 	if (wl == SLIST_FIRST(&s->lastw))
 		flag = '-';
 	if (wl == s->curw)
 		flag = '*';

@@ -79,6 +79,7 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 			 * if this makes it empty.
 			 */
 			session_alert_cancel(dst, wl_dst);
+			winlink_stack_remove(&dst->lastw, wl_dst);
 			winlink_remove(&dst->windows, wl_dst);
 
 			/* Force select/redraw if current. */
@@ -86,8 +87,6 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 				data->flags &= ~CMD_DFLAG;
 				dst->curw = NULL;
 			}
-			if (wl_dst == dst->lastw)
-				dst->lastw = NULL;
 		}
 	}
 

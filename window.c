@@ -164,6 +164,32 @@ winlink_previous(unused struct winlinks *wwl, struct winlink *wl)
 #endif
 }
 
+void
+winlink_stack_push(struct winlink_stack *stack, struct winlink *wl)
+{
+	if (wl == NULL)
+		return;
+
+	winlink_stack_remove(stack, wl);
+	SLIST_INSERT_HEAD(stack, wl, sentry);
+}
+
+void
+winlink_stack_remove(struct winlink_stack *stack, struct winlink *wl)
+{
+	struct winlink	*wl2;
+
+	if (wl == NULL)
+		return;
+
+	SLIST_FOREACH(wl2, stack, sentry) {
+		if (wl2 == wl) {
+			SLIST_REMOVE(stack, wl, winlink, sentry);
+			return;
+		}
+	}
+}
+
 struct window *
 window_create(const char *name,
     const char *cmd, const char **envp, u_int sx, u_int sy, u_int hlimit)
