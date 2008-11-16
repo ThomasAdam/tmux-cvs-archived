@@ -888,7 +888,7 @@ tty_cmd_cell(struct tty *tty, unused struct screen *s, va_list ap)
 	tty_attributes(tty, gc);
 
 	/* If not UTF8 multibyte, write directly. */
-	if (gc->data < 0xff) {
+	if (gc->data <= 0xff) {
 		tty_putc(tty, gc->data);
 		return;
 	}

@@ -510,7 +510,7 @@ input_state_utf8(u_char ch, struct input_ctx *ictx)
 void
 input_handle_character(u_char ch, struct input_ctx *ictx)
 {
-	if (ch > 0x7f) {
+	if (ictx->w->flags & WINDOW_UTF8 && ch > 0x7f) {
 		/*
 		 * UTF-8 sequence.
 		 *

@@ -62,6 +62,8 @@ cmd_show_window_options_exec(struct cmd *self, struct cmd_ctx *ctx)
 		ctx->print(ctx, "monitor-activity");
 	if (wl->window->flags & WINDOW_ZOMBIFY)
 		ctx->print(ctx, "remain-on-exit");
+	if (wl->window->flags & WINDOW_UTF8)
+		ctx->print(ctx, "utf8");
 
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);

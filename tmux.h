@@ -569,6 +569,7 @@ struct window {
 #define WINDOW_MONITOR 0x8
 #define WINDOW_AGGRESSIVE 0x10
 #define WINDOW_ZOMBIFY 0x20
+#define WINDOW_UTF8 0x40
 
 	u_int		 limitx;
 	u_int		 limity;

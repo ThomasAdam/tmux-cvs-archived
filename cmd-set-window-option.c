@@ -182,6 +182,30 @@ cmd_set_window_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 
 		recalculate_sizes();
+	} else if (strcmp(data->option, "utf8") == 0) {
+		if (flag == -1) {
+			ctx->error(ctx, "bad value: %s", data->value);
+			return;
+		}
+
+		if (flag == -2)
+			wl->window->flags ^= WINDOW_UTF8;
+		else {
+			if (flag)
+				wl->window->flags |= WINDOW_UTF8;
+			else
+				wl->window->flags &= ~WINDOW_UTF8;
+		}
+
+		if (wl->window->flags & WINDOW_UTF8) {
+			ctx->info(ctx, "window %s:%d: set %s",
+			    s->name, wl->idx, data->option);
+		} else {
+			ctx->info(ctx, "window %s:%d: cleared %s",
+			    s->name, wl->idx, data->option);
+		}
+
+		recalculate_sizes();
 	} else if (strcmp(data->option, "force-width") == 0) {
 		if (data->value == NULL || number == -1) {
 			ctx->error(ctx, "invalid value");
