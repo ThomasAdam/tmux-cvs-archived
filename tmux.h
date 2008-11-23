@@ -407,8 +407,12 @@ struct msg_resize_data {
 #define MODE_MOUSE 0x10
 
 /* Grid output. */
+#ifdef DEBUG
 #define GRID_DEBUG(gd, fmt, ...) log_debug3("%s: (sx=%u, sy=%u, hsize=%u) " \
     fmt, __func__, (gd)->sx, (gd)->sy, (gd)->hsize, ## __VA_ARGS__)
+#else
+#define GRID_DEBUG(...)
+#endif
 
 /* Grid attributes. */
 #define GRID_ATTR_BRIGHT 0x1
