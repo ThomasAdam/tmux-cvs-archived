@@ -34,7 +34,8 @@
 #include "tmux.h"
 
 #ifdef DEBUG
-#ifdef __OpenBSD__
+/* DragonFly uses an OpenBSD-like malloc() since 1.6 */
+#if defined(__OpenBSD__) || defined(__DragonFly__)
 const char	*malloc_options = "AFGJPX";
 #endif
 #ifdef __FreeBSD__

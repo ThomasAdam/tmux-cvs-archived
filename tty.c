@@ -301,10 +301,6 @@ tty_find_term(char *name, int fd, char **cause)
 		xasprintf(cause, "carriage_return missing");
 		goto error;
 	}
-	if (cursor_left == NULL) {
-		xasprintf(cause, "cursor_left missing");
-		goto error;
-	}
 	if (parm_up_cursor == NULL && cursor_up == NULL) {
 		xasprintf(cause, "parm_up_cursor missing");
 		goto error;

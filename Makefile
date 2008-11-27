@@ -71,8 +71,8 @@ LDFLAGS+= -pg
 .endif
 LIBS+= -lutil -lncurses
 
-# FreeBSD
-.if ${OS} == "FreeBSD"
+# FreeBSD and DragonFly
+.if ${OS} == "FreeBSD" || ${OS} == "DragonFly"
 CFLAGS+= -DUSE_LIBUTIL_H
 .endif
 
