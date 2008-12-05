@@ -305,7 +305,7 @@ server_check_redraw(struct client *c)
 	struct screen			screen;
 	struct grid_cell		gc;
 	u_int				xx, yy, sx, sy;
-	char			        title[BUFSIZ];
+	char			       *title;
 	int				flags;
 
 	if (c == NULL || c->session == NULL)
@@ -316,9 +316,7 @@ server_check_redraw(struct client *c)
 	c->tty.flags &= ~TTY_FREEZE;
 
 	if (options_get_number(&s->options, "set-titles")) {
-		xsnprintf(title, sizeof title,
-		    "%s:%u:%s - \"%s\"", s->name, s->curw->idx,
-		    s->curw->window->name, s->curw->window->base.title);
+		title = s->curw->window->base.title;
 		if (c->title == NULL || strcmp(title, c->title) != 0) {
 			if (c->title != NULL)
 				xfree(c->title);

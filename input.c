@@ -462,7 +462,8 @@ input_state_string_escape(u_char ch, struct input_ctx *ictx)
 				xfree(s);
 				return;
 			}
-			screen_set_title(ictx->ctx.s, s + 2);
+			screen_set_title(ictx->ctx.s, s + 2);	
+			server_status_window(ictx->w);
 			xfree(s);
 			break;
 		case STRING_APPLICATION:
@@ -470,6 +471,7 @@ input_state_string_escape(u_char ch, struct input_ctx *ictx)
 				return;
 			s = input_get_string(ictx);
 			screen_set_title(ictx->ctx.s, s);
+			server_status_window(ictx->w);
 			xfree(s);
 			break;
 		case STRING_NAME:

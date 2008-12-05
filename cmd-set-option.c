@@ -77,6 +77,8 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "status-interval", SET_OPTION_NUMBER, 0, INT_MAX, NULL },
 	{ "status-left", SET_OPTION_STRING, 0, 0, NULL },
 	{ "status-right", SET_OPTION_STRING, 0, 0, NULL },
+	{ "status-left-length", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
+	{ "status-right-length", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
 	{ "utf8", SET_OPTION_FLAG, 0, 0, NULL },
 };
 

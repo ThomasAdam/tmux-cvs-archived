@@ -11,7 +11,7 @@ REL!= uname -r
 DATE!= date +%Y%m%d-%H%M
 
 # This must be empty as OpenBSD includes it in default CFLAGS.
-#DEBUG=
+DEBUG=
 
 META?= \002 # C-b
 

@@ -844,7 +844,7 @@ struct set_option_entry {
 	const char     **choices;
 };
 extern const struct set_option_entry set_option_table[];
-#define NSETOPTION 16
+#define NSETOPTION 18
 
 /* Edit keys. */
 enum mode_key {
