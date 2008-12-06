@@ -116,7 +116,10 @@ int
 tty_open(struct tty *tty, char **cause)
 {
 	struct termios	 tio;
-	int		 what, mode;
+#ifdef TIOCFLUSH
+	int		 what;
+#endif
+	int		 mode;
 
 	tty->fd = open(tty->path, O_RDWR|O_NONBLOCK);
 	if (tty->fd == -1) {
