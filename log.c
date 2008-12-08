@@ -225,9 +225,6 @@ log_vfatal(const char *msg, va_list ap)
 	}
 	free(fmt);
 
-#ifdef DEBUG
-	abort();
-#endif
 	exit(1);
 }
 

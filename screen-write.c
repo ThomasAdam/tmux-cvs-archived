@@ -608,8 +608,8 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 
 	if (ctx->write != NULL) {
 		if (screen_check_selection(ctx->s, s->cx, s->cy)) {
-			memcpy(&tc, gc, sizeof tc);
-			tc.attr |= GRID_ATTR_REVERSE;
+			memcpy(&tc, &ctx->s->sel.cell, sizeof tc);
+			tc.data = gc->data;
 			ctx->write(ctx->data, TTY_CELL, &tc);
 		} else
 			ctx->write(ctx->data, TTY_CELL, gc);

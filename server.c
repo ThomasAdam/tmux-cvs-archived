@@ -612,7 +612,7 @@ server_handle_window(struct window *w)
 			update = 1;
 		}
 
-		if ((w->flags & WINDOW_MONITOR) &&
+		if (options_get_number(&w->options, "monitor-activity") &&
 		    (w->flags & WINDOW_ACTIVITY) &&
 		    !session_alert_has_window(s, w, WINDOW_ACTIVITY)) {
 			session_alert_add(s, w, WINDOW_ACTIVITY);
@@ -637,7 +637,7 @@ server_lost_window(struct window *w)
 
 	log_debug("lost window %d", w->fd);
 
-	if (w->flags & WINDOW_ZOMBIFY) {
+	if (options_get_number(&w->options, "remain-on-exit")) {
 		w->fd = -1;
 		return;
 	}

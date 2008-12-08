@@ -207,11 +207,6 @@ session_new(struct session *s, const char *name, const char *cmd, int idx)
 	if ((w = window_create(name, cmd, env, s->sx, s->sy, hlimit)) == NULL)
 		return (NULL);
 
-	if (options_get_number(&s->options, "remain-by-default"))
-		w->flags |= WINDOW_ZOMBIFY;
-	if (options_get_number(&s->options, "utf8-default"))
-		w->flags |= WINDOW_UTF8;
-
 	return (session_attach(s, w, idx));
 }
 
