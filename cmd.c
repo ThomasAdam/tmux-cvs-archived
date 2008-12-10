@@ -19,7 +19,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
 
-#include <getopt.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -159,10 +158,11 @@ cmd_parse(int argc, char **argv, char **cause)
 		xasprintf(cause, "unknown command: %s", argv[0]);
 		return (NULL);
 	}
-
+	
+	optreset = 1;
 	optind = 1;
 	if (entry->parse == NULL) {
-		while ((opt = getopt(argc, argv, GETOPT_PREFIX "")) != EOF) {
+		while ((opt = getopt(argc, argv, "")) != -1) {
 			switch (opt) {
 			default:
 				goto usage;

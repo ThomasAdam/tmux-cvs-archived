@@ -18,7 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
 #include <stdlib.h>
 
 #include "tmux.h"
@@ -76,7 +75,7 @@ cmd_new_window_parse(struct cmd *self, int argc, char **argv, char **cause)
 	self->entry->init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "dt:n:")) != EOF) {
+	while ((opt = getopt(argc, argv, "dt:n:")) != -1) {
 		switch (opt) {
 		case 'd':
 			data->flag_detached = 1;

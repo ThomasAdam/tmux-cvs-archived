@@ -1,3 +1,13 @@
+10 December 2008
+
+* glibc's getopt(3) is useless: it is not POSIX compliant without jumping through
+  non-portable hoops, and the method of resetting it is unclear (the man page
+  on my system says set optind to 1, but other sources say 0). So, import
+  OpenBSD's getopt_long.c into compat/ for use on Linux and use the clearly
+  documented optreset = optind = 1 method. This fixes some strange issues
+  with command parsing (getting the syntax would prevent any further commands
+  being parsed).
+
 06 December 2008
 
 * Bring set/setw/show/showw into line with other commands. This means that by

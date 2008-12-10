@@ -18,7 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
 #include <stdlib.h>
 
 #include "tmux.h"
@@ -67,7 +66,7 @@ cmd_send_keys_parse(struct cmd *self, int argc, char **argv, char **cause)
 	data->nkeys = 0;
 	data->keys = NULL;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "t:")) != EOF) {
+	while ((opt = getopt(argc, argv, "t:")) != -1) {
 		switch (opt) {
 		case 't':
 			if (data->target == NULL)

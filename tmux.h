@@ -46,6 +46,12 @@
 #include "compat/bsd-poll.h"
 #endif
 
+#ifndef BROKEN_GETOPT
+#include <getopt.h>
+#else
+#include "compat/getopt.h"
+#endif
+
 #include <ncurses.h>
 #include <limits.h>
 #include <signal.h>

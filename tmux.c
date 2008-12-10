@@ -181,7 +181,7 @@ main(int argc, char **argv)
 
 	flags = 0;
 	path = NULL;
-        while ((opt = getopt(argc, argv, GETOPT_PREFIX "2df:qS:uVv")) != EOF) {
+        while ((opt = getopt(argc, argv, "2df:qS:uVv")) != -1) {
                 switch (opt) {
 		case '2':
 			flags |= IDENTIFY_256COLOURS;

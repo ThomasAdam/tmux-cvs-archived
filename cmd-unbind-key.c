@@ -18,8 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
-
 #include "tmux.h"
 
 /*
@@ -57,7 +55,7 @@ cmd_unbind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 
 	self->data = data = xmalloc(sizeof *data);
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "")) != EOF) {
+	while ((opt = getopt(argc, argv, "")) != -1) {
 		switch (opt) {
 		default:
 			goto usage;

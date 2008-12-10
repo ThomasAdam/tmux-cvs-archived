@@ -79,7 +79,7 @@ CFLAGS+= -DUSE_LIBUTIL_H
 OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
 
 DISTDIR= ${PROG}-${VERSION}
-DISTFILES= *.[chyl] Makefile GNUmakefile *.[1-9] NOTES TODO \
+DISTFILES= *.[chyl] Makefile GNUmakefile *.[1-9] NOTES TODO CHANGES \
 	   `find examples compat -type f -and ! -path '*CVS*'`
 
 CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log index.html

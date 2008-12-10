@@ -18,7 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
 #include <stdlib.h>
 
 #include "tmux.h"
@@ -44,7 +43,7 @@ cmd_target_parse(struct cmd *self, int argc, char **argv, char **cause)
 	cmd_target_init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "dgkt:")) != EOF) {
+	while ((opt = getopt(argc, argv, "dgkt:")) != -1) {
 		switch (opt) {
 		case 'd':
 			if (self->entry->flags & CMD_DFLAG) {
@@ -174,7 +173,7 @@ cmd_srcdst_parse(struct cmd *self, int argc, char **argv, char **cause)
 	cmd_srcdst_init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "dgks:t:")) != EOF) {
+	while ((opt = getopt(argc, argv, "dgks:t:")) != -1) {
 		switch (opt) {
 		case 'd':
 			if (self->entry->flags & CMD_DFLAG) {
@@ -315,7 +314,7 @@ cmd_buffer_parse(struct cmd *self, int argc, char **argv, char **cause)
 	cmd_buffer_init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "b:dgkt:")) != EOF) {
+	while ((opt = getopt(argc, argv, "b:dgkt:")) != -1) {
 		switch (opt) {
 		case 'b':
 			if (data->buffer == -1) {
@@ -460,7 +459,7 @@ cmd_option_parse(struct cmd *self, int argc, char **argv, char **cause)
 	cmd_option_init(self, 0);
 	data = self->data;
 
-	while ((opt = getopt(argc, argv, GETOPT_PREFIX "dgkt:")) != EOF) {
+	while ((opt = getopt(argc, argv, "dgkt:")) != -1) {
 		switch (opt) {
 		case 'd':
 			if (self->entry->flags & CMD_DFLAG) {
