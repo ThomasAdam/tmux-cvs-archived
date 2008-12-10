@@ -132,7 +132,8 @@ cmd_string_parse(const char *s, struct cmd **cmd, char **cause)
 				goto out;
 
 			if ((*cmd = cmd_parse(argc, argv, cause)) == NULL)
-				goto error;
+				goto out;
+ 		
 			rval = 0;
 			goto out;
 		default:
