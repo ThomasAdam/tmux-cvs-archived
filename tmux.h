@@ -953,6 +953,7 @@ void		 tty_set_title(struct tty *, const char *);
 int		 tty_open(struct tty *, char **);
 void		 tty_close(struct tty *);
 void		 tty_free(struct tty *);
+void		 tty_write(struct tty *, struct screen *, int, ...);
 void		 tty_vwrite(struct tty *, struct screen *s, int, va_list);
 
 /* tty-keys.c */

@@ -1,3 +1,10 @@
+13 December 2008
+
+* Work around lack of dch. On Linux, the rxvt termcap doesn't have it (it is
+  lying, but we can't really start disbelieving termcaps...). This is a bit
+  horrible - I can see no way to do it without pretty much redrawing the whole
+  line, but it works...
+
 10 December 2008
 
 * glibc's getopt(3) is useless: it is not POSIX compliant without jumping
