@@ -1,3 +1,8 @@
+15 December 2008
+
+* New command, source-file (alias source), to load a configuration
+  file. Written by Tiago Cunha, many thanks.
+
 13 December 2008
 
 * Work around lack of dch. On Linux, the rxvt termcap doesn't have it (it is
