@@ -209,6 +209,8 @@ key_string_lookup_string(const char *string)
 	if (string[0] == 'C' && string[1] == '-') {
 		if (string[2] == '\0' || string[3] != '\0')
 			return (KEYC_NONE);
+		if (string[1] == 32)
+			return (0);
 		if (string[2] >= 64 && string[2] <= 95)
 			return (string[2] - 64);
 		if (string[2] >= 97 && string[2] <= 122)
@@ -219,6 +221,8 @@ key_string_lookup_string(const char *string)
 	if (string[0] == '^') {
 		if (string[1] == '\0' || string[2] != '\0')
 			return (KEYC_NONE);
+		if (string[1] == 32)
+			return (0);
 		if (string[1] >= 64 && string[1] <= 95)
 			return (string[1] - 64);
 		if (string[1] >= 97 && string[1] <= 122)
