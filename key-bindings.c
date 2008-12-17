@@ -79,7 +79,6 @@ key_bindings_init(void)
 		{ '#', &cmd_list_buffers_entry },
 		{ '&', &cmd_kill_window_entry },
 		{ '-', &cmd_delete_buffer_entry },
-		{ '/', &cmd_list_keys_entry },
 		{ '0', &cmd_select_window_entry },
 		{ '1', &cmd_select_window_entry },
 		{ '2', &cmd_select_window_entry },
