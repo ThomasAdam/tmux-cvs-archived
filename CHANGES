@@ -1,3 +1,7 @@
+20 December 2008
+
+* Add vim mode for tmux configuration file to examples/, from Tiago Cunha.
+
 15 December 2008
 
 * New command, source-file (alias source), to load a configuration
