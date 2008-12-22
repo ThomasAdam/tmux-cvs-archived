@@ -43,12 +43,12 @@ struct {
 	{ KEYC_F10,    "\033[21~", 0 },
 	{ KEYC_F11,    "\033[23~", 0 },
 	{ KEYC_F12,    "\033[24~", 0 },
-	{ KEYC_FIND,   "\033[1~", 0 },
 	{ KEYC_DC,     "\033[3~", 0 },
 	{ KEYC_IC,     "\033[2~", 0 },
 	{ KEYC_NPAGE,  "\033[6~", 0 },
 	{ KEYC_PPAGE,  "\033[5~", 0 },
-	{ KEYC_SELECT, "\033[4~", 0 },
+	{ KEYC_HOME,   "\033[1~", 0 },
+	{ KEYC_END,    "\033[4~", 0 },
 
 	/* Arrow keys. Cursor versions must come first. */
 	{ KEYC_UP,     "\033OA", INPUTKEY_CURSOR },

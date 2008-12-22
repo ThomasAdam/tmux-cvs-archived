@@ -1,3 +1,7 @@
+22 December 2008
+
+* Use the right keys for home and end.
+
 20 December 2008
 
 * Add vim mode for tmux configuration file to examples/, from Tiago Cunha.
