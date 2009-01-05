@@ -129,7 +129,6 @@ grid_view_insert_lines_region(
 	GRID_DEBUG(
 	    gd, "rupper=%u, rlower=%u, py=%u, ny=%u", rupper, rlower, py, ny);
 
-	rupper = grid_view_y(gd, rupper);
 	rlower = grid_view_y(gd, rlower);
 
 	py = grid_view_y(gd, py);
@@ -160,7 +159,6 @@ grid_view_delete_lines_region(
 	GRID_DEBUG(
 	    gd, "rupper=%u, rlower=%u, py=%u, ny=%u", rupper, rlower, py, ny);
 
-	rupper = grid_view_y(gd, rupper);
 	rlower = grid_view_y(gd, rlower);
 
 	py = grid_view_y(gd, py);
