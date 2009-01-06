@@ -42,13 +42,11 @@ const struct cmd_entry cmd_list_keys_entry = {
 void
 cmd_list_keys_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct binding	*bd;
-	const char	*key;
-	char		 s[BUFSIZ];
-	u_int		 i;
+	struct key_binding	*bd;
+	const char		*key;
+	char			 s[BUFSIZ];
 
-	for (i = 0; i < ARRAY_LENGTH(&key_bindings); i++) {
-		bd = ARRAY_ITEM(&key_bindings, i);
+	SPLAY_FOREACH(bd, key_bindings, &key_bindings) {
 		if ((key = key_string_lookup_key(bd->key)) == NULL)
 			continue;
 		if (bd->cmd->entry->print == NULL) {
