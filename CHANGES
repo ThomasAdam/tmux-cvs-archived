@@ -1,5 +1,7 @@
 06 January 2009
 
+* Don't crash when backspacing if cursor is off the right of the screen,
+  reported by David Chisnall.
 * Complete words at any point inside command in prompt, also use option name
   as well as command names.
 * Per-client prompt history of up to 100 items.
