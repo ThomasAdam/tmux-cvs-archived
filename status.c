@@ -529,8 +529,6 @@ status_prompt_key(struct client *c, int key)
 		if ((s = status_prompt_complete(word)) == NULL)
 			break;
 
-		log_debug("XXX '%s' '%s' '%s'", c->prompt_buffer, first, last);
-
 		/* Trim out word. */
 		n = size - (last - c->prompt_buffer) + 1; /* with \0 */
 		memmove(first, last, n);
