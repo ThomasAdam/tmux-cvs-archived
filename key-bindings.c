@@ -50,11 +50,10 @@ key_bindings_add(int key, struct cmd *cmd)
 
 	if ((bd = key_bindings_lookup(key)) == NULL) {
 		bd = xmalloc(sizeof *bd);
+		bd->key = key;
 		SPLAY_INSERT(key_bindings, &key_bindings, bd);
 	} else
 		cmd_free(bd->cmd);
-
-	bd->key = key;
 	bd->cmd = cmd;
 }
 
