@@ -1,6 +1,8 @@
 06 January 2009
 
-* Use a splay tree for key bindings.
+* Per-client prompt history of up to 100 items.
+* Use a splay tree for key bindings instead of an array. As a side-effect this
+  sorts them when listed.
 
 22 December 2008
 

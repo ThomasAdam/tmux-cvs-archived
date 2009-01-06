@@ -119,6 +119,9 @@ extern const char    *__progname;
 /* Default configuration file. */
 #define DEFAULT_CFG ".tmux.conf"
 
+/* Default prompt history length. */
+#define PROMPT_HISTORY 100
+
 /* Fatal errors. */
 #define fatal(msg) log_fatal("%s: %s", __func__, msg);
 #define fatalx(msg) log_fatalx("%s: %s", __func__, msg);
@@ -745,6 +748,8 @@ struct client {
 	size_t		 prompt_index;
 	void		 (*prompt_callback)(void *, char *);
 	void		*prompt_data;
+	u_int		 prompt_hindex;
+	ARRAY_DECL(, char *) prompt_hdata;
 
 	struct session	*session;
 };

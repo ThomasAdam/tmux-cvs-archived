@@ -68,6 +68,8 @@ server_set_client_prompt(
 	c->prompt_callback = fn;
 	c->prompt_data = data;
 
+	c->prompt_hindex = 0;
+
 	c->tty.flags |= (TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_STATUS;
 }
@@ -82,6 +84,7 @@ server_clear_client_prompt(struct client *c)
 	c->prompt_string = NULL;
 
 	xfree(c->prompt_buffer);
+	c->prompt_buffer = NULL;
 
 	c->tty.flags &= ~(TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_REDRAW;
