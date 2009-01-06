@@ -1,5 +1,7 @@
 06 January 2009
 
+* Complete words at any point inside command in prompt, also use option name
+  as well as command names.
 * Per-client prompt history of up to 100 items.
 * Use a splay tree for key bindings instead of an array. As a side-effect this
   sorts them when listed.
