@@ -55,7 +55,7 @@ cmd_paste_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (data->buffer == -1)
 		pb = paste_get_top(&s->buffers);
 	else {
-		if ((pb = paste_get_top(&s->buffers)) == NULL)
+		if ((pb = paste_get_index(&s->buffers, data->buffer)) == NULL)
 			ctx->error(ctx, "no buffer %d", data->buffer);
 	}
 
