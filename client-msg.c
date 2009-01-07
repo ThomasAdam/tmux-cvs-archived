@@ -34,7 +34,6 @@ int	client_msg_fn_pause(struct hdr *, struct client_ctx *, char **);
 
 struct client_msg {
 	enum hdrtype   type;
-
 	int	       (*fn)(struct hdr *, struct client_ctx *, char **);
 };
 struct client_msg client_msg_table[] = {
