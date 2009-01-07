@@ -96,6 +96,7 @@ cmd_source_file_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if (load_cfg(data->path, &cause) != 0) {
 		ctx->error(ctx, "%s", cause);
+		xfree(cause);
 		return;
 	}
 
