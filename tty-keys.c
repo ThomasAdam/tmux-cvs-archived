@@ -205,7 +205,6 @@ struct {
 	{ "-\033Op", KEYC_KP4_0 },
 	{ "-\033On", KEYC_KP4_2 },
 };
-#define NTTYKEYS (sizeof tty_keys / sizeof tty_keys[0])
 
 RB_GENERATE(tty_keys, tty_key, entry, tty_keys_cmp);
 
@@ -227,7 +226,7 @@ tty_keys_init(struct tty *tty)
 	RB_INIT(&tty->ktree);
 
 	tty->ksize = 0;
-	for (i = 0; i < NTTYKEYS; i++) {
+	for (i = 0; i < nitems(tty_keys); i++) {
 		if (*tty_keys[i].name == '-')
 			s = tty_keys[i].name + 1;
 		else {

@@ -48,7 +48,6 @@ const struct server_msg server_msg_table[] = {
 	{ MSG_RESIZE, server_msg_fn_resize },
 	{ MSG_EXITING, server_msg_fn_exiting }
 };
-#define NSERVERMSG (sizeof server_msg_table / sizeof server_msg_table[0])
 
 int
 server_msg_dispatch(struct client *c)
@@ -66,7 +65,7 @@ server_msg_dispatch(struct client *c)
 			return (0);
 		buffer_remove(c->in, sizeof hdr);
 
-		for (i = 0; i < NSERVERMSG; i++) {
+		for (i = 0; i < nitems(server_msg_table); i++) {
 			msg = server_msg_table + i;
 			if (msg->type == hdr.type) {
 				if ((n = msg->fn(&hdr, c)) != 0)
@@ -74,7 +73,7 @@ server_msg_dispatch(struct client *c)
 				break;
 			}
 		}
-		if (i == NSERVERMSG)
+		if (i == nitems(server_msg_table))
 			fatalx("unexpected message");
 	}
 }

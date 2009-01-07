@@ -111,7 +111,7 @@ key_bindings_init(void)
 
 	SPLAY_INIT(&key_bindings);
 
-	for (i = 0; i < (sizeof table / sizeof table[0]); i++) {
+	for (i = 0; i < nitems(table); i++) {
 		cmd = xmalloc(sizeof *cmd);
 		cmd->entry = table[i].entry;
 		cmd->data = NULL;
