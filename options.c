@@ -83,6 +83,22 @@ options_find(struct options *oo, const char *name)
 	return (o);
 }
 
+int
+options_remove(struct options *oo, const char *name)
+{
+	struct options_entry	*o;
+
+	if ((o = options_find1(oo, name)) == NULL)
+		return (-1);
+
+	SPLAY_REMOVE(options_tree, &oo->tree, o);
+	xfree(o->name);
+	if (o->type == OPTIONS_STRING)
+		xfree(o->value.string);
+	xfree(o);
+	return (0);
+}
+
 void printflike3
 options_set_string(struct options *oo, const char *name, const char *fmt, ...)
 {
