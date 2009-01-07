@@ -473,6 +473,8 @@ status_prompt_key(struct client *c, int key)
 	size_t	size, n, off, idx;
 	char	word[64];
 
+	/* XXX This function needs some tidying... */
+
 	size = strlen(c->prompt_buffer);
 	switch (key) {
 	case KEYC_LEFT:
