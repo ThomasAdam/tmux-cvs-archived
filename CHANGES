@@ -1,3 +1,14 @@
+08 January 2009
+
+* If built without DEBUG (the release versions), don't cause a fatal error if
+  the grid functions notice an input error, just log and ignore the
+  request. This might mean me getting shouted at less often when bugs kill
+  long-running sessions, at least in release versions.
+* Hopefully fix cursor out-of-bounds checking when writing to grid. When I
+  wrote the code I must have forgotten that the cursor can be one cell off the
+  right of the screen (yes, I know), so there were number of out-of-bounds/
+  overflow problems.
+
 07 January 2009
 
 * New flag to set and setw, -u, to unset a option (allowing it to inherit from)
