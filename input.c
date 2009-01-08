@@ -202,10 +202,9 @@ input_get_string(struct input_ctx *ictx)
 {
 	char	*s;
 
-	if (ictx->string_buf == NULL)
+	if (ictx->string_buf == NULL || input_add_string(ictx, '\0') != 0)
 		return (xstrdup(""));
 
-	input_add_string(ictx, '\0');
 	s = ictx->string_buf;
 	ictx->string_buf = NULL;
 	return (s);

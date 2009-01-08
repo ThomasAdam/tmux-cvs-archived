@@ -139,6 +139,7 @@ screen_write_cursorup(struct screen_write_ctx *ctx, u_int ny)
 	if (ny == 0)
 		return;
 
+	log_debug("cursor up: %u + %u", s->cy, ny);
 	s->cy -= ny;
 
 	if (ctx->write != NULL)
@@ -159,6 +160,7 @@ screen_write_cursordown(struct screen_write_ctx *ctx, u_int ny)
 	if (ny == 0)
 		return;
 
+	log_debug("cursor down: %u + %u", s->cy, ny);
 	s->cy += ny;
 
 	if (ctx->write != NULL)
@@ -179,6 +181,7 @@ screen_write_cursorright(struct screen_write_ctx *ctx, u_int nx)
 	if (nx == 0)
 		return;
 
+	log_debug("cursor right: %u + %u", s->cx, nx);
 	s->cx += nx;
 
 	if (ctx->write != NULL)
@@ -199,6 +202,7 @@ screen_write_cursorleft(struct screen_write_ctx *ctx, u_int nx)
 	if (nx == 0)
 		return;
 
+	log_debug("cursor left: %u + %u", s->cx, nx);
 	s->cx -= nx;
 
 	if (ctx->write != NULL)
