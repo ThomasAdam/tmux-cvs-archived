@@ -522,7 +522,8 @@ status_prompt_key(struct client *c, int key)
 			last--;
 		if (*last != '\0')
 			last++;
-		if (last <= first || last - first > (sizeof word) - 1)
+		if (last <= first ||
+		    ((size_t) (last - first)) > (sizeof word) - 1)
 			break;
 		memcpy(word, first, last - first);
 		word[last - first] = '\0';
