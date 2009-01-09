@@ -60,6 +60,7 @@ const struct set_option_entry set_window_option_table[NSETWINDOWOPTION] = {
 	{ "monitor-activity", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "remain-on-exit", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "utf8", SET_OPTION_FLAG, 0, 0, NULL },
+	{ "xterm-keys", SET_OPTION_FLAG, 0, 0, NULL },
 };
 
 void

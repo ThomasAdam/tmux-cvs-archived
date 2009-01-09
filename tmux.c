@@ -236,7 +236,8 @@ main(int argc, char **argv)
 	options_set_number(&global_options, "message-fg", 0);
 	options_set_number(&global_options, "message-bg", 3);
 	options_init(&global_window_options, NULL);
-	options_set_number(&global_window_options, "monitor-activity", 0);
+	options_set_number(&global_window_options, "xterm-keys", 0);
+	options_set_number(&global_window_options, "monitor-activity", 0);	
 	options_set_number(&global_window_options, "aggressive-resize", 0);
  	options_set_number(&global_window_options, "remain-on-exit", 0);
 	options_set_number(&global_window_options, "utf8", 0);

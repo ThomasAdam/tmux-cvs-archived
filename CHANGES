@@ -1,3 +1,9 @@
+09 January 2009
+
+* Update key handling code. Simplify, support ctrl properly and add a new
+  window option (xterm-keys) to output xterm key codes including ctrl and,
+  if available, alt and shift.
+
 08 January 2009
 
 * If built without DEBUG (the release versions), don't cause a fatal error if

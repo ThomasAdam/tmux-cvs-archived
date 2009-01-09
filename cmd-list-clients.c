@@ -47,7 +47,6 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct client	*c;
 	u_int		 i;
-	char		 options[256];
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
