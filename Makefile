@@ -37,7 +37,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       cmd-list-commands.c cmd-move-window.c cmd-select-prompt.c \
       cmd-respawn-window.c cmd-source-file.c \
       window-scroll.c window-more.c window-copy.c options.c paste.c \
-      tty.c tty-keys.c tty-write.c colour.c utf8.c options-cmd.c
+      tty.c tty-term.c tty-keys.c tty-write.c colour.c utf8.c options-cmd.c
 
 CC?= cc
 INCDIRS+= -I. -I- -I/usr/local/include

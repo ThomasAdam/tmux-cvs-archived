@@ -52,7 +52,7 @@ screen_write_start_session(struct screen_write_ctx *ctx, struct session *s)
 /* Initialise writing. */
 void
 screen_write_start(struct screen_write_ctx *ctx,
-    struct screen *s, void (*write)(void *, int, ...), void *data)
+    struct screen *s, void (*write)(void *, enum tty_cmd, ...), void *data)
 {
 	ctx->write = write;
 	ctx->data = data;

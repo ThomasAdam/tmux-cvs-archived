@@ -52,7 +52,7 @@ screen_redraw_start_session(struct screen_redraw_ctx *ctx, struct session *s)
 /* Initialise for redrawing. */
 void
 screen_redraw_start(struct screen_redraw_ctx *ctx,
-    struct screen *s, void (*write)(void *, int, ...), void *data)
+    struct screen *s, void (*write)(void *, enum tty_cmd, ...), void *data)
 {
 	ctx->write = write;
 	ctx->data = data;

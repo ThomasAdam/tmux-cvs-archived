@@ -1,5 +1,12 @@
 09 January 2009
 
+* Stop using ncurses variables and instead build a table of the codes we want
+  into an array for each terminal type. This makes the code a little more
+  untidy in places but gets rid of the awful global variables and calling
+  setterm all the time, and shoves all the ncurses-dependent mess into a single
+  file, tty-term.c. It also allows overriding single terminal codes, this is
+  used to fix rxvt on some platforms (where it is missing dch) and in future
+  may allow user customisation a la vim.
 * Update key handling code. Simplify, support ctrl properly and add a new
   window option (xterm-keys) to output xterm key codes including ctrl and,
   if available, alt and shift.

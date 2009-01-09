@@ -88,7 +88,6 @@ key_string_search_table(const char *string)
 int
 key_string_lookup_string(const char *string)
 {
-	u_int	i;
 	int	key;
 
 	if (string[0] == '\0')
