@@ -63,7 +63,8 @@ const struct window_mode window_copy_mode = {
 	window_copy_init,
 	window_copy_free,
 	window_copy_resize,
-	window_copy_key
+	window_copy_key,
+	NULL
 };
 
 struct window_copy_mode_data {

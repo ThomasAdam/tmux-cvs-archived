@@ -1,5 +1,8 @@
 10 January 2009
 
+* New mode to display a large clock. Entered with clock-mode command (bound to
+  C-b t by default); two window options: clock-mode-colour and clock-mode-style
+  (12 or 24). This will probably be used as the basis for window locking.
 * New command, server-info, to show some server information and terminal
   details.
 

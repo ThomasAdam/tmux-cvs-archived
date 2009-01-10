@@ -248,6 +248,8 @@ main(int argc, char **argv)
 	options_set_number(&global_window_options, "mode-keys", MODEKEY_EMACS);
 	options_set_number(&global_window_options, "force-width", 0);
 	options_set_number(&global_window_options, "force-height", 0);
+	options_set_number(&global_window_options, "clock-mode-colour", 4);
+	options_set_number(&global_window_options, "clock-mode-style", 1);
 
 	if (cfg_file == NULL) {
 		home = getenv("HOME");
@@ -301,6 +303,7 @@ main(int argc, char **argv)
 	}
 	options_set_string(
 	    &global_options, "default-command", "exec %s", shell);
+	
 
 	if (argc == 0) {
 		cmd = xmalloc(sizeof *cmd);
