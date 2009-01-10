@@ -210,7 +210,7 @@ void
 screen_write_insertcharacter(struct screen_write_ctx *ctx, u_int nx)
 {
 	struct screen	*s = ctx->s;
-	
+
 	if (nx == 0)
 		nx = 1;
 
@@ -320,7 +320,7 @@ screen_write_clearendofline(struct screen_write_ctx *ctx)
 
 	if (s->cx <= sx - 1)
 		grid_view_clear(s->grid, s->cx, s->cy, sx - s->cx, 1);
-	
+
 	if (ctx->write != NULL)
 		ctx->write(ctx->data, TTY_CLEARENDOFLINE);
 }

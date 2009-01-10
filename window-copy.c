@@ -318,7 +318,7 @@ window_copy_update_selection(struct window *w)
 	/* Set colours. */
 	memcpy(&gc, &grid_default_cell, sizeof gc);
 	gc.fg = options_get_number(&w->options, "mode-fg");
-	gc.bg = options_get_number(&w->options, "mode-bg");	
+	gc.bg = options_get_number(&w->options, "mode-bg");
 
 	/* Find top-left of screen. */
 	tx = data->ox;

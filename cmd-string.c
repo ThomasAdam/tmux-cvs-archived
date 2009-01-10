@@ -133,7 +133,7 @@ cmd_string_parse(const char *s, struct cmd **cmd, char **cause)
 
 			if ((*cmd = cmd_parse(argc, argv, cause)) == NULL)
 				goto out;
- 		
+
 			rval = 0;
 			goto out;
 		default:

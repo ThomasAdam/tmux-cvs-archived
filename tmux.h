@@ -840,7 +840,7 @@ struct key_binding {
 	int		 key;
 	struct cmd	*cmd;
 
-	SPLAY_ENTRY(key_binding) entry;	
+	SPLAY_ENTRY(key_binding) entry;
 };
 SPLAY_HEAD(key_bindings, key_binding);
 

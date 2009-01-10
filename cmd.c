@@ -109,7 +109,7 @@ cmd_parse(int argc, char **argv, char **cause)
 		xasprintf(cause, "unknown command: %s", argv[0]);
 		return (NULL);
 	}
-	
+
 	optreset = 1;
 	optind = 1;
 	if (entry->parse == NULL) {

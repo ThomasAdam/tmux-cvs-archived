@@ -122,7 +122,7 @@ set_option_flag(struct cmd_ctx *ctx, struct options *oo,
 	}
 
 	options_set_number(oo, entry->name, flag);
-	ctx->info(ctx, 
+	ctx->info(ctx,
 	    "set option: %s -> %s", entry->name, flag ? "on" : "off");
 }
 

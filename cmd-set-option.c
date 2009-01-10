@@ -110,7 +110,7 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if (data->flags & CMD_UFLAG) {
 		if (data->flags & CMD_GFLAG) {
-			ctx->error(ctx, 
+			ctx->error(ctx,
 			    "can't unset global option: %s", entry->name);
 			return;
 		}
@@ -148,7 +148,7 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 			break;
 		}
 	}
-		
+
 	recalculate_sizes();
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);

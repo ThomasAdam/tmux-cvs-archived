@@ -93,12 +93,12 @@
   (including the ability to use abbreviations).
 
   PLEASE NOTE this includes the following configuration-breaking changes:
-  
+
   - remain-by-default is now GONE, use "setw -g remain-on-exit" to apply the
     global window option instead;
   - mode-keys is now a window option rather than session - use "setw [-g]
     mode-keys" instead of set.
-  
+
   There are also some additions:
 
   - message-fg and message-bg session options to control status line message

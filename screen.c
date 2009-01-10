@@ -183,7 +183,7 @@ screen_resize_y(struct screen *s, u_int sy)
 
 /* Set selection. */
 void
-screen_set_selection(struct screen *s, 
+screen_set_selection(struct screen *s,
     u_int sx, u_int sy, u_int ex, u_int ey, struct grid_cell *gc)
 {
 	struct screen_sel	*sel = &s->sel;
