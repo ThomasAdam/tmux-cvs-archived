@@ -147,6 +147,10 @@ window_more_key(struct window *w, unused struct client *c, int key)
 			data->top -= screen_size_y(s);
 		window_more_redraw_screen(w);
 		break;
+	case MODEKEY_NONE:
+		if (key != ' ')
+			break;
+		/* FALLTHROUGH */
 	case MODEKEY_NPAGE:
 		if (data->top + screen_size_y(s) > ARRAY_LENGTH(&data->list))
 			data->top = ARRAY_LENGTH(&data->list);
