@@ -115,6 +115,7 @@ session_create(const char *name, const char *cmd, u_int sx, u_int sy)
 	u_int		 i;
 
 	s = xmalloc(sizeof *s);
+	s->flags = 0;
 	if (gettimeofday(&s->tv, NULL) != 0)
 		fatal("gettimeofday");
 	s->curw = NULL;

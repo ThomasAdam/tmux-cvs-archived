@@ -99,6 +99,19 @@ winlink_next_index(struct winlinks *wwl)
 	fatalx("no free indexes");
 }
 
+u_int
+winlink_count(struct winlinks *wwl)
+{
+	struct winlink	*wl;
+	u_int		 n;
+
+	n = 0;
+	RB_FOREACH(wl, winlinks, wwl)
+		n++;
+
+	return (n);
+}
+
 struct winlink *
 winlink_add(struct winlinks *wwl, struct window *w, int idx)
 {

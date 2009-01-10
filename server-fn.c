@@ -102,7 +102,7 @@ server_write_client(
 	hdr.size = len;
 
 	buffer_write(c->out, &hdr, sizeof hdr);
-	if (buf != NULL)
+	if (buf != NULL && len > 0)
 		buffer_write(c->out, buf, len);
 }
 
