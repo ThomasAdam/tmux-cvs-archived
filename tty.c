@@ -411,7 +411,16 @@ tty_cmd_insertcharacter(struct tty *tty, unused struct screen *s, va_list ap)
 
 	tty_reset(tty);
 
-	tty_emulate_repeat(tty, TTYC_ICH, TTYC_ICH1, ua);
+	if (tty_term_has(tty->term, TTYC_ICH) || 
+	    tty_term_has(tty->term, TTYC_ICH1))
+	    tty_emulate_repeat(tty, TTYC_ICH, TTYC_ICH1, ua);
+	else {
+		tty_putcode(tty, TTYC_SMIR);
+		while (ua-- > 0)
+			tty_putc(tty, ' ');
+		tty_putcode(tty, TTYC_RMIR);
+		tty_putcode2(tty, TTYC_CUP, s->cy, s->cx);
+	}
 }
 
 void
