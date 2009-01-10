@@ -53,6 +53,7 @@ struct options	 global_window_options;
 int		 debug_level;
 int		 be_quiet;
 time_t		 start_time;
+const char	*socket_path;
 
 void		 sighandler(int);
 __dead void	 usage(void);

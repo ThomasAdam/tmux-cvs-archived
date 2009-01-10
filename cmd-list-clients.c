@@ -53,8 +53,8 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		if (c == NULL || c->session == NULL)
 			continue;
 
-		ctx->print(ctx, "%s: %s [%ux%u]",
-		    c->tty.path, c->session->name, c->sx, c->sy);
+		ctx->print(ctx, "%s: %s [%ux%u %s]", c->tty.path,
+		    c->session->name, c->sx, c->sy, c->tty.termname);
 	}
 
 	if (ctx->cmdclient != NULL)

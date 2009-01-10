@@ -1,3 +1,8 @@
+10 January 2009
+
+* New command, server-info, to show some server information and terminal
+  details.
+
 09 January 2009
 
 * Stop using ncurses variables and instead build a table of the codes we want
