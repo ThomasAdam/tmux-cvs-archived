@@ -19,6 +19,7 @@
 #include <sys/types.h>
 
 #include <string.h>
+#include <time.h>
 
 #include "tmux.h"
 
