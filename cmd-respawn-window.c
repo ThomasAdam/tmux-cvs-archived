@@ -47,7 +47,9 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
 	struct session		*s;
-	const char		*env[] = { NULL /* TMUX= */, "TERM=screen", NULL };
+	const char		*env[] = { 
+		NULL /* TMUX= */, "TERM=screen", NULL 
+	};
 	char		 	 buf[256];
 	u_int			 i;
 
@@ -64,7 +66,7 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	xsnprintf(buf, sizeof buf, "TMUX=%ld,%u", (long) getpid(), i);
 	env[0] = buf;
 
-	if (window_spawn(wl->window, data->arg, env) != 0) {
+	if (window_spawn(wl->window, data->arg, wl->window->cwd, env) != 0) {
 		ctx->error(ctx, "respawn failed: %s:%d", s->name, wl->idx);
 		return;
 	}

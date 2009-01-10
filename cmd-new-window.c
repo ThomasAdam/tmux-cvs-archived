@@ -115,7 +115,7 @@ cmd_new_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_new_window_data	*data = self->data;
 	struct session			*s;
 	struct winlink			*wl;
-	char				*cmd;
+	char				*cmd, *cwd;
 	int				 idx;
 
 	if (data == NULL)
@@ -137,8 +137,12 @@ cmd_new_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	cmd = data->cmd;
 	if (cmd == NULL)
 		cmd = options_get_string(&s->options, "default-command");
+	if (ctx->cmdclient == NULL || ctx->cmdclient->cwd == NULL)
+		cwd = options_get_string(&global_options, "default-path");
+	else
+		cwd = ctx->cmdclient->cwd;
 
-	wl = session_new(s, data->name, cmd, idx);
+	wl = session_new(s, data->name, cmd, cwd, idx);
 	if (wl == NULL) {
 		ctx->error(ctx, "command failed: %s", cmd);
 		return;

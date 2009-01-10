@@ -183,6 +183,10 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 	c->sx = data.sx;
 	c->sy = data.sy;
 
+	c->cwd = NULL;
+	if (*data.cwd != '\0')
+		c->cwd = xstrdup(data.cwd);
+
 	data.tty[(sizeof data.tty) - 1] = '\0';
 	tty_init(&c->tty, data.tty, xstrdup(term));
 	if (data.flags & IDENTIFY_UTF8)

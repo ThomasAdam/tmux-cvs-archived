@@ -49,6 +49,7 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "bell-action", SET_OPTION_CHOICE, 0, 0, set_option_bell_action_list },
 	{ "buffer-limit", SET_OPTION_NUMBER, 1, INT_MAX, NULL },
 	{ "default-command", SET_OPTION_STRING, 0, 0, NULL },
+	{ "default-path", SET_OPTION_STRING, 0, 0, NULL },
 	{ "display-time", SET_OPTION_NUMBER, 1, INT_MAX, NULL },
 	{ "history-limit", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
 	{ "message-bg", SET_OPTION_COLOUR, 0, 0, NULL },

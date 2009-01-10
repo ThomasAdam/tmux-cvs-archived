@@ -113,7 +113,7 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_new_session_data	*data = self->data;
 	struct client			*c = ctx->cmdclient;
 	struct session			*s;
-	char				*cmd, *cause;
+	char				*cmd, *cwd, *cause;
 	u_int				 sx, sy;
 
 	if (ctx->curclient != NULL)
@@ -138,6 +138,10 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	cmd = data->cmd;
 	if (cmd == NULL)
 		cmd = options_get_string(&global_options, "default-command");
+	if (c == NULL || c->cwd == NULL)
+		cwd = options_get_string(&global_options, "default-path");
+	else
+		cwd = c->cwd;
 
 	sx = 80;
 	sy = 25;
@@ -160,8 +164,8 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	}
 
 
-	if ((s = session_create(data->newname, cmd, sx, sy)) == NULL)
-		fatalx("session_create failed");
+	if ((s = session_create(data->newname, cmd, cwd, sx, sy)) == NULL)
+	       	fatalx("session_create failed");
 	if (data->winname != NULL) {
 		xfree(s->curw->window->name);
 		s->curw->window->name = xstrdup(data->winname);

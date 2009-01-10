@@ -99,6 +99,8 @@ retry:
 		data.sx = ws.ws_col;
 		data.sy = ws.ws_row;
 		*data.tty = '\0';
+		if (getcwd(data.cwd, sizeof data.cwd) == NULL)
+			*data.cwd = '\0';
 
 		if ((name = ttyname(STDIN_FILENO)) == NULL)
 			fatal("ttyname failed");
