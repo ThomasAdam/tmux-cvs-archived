@@ -21,7 +21,7 @@
 #include "tmux.h"
 
 /*
- * Enter scroll mode. Only valid when bound to a key.
+ * Enter scroll mode.
  */
 
 void	cmd_scroll_mode_exec(struct cmd *, struct cmd_ctx *);

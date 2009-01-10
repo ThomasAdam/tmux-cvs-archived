@@ -21,7 +21,7 @@
 #include "tmux.h"
 
 /*
- * Enter copy mode. Only valid when bound to a key.
+ * Enter copy mode.
  */
 
 void	cmd_copy_mode_exec(struct cmd *, struct cmd_ctx *);
