@@ -89,8 +89,8 @@ cmd_server_info_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 				    ent->code, ent->name);
 				break;
 			case TTYCODE_STRING:
-				strnvis(
-				    s, code->value.string, sizeof s, VIS_OCTAL);
+				strnvis(s, code->value.string,
+				    sizeof s, VIS_OCTAL|VIS_WHITE);
 				s[(sizeof s) - 1] = '\0';
 
 				ctx->print(ctx, "  %2d,%s: (string) %s",
