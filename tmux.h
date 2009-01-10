@@ -195,6 +195,7 @@ struct buffer {
 #define KEYC_END (KEYC_OFFSET + 0x16)
 #define KEYC_NPAGE (KEYC_OFFSET + 0x17)
 #define KEYC_PPAGE (KEYC_OFFSET + 0x18)
+#define KEYC_BTAB (KEYC_OFFSET + 0x19)
 
 /* Arrow keys. */
 #define KEYC_UP (KEYC_OFFSET + 0x50)

@@ -53,6 +53,7 @@ struct tty_key_ent tty_keys[] = {
 	{ TTYC_KEND,  NULL,     KEYC_END,   TTYKEY_MODIFIER },
 	{ TTYC_KNP,   NULL,     KEYC_NPAGE, TTYKEY_MODIFIER },
 	{ TTYC_KPP,   NULL,     KEYC_PPAGE, TTYKEY_MODIFIER },
+	{ TTYC_KCBT,  NULL,	KEYC_BTAB,  TTYKEY_MODIFIER },
 
 	/* Arrow keys. */
 	{ TTYC_KCUU1, NULL,     KEYC_UP,    TTYKEY_MODIFIER },

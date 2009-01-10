@@ -55,6 +55,7 @@ struct input_key_ent input_keys[] = {
 	{ KEYC_END,    "\033[4~", INPUTKEY_MODIFIER|INPUTKEY_XTERM },
 	{ KEYC_NPAGE,  "\033[6~", INPUTKEY_MODIFIER|INPUTKEY_XTERM },
 	{ KEYC_PPAGE,  "\033[5~", INPUTKEY_MODIFIER|INPUTKEY_XTERM },
+	{ KEYC_BTAB,   "\033[Z",  INPUTKEY_MODIFIER },
 
 	/* Arrow keys. Cursor versions must come first. */
 	{ KEYC_UP,     "\033OA", INPUTKEY_MODIFIER|INPUTKEY_CURSOR },
