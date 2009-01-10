@@ -96,7 +96,6 @@ struct tty_term_code_entry tty_term_codes[NTTYCODE] = {
 	{ TTYC_RI, TTYCODE_STRING, "ri" },
 	{ TTYC_RMACS, TTYCODE_STRING, "rmacs" },
 	{ TTYC_RMCUP, TTYCODE_STRING, "rmcup" },
-	{ TTYC_RMIR, TTYCODE_STRING, "rmir" },
 	{ TTYC_RMKX, TTYCODE_STRING, "rmkx" },
 	{ TTYC_SETAB, TTYCODE_STRING, "setab" },
 	{ TTYC_SETAF, TTYCODE_STRING, "setaf" },
