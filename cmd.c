@@ -71,9 +71,11 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_show_options_entry,
 	&cmd_show_window_options_entry,
 	&cmd_source_file_entry,
+	&cmd_split_window_entry,
 	&cmd_start_server_entry,
 	&cmd_swap_window_entry,
 	&cmd_switch_client_entry,
+	&cmd_switch_pane_entry,
 	&cmd_unbind_key_entry,
 	&cmd_unlink_window_entry,
 	NULL

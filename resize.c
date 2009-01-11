@@ -125,12 +125,11 @@ recalculate_sizes(void)
 		if (limit != 0 && ssy > limit)
 			ssy = limit;
 
-		if (screen_size_x(&w->base) == ssx &&
-		    screen_size_y(&w->base) == ssy)
+		if (w->sx == ssx && w->sy == ssy)
 			continue;
 
-		log_debug("window size %u,%u (was %u,%u)", ssx, ssy,
-		    screen_size_x(&w->base), screen_size_y(&w->base));
+		log_debug(
+		    "window size %u,%u (was %u,%u)", ssx, ssy, w->sx, w->sy);
 
 		window_resize(w, ssx, ssy);
 		server_redraw_window(w);
