@@ -63,6 +63,8 @@ cmd_do_flags(int opt, int iflags, int *oflags)
 size_t
 cmd_print_flags(char *buf, size_t len, size_t off, int flags)
 {
+	size_t	boff = off;
+
 	if ((flags & (CMD_DFLAG|CMD_GFLAG|CMD_KFLAG|CMD_UFLAG)) == 0)
 		return (0);
 	off += xsnprintf(buf + off, len - off, " -");
@@ -74,7 +76,7 @@ cmd_print_flags(char *buf, size_t len, size_t off, int flags)
 		off += xsnprintf(buf + off, len - off, "k");
 	if (off < len && flags & CMD_UFLAG)
 		off += xsnprintf(buf + off, len - off, "u");
-	return (off);
+	return (off - boff);
 }
 
 int
