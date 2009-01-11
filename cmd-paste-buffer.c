@@ -70,6 +70,6 @@ cmd_paste_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 			paste_free_index(&s->buffers, data->buffer);
 	}
 
-	if (ctx->cmdclient != NULL)
+ 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
