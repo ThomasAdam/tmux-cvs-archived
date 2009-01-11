@@ -1,3 +1,7 @@
+11 January 2009
+
+* save-buffer command, from Tiago Cunha.
+
 10 January 2009
 
 * New option, lock-after-time. If there is no activity in the period specified

@@ -22,7 +22,7 @@
 
 #include "tmux.h"
 
-#define CMD_FLAGS "dgku"
+#define CMD_FLAGS "adgku"
 
 int	cmd_do_flags(int, int, int *);
 size_t	cmd_print_flags(char *, size_t, size_t, int);
@@ -32,6 +32,12 @@ int
 cmd_do_flags(int opt, int iflags, int *oflags)
 {
 	switch (opt) {
+	case 'a':
+		if (iflags & CMD_AFLAG) {
+			(*oflags) |= CMD_AFLAG;
+			return (0);
+		}
+		return (-1);
 	case 'd':
 		if (iflags & CMD_DFLAG) {
 			(*oflags) |= CMD_DFLAG;
