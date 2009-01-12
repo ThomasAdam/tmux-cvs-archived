@@ -741,6 +741,7 @@ struct client {
 
 	struct tty 	 tty;
 	struct timeval	 status_timer;
+	struct timeval	 command_timer;
 
 	u_int		 sx;
 	u_int		 sy;
@@ -887,7 +888,7 @@ struct set_option_entry {
 };
 extern const struct set_option_entry set_option_table[];
 extern const struct set_option_entry set_window_option_table[];
-#define NSETOPTION 19
+#define NSETOPTION 20
 #define NSETWINDOWOPTION 12
 
 /* Edit keys. */

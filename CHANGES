@@ -1,5 +1,8 @@
 12 January 2009
 
+* Option to set prefix time, allowing multiple commands to be entered without
+  pressing the prefix key again, so long as they each typed within this time of
+  each other.
 * Yet more hacks for key handling. Think it is just about working now.
 * Two commands, resize-pane-up and resize-pane-down to resize a pane.
 * Make the window pane code handle panes of different sizes, and add a -l
