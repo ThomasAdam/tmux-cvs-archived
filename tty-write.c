@@ -36,7 +36,7 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 	struct window_pane	*wp = ptr;
 	struct client		*c;
 	va_list		 	 aq;
-	u_int		 	 i, oy;
+	u_int		 	 i;
 
 	if (wp->window->flags & WINDOW_HIDDEN)
 		return;
@@ -47,13 +47,8 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 			continue;
 
 		if (c->session->curw->window == wp->window) {
-			if (wp == wp->window->panes[0])
-				oy = 0;
-			else
-				oy = wp->window->sy / 2;
-
 			va_copy(aq, ap);
-			tty_vwrite(&c->tty, wp->screen, oy, cmd, aq);
+			tty_vwrite(&c->tty, wp->screen, wp->yoff, cmd, aq);
 			va_end(aq);
 		}
 	}

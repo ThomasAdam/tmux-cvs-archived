@@ -48,9 +48,7 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct winlink		*wl;
 	struct window		*w;
 	struct session		*s;
-	const char		*env[] = { 
-		NULL /* TMUX= */, "TERM=screen", NULL 
-	};
+	const char		*env[] = CHILD_ENVIRON;
 	char		 	 buf[256];
 	u_int			 i;
 

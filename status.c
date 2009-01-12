@@ -258,18 +258,17 @@ off:
 	 * status is off. Not sure this is the right place for this.
 	 */
 	screen_write_start(&ctx, NULL, &c->status);
-	wp = s->curw->window->panes[1];
-	sy = c->sy - (c->sy / 2);
-	if (wp == NULL) {
-		wp = s->curw->window->panes[0];
-		sy = c->sy;
+	wp = s->curw->window->panes[0];
+ 	sy = wp->sy;
+	if (s->curw->window->panes[1] != NULL) {
+		wp = s->curw->window->panes[1];
+		sy += wp->sy + 1;
 	}
 	screen_write_cursormove(&ctx, 0, 0);
-	if (screen_size_y(wp->screen) < sy) {
+	if (sy < c->sy - 1) {
 		/* If the screen is too small, use blank. */
 		for (offset = 0; offset < c->sx; offset++)
 			screen_write_putc(&ctx, &gc, ' ');
-		abort();
 	} else {
 		screen_write_copy(&ctx, wp->screen, 0, wp->screen->grid->hsize +
 		    screen_size_y(wp->screen) - 1, c->sx, 1);

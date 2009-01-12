@@ -81,8 +81,7 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 		
 			ctx->print(ctx, "   pane %d:"
 			    " %s [%ux%u] [history %u/%u, %llu bytes]", i, name,
-			    screen_size_x(&wp->base), screen_size_y(&wp->base),
-			    gd->hsize, gd->hlimit, size);
+			    wp->sx, wp->sy, gd->hsize, gd->hlimit, size);
 		}
 	}
 

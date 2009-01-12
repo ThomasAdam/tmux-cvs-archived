@@ -197,7 +197,7 @@ session_new(struct session *s,
     const char *name, const char *cmd, const char *cwd, int idx)
 {
 	struct window	*w;
-	const char	*env[] = { NULL /* TMUX= */, "TERM=screen", NULL };
+	const char	*env[] = CHILD_ENVIRON;
 	char		 buf[256];
 	u_int		 i, hlimit;
 
