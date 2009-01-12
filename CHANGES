@@ -1,5 +1,6 @@
 12 January 2009
 
+* More hacks for key handling.
 * Two commands, resize-pane-up and resize-pane-down to resize a pane.
 * Make the window pane code handle panes of different sizes, and add a -l
   and -p arguments to split-window to specify the new window size in lines
