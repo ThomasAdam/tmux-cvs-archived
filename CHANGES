@@ -1,5 +1,7 @@
 11 January 2009
 
+* GCC screws up copying (window-copy.c) so build with -O0 until I have time to
+  find the problem or a better workaround.
 * Vertical window splitting. Currently can only split a window into two panes.
   New split-window command splits (bound to ") and switch-pane command (bound to
   o) switches between panes. 
@@ -65,7 +67,7 @@
 
 07 January 2009
 
-* New flag to set and setw, -u, to unset a option (allowing it to inherit from)
+* New flag to set and setw, -u, to unset an option (allowing it to inherit from)
   the global options again.
 * Added more info messages for options changes.
 * A bit of tidying and reorganisation of options code.
