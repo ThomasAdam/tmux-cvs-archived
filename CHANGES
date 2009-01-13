@@ -1,5 +1,16 @@
 12 January 2009
 
+* command-prompt now accepts a single argument, a template string. Any
+  occurrences of %% in this string are replaced by whatever is entered at the
+  prompt and the result is executed as a command. This allows things like (now
+  bound by default):
+
+  	 bind , command-prompt "rename-window %%"
+
+  or my favourite:
+
+         bind x command-prompt "split-window 'man %%'"
+
 * Option to set prefix time, allowing multiple commands to be entered without
   pressing the prefix key again, so long as they each typed within this time of
   each other.

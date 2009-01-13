@@ -80,6 +80,7 @@ key_bindings_init(void)
 		{ '"', &cmd_split_window_entry },
 		{ '#', &cmd_list_buffers_entry },
 		{ '&', &cmd_kill_window_entry },
+		{ ',', &cmd_command_prompt_entry },
 		{ '-', &cmd_delete_buffer_entry },
 		{ '0', &cmd_select_window_entry },
 		{ '1', &cmd_select_window_entry },
