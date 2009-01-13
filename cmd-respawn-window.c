@@ -68,7 +68,7 @@ cmd_respawn_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	env[0] = buf;
 
 	if (w->panes[1] != NULL)
-		window_remove_pane(w, 1);
+		window_remove_pane(w, w->panes[1]);
 
 	if (window_pane_spawn(w->panes[0], data->arg, NULL, env) != 0) {
 		ctx->error(ctx, "respawn failed: %s:%d", s->name, wl->idx);

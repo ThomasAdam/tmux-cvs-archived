@@ -1081,6 +1081,7 @@ extern const struct cmd_entry cmd_copy_mode_entry;
 extern const struct cmd_entry cmd_delete_buffer_entry;
 extern const struct cmd_entry cmd_detach_client_entry;
 extern const struct cmd_entry cmd_has_session_entry;
+extern const struct cmd_entry cmd_kill_pane_entry;
 extern const struct cmd_entry cmd_kill_server_entry;
 extern const struct cmd_entry cmd_kill_session_entry;
 extern const struct cmd_entry cmd_kill_window_entry;
@@ -1383,7 +1384,7 @@ void		 window_destroy(struct window *);
 int		 window_resize(struct window *, u_int, u_int);
 int		 window_add_pane(struct window *,
 		     u_int, const char *, const char *, const char **, u_int);
-int		 window_remove_pane(struct window *, int);
+int		 window_remove_pane(struct window *, struct window_pane *);
 struct window_pane *window_pane_create(struct window *, u_int, u_int, u_int);
 void		 window_pane_destroy(struct window_pane *);
 int		 window_pane_spawn(struct window_pane *,
