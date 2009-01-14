@@ -194,7 +194,6 @@ void
 key_bindings_dispatch(struct key_binding *bd, struct client *c)
 {
 	struct cmd_ctx	 	 ctx;
-	struct key_binding	*bd;
 
 	ctx.msgdata = NULL;
 	ctx.cursession = c->session;
