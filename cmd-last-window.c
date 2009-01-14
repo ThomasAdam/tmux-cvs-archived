@@ -29,7 +29,7 @@ void	cmd_last_window_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_last_window_entry = {
 	"last-window", "last",
 	CMD_TARGET_SESSION_USAGE,
-	0,
+	CMD_CANREPEAT,
 	cmd_target_init,
 	cmd_target_parse,
 	cmd_last_window_exec,
