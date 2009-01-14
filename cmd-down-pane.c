@@ -29,7 +29,7 @@ void	cmd_down_pane_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_down_pane_entry = {
 	"down-pane", "downp",
 	CMD_TARGET_WINDOW_USAGE,
-	0,
+	CMD_CANREPEAT,
 	cmd_target_init,
 	cmd_target_parse,
 	cmd_down_pane_exec,

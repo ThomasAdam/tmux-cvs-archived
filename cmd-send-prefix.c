@@ -53,12 +53,6 @@ cmd_send_prefix_exec(struct cmd *self, struct cmd_ctx *ctx)
 	key = options_get_number(&s->options, "prefix");
 	window_pane_key(wl->window->active, ctx->curclient, key);
 
-	/* Don't want this to be repeated so reset command timer. */
-	if (ctx->curclient != NULL) {
-		if (gettimeofday(&ctx->curclient->command_timer, NULL) != 0)
-			fatal("gettimeofday");
-	}
-
 	if (ctx->cmdclient != NULL)
 		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }

@@ -63,10 +63,6 @@
 
 extern const char    *__progname;
 
-#ifndef GETOPT_PREFIX
-#define GETOPT_PREFIX ""
-#endif
-
 #ifndef INFTIM
 #define INFTIM -1
 #endif
@@ -750,7 +746,7 @@ struct client {
 
 	struct tty 	 tty;
 	struct timeval	 status_timer;
-	struct timeval	 command_timer;
+	struct timeval	 repeat_timer;
 
 	u_int		 sx;
 	u_int		 sy;
@@ -762,6 +758,7 @@ struct client {
 #define CLIENT_MOUSE 0x4
 #define CLIENT_REDRAW 0x8
 #define CLIENT_STATUS 0x10
+#define CLIENT_REPEAT 0x20	/* allow command to repeat within repeat time */
 	int		 flags;
 
 	char		*message_string;
@@ -816,10 +813,11 @@ struct cmd_entry {
 
 #define CMD_STARTSERVER 0x1
 #define CMD_CANTNEST 0x2
-#define CMD_KFLAG 0x4
-#define CMD_DFLAG 0x8
-#define CMD_ONEARG 0x10
-#define CMD_ZEROONEARG 0x20
+#define CMD_ONEARG 0x4
+#define CMD_ZEROONEARG 0x8
+#define CMD_CANREPEAT 0x10
+#define CMD_KFLAG 0x10
+#define CMD_DFLAG 0x20
 #define CMD_GFLAG 0x40
 #define CMD_UFLAG 0x80
 #define CMD_AFLAG 0x100
@@ -1218,7 +1216,7 @@ void	 key_bindings_add(int, struct cmd *);
 void	 key_bindings_remove(int);
 void	 key_bindings_init(void);
 void	 key_bindings_free(void);
-void	 key_bindings_dispatch(int, struct client *);
+void	 key_bindings_dispatch(struct key_binding *, struct client *);
 void printflike2 key_bindings_error(struct cmd_ctx *, const char *, ...);
 void printflike2 key_bindings_print(struct cmd_ctx *, const char *, ...);
 void printflike2 key_bindings_info(struct cmd_ctx *, const char *, ...);

@@ -1,5 +1,10 @@
 14 January 2009
 
+* Rework the prefix-time stuff. The option is now call repeat-time and defaults
+  to 500 ms. However, it only applies to a small subset of commands, currently:
+  up-pane, down-pane, next-window, previous-window, resize-pane-up,
+  resize-pane-down. These are the commands for which it is obviously useful,
+  having it for everything else was just bloody annoying.
 * The alt-up and alt-down keys now resize a pane by five lines at a time.
 * switch-pane is now select-pane and requires -p to select a pane. The
   "o" key binding is changed to down-pane.
