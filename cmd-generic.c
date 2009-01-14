@@ -90,14 +90,14 @@ cmd_fill_argument(int flags, char **arg, int argc, char **argv)
 {
 	*arg = NULL;
 
-	if (flags & CMD_ONEARG) {
+	if (flags & CMD_ARG1) {
 		if (argc != 1)
 			return (-1);
 		*arg = xstrdup(argv[0]);
 		return (0);
 	}
 
-	if (flags & CMD_ZEROONEARG) {
+	if (flags & CMD_ARG01) {
 		if (argc != 0 && argc != 1)
 			return (-1);
 		if (argc == 1)

@@ -31,7 +31,7 @@ void	cmd_respawn_window_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_respawn_window_entry = {
 	"respawn-window", "respawnw",
 	"[-k] " CMD_TARGET_WINDOW_USAGE " [command]",
-	CMD_ZEROONEARG|CMD_KFLAG,
+	CMD_ARG01|CMD_KFLAG,
 	cmd_target_init,
 	cmd_target_parse,
 	cmd_respawn_window_exec,

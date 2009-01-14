@@ -31,7 +31,7 @@ void	cmd_set_buffer_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_set_buffer_entry = {
 	"set-buffer", "setb",
 	CMD_BUFFER_SESSION_USAGE " data",
-	CMD_ONEARG,
+	CMD_ARG1,
 	cmd_buffer_init,
 	cmd_buffer_parse,
 	cmd_set_buffer_exec,

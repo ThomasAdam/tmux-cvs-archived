@@ -33,7 +33,7 @@ void	cmd_save_buffer_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_save_buffer_entry = {
 	"save-buffer", "saveb",
 	"[-a] " CMD_BUFFER_SESSION_USAGE " path",
-	CMD_AFLAG|CMD_ONEARG,
+	CMD_AFLAG|CMD_ARG1,
 	cmd_buffer_init,
 	cmd_buffer_parse,
 	cmd_save_buffer_exec,

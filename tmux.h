@@ -813,8 +813,8 @@ struct cmd_entry {
 
 #define CMD_STARTSERVER 0x1
 #define CMD_CANTNEST 0x2
-#define CMD_ONEARG 0x4
-#define CMD_ZEROONEARG 0x8
+#define CMD_ARG1 0x4
+#define CMD_ARG01 0x8
 #define CMD_CANREPEAT 0x10
 #define CMD_KFLAG 0x10
 #define CMD_DFLAG 0x20
