@@ -111,6 +111,8 @@ key_bindings_init(void)
 		{ 'x', &cmd_kill_pane_entry, },	
 		{ KEYC_UP, &cmd_up_pane_entry },
 		{ KEYC_DOWN, &cmd_down_pane_entry },
+		{ KEYC_ADDESC(KEYC_UP), &cmd_resize_pane_up_entry },
+		{ KEYC_ADDESC(KEYC_DOWN), &cmd_resize_pane_down_entry },
 		{ KEYC_ADDCTL(KEYC_UP), &cmd_resize_pane_up_entry },
 		{ KEYC_ADDCTL(KEYC_DOWN), &cmd_resize_pane_down_entry },
 		{ META, &cmd_send_prefix_entry },

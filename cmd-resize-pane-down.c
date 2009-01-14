@@ -26,13 +26,14 @@
  * Decrease pane size.
  */
 
+void	cmd_resize_pane_down_init(struct cmd *, int);
 void	cmd_resize_pane_down_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_resize_pane_down_entry = {
 	"resize-pane-down", "resizep-down",
 	CMD_PANE_WINDOW_USAGE " [adjustment]",
 	CMD_ZEROONEARG,
-	cmd_pane_init,
+	cmd_resize_pane_down_init,
 	cmd_pane_parse,
 	cmd_resize_pane_down_exec,
        	cmd_pane_send,
@@ -40,6 +41,18 @@ const struct cmd_entry cmd_resize_pane_down_entry = {
 	cmd_pane_free,
 	cmd_pane_print
 };
+
+void
+cmd_resize_pane_down_init(struct cmd *self, int key)
+{
+	struct cmd_pane_data	*data;
+
+	cmd_pane_init(self, key);
+	data = self->data;
+
+	if (key == KEYC_ADDESC(KEYC_DOWN))
+		data->arg = xstrdup("5");
+}
 
 void
 cmd_resize_pane_down_exec(struct cmd *self, struct cmd_ctx *ctx)

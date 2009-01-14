@@ -1,5 +1,6 @@
 14 January 2009
 
+* The alt-up and alt-down keys now resize a pane by five lines at a time.
 * switch-pane is now select-pane and requires -p to select a pane. The
   "o" key binding is changed to down-pane.
 * up-pane and down-pane commands, bound to arrow up and down by default.
