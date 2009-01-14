@@ -38,7 +38,7 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 	va_list		 	 aq;
 	u_int		 	 i;
 
-	if (wp->window->flags & WINDOW_HIDDEN)
+	if (wp->window->flags & WINDOW_HIDDEN || wp->flags & PANE_HIDDEN)
 		return;
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
