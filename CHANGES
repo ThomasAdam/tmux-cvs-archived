@@ -1,5 +1,6 @@
 14 January 2009
 
+* up-pane and down-pane commands, bound to arrow up and down by default.
 * Multiple vertical window splitting. Minimum pane size is four lines, an
   (unhelpful) error will be shown if attempting to split a window with less
   that eight lines. If the window is resized, as many panes are shown as can
@@ -8,9 +9,6 @@
 
   Note the -p and -l options to split-window are now gone, these may reappear
   once I think them through again.
-
-  To come: up-pane, down-pane; switch-pane will support -p and become
-  select-pane.
 * Server locking on inactivity (lock-after-time) is now disabled by default.
 
 13 January 2009

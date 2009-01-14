@@ -33,6 +33,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_copy_mode_entry,
 	&cmd_delete_buffer_entry,
 	&cmd_detach_client_entry,
+	&cmd_down_pane_entry,
 	&cmd_has_session_entry,
 	&cmd_kill_pane_entry,
 	&cmd_kill_server_entry,
@@ -81,6 +82,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_switch_pane_entry,
 	&cmd_unbind_key_entry,
 	&cmd_unlink_window_entry,
+	&cmd_up_pane_entry,
 	NULL
 };
 
