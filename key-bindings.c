@@ -102,7 +102,7 @@ key_bindings_init(void)
 		{ 'd', &cmd_detach_client_entry },
 		{ 'l', &cmd_last_window_entry },
 		{ 'n', &cmd_next_window_entry },
-		{ 'o', &cmd_switch_pane_entry },
+		{ 'o', &cmd_down_pane_entry },
 		{ 'p', &cmd_previous_window_entry },
 		{ 'r', &cmd_refresh_client_entry },
 		{ 's', &cmd_list_sessions_entry },

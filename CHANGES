@@ -1,5 +1,7 @@
 14 January 2009
 
+* switch-pane is now select-pane and requires -p to select a pane. The
+  "o" key binding is changed to down-pane.
 * up-pane and down-pane commands, bound to arrow up and down by default.
 * Multiple vertical window splitting. Minimum pane size is four lines, an
   (unhelpful) error will be shown if attempting to split a window with less
