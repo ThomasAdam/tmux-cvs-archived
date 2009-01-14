@@ -1,3 +1,7 @@
+14 January 2009
+
+* Server locking on inactivity (lock-after-time) is now disabled by default.
+
 13 January 2009
 
 * kill-pane command.
