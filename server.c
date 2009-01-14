@@ -598,15 +598,12 @@ server_handle_client(struct client *c)
 			continue;
 		wp = wl->window->active;	/* could die - do each loop */
 		
-		/* Prefix key pressed. */
-		if (key == prefix) {
-			c->flags |= CLIENT_PREFIX;
-			continue;
-		}
-
-		/* Other key and no previous prefix key. */
+		/* No previous prefix key. */
 		if (!(c->flags & CLIENT_PREFIX)) {
-			window_pane_key(wp, c, key);
+			if (key == prefix)
+				c->flags |= CLIENT_PREFIX;
+			else
+				window_pane_key(wp, c, key);
 			continue;
 		}
 
@@ -616,7 +613,10 @@ server_handle_client(struct client *c)
 			/* If repeating, treat this as a key, else ignore. */
 			if (c->flags & CLIENT_REPEAT) {
 				c->flags &= ~CLIENT_REPEAT;
-				window_pane_key(wp, c, key);
+				if (key == prefix)
+					c->flags |= CLIENT_PREFIX;
+				else
+					window_pane_key(wp, c, key);
 			}
 			continue;
 		}
@@ -625,7 +625,10 @@ server_handle_client(struct client *c)
 		/* If already repeating, but this key can't repeat, skip it. */
 		if (c->flags & CLIENT_REPEAT && !(flags & CMD_CANREPEAT)) {
 			c->flags &= ~CLIENT_REPEAT;
-			window_pane_key(wp, c, key);
+			if (key == prefix)
+				c->flags |= CLIENT_PREFIX;
+			else
+				window_pane_key(wp, c, key);
 			continue;
 		}
 		
