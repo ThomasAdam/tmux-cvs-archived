@@ -36,7 +36,7 @@ syn keyword tmuxOptsSet prefix status status-fg status-bg bell-action
 syn keyword tmuxOptsSet default-command history-limit status-left status-right
 syn keyword tmuxOptsSet status-interval set-titles display-time buffer-limit
 syn keyword tmuxOptsSet status-left-length status-right-length message-fg
-syn keyword tmuxOptsSet message-bg lock-after-time
+syn keyword tmuxOptsSet message-bg lock-after-time default-path
 
 syn keyword tmuxOptsSetw monitor-activity aggressive-resize force-width
 syn keyword tmuxOptsSetw force-height remain-on-exit uft8 mode-fg mode-bg
