@@ -72,7 +72,7 @@ window_more_vadd(struct window_pane *wp, const char *fmt, va_list ap)
 	screen_write_stop(&ctx);
 }
 
-void
+void printflike2
 window_more_add(struct window_pane *wp, const char *fmt, ...)
 {
 	va_list	ap;
@@ -165,7 +165,8 @@ window_more_key(struct window_pane *wp, unused struct client *c, int key)
 }
 
 void
-window_more_write_line(struct window_pane *wp, struct screen_write_ctx *ctx, u_int py)
+window_more_write_line(
+    struct window_pane *wp, struct screen_write_ctx *ctx, u_int py)
 {
 	struct window_more_mode_data	*data = wp->modedata;
 	struct screen			*s = &data->screen;
