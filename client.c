@@ -82,7 +82,7 @@ retry:
 			if (server_start(path) != 0)
 				goto no_start;
 		}
-		goto fail;
+		goto retry;
 	}
 
 	if ((mode = fcntl(cctx->srv_fd, F_GETFL)) == -1)
