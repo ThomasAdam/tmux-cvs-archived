@@ -96,8 +96,9 @@ cmd_choose_window_callback(void *data, int idx)
 
 	if (idx != -1 && cdata->session <= ARRAY_LENGTH(&sessions) - 1) {
 		s = ARRAY_ITEM(&sessions, cdata->session);
-		if (s != NULL && session_select(s, idx) != -1)
+		if (s != NULL && session_select(s, idx) == 0)
 			server_redraw_session(s);
+		recalculate_sizes();
 	}
 	xfree(cdata);
 }
