@@ -1,7 +1,8 @@
 15 January 2009
 
 * Two new commands, choose-window and choose-session which work only when bound
-  to a key and allow the window or session to be selected from a list.
+  to a key and allow the window or session to be selected from a list. These
+  are now bound to "w" and "s" instead of the list commands.
 
 14 January 2009
 
