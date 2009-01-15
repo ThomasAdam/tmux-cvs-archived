@@ -226,6 +226,8 @@ window_choose_key(struct window_pane *wp, unused struct client *c, int key)
 			data->top += screen_size_y(s);
 		window_choose_redraw_screen(wp);
 		break;
+	default:
+		break;
 	}
 }
 
