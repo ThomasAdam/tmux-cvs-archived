@@ -82,6 +82,7 @@ retry:
 			if (server_start(path) != 0)
 				goto no_start;
 		}
+		retries++;
 		goto retry;
 	}
 
