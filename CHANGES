@@ -1,5 +1,6 @@
 15 January 2009
 
+* Support #H for hostname and #S for session name in status-left/right.
 * Two new commands, choose-window and choose-session which work only when bound
   to a key and allow the window or session to be selected from a list. These
   are now bound to "w" and "s" instead of the list commands.

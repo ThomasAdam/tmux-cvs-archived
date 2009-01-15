@@ -243,7 +243,7 @@ main(int argc, char **argv)
 	options_set_number(&global_options, "status-interval", 15);
 	options_set_number(&global_options, "status-left-length", 10);
 	options_set_number(&global_options, "status-right-length", 40);
-	options_set_string(&global_options, "status-left", "%s", ""); /* ugh */
+	options_set_string(&global_options, "status-left", "[#S]");
 	options_set_string(
 	    &global_options, "status-right", "\"#24T\" %%H:%%M %%d-%%b-%%y");
 	options_init(&global_window_options, NULL);
