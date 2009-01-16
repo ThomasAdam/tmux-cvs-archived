@@ -47,6 +47,8 @@ struct {
 	{ "End",	KEYC_END },
 	{ "NPage",	KEYC_NPAGE },
 	{ "PPage",	KEYC_PPAGE },
+	{ "Tab",	'\011' },
+	{ "BTab",	KEYC_BTAB },
 
 	/* Arrow keys. */
 	{ "Up",		KEYC_UP },
