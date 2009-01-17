@@ -193,8 +193,6 @@ server_main(const char *srv_path, int srv_fd)
 
 	last = time(NULL);
 
-	sigterm=1;/*XXX*/
-
 	pfds = NULL;
 	while (!sigterm) {
 		/* Initialise pollfd array. */
