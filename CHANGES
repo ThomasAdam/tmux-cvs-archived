@@ -1,3 +1,7 @@
+17 January 2009
+
+* tmux 0.6 released.
+
 15 January 2009
 
 * Support #H for hostname and #S for session name in status-left/right.
@@ -54,8 +58,6 @@
 
 11 January 2009
 
-* GCC screws up copying (window-copy.c) so build with -O0 until I have time to
-  find the problem or a better workaround.
 * Vertical window splitting. Currently can only split a window into two panes.
   New split-window command splits (bound to ") and switch-pane command (bound to
   o) switches between panes. 
