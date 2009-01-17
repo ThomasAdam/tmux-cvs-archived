@@ -44,6 +44,7 @@ syn keyword tmuxOptsSet message-bg lock-after-time default-path repeat-time
 syn keyword tmuxOptsSetw monitor-activity aggressive-resize force-width
 syn keyword tmuxOptsSetw force-height remain-on-exit uft8 mode-fg mode-bg
 syn keyword tmuxOptsSetw mode-keys clock-mode-colour clock-mode-style
+syn keyword tmuxOptsSetw xterm-keys
 
 syn keyword tmuxTodo FIXME NOTE TODO XXX contained
 
