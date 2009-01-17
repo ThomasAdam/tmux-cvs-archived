@@ -945,6 +945,15 @@ command.
 Instructs
 .Nm
 to expect UTF-8 sequences to appear in this window.
+.It Xo xterm-keys
+.Op Ic on | Ic off
+.Xc
+If this option is set,
+.Nm
+will generate
+.Xr xterm 1 -style
+function key sequences; these have a number included to indicate modifiers such
+as shift, meta or ctrl.
 .El
 .It Xo Ic show-buffer
 .Op Fl b Ar buffer-index
