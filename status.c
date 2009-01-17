@@ -44,7 +44,7 @@ status_redraw(struct client *c)
 	struct session		       *s = c->session;
 	struct winlink		       *wl;
 	struct window_pane	       *wp;
-	struct screen		       *sc;
+	struct screen		       *sc = NULL;
 	char		 	       *left, *right, *text, *ptr;
 	size_t				llen, rlen, offset, xx, yy, sy;
 	size_t				size, start, width;

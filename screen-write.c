@@ -589,7 +589,8 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 	 */
 	for (xx = s->cx + 1; xx < s->cx + width; xx++) {
 		ic = grid_view_get_cell(gd, xx, s->cy);
-		ic->flags |= GRID_FLAG_PADDING;
+		if (ic != NULL)
+			ic->flags |= GRID_FLAG_PADDING;
 	}
 
 	/* Write the actual cell. */
