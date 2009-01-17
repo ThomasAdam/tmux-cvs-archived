@@ -139,6 +139,7 @@ key_bindings_free(void)
 
 	while (!SPLAY_EMPTY(&key_bindings)) {
 		bd = SPLAY_ROOT(&key_bindings);
+		SPLAY_REMOVE(key_bindings, &key_bindings, bd);
 		cmd_free(bd->cmd);
 		xfree(bd);
 	}
