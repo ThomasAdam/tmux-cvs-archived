@@ -53,12 +53,12 @@ cfg_error(unused struct cmd_ctx *ctx, const char *fmt, ...)
 int
 load_cfg(const char *path, char **cause)
 {
-	FILE   	       *f;
-	u_int		n;
-	char	       *buf, *line, *ptr;
-	size_t		len;
-	struct cmd     *cmd;
-	struct cmd_ctx	ctx;
+	FILE   	        *f;
+	u_int		 n;
+	char	        *buf, *line, *ptr;
+	size_t		 len;
+	struct cmd_list	*cmdlist;
+	struct cmd_ctx	 ctx;
 
 	if ((f = fopen(path, "rb")) == NULL) {
 		xasprintf(cause, "%s: %s", path, strerror(errno));
@@ -78,12 +78,12 @@ load_cfg(const char *path, char **cause)
 		}
 		n++;
 
-		if (cmd_string_parse(buf, &cmd, cause) != 0) {
+		if (cmd_string_parse(buf, &cmdlist, cause) != 0) {
 			if (*cause == NULL)
 				continue;
 			goto error;
 		}
-		if (cmd == NULL)
+		if (cmdlist == NULL)
 			continue;
 		cfg_cause = NULL;
 
@@ -98,8 +98,8 @@ load_cfg(const char *path, char **cause)
 		ctx.cmdclient = NULL;
 
 		cfg_cause = NULL;
-		cmd_exec(cmd, &ctx);
-		cmd_free(cmd);
+		cmd_list_exec(cmdlist, &ctx);
+		cmd_list_free(cmdlist);
 		if (cfg_cause != NULL) {
 			*cause = cfg_cause;
 			goto error;

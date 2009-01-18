@@ -44,17 +44,15 @@ cmd_list_keys_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct key_binding	*bd;
 	const char		*key;
-	char			 s[BUFSIZ];
+	char			 tmp[BUFSIZ];
 
 	SPLAY_FOREACH(bd, key_bindings, &key_bindings) {
 		if ((key = key_string_lookup_key(bd->key)) == NULL)
 			continue;
-		if (bd->cmd->entry->print == NULL) {
-			ctx->print(ctx, "%11s: %s", key, bd->cmd->entry->name);
-			continue;
-		}
-		bd->cmd->entry->print(bd->cmd, s, sizeof s);
-		ctx->print(ctx, "%11s: %s", key, s);
+		
+		*tmp = '\0';
+		cmd_list_print(bd->cmdlist, tmp, sizeof tmp);
+		ctx->print(ctx, "%11s: %s", key, tmp);
 	}
 
 	if (ctx->cmdclient != NULL)

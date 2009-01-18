@@ -33,7 +33,7 @@ void	cmd_set_password_send(struct cmd *, struct buffer *);
 void	cmd_set_password_recv(struct cmd *, struct buffer *);
 void	cmd_set_password_free(struct cmd *);
 void	cmd_set_password_init(struct cmd *, int);
-void	cmd_set_password_print(struct cmd *, char *, size_t);
+size_t	cmd_set_password_print(struct cmd *, char *, size_t);
 
 struct cmd_set_password_data {
 	char	*password;
@@ -153,7 +153,7 @@ cmd_set_password_free(struct cmd *self)
 	xfree(data);
 }
 
-void
+size_t
 cmd_set_password_print(struct cmd *self, char *buf, size_t len)
 {
 	struct cmd_set_password_data	*data = self->data;
@@ -161,9 +161,10 @@ cmd_set_password_print(struct cmd *self, char *buf, size_t len)
 
 	off += xsnprintf(buf, len, "%s", self->entry->name);
 	if (data == NULL)
-		return;
+		return (off);
 	if (off < len && data->flag_encrypted)
 		off += xsnprintf(buf + off, len - off, " -c");
 	if (off < len && data->password != NULL)
 		off += xsnprintf(buf + off, len - off, " password");
+	return (off);
 }

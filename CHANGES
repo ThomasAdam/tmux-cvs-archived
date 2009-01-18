@@ -1,5 +1,18 @@
 18 January 2009
 
+* Cleaned up command printing code, also enclose arguments with spaces in "s.
+* Added command sequences. These are entered by separating each argument by a ;
+  argument (spaces on both sides), for example:
+
+	lsk ; lsc
+
+  To use a literal ; as the argument prefix it with \, for example:
+
+	bind x lsk \; lsc
+
+  Commands are executed from left to right and, importantly, an error does NOT
+  stop execution. Also note that command sequences do not support repeat-time
+  repetition unless all commands making up the sequence support it.
 * suspend-client command to suspend a client. Don't try to background it
   though...
 * Mark attached sessions in sessions lists. Suggested by Simon Kuhnle.

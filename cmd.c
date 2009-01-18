@@ -234,6 +234,15 @@ cmd_free(struct cmd *cmd)
 	xfree(cmd);
 }
 
+size_t
+cmd_print(struct cmd *cmd, char *buf, size_t len)
+{
+	if (cmd->entry->print == NULL) {
+		return (xsnprintf(buf, len, "%s", cmd->entry->name));
+	}
+	return (cmd->entry->print(cmd, buf, len));
+}
+
 void
 cmd_send_string(struct buffer *b, const char *s)
 {

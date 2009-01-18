@@ -31,7 +31,7 @@ void	cmd_send_keys_exec(struct cmd *, struct cmd_ctx *);
 void	cmd_send_keys_send(struct cmd *, struct buffer *);
 void	cmd_send_keys_recv(struct cmd *, struct buffer *);
 void	cmd_send_keys_free(struct cmd *);
-void	cmd_send_keys_print(struct cmd *, char *, size_t);
+size_t	cmd_send_keys_print(struct cmd *, char *, size_t);
 
 struct cmd_send_keys_data {
 	char	*target;
@@ -160,7 +160,7 @@ cmd_send_keys_free(struct cmd *self)
 	xfree(data);
 }
 
-void
+size_t
 cmd_send_keys_print(struct cmd *self, char *buf, size_t len)
 {
 	struct cmd_send_keys_data	*data = self->data;
@@ -169,9 +169,9 @@ cmd_send_keys_print(struct cmd *self, char *buf, size_t len)
 
 	off += xsnprintf(buf, len, "%s", self->entry->name);
 	if (data == NULL)
-		return;
+		return (off);
 	if (off < len && data->target != NULL)
-		off += xsnprintf(buf + off, len - off, " -t %s", data->target);
+		off += cmd_prarg(buf + off, len - off, " -t ", data->target);
 	if (off < len && data->idx != -1)
 		off += xsnprintf(buf + off, len - off, " -i %d", data->idx);
 
@@ -181,4 +181,5 @@ cmd_send_keys_print(struct cmd *self, char *buf, size_t len)
 		off += xsnprintf(buf + off,
 		    len - off, " %s", key_string_lookup_key(data->keys[i]));
 	}
+	return (off);
 }
