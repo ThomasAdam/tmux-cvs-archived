@@ -411,7 +411,7 @@ screen_write_linefeed(struct screen_write_ctx *ctx)
 
 	if (s->cy == s->rlower)
 		grid_view_scroll_region_up(s->grid, s->rupper, s->rlower);
-	else if (s->cy < screen_size_x(s) - 1)
+	else if (s->cy < screen_size_y(s) - 1)
 		s->cy++;
 }
 
