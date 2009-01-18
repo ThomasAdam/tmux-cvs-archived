@@ -3,11 +3,11 @@
 .PHONY: clean
 
 PROG= tmux
-VERSION= 0.6
+VERSION= 0.7
 
 DATE= $(shell date +%Y%m%d-%H%M)
 
-#DEBUG= 1
+DEBUG= 1
 
 META?= \002
 
