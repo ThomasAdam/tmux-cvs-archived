@@ -542,7 +542,9 @@ input_state_utf8(u_char ch, struct input_ctx *ictx)
 		value = '_';
 
 	ictx->cell.data = value;
+ 	ictx->cell.flags |= GRID_FLAG_UTF8;
 	screen_write_cell(&ictx->ctx, &ictx->cell);
+ 	ictx->cell.flags &= ~GRID_FLAG_UTF8;
 }
 
 void

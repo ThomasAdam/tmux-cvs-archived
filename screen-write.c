@@ -514,7 +514,11 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 	const struct grid_cell 	*hc;
 	struct grid_cell 	*ic, tc;
 
-	width = utf8_width(gc->data);
+	/* Find character width. */
+	if (gc->flags & GRID_FLAG_UTF8)
+		width = utf8_width(gc->data);
+	else
+		width = 1;
 
 	/* If the character is wider than the screen, don't print it. */
 	if (width > screen_size_x(s)) {
@@ -570,7 +574,7 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 				break;
 			grid_view_set_cell(gd, xx, s->cy, &grid_default_cell);
 		}
-	} else if (utf8_width(hc->data) > 1) {
+	} else if (hc->flags & GRID_FLAG_UTF8 && utf8_width(hc->data) > 1) {
 		/*
 		 * An UTF-8 wide cell; overwrite following padding cells only.
 		 */
@@ -593,6 +597,7 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 			ic->flags |= GRID_FLAG_PADDING;
 	}
 
+not_utf8:
 	/* Write the actual cell. */
 	grid_view_set_cell(gd, s->cx, s->cy, gc);
 

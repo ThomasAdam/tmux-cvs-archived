@@ -426,6 +426,7 @@ struct msg_resize_data {
 #define GRID_FLAG_FG256 0x1
 #define GRID_FLAG_BG256 0x2
 #define GRID_FLAG_PADDING 0x4
+#define GRID_FLAG_UTF8 0x8
 
 /* Grid cell. */
 struct grid_cell {
