@@ -50,13 +50,16 @@ cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data		*data = self->data;
 	struct cmd_choose_window_data	*cdata;
-	struct session			*s = ctx->curclient->session;
+	struct session			*s;
 	struct winlink			*wl, *wm;
 	struct window			*w;
 	u_int			 	 idx, cur;
 
-	if (ctx->curclient == NULL)
+	if (ctx->curclient == NULL) {
+		ctx->error(ctx, "must be run interactively");
 		return;
+	}
+	s = ctx->curclient->session;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return;
