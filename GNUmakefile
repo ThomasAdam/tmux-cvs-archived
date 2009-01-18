@@ -105,7 +105,7 @@ endif
 
 OBJS= $(patsubst %.c,%.o,$(SRCS))
 
-CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log index.html
+CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log compat/*.o index.html
 
 CPPFLAGS+= $(INCDIRS)
 

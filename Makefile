@@ -92,7 +92,7 @@ DISTDIR= ${PROG}-${VERSION}
 DISTFILES= *.[chyl] Makefile GNUmakefile *.[1-9] NOTES TODO CHANGES FAQ \
 	   `find examples compat -type f -and ! -path '*CVS*'`
 
-CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log index.html
+CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log compat/*.o index.html
 
 .c.o:
 		${CC} ${CFLAGS} ${INCDIRS} -c ${.IMPSRC} -o ${.TARGET}
