@@ -225,7 +225,12 @@ server_msg_fn_resize(struct hdr *hdr, struct client *c)
 	c->sy = data.sy;
 	if (c->sy == 0)
 		c->sy = 25;
-
+	
+	c->tty.cx = UINT_MAX;
+	c->tty.cy = UINT_MAX;
+	c->tty.rupper = UINT_MAX;
+	c->tty.rlower = UINT_MAX;
+	
 	recalculate_sizes();
 
 	/* Always redraw this client. */
