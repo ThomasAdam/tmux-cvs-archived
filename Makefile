@@ -80,7 +80,10 @@ LIBS+= -lutil -lncurses
 
 # FreeBSD and DragonFly
 .if ${OS} == "FreeBSD" || ${OS} == "DragonFly"
+INCDIRS+= -Icompat
+SRCS+= compat/vis.c
 CFLAGS+= -DUSE_LIBUTIL_H
+LIBS+= -lcrypt
 .endif
 
 OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
