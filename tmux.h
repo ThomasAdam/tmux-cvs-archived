@@ -727,7 +727,7 @@ struct tty {
 #define TTY_FREEZE 0x2
 #define TTY_ESCAPE 0x4
 #define TTY_UTF8 0x8
-	int		 flags;
+	int    		 flags;
 
 	int		 term_flags;
 
@@ -1479,8 +1479,8 @@ struct winlink	*session_new(struct session *,
 struct winlink	*session_attach(struct session *, struct window *, int);
 int		 session_detach(struct session *, struct winlink *);
 int		 session_has(struct session *, struct window *);
-int		 session_next(struct session *);
-int		 session_previous(struct session *);
+int		 session_next(struct session *, int);
+int		 session_previous(struct session *, int);
 int		 session_select(struct session *, int);
 int		 session_last(struct session *);
 

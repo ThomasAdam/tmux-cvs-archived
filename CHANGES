@@ -1,5 +1,7 @@
 18 January 2009
 
+* -a flag to next-window and previous-window to select the next or previous 
+  window with activity or bell. Bound to M-n and M-p.
 * find-window command to search window names, titles and visible content (but
   not history) for a string. If only one is found, the window is selected
   otherwise a choice list is shown. This (as with the other choice commands)
