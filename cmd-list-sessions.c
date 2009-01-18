@@ -58,8 +58,9 @@ cmd_list_sessions_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		tim = ctime(&t);
 		*strchr(tim, '\n') = '\0';
 
-		ctx->print(ctx, "%s: %u windows (created %s) [%ux%u]",
-		    s->name, winlink_count(&s->windows), tim, s->sx, s->sy);
+		ctx->print(ctx, "%s: %u windows (created %s) [%ux%u]%s",
+		    s->name, winlink_count(&s->windows), tim, s->sx, s->sy,
+		    s->flags & SESSION_UNATTACHED ? "" : " (attached)");
 	}
 
 	if (ctx->cmdclient != NULL)

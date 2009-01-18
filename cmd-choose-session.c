@@ -73,8 +73,9 @@ cmd_choose_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 		idx++;
 
 		window_choose_add(wl->window->active, i,
-		    "%s: %u windows [%ux%u]", s->name,
-		    winlink_count(&s->windows), s->sx, s->sy);
+		    "%s: %u windows [%ux%u]%s", s->name,
+		    winlink_count(&s->windows), s->sx, s->sy,
+		    s->flags & SESSION_UNATTACHED ? "" : " (attached)");
 	}
 
 	cdata = xmalloc(sizeof *cdata);
