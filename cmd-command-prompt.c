@@ -62,6 +62,9 @@ cmd_command_prompt_init(struct cmd *self, int key)
 	case ',':
 		data->arg = xstrdup("rename-window '%%'");
 		break;
+	case 'f':
+		data->arg = xstrdup("find-window '%%'");
+		break;
 	}
 }
 

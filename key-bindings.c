@@ -100,6 +100,7 @@ key_bindings_init(void)
 		{ ']', &cmd_paste_buffer_entry },
 		{ 'c', &cmd_new_window_entry },
 		{ 'd', &cmd_detach_client_entry },
+		{ 'f', &cmd_command_prompt_entry },
 		{ 'l', &cmd_last_window_entry },
 		{ 'n', &cmd_next_window_entry },
 		{ 'o', &cmd_down_pane_entry },

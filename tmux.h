@@ -1102,6 +1102,7 @@ extern const struct cmd_entry cmd_copy_mode_entry;
 extern const struct cmd_entry cmd_delete_buffer_entry;
 extern const struct cmd_entry cmd_detach_client_entry;
 extern const struct cmd_entry cmd_down_pane_entry;
+extern const struct cmd_entry cmd_find_window_entry;
 extern const struct cmd_entry cmd_has_session_entry;
 extern const struct cmd_entry cmd_kill_pane_entry;
 extern const struct cmd_entry cmd_kill_server_entry;
@@ -1487,6 +1488,9 @@ int		 session_last(struct session *);
 u_int	utf8_combine(const u_char *);
 void	utf8_split(u_int, u_char *);
 int	utf8_width(u_int);
+
+/* util.c */
+char   *section_string(char *, size_t, size_t, size_t);
 
 /* buffer.c */
 struct buffer 	*buffer_create(size_t);

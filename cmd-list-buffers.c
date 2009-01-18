@@ -78,8 +78,8 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 				tmp[out - 3] = '.';
 			}
 
-			ctx->print(ctx, "%d: "
-			    "%zu bytes: \"%s\"", idx - 1, strlen(pb->data), tmp);
+			ctx->print(ctx, "%d: %zu bytes: \"%s\"",
+			    idx - 1, strlen(pb->data), tmp);
 		} else
 			ctx->print(ctx, "%d: %zu bytes", idx, strlen(pb->data));
 	}

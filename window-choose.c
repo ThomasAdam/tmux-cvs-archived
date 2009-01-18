@@ -149,6 +149,7 @@ window_choose_key(struct window_pane *wp, unused struct client *c, int key)
 	struct window_choose_mode_data	*data = wp->modedata;
 	struct screen			*s = &data->screen;
 	struct screen_write_ctx		 ctx;
+	struct window_choose_mode_item	*item;
 	int				 table;
 	u_int				 items;
 
@@ -161,7 +162,8 @@ window_choose_key(struct window_pane *wp, unused struct client *c, int key)
 		window_pane_reset_mode(wp);
 		break;
 	case MODEKEY_ENTER:
-		data->callback(data->data, data->selected);
+		item = &ARRAY_ITEM(&data->list, data->selected);
+		data->callback(data->data, item->idx);
 		window_pane_reset_mode(wp);
 		break;
 	case MODEKEY_UP:

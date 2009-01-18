@@ -36,6 +36,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_delete_buffer_entry,
 	&cmd_detach_client_entry,
 	&cmd_down_pane_entry,
+	&cmd_find_window_entry,
 	&cmd_has_session_entry,
 	&cmd_kill_pane_entry,
 	&cmd_kill_server_entry,
