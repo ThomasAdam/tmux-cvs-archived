@@ -59,6 +59,19 @@ this may be turned on for all windows by setting it as a global option, see
 tmux(1) and the FAQ file. In addition, when starting tmux or attaching to an
 existing session from a UTF-8-capable terminal, the -u flag must be specified.
 
+A Vim syntax file is available in the examples directory. To install it:
+- Drop the file in the syntax directory in your runtimepath
+  (e.g. ~/.vim/syntax/tmux.vim).
+- Make the filetype recognisable by adding the following to filetype.vim
+  (again) in your runtimepath (e.g. ~/.vim/filetype.vim):
+
+	augroup filetypedetect
+		au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+	augroup END
+
+- Switch on syntax highlighting in your vimrc file by adding "syntax enable"
+  to it.
+
 There are the following known issues:
 
 - cons25 on the FreeBSD console doesn't support scroll region (cs) (or lies
