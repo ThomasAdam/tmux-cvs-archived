@@ -424,7 +424,8 @@ window_copy_copy_line(
     struct window_pane *wp, char **buf, size_t *off, u_int sy, u_int sx, u_int ex)
 {
 	const struct grid_cell *gc;
-	u_char			i, j, xx, data[4];
+	u_int			i, j, xx;
+	u_char			data[4];
 
 	if (sx > ex)
 		return;
