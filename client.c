@@ -146,6 +146,11 @@ client_main(struct client_ctx *cctx)
 	while (!sigterm) {
 		if (sigwinch)
 			client_handle_winch(cctx);
+		if (sigcont) {
+			siginit();
+			client_write_server(cctx, MSG_WAKEUP, NULL, 0);	
+			sigcont = 0;
+		}
 
 		switch (client_msg_dispatch(cctx, &error)) {
 		case -1:

@@ -1,5 +1,7 @@
 17 January 2009
 
+* suspend-client command to suspend a client. Don't try to background it
+  though...
 * tmux 0.6 released.
 
 15 January 2009

@@ -45,6 +45,8 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 		c = ARRAY_ITEM(&clients, i);
 		if (c == NULL || c->session == NULL)
 			continue;
+		if (c->flags & CLIENT_SUSPENDED)
+			continue;
 
 		if (c->session->curw->window == wp->window) {
 			va_copy(aq, ap);
