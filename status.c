@@ -498,8 +498,8 @@ status_prompt_redraw(struct client *c)
 		ch = c->prompt_buffer[c->prompt_index];
 	if (ch == '\0')
 		ch = ' ';
-	gc.bg = gc.fg;
-	gc.fg = options_get_number(&s->options, "message-bg");
+	gc.bg = options_get_number(&s->options, "message-bg");
+	gc.attr |= GRID_ATTR_REVERSE;
 	screen_write_putc(&ctx, &gc, ch);
 
 	screen_write_stop(&ctx);

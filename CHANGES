@@ -1,5 +1,7 @@
 19 January 2009
 
+* Use reverse attributes for clock and cursor, otherwise they do not
+  appear on black and white terminals.
 * An error in a command sequence now stops execution of that sequence.
   Internally, each command code now passes a return code back rather than
   talking to the calling client (if any) directly.
