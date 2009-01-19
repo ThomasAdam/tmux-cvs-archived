@@ -597,7 +597,6 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 			ic->flags |= GRID_FLAG_PADDING;
 	}
 
-not_utf8:
 	/* Write the actual cell. */
 	grid_view_set_cell(gd, s->cx, s->cy, gc);
 
