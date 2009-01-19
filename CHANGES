@@ -1,3 +1,9 @@
+19 January 2009
+
+* attach-session now tries to start the server if it isn't already started - if
+  no sessions are created in .tmux.conf this will cause an error.
+* Clean up starting server by making initial client get a special socketpair.
+
 18 January 2009
 
 * Unbreak UTF-8.

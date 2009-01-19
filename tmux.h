@@ -1253,6 +1253,7 @@ const char *key_string_lookup_key(int);
 
 /* server.c */
 extern struct clients clients;
+struct client *server_create_client(int);
 int	 server_client_index(struct client *);
 int	 server_start(const char *);
 
