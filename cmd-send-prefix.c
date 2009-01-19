@@ -24,7 +24,7 @@
  * Send prefix key as a key.
  */
 
-void	cmd_send_prefix_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_send_prefix_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_send_prefix_entry = {
 	"send-prefix", NULL,
@@ -39,7 +39,7 @@ const struct cmd_entry cmd_send_prefix_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_send_prefix_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
@@ -48,11 +48,10 @@ cmd_send_prefix_exec(struct cmd *self, struct cmd_ctx *ctx)
 	int			 key;
 
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
-		return;
+		return (-1);
 
 	key = options_get_number(&s->options, "prefix");
 	window_pane_key(wl->window->active, ctx->curclient, key);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

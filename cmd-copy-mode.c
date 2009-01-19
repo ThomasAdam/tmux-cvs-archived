@@ -24,7 +24,7 @@
  * Enter copy mode.
  */
 
-void	cmd_copy_mode_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_copy_mode_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_copy_mode_entry = {
 	"copy-mode", NULL,
@@ -39,17 +39,16 @@ const struct cmd_entry cmd_copy_mode_entry = {
 	NULL
 };
 
-void
+int
 cmd_copy_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
-		return;
+		return (-1);
 
 	window_pane_set_mode(wl->window->active, &window_copy_mode);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

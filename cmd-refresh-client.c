@@ -24,7 +24,7 @@
  * Refresh client.
  */
 
-void	cmd_refresh_client_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_refresh_client_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_refresh_client_entry = {
 	"refresh-client", "refresh",
@@ -39,17 +39,16 @@ const struct cmd_entry cmd_refresh_client_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_refresh_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct client		*c;
 
 	if ((c = cmd_find_client(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	server_redraw_client(c);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

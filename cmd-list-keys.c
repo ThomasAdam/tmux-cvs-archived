@@ -24,7 +24,7 @@
  * List key bindings.
  */
 
-void	cmd_list_keys_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_list_keys_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_keys_entry = {
 	"list-keys", "lsk",
@@ -39,7 +39,7 @@ const struct cmd_entry cmd_list_keys_entry = {
 	NULL
 };
 
-void
+int
 cmd_list_keys_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct key_binding	*bd;
@@ -55,6 +55,5 @@ cmd_list_keys_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		ctx->print(ctx, "%11s: %s", key, tmp);
 	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

@@ -26,7 +26,7 @@
  * Change session name.
  */
 
-void	cmd_rename_session_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_rename_session_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_rename_session_entry = {
 	"rename-session", "rename",
@@ -41,18 +41,17 @@ const struct cmd_entry cmd_rename_session_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_rename_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct session		*s;
 
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	xfree(s->name);
 	s->name = xstrdup(data->arg);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

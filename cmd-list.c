@@ -60,13 +60,17 @@ bad:
 	return (NULL);
 }
 
-void
+int
 cmd_list_exec(struct cmd_list *cmdlist, struct cmd_ctx *ctx)
 {
 	struct cmd	*cmd;
+	int		 n;
 
-	TAILQ_FOREACH(cmd, cmdlist, qentry)
-		cmd_exec(cmd, ctx);
+	TAILQ_FOREACH(cmd, cmdlist, qentry) {
+		if ((n = cmd_exec(cmd, ctx)) != 0)
+			return (n);
+	}
+	return (0);
 }
 
 void

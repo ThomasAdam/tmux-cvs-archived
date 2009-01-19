@@ -24,7 +24,7 @@
  * Move to last window.
  */
 
-void	cmd_last_window_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_last_window_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_last_window_entry = {
 	"last-window", "last",
@@ -39,21 +39,22 @@ const struct cmd_entry cmd_last_window_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_last_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct session		*s;
 
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	if (session_last(s) == 0)
 		server_redraw_session(s);
-	else
+	else {
 		ctx->error(ctx, "no last window");
+		return (-1);
+	}
 	recalculate_sizes();
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

@@ -26,7 +26,7 @@
  * Add or set a session paste buffer.
  */
 
-void	cmd_set_buffer_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_set_buffer_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_set_buffer_entry = {
 	"set-buffer", "setb",
@@ -41,7 +41,7 @@ const struct cmd_entry cmd_set_buffer_entry = {
 	cmd_buffer_print
 };
 
-void
+int
 cmd_set_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_buffer_data	*data = self->data;
@@ -49,16 +49,15 @@ cmd_set_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 	u_int			 limit;
 
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	limit = options_get_number(&s->options, "buffer-limit");
 	if (data->buffer == -1)
 		paste_add(&s->buffers, data->arg, limit);
-	else {
-		if (paste_replace(&s->buffers, data->buffer, data->arg) != 0)
-			ctx->error(ctx, "no buffer %d", data->buffer);
+	else if (paste_replace(&s->buffers, data->buffer, data->arg) != 0) {
+		ctx->error(ctx, "no buffer %d", data->buffer);
+		return (-1);
 	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

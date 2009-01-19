@@ -25,7 +25,7 @@
  */
 
 int	cmd_unbind_key_parse(struct cmd *, int, char **, char **);
-void	cmd_unbind_key_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_unbind_key_exec(struct cmd *, struct cmd_ctx *);
 void	cmd_unbind_key_send(struct cmd *, struct buffer *);
 void	cmd_unbind_key_recv(struct cmd *, struct buffer *);
 void	cmd_unbind_key_free(struct cmd *);
@@ -81,18 +81,17 @@ error:
 	return (-1);
 }
 
-void
+int
 cmd_unbind_key_exec(struct cmd *self, unused struct cmd_ctx *ctx)
 {
 	struct cmd_unbind_key_data	*data = self->data;
 
 	if (data == NULL)
-		return;
+		return (0);
 
 	key_bindings_remove(data->key);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
 
 void

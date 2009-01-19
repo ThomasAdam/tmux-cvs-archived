@@ -25,7 +25,7 @@
  */
 
 int	cmd_source_file_parse(struct cmd *, int, char **, char **);
-void	cmd_source_file_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_source_file_exec(struct cmd *, struct cmd_ctx *);
 void	cmd_source_file_send(struct cmd *, struct buffer *);
 void	cmd_source_file_recv(struct cmd *, struct buffer *);
 void	cmd_source_file_free(struct cmd *);
@@ -88,7 +88,7 @@ usage:
 	return (-1);
 }
 
-void
+int
 cmd_source_file_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_source_file_data	*data = self->data;
@@ -97,11 +97,10 @@ cmd_source_file_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (load_cfg(data->path, &cause) != 0) {
 		ctx->error(ctx, "%s", cause);
 		xfree(cause);
-		return;
+		return (-1);
 	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
 
 void

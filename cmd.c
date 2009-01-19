@@ -170,14 +170,14 @@ usage:
 	return (NULL);
 }
 
-void
+int
 cmd_exec(struct cmd *cmd, struct cmd_ctx *ctx)
 {
 	if (server_locked) {
 		ctx->error(ctx, "server is locked");
-		return;
+		return (-1);
 	}
-	cmd->entry->exec(cmd, ctx);
+	return (cmd->entry->exec(cmd, ctx));
 }
 
 void

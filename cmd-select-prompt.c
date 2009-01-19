@@ -26,7 +26,7 @@
  * Prompt for window index and select it.
  */
 
-void	cmd_select_prompt_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_select_prompt_exec(struct cmd *, struct cmd_ctx *);
 
 int	cmd_select_prompt_callback(void *, const char *);
 
@@ -43,22 +43,21 @@ const struct cmd_entry cmd_select_prompt_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_select_prompt_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct client		*c;
 
 	if ((c = cmd_find_client(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	if (c->prompt_string != NULL)
-		return;
+		return (0);
 
 	server_set_client_prompt(c, "index ", cmd_select_prompt_callback, c, 0);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
 
 int

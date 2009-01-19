@@ -27,7 +27,7 @@
  * List all clients.
  */
 
-void	cmd_list_clients_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_list_clients_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_clients_entry = {
 	"list-clients", "lsc",
@@ -42,7 +42,7 @@ const struct cmd_entry cmd_list_clients_entry = {
 	NULL
 };
 
-void
+int
 cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct client	*c;
@@ -57,6 +57,5 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		    c->session->name, c->sx, c->sy, c->tty.termname);
 	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

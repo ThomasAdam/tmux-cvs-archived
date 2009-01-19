@@ -28,7 +28,7 @@
  */
 
 void	cmd_command_prompt_init(struct cmd *, int);
-void	cmd_command_prompt_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_command_prompt_exec(struct cmd *, struct cmd_ctx *);
 
 int	cmd_command_prompt_callback(void *, const char *);
 
@@ -68,7 +68,7 @@ cmd_command_prompt_init(struct cmd *self, int key)
 	}
 }
 
-void
+int
 cmd_command_prompt_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data		*data = self->data;
@@ -77,10 +77,10 @@ cmd_command_prompt_exec(struct cmd *self, struct cmd_ctx *ctx)
 	char				*hdr, *ptr;
 
 	if ((c = cmd_find_client(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	if (c->prompt_string != NULL)
-		return;
+		return (0);
 
 	cdata = xmalloc(sizeof *cdata);
 	cdata->c = c;
@@ -96,8 +96,7 @@ cmd_command_prompt_exec(struct cmd *self, struct cmd_ctx *ctx)
 	server_set_client_prompt(c, hdr, cmd_command_prompt_callback, cdata, 0);
 	xfree(hdr);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
 
 int

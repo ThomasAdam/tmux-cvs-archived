@@ -24,7 +24,7 @@
  * Enter choice mode to choose a window.
  */
 
-void	cmd_choose_window_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_choose_window_exec(struct cmd *, struct cmd_ctx *);
 
 void	cmd_choose_window_callback(void *, int);
 
@@ -45,7 +45,7 @@ struct cmd_choose_window_data {
 	u_int	session;
 };
 
-void
+int
 cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data		*data = self->data;
@@ -57,15 +57,15 @@ cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if (ctx->curclient == NULL) {
 		ctx->error(ctx, "must be run interactively");
-		return;
+		return (-1);
 	}
 	s = ctx->curclient->session;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
-		return;
+		return (-1);
 		
 	if (window_pane_set_mode(wl->window->active, &window_choose_mode) != 0)
-		goto out;
+		return (0);
 
 	cur = idx = 0;
 	RB_FOREACH(wm, winlinks, &s->windows) {
@@ -87,9 +87,7 @@ cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	window_choose_ready(
 	    wl->window->active, cur, cmd_choose_window_callback, cdata);
 
-out:
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+ 	return (0);
 }
 
 void

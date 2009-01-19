@@ -28,7 +28,7 @@
  */
 
 int	cmd_set_password_parse(struct cmd *, int, char **, char **);
-void	cmd_set_password_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_set_password_exec(struct cmd *, struct cmd_ctx *);
 void	cmd_set_password_send(struct cmd *, struct buffer *);
 void	cmd_set_password_recv(struct cmd *, struct buffer *);
 void	cmd_set_password_free(struct cmd *);
@@ -102,14 +102,14 @@ usage:
 	return (-1);
 }
 
-void
+int
 cmd_set_password_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_set_password_data	*data = self->data;
 
 	if (data->password == NULL) {
 		ctx->error(ctx, "failed to encrypt password");
-		return;
+		return (-1);
 	}
 
 	if (server_password != NULL)
@@ -120,8 +120,7 @@ cmd_set_password_exec(struct cmd *self, struct cmd_ctx *ctx)
 		server_password = xstrdup(data->password);
 	log_debug("pw now %s", server_password);
 
- 	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+ 	return (0);
 }
 
 void

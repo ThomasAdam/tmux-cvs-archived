@@ -24,7 +24,7 @@
  * Enter clock mode.
  */
 
-void	cmd_clock_mode_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_clock_mode_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_clock_mode_entry = {
 	"clock-mode", NULL,
@@ -39,17 +39,16 @@ const struct cmd_entry cmd_clock_mode_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_clock_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
-		return;
+		return (-1);
 
 	window_pane_set_mode(wl->window->active, &window_clock_mode);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }

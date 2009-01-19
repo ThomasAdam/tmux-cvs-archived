@@ -26,7 +26,7 @@
  * List paste buffers.
  */
 
-void	cmd_list_buffers_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_list_buffers_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_buffers_entry = {
 	"list-buffers", "lsb",
@@ -41,7 +41,7 @@ const struct cmd_entry cmd_list_buffers_entry = {
 	cmd_target_print
 };
 
-void
+int
 cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
@@ -52,7 +52,7 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 	size_t			 size, in, out;
 
 	if ((s = cmd_find_session(ctx, data->target)) == NULL)
-		return;
+		return (-1);
 
 	if (s->sx > 35) {	/* leave three for ... */
 		size = s->sx - 32;
@@ -87,6 +87,5 @@ cmd_list_buffers_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (tmp != NULL)
 		xfree(tmp);
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
