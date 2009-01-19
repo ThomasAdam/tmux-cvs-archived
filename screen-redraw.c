@@ -53,14 +53,14 @@ screen_redraw_screen(struct client *c, struct screen *s)
 		s = wp->screen;
 
 		sy = screen_size_y(s);
-		if (!status && TAILQ_NEXT(wp, entry) == NULL)
-			sy--;
 
 		cx = s->cx;
 		cy = s->cy;
 		if (wp->yoff + sy <= w->sy) {
-			for (i = 0; i < sy; i++)
-				screen_redraw_line(c, s, wp->yoff, i);
+			for (i = 0; i < sy; i++) {
+				if (wp->yoff + i != c->sy - 1)
+					screen_redraw_line(c, s, wp->yoff, i);
+			}
 			if (TAILQ_NEXT(wp, entry) != NULL)
 				screen_redraw_blanky(c, wp->yoff + sy, 1, '-');
 		}
@@ -70,7 +70,7 @@ screen_redraw_screen(struct client *c, struct screen *s)
 
 	/* Fill in empty space below. */
 	if (w->sy < c->sy - status)
-		screen_redraw_blanky(c, w->sy, c->sy - w->sy, '=');
+		screen_redraw_blanky(c, w->sy, c->sy - status - w->sy, '=');
 
 	/* Draw the status line. */
 	screen_redraw_status(c);

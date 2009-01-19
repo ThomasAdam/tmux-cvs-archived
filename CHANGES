@@ -1,5 +1,6 @@
 19 January 2009
 
+* Fix various stupid issues when the status line is turned off. Grr.
 * Use reverse attributes for clock and cursor, otherwise they do not
   appear on black and white terminals.
 * An error in a command sequence now stops execution of that sequence.
