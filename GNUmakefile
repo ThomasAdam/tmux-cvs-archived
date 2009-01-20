@@ -90,7 +90,7 @@ ifeq ($(shell uname),Darwin)
 INCDIRS+= -Icompat
 SRCS+= compat/strtonum.c compat/bsd-poll.c compat/vis.c
 CFLAGS+= -DNO_STRTONUM -DNO_SETRESUID -DNO_SETRESGID -DNO_SETPROCTITLE \
-         -DNO_TREE_H -DBROKEN_POLL
+         -DNO_QUEUE_H -DNO_TREE_H -DBROKEN_POLL
 endif
 
 ifeq ($(shell uname),Linux)
