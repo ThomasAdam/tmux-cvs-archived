@@ -1,5 +1,8 @@
 20 January 2009
 
+* Darwin support for automatic-rename from joshe; Darwin doesn't seem to have
+  a sane method of getting argv[0] and searching for the precise insane way
+  is too frustrating, so this just uses the executable name.
 * Try to change the window title to match the command running it in. This is
   done by reading argv[0] from the process group leader of the group that owns
   the tty (tcgetpgrp()). This can't be done portably so some OS-dependent code

@@ -45,7 +45,8 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       window-choose.c \
       options.c options-cmd.c paste.c colour.c utf8.c clock.c \
       tty.c tty-term.c tty-keys.c tty-write.c util.c names.c \
-      osdep-unknown.c osdep-openbsd.c osdep-freebsd.c osdep-linux.c
+      osdep-unknown.c osdep-openbsd.c osdep-freebsd.c osdep-linux.c \
+      osdep-darwin.c
 
 CC?= cc
 INCDIRS+= -I. -I- -I/usr/local/include

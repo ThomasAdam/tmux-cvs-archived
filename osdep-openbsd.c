@@ -44,7 +44,7 @@ get_argv0(pid_t pgrp)
 	size = 128;
 	while (size < SIZE_MAX / 2) {
 		size *= 2;
-		if ((args2 = realloc(args, 2 * size)) == NULL)
+		if ((args2 = realloc(args, size)) == NULL)
 			break;
 		args = args2;
 		if (sysctl(mib, 4, args, &size, NULL, 0) == -1) {

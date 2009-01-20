@@ -16,7 +16,8 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(__OpenBSD__) && !defined(__FreeBSD__) && !defined(__linux__)
+#if !defined(__OpenBSD__) && !defined(__FreeBSD__) && !defined(__linux__) && \
+	!defined(__APPLE__)
 
 #include <sys/types.h>
 
