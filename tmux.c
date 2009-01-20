@@ -256,6 +256,7 @@ main(int argc, char **argv)
 	options_set_number(&global_window_options, "clock-mode-style", 1);
 	options_set_number(&global_window_options, "force-height", 0);
 	options_set_number(&global_window_options, "force-width", 0);
+	options_set_number(&global_window_options, "automatic-rename", 1);
 	options_set_number(&global_window_options, "mode-bg", 3);
 	options_set_number(&global_window_options, "mode-fg", 0);
 	options_set_number(&global_window_options, "mode-keys", MODEKEY_EMACS);

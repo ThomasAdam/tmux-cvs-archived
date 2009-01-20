@@ -53,6 +53,7 @@ cmd_rename_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	xfree(wl->window->name);
 	wl->window->name = xstrdup(data->arg);
+	options_set_number(&wl->window->options, "automatic-rename", 0);	
 
 	server_status_session(s);
 

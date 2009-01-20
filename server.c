@@ -276,6 +276,9 @@ server_main(const char *srv_path, int srv_fd)
 			server_second_timers();
 		}
 
+		/* Set window names. */
+		set_window_names();
+
 		/*
 		 * Handle window and client sockets. Clients can create
 		 * windows, so windows must come first to avoid messing up by

@@ -169,6 +169,8 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (data->winname != NULL) {
 		xfree(s->curw->window->name);
 		s->curw->window->name = xstrdup(data->winname);
+		options_set_number(
+		    &s->curw->window->options, "automatic-rename", 0);
 	}
 
 	if (data->flag_detached) {

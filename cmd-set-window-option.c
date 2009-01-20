@@ -55,6 +55,7 @@ const char *set_option_clock_mode_style_list[] = {
 };
 const struct set_option_entry set_window_option_table[NSETWINDOWOPTION] = {
 	{ "aggressive-resize", SET_OPTION_FLAG, 0, 0, NULL },
+	{ "automatic-rename", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "clock-mode-colour", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "clock-mode-style",
 	  SET_OPTION_CHOICE, 0, 0, set_option_clock_mode_style_list },
