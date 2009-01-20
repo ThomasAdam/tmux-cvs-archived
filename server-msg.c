@@ -159,6 +159,7 @@ server_msg_fn_command(struct hdr *hdr, struct client *c)
 				    "sessions should be nested with care. "
 				    "unset $TMUX to force");
 				cmd_list_free(cmdlist);
+				server_write_client(c, MSG_EXIT, NULL, 0);
 				return (0);
 			}
 		}
