@@ -184,6 +184,11 @@ out:
  		return (1);
  	}
 
+	if (cctx->flags & CCTX_SHUTDOWN) {
+		printf("[server exited]\n");
+		return (0);
+	}
+
 	if (cctx->flags & CCTX_EXIT) {
 		printf("[exited]\n");
 		return (0);

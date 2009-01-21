@@ -402,6 +402,7 @@ main(int argc, char **argv)
 
 		switch (hdr.type) {
 		case MSG_EXIT:
+		case MSG_SHUTDOWN:
 			n = 0;
 			goto out;
 		case MSG_ERROR:
