@@ -1,5 +1,7 @@
 21 January 2009
 
+* Bring back split-window -p and -l options to specify the height a percentage
+  or as a number of lines.
 * Make window and session choice modes allow you to choose items in vi keys
   mode (doh!). As a side-effect, this makes enter copy selection (as well
   as C-w/M-w) when using emacs keys in copy mode. Reported by merdely.

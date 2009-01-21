@@ -1421,7 +1421,7 @@ struct window	*window_create(const char *, const char *,
 void		 window_destroy(struct window *);
 int		 window_resize(struct window *, u_int, u_int);
 void		 window_set_active_pane(struct window *, struct window_pane *);
-struct window_pane *window_add_pane(struct window *,
+struct window_pane *window_add_pane(struct window *, int,
     		     const char *, const char *, const char **, u_int);
 void		 window_remove_pane(struct window *, struct window_pane *);
 u_int		 window_index_of_pane(struct window *, struct window_pane *);
