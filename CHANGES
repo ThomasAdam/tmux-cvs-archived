@@ -1,3 +1,9 @@
+21 January 2009
+
+* Make window and session choice modes allow you to choose items in vi keys
+  mode (doh!). As a side-effect, this makes enter copy selection (as well
+  as C-w/M-w) when using emacs keys in copy mode. Reported by merdely.
+
 20 January 2009
 
 * Darwin support for automatic-rename from joshe; Darwin doesn't seem to have
