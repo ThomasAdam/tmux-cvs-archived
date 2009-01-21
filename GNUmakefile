@@ -7,7 +7,7 @@ VERSION= 0.7
 
 DATE= $(shell date +%Y%m%d-%H%M)
 
-DEBUG= 1
+FDEBUG= 1
 
 META?= \002
 
@@ -47,7 +47,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
 CC?= gcc
 INCDIRS+= -I. -I-
 CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
-ifdef DEBUG
+ifdef FDEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -rdynamic
 LIBS+= -ldl

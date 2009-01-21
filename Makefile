@@ -10,8 +10,7 @@ OS!= uname
 REL!= uname -r
 DATE!= date +%Y%m%d-%H%M
 
-# This must be empty as OpenBSD includes it in default CFLAGS.
-DEBUG=
+FDEBUG= 1
 
 META?= \002 # C-b
 
@@ -56,7 +55,7 @@ CFLAGS+= -DMETA="'${META}'"
 CC= /usr/bin/gcc
 CFLAGS+= -pg -DPROFILE -O0
 .endif
-.ifdef DEBUG
+.ifdef FDEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -Wl,-E
 CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\""
@@ -112,8 +111,8 @@ depend:
 		mkdep ${CFLAGS} ${INCDIRS} ${SRCS:M*.c}
 
 dist:		clean
-		grep '^#DEBUG=' Makefile
-		grep '^#DEBUG=' GNUmakefile
+		grep '^#FDEBUG=' Makefile
+		grep '^#FDEBUG=' GNUmakefile
 		[ "`(grep '^VERSION' Makefile; grep '^VERSION' GNUmakefile)| \
 			uniq -u`" = "" ]
 		tar -zc \
