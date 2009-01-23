@@ -62,7 +62,7 @@ cmd_attach_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	}
 
 	if (tty_open(&ctx->cmdclient->tty, &cause) != 0) {
-		ctx->error(ctx, "%s", cause);
+		ctx->error(ctx, "terminal open failed: %s", cause);
 		xfree(cause);
 		return (-1);
 	}

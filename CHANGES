@@ -1,5 +1,6 @@
 23 January 2009
 
+* Better error messages when creating a session or window fails.
 * Oops. Return non-zero on error. Reported by Will Maier.
 
 21 January 2009

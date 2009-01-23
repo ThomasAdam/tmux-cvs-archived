@@ -47,6 +47,7 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_srcdst_data	*data = self->data;
 	struct session		*dst;
 	struct winlink		*wl_src, *wl_dst;
+	char			*cause;
 	int			 idx;
 
 	if ((wl_src = cmd_find_window(ctx, data->src, NULL)) == NULL)
@@ -89,9 +90,10 @@ cmd_link_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 	}
 
-	wl_dst = session_attach(dst, wl_src->window, idx);
+	wl_dst = session_attach(dst, wl_src->window, idx, &cause);
 	if (wl_dst == NULL) {
-		ctx->error(ctx, "index in use: %d", idx);
+		ctx->error(ctx, "create session failed: %s", cause);
+		xfree(cause);
 		return (-1);
 	}
 

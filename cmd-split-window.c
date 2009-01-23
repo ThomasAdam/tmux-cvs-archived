@@ -140,8 +140,7 @@ cmd_split_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct window			*w;
 	struct window_pane		*wp;
 	const char			*env[] = CHILD_ENVIRON;
-	char		 		 buf[256];
-	char				*cmd, *cwd;
+	char		 		 buf[256], *cmd, *cwd, *cause;
 	u_int				 i, hlimit, lines;
 
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
@@ -168,8 +167,10 @@ cmd_split_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		lines = (w->active->sy * data->percentage) / 100;
 
 	hlimit = options_get_number(&s->options, "history-limit");
-	if ((wp = window_add_pane(w, lines, cmd, cwd, env, hlimit)) == NULL) {
-		ctx->error(ctx, "command failed: %s", cmd);
+	wp = window_add_pane(w, lines, cmd, cwd, env, hlimit, &cause);
+	if (wp == NULL) {
+		ctx->error(ctx, "create pane failed: %s", cause);
+		xfree(cause);
 		return (-1);
 	}
 	server_redraw_window(w);

@@ -50,6 +50,7 @@ cmd_move_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct client		*c;
 	u_int		 	 i;
 	int		 	 destroyed, idx;
+	char			*cause;
 
 	if ((wl_src = cmd_find_window(ctx, data->src, &src)) == NULL)
 		return (-1);
@@ -91,9 +92,10 @@ cmd_move_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 	}
 
-	wl_dst = session_attach(dst, wl_src->window, idx);
+	wl_dst = session_attach(dst, wl_src->window, idx, &cause);
 	if (wl_dst == NULL) {
-		ctx->error(ctx, "index in use: %d", idx);
+		ctx->error(ctx, "attach window failed: %s", cause);
+		xfree(cause);
 		return (-1);
 	}
 
