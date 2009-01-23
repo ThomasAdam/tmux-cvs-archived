@@ -1,5 +1,7 @@
 23 January 2009
 
+* Use reverse colours rather than swapping fg and bg for message, mode and
+  status line. This makes these usable on black and white terminals.
 * Better error messages when creating a session or window fails.
 * Oops. Return non-zero on error. Reported by Will Maier.
 
