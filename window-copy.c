@@ -320,8 +320,9 @@ window_copy_update_selection(struct window_pane *wp)
 
 	/* Set colours. */
 	memcpy(&gc, &grid_default_cell, sizeof gc);
-	gc.fg = options_get_number(&wp->window->options, "mode-fg");
-	gc.bg = options_get_number(&wp->window->options, "mode-bg");
+	gc.bg = options_get_number(&wp->window->options, "mode-fg");
+	gc.fg = options_get_number(&wp->window->options, "mode-bg");
+	gc.attr |= GRID_ATTR_REVERSE;
 
 	/* Find top-left of screen. */
 	tx = data->ox;
