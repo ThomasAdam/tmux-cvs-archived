@@ -258,8 +258,9 @@ window_choose_write_line(
 
 	memcpy(&gc, &grid_default_cell, sizeof gc);
 	if (data->selected == data->top + py) {
-		gc.fg = options_get_number(&wp->window->options, "mode-fg");
-		gc.bg = options_get_number(&wp->window->options, "mode-bg");
+		gc.fg = options_get_number(&wp->window->options, "mode-bg");
+		gc.bg = options_get_number(&wp->window->options, "mode-fg");
+		gc.attr |= GRID_ATTR_REVERSE;
 	}
 
 	screen_write_cursormove(ctx, 0, py);

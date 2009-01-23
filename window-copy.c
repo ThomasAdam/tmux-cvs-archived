@@ -215,8 +215,9 @@ window_copy_write_line(struct window_pane *wp, struct screen_write_ctx *ctx, u_i
 		memcpy(&gc, &grid_default_cell, sizeof gc);
 		size = xsnprintf(hdr, sizeof hdr,
 		    "[%u,%u/%u]", data->ox, data->oy, screen_hsize(&wp->base));
-		gc.fg = options_get_number(&wp->window->options, "mode-fg");
-		gc.bg = options_get_number(&wp->window->options, "mode-bg");
+		gc.bg = options_get_number(&wp->window->options, "mode-fg");
+		gc.fg = options_get_number(&wp->window->options, "mode-bg");
+		gc.attr |= GRID_ATTR_REVERSE;
 		screen_write_cursormove(ctx, screen_size_x(s) - size, 0);
 		screen_write_puts(ctx, &gc, "%s", hdr);
 		screen_write_puts(ctx, &gc, "%s", hdr);
