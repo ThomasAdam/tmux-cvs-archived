@@ -1,3 +1,7 @@
+23 January 2009
+
+* Oops. Return non-zero on error. Reported by Will Maier.
+
 21 January 2009
 
 * Handle SIGTERM (and kill-server which uses it), a bit more neatly - tidy
