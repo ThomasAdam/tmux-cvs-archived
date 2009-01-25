@@ -52,12 +52,13 @@ cmd_set_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return (-1);
 
 	limit = options_get_number(&s->options, "buffer-limit");
-	if (data->buffer == -1)
-		paste_add(&s->buffers, data->arg, limit);
-	else if (paste_replace(&s->buffers, data->buffer, data->arg) != 0) {
+	if (data->buffer == -1) {
+		paste_add(&s->buffers, xstrdup(data->arg), limit);
+		return (0);
+	}
+	if (paste_replace(&s->buffers, data->buffer, xstrdup(data->arg)) != 0) {
 		ctx->error(ctx, "no buffer %d", data->buffer);
 		return (-1);
 	}
-
 	return (0);
 }

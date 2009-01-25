@@ -419,7 +419,6 @@ window_copy_copy_selection(struct window_pane *wp, struct client *c)
 	/* Add the buffer to the stack. */
 	limit = options_get_number(&c->session->options, "buffer-limit");
 	paste_add(&c->session->buffers, buf, limit);
-	xfree(buf);
 }
 
 void

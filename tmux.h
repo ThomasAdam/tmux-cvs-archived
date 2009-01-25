@@ -1074,8 +1074,8 @@ struct paste_buffer *paste_get_top(struct paste_stack *);
 struct paste_buffer *paste_get_index(struct paste_stack *, u_int);
 int	     	 paste_free_top(struct paste_stack *);
 int		 paste_free_index(struct paste_stack *, u_int);
-void		 paste_add(struct paste_stack *, const char *, u_int);
-int		 paste_replace(struct paste_stack *, u_int, const char *);
+void		 paste_add(struct paste_stack *, char *, u_int);
+int		 paste_replace(struct paste_stack *, u_int, char *);
 
 /* clock.c */
 void		 clock_draw(struct screen_write_ctx *, u_int, int);
