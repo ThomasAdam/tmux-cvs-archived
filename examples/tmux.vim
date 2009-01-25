@@ -33,7 +33,7 @@ syn keyword tmuxCmds source[-file] info server-info clock-mode lock[-server]
 syn keyword tmuxCmds pass set-password saveb save-buffer downp down-pane killp
 syn keyword tmuxCmds kill-pane resizep-down resize-pane-down resizep-up
 syn keyword tmuxCmds resize-pane-up selectp select-pane splitw split-window
-syn keyword tmuxCmds upp up-pane choose-session choose-window
+syn keyword tmuxCmds upp up-pane choose-session choose-window loadb load-buffer
 
 syn keyword tmuxOptsSet prefix status status-fg status-bg bell-action
 syn keyword tmuxOptsSet default-command history-limit status-left status-right

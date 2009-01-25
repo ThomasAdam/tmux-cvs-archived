@@ -50,6 +50,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_list_keys_entry,
 	&cmd_list_sessions_entry,
 	&cmd_list_windows_entry,
+	&cmd_load_buffer_entry,
 	&cmd_lock_server_entry,
 	&cmd_move_window_entry,
 	&cmd_new_session_entry,
