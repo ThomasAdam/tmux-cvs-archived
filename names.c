@@ -31,8 +31,7 @@ set_window_names(void)
 {
 	struct window	*w;
 	u_int		 i;
-	pid_t		 pgrp;
-	char		*name;
+	char		*name, *wname;
 	struct timeval	 tv, tv2;
 	
 	if (gettimeofday(&tv, NULL) != 0)
@@ -53,21 +52,20 @@ set_window_names(void)
 		timeradd(&w->name_timer, &tv2, &w->name_timer);	
 
 		if (w->active->screen != &w->active->base)
-			pgrp = -1;
-		else if ((pgrp = tcgetpgrp(w->active->fd)) == w->pgrp)
-			continue;
-		w->pgrp = pgrp;
-
-		name = get_argv0(pgrp);
-		if (pgrp == -1 || name == NULL)
-			name = default_window_name(w);
+			name = NULL;
 		else
-			name = parse_window_name(name);
-		if (strcmp(name, w->name) == 0)
+			name = get_argv0(w->active->fd, w->active->tty);
+		if (name == NULL)
+			wname = default_window_name(w);
+		else {
+			wname = parse_window_name(name);
 			xfree(name);
+		}
+		if (strcmp(wname, w->name) == 0)
+			xfree(wname);
 		else {
 			xfree(w->name);
-			w->name = name;
+			w->name = wname;
 			server_status_window(w);
 		}
 	}

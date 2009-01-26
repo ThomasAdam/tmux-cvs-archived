@@ -1,5 +1,6 @@
 26 January 2009
 
+* Be more clever about picking the right process to create the window name.
 * Don't balls up the terminal on UTF-8 combined characters. Don't support them
   properly either - they are just discarded for the moment.
 

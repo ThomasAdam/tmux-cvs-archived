@@ -569,7 +569,7 @@ window_pane_spawn(struct window_pane *wp,
 	tv.tv_usec = NAME_INTERVAL * 1000L;
 	timeradd(&wp->window->name_timer, &tv, &wp->window->name_timer);
 
- 	switch (forkpty(&wp->fd, NULL, NULL, &ws)) {
+ 	switch (forkpty(&wp->fd, wp->tty, NULL, &ws)) {
 	case -1:
 		wp->fd = -1;
 		xasprintf(cause, "%s: %s", cmd, strerror(errno));

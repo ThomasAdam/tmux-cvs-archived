@@ -27,16 +27,23 @@
 #include "tmux.h"
 
 char *
-get_argv0(pid_t pgrp)
+get_argv0(int fd, unused char *tty)
 {
 	FILE	*f;
 	char	*path, *buf;
 	size_t	 len;
 	int	 ch;
+	pid_t	 pgrp;
+
+	if ((pgrp = tcgetpgrp(fd)) == -1)
+		return (NULL);
 
 	xasprintf(&path, "/proc/%lld/cmdline", (long long) pgrp);
-	if ((f = fopen(path, "r")) == NULL)
+	if ((f = fopen(path, "r")) == NULL) {
+		xfree(path);
 		return (NULL);
+	}
+	xfree(path);
 
 	len = 0;
 	buf = NULL;
