@@ -1,3 +1,8 @@
+26 January 2009
+
+* Don't balls up the terminal on UTF-8 combined characters. Don't support them
+  properly either - they are just discarded for the moment.
+
 25 January 2009
 
 * load-buffer command

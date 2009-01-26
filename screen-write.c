@@ -520,6 +520,10 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 	else
 		width = 1;
 
+	/* Discard zero-width characters. */
+	if (width == 0)
+		return;
+
 	/* If the character is wider than the screen, don't print it. */
 	if (width > screen_size_x(s)) {
 		memcpy(&tc, gc, sizeof tc);
