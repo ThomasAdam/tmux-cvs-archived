@@ -33,13 +33,11 @@ screen_write_start(
 		ctx->data = wp;
 		if (ctx->s == NULL)
 			ctx->s = wp->screen;
+		tty_write_cursor_off(ctx->data);
 	} else {
 		ctx->write = NULL;
 		ctx->data = NULL;
 	}
-	
-	if (ctx->write != NULL)
-		ctx->write(ctx->data, TTY_CURSORMODE, 0);
 }
 
 /* Finish writing. */
@@ -430,9 +428,6 @@ screen_write_kcursormode(struct screen_write_ctx *ctx, int state)
 {
 	struct screen	*s = ctx->s;
 
-	if (ctx->write != NULL)
-		ctx->write(ctx->data, TTY_KCURSORMODE);
-
 	if (state)
 		s->mode |= MODE_KCURSOR;
 	else
@@ -444,9 +439,6 @@ void
 screen_write_kkeypadmode(struct screen_write_ctx *ctx, int state)
 {
 	struct screen	*s = ctx->s;
-
-	if (ctx->write != NULL)
-		ctx->write(ctx->data, TTY_KKEYPADMODE);
 
 	if (state)
 		s->mode |= MODE_KKEYPAD;

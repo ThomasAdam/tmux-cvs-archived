@@ -55,3 +55,24 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 		}
 	}
 }
+
+void
+tty_write_cursor_off(void *ptr)
+{
+	struct window_pane	*wp = ptr;
+	struct client		*c;
+	u_int		 	 i;
+
+	if (wp->window->flags & WINDOW_HIDDEN || wp->flags & PANE_HIDDEN)
+		return;
+
+	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
+		c = ARRAY_ITEM(&clients, i);
+		if (c == NULL || c->session == NULL)
+			continue;
+		if (c->flags & CLIENT_SUSPENDED)
+			continue;
+
+		tty_cursor_off(&c->tty);
+	}
+}

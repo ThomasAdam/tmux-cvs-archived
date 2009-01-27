@@ -713,10 +713,10 @@ server_handle_client(struct client *c)
 	if (c->prompt_string == NULL && c->message_string == NULL &&
 	    !server_locked && wp->screen->mode & MODE_CURSOR &&
 	    wp->yoff + wp->screen->cy < c->sy - status) {
-		tty_write(&c->tty, wp->screen, 0, TTY_CURSORMODE, 1);
+		tty_cursor_on(&c->tty);
 		tty_cursor(&c->tty, wp->screen->cx, wp->screen->cy, wp->yoff);
 	} else
-		tty_write(&c->tty, wp->screen, 0, TTY_CURSORMODE, 0);
+		tty_cursor_off(&c->tty);
 }
 
 /* Lost a client. */
