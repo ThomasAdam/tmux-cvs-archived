@@ -77,7 +77,7 @@ cmd_load_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return (-1);
 	}
 
-	if (fread(buf, 1, statbuf.st_size, f) != statbuf.st_size) {
+	if (fread(buf, 1, statbuf.st_size, f) != (size_t) statbuf.st_size) {
 		ctx->error(ctx, "%s: fread error", data->arg);
 		xfree(buf);
 		fclose(f);
