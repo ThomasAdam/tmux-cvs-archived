@@ -118,7 +118,8 @@ get_proc_argv0(pid_t pid)
 				continue;
 			break;
 		}
-		procname = strdup(*args);
+		if (*args != NULL)
+			procname = strdup(*args);
 		break;
 	}
 	free(args);
