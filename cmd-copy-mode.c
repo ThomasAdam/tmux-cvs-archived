@@ -29,7 +29,7 @@ int	cmd_copy_mode_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_copy_mode_entry = {
 	"copy-mode", NULL,
 	CMD_TARGET_WINDOW_USAGE,
-	0,
+	CMD_UFLAG,
 	cmd_target_init,
 	cmd_target_parse,
 	cmd_copy_mode_exec,
@@ -49,6 +49,9 @@ cmd_copy_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return (-1);
 
 	window_pane_set_mode(wl->window->active, &window_copy_mode);
+	if (data->flags & CMD_UFLAG)
+		window_copy_pageup(wl->window->active);
+
 
 	return (0);
 }

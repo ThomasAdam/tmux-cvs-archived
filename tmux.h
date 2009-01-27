@@ -1458,9 +1458,11 @@ extern const struct window_mode window_clock_mode;
 
 /* window-copy.c */
 extern const struct window_mode window_copy_mode;
+void 		 window_copy_pageup(struct window_pane *);
 
 /* window-scroll.c */
 extern const struct window_mode window_scroll_mode;
+void 		 window_scroll_pageup(struct window_pane *);
 
 /* window-more.c */
 extern const struct window_mode window_more_mode;
