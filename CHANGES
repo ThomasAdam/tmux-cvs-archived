@@ -1,3 +1,14 @@
+27 January 2009
+
+* Allow status, mode and message attributes to be changed by three new options:
+  status-attr, mode-attr, message-attr. A comma-separataed list is accepted
+  containing: bright, dim, underscore, blink, reverse, hidden, italics, for
+  example:
+
+	set -g status-attr bright,blink
+
+  From Josh Elsasser, thanks!
+
 26 January 2009
 
 * Be more clever about picking the right process to create the window name.

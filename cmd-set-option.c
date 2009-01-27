@@ -53,12 +53,14 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "display-time", SET_OPTION_NUMBER, 1, INT_MAX, NULL },
 	{ "history-limit", SET_OPTION_NUMBER, 0, INT_MAX, NULL },
 	{ "lock-after-time", SET_OPTION_NUMBER, 0, INT_MAX, NULL },
+	{ "message-attr", SET_OPTION_ATTRIBUTES, 0, 0, NULL },
 	{ "message-bg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "message-fg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "prefix", SET_OPTION_KEY, 0, 0, NULL },
 	{ "repeat-time", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
 	{ "set-titles", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "status", SET_OPTION_FLAG, 0, 0, NULL },
+	{ "status-attr", SET_OPTION_ATTRIBUTES, 0, 0, NULL },
 	{ "status-bg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "status-fg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "status-interval", SET_OPTION_NUMBER, 0, INT_MAX, NULL },
@@ -142,6 +144,9 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 			break;
 		case SET_OPTION_COLOUR:
 			set_option_colour(ctx, oo, entry, data->value);
+			break;
+		case SET_OPTION_ATTRIBUTES:
+			set_option_attributes(ctx, oo, entry, data->value);
 			break;
 		case SET_OPTION_FLAG:
 			set_option_flag(ctx, oo, entry, data->value);

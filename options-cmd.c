@@ -81,14 +81,14 @@ void
 set_option_colour(struct cmd_ctx *ctx, struct options *oo,
     const struct set_option_entry *entry, char *value)
 {
-	u_char	colour;
+	int	colour;
 
 	if (value == NULL) {
 		ctx->error(ctx, "empty value");
 		return;
 	}
 
-	if ((colour = colour_fromstring(value)) > 8) {
+	if ((colour = colour_fromstring(value)) == -1) {
 		ctx->error(ctx, "bad colour: %s", value);
 		return;
 	}
@@ -96,6 +96,27 @@ set_option_colour(struct cmd_ctx *ctx, struct options *oo,
 	options_set_number(oo, entry->name, colour);
 	ctx->info(ctx,
 	    "set option: %s -> %s", entry->name, colour_tostring(colour));
+}
+
+void
+set_option_attributes(struct cmd_ctx *ctx, struct options *oo,
+    const struct set_option_entry *entry, char *value)
+{
+	int	attr;
+
+	if (value == NULL) {
+		ctx->error(ctx, "empty value");
+		return;
+	}
+
+	if ((attr = attributes_fromstring(value)) == -1) {
+		ctx->error(ctx, "bad attributes: %s", value);
+		return;
+	}
+
+	options_set_number(oo, entry->name, attr);
+	ctx->info(ctx,
+	    "set option: %s -> %s", entry->name, attributes_tostring(attr));
 }
 
 void

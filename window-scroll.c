@@ -160,7 +160,7 @@ window_scroll_write_line(
 		    "[%u,%u/%u]", data->ox, data->oy, screen_hsize(&wp->base));
 		gc.bg = options_get_number(&wp->window->options, "mode-fg");
 		gc.fg = options_get_number(&wp->window->options, "mode-bg");
-		gc.attr |= GRID_ATTR_REVERSE;
+		gc.attr |= options_get_number(&wp->window->options, "mode-attr");
 		screen_write_cursormove(ctx, screen_size_x(s) - size, 0);
 		screen_write_puts(ctx, &gc, "%s", hdr);
 		memcpy(&gc, &grid_default_cell, sizeof gc);

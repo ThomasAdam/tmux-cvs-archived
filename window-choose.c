@@ -260,7 +260,7 @@ window_choose_write_line(
 	if (data->selected == data->top + py) {
 		gc.fg = options_get_number(&wp->window->options, "mode-bg");
 		gc.bg = options_get_number(&wp->window->options, "mode-fg");
-		gc.attr |= GRID_ATTR_REVERSE;
+		gc.attr |= options_get_number(&wp->window->options, "mode-attr");
 	}
 
 	screen_write_cursormove(ctx, 0, py);
