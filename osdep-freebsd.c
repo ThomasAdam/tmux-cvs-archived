@@ -72,6 +72,8 @@ retry:
 
 	bestp = NULL;
 	for (i = 0; i < len / sizeof (struct kinfo_proc); i++) {
+		if (buf[i].ki_tdev != sb.st_rdev)
+			continue;
 		p = &buf[i];
 		if (bestp == NULL)
 			bestp = p;
@@ -84,12 +86,15 @@ retry:
 			continue;
 		bestp = p;
 	}
-	
-	procname = get_proc_argv0(bestp->ki_pid);
-	if (procname == NULL || *procname == '\0') {
-		free(procname);
-		procname = strdup(bestp->ki_comm);
-	}
+	if (bestp != NULL) {
+		procname = get_proc_argv0(bestp->ki_pid);
+		if (procname == NULL || *procname == '\0') {
+			free(procname);
+			procname = strdup(bestp->ki_comm);
+		}
+	} else
+		procname = NULL;
+
 
 	free(buf);
 	return (procname);
