@@ -28,6 +28,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#define nitems(_a) (sizeof((_a)) / sizeof((_a)[0]))
+
 char	*get_argv0(int, char *);
 char	*get_proc_argv0(pid_t);
 
