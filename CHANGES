@@ -1,5 +1,7 @@
 28 January 2009
 
+* Support mouse in copy mode to move cursor. Can't do anything else at the
+  moment until other mouse modes are handled.
 * Better support for at least the most common variant of mouse input: parse it
   and adjust for different panes. Also support mouse in window/session choice
   mode.

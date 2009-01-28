@@ -257,7 +257,7 @@ window_choose_mouse(struct window_pane *wp,
 	struct window_choose_mode_item	*item;
 	u_int				 idx;
 
-	if ((b & 3) == 0)
+	if ((b & 3) == 3)
 		return;
 	if (x >= screen_size_x(s))
 		return;
