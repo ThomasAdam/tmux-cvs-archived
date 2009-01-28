@@ -36,7 +36,8 @@ const struct window_mode window_clock_mode = {
 	window_clock_free,
 	window_clock_resize,
 	window_clock_key,
-	window_clock_timer
+	NULL,
+	window_clock_timer,
 };
 
 struct window_clock_mode_data {

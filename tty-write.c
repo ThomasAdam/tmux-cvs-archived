@@ -57,7 +57,7 @@ tty_vwrite_window(void *ptr, enum tty_cmd cmd, va_list ap)
 }
 
 void
-tty_write_cursor_off(void *ptr)
+tty_write_update_mode(void *ptr, int mode)
 {
 	struct window_pane	*wp = ptr;
 	struct client		*c;
@@ -73,6 +73,7 @@ tty_write_cursor_off(void *ptr)
 		if (c->flags & CLIENT_SUSPENDED)
 			continue;
 
-		tty_cursor_off(&c->tty);
+		tty_update_mode(&c->tty, mode);
 	}
 }
+

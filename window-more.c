@@ -39,7 +39,8 @@ const struct window_mode window_more_mode = {
 	window_more_free,
 	window_more_resize,
 	window_more_key,
-	NULL
+	NULL,
+	NULL,
 };
 
 struct window_more_mode_data {

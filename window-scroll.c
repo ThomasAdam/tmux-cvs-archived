@@ -43,7 +43,8 @@ const struct window_mode window_scroll_mode = {
 	window_scroll_free,
 	window_scroll_resize,
 	window_scroll_key,
-	NULL
+	NULL,
+	NULL,
 };
 
 struct window_scroll_mode_data {
