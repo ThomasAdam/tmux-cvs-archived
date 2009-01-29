@@ -337,12 +337,12 @@ server_shutdown(void)
 {
 	struct session	*s;
 	struct client	*c;
-	u_int		 i;
+	u_int		 i, j;
 
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i);
-		for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
-			c = ARRAY_ITEM(&clients, i);
+		for (j = 0; j < ARRAY_LENGTH(&clients); j++) {
+			c = ARRAY_ITEM(&clients, j);
 			if (c != NULL && c->session == s) {
 				s = NULL;
 				break;
