@@ -1,3 +1,9 @@
+29 January 2009
+
+* Support #(command) in status-left, and status-right, which is displayed as
+  the first line of command's output (e.g. set -g status-right
+  "#(whoami)@#(hostname -s)"). Commands with )s aren't supported.
+
 28 January 2009
 
 * Support mouse in copy mode to move cursor. Can't do anything else at the
