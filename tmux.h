@@ -302,7 +302,7 @@ enum tty_code_code {
 	TTYC_SMSO,	/* enter_standout_mode, so */
 	TTYC_SMUL,	/* enter_underline_mode, us */
 };
-#define NTTYCODE (TTYC_SMUL + 1)
+#define NTTYCODE ((int) TTYC_SMUL + 1)
 
 /* Termcap types. */
 enum tty_code_type {

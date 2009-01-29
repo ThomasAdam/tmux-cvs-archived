@@ -44,7 +44,7 @@ xcalloc(size_t nmemb, size_t size)
         void	*ptr;
 
         if (size == 0 || nmemb == 0)
-	{ abort();fatalx("zero size");}
+		fatalx("zero size");
         if (SIZE_MAX / nmemb < size)
                 fatalx("nmemb * size > SIZE_MAX");
         if ((ptr = calloc(nmemb, size)) == NULL)
