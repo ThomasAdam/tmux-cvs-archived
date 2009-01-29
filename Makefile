@@ -120,7 +120,7 @@ dist:		clean
 			-f ${DISTDIR}.tar.gz ${DISTFILES}
 
 lint:
-		lint -cehvx ${CFLAGS:M-D*} ${SRCS:M*.c}
+		lint -chvx ${CFLAGS:M-D*} ${SRCS:M*.c}
 
 clean:
 		rm -f ${CLEANFILES}
