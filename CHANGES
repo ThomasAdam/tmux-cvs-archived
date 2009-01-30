@@ -6,7 +6,7 @@
 
   This allows quite neat things like:
 
-	$ cat xssh                 
+	$ cat ~/bin/xssh
 	#!/bin/sh
 
 	if [ ! -z "$TMUX" ]; then
@@ -21,6 +21,7 @@
 	fi
 	ssh "$@"
 	[ ! -z "$TMUX" ] && tmux setw -u window-status-fg >/dev/null
+	$ alias ssh="~/bin/xssh"
 
 * Support #(command) in status-left, and status-right, which is displayed as
   the first line of command's output (e.g. set -g status-right
