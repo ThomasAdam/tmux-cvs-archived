@@ -40,7 +40,7 @@
 * Bring back the fancy window titles with session/window names: it is easy to
   work around problems with elinks (see FAQ).
 * -u flag to scroll-mode and copy-mode to start scrolled one page
-   up. scroll-mode -u is bound to prefix,page-up (ppage) by default.
+  up. scroll-mode -u is bound to prefix,page-up (ppage) by default.
 * Allow status, mode and message attributes to be changed by three new options:
   status-attr, mode-attr, message-attr. A comma-separataed list is accepted
   containing: bright, dim, underscore, blink, reverse, hidden, italics, for
