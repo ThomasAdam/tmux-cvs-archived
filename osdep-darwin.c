@@ -39,7 +39,7 @@ get_argv0(int fd, __attribute__ ((unused)) char *tty)
 	struct kinfo_proc kp;
 	
 	if ((mib[3] = tcgetpgrp(fd)) == -1)
-		return (NULL)
+		return (NULL);
 
 	size = sizeof kp;
 	if (sysctl(mib, 4, &kp, &size, NULL, 0) == -1 ||
