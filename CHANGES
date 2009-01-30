@@ -1,3 +1,7 @@
+30 January 2009
+
+* . now bound to "command-prompt 'move-window %%'" by default, from joshe.
+
 29 January 2009
 
 * Window options to set status line fg, bg and attributes for a single

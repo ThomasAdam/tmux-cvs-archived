@@ -62,6 +62,9 @@ cmd_command_prompt_init(struct cmd *self, int key)
 	case ',':
 		data->arg = xstrdup("rename-window '%%'");
 		break;
+	case '.':
+		data->arg = xstrdup("move-window -t '%%'");
+		break;
 	case 'f':
 		data->arg = xstrdup("find-window '%%'");
 		break;
