@@ -73,7 +73,6 @@ retry:
 		if (buf[i].kp_eproc.e_tdev != sb.st_rdev)
 			continue;
 		p = &buf[i].kp_proc;
-		//log_debug("XXX %d %s %d %d %d", i, p->p_comm, p->p_stat, p->p_estcpu, p->p_slptime);
 		if (bestp == NULL)
 			bestp = p;
 
