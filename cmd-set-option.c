@@ -125,11 +125,7 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 			return (-1);
 		}
 
-		if (options_remove(oo, entry->name) != 0) {
-			ctx->error(ctx,
-			    "can't unset option, not set: %s", entry->name);
-			return (-1);
-		}
+		options_remove(oo, entry->name);
 		ctx->info(ctx, "unset option: %s", entry->name);
 	} else {
 		switch (entry->type) {
