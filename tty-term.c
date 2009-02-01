@@ -134,7 +134,7 @@ tty_term_strip(const char *s)
 void
 tty_term_quirks(struct tty_term *term)
 {
-	if (strcmp(term->name, "rxvt") == 0) {
+	if (strncmp(term->name, "rxvt", 4) == 0) {
 		/* rxvt supports dch1 but some termcap files do not have it. */
 		if (!tty_term_has(term, TTYC_DCH1)) {
 			term->codes[TTYC_DCH1].type = TTYCODE_STRING;
