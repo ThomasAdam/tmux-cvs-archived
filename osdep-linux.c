@@ -56,6 +56,7 @@ get_argv0(int fd, unused char *tty)
 	if (buf != NULL)
 		buf[len] = '\0';
 
+	fclose(f);
 	return (buf);
 }
 
