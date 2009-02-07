@@ -10,7 +10,7 @@ OS!= uname
 REL!= uname -r
 DATE!= date +%Y%m%d-%H%M
 
-FDEBUG= 1
+#FDEBUG= 1
 
 META?= \002 # C-b
 

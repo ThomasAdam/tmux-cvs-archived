@@ -7,7 +7,7 @@ VERSION= 0.7
 
 DATE= $(shell date +%Y%m%d-%H%M)
 
-FDEBUG= 1
+#FDEBUG= 1
 
 META?= \002
 
