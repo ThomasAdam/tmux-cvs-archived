@@ -92,7 +92,7 @@ retry:
 		if (p->p_flag & P_SINTR && !(bestp->p_flag & P_SINTR))
 			bestp = p;
 		if (LIST_FIRST(&p->p_children) == NULL &&
-		    LIST_FIRST(&bestp->p_children) != NULL)
+		    LIST_FIRST(&bestp->p_children) != NULL) /* XXX ugh */
 			bestp = p;
 	}	
 	if (bestp != NULL) {

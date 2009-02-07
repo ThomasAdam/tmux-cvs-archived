@@ -22,6 +22,8 @@
 #include <sys/sysctl.h>
 
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 char	*get_argv0(int, char *);
 
