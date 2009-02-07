@@ -22,7 +22,6 @@
 #include <sys/proc.h>
 #include <sys/stat.h>
 #include <sys/sysctl.h>
-#include <sys/time.h>
 #include <sys/user.h>
 
 #include <err.h>
@@ -92,8 +91,7 @@ retry:
 			bestp = p;
 		if (p->ki_slptime < bestp->ki_slptime)
 			bestp = p;
-		if (timercmp(&p->ki_rusage_ch, &bestp->ki_rusage_ch, <))
-			bestp = p;
+		/* XXX children? */
 	}
 	if (bestp != NULL) {
 		procname = get_proc_argv0(bestp->ki_pid);
