@@ -539,6 +539,7 @@ tty_cmd_linefeed(struct tty *tty, struct screen *s, u_int oy, unused va_list ap)
 	tty_cursor(tty, s->cx, s->cy, oy);
 
 	tty_putc(tty, '\n');
+	tty->cy++;
 }
 
 void
