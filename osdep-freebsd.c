@@ -39,7 +39,7 @@ char	*get_proc_argv0(pid_t);
 #define is_runnable(p) \
 	((p)->ki_stat == SRUN || (p)->ki_stat == SIDL)
 #define is_stopped(p) \
-	((p)->ki_stat == SSTOP || (p)->ki_stat == SZOMB || (p)->ki_stat == SDEAD)
+	((p)->ki_stat == SSTOP || (p)->ki_stat == SZOMB)
 
 char *
 get_argv0(__attribute__ ((unused)) int fd, char *tty)
