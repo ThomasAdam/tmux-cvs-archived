@@ -30,6 +30,11 @@
 
 #define nitems(_a) (sizeof((_a)) / sizeof((_a)[0]))
 
+#define is_runnable(p) \
+	((p)->p_stat == SRUN || (p)->p_stat == SIDL || (p)->p_stat == SONPROC)
+#define is_stopped(p) \
+	((p)->p_stat == SSTOP || (p)->p_stat == SZOMB || (p)->p_stat == SDEAD)
+
 char	*get_argv0(int, char *);
 char	*get_proc_argv0(pid_t);
 
@@ -76,17 +81,18 @@ retry:
 		if (bestp == NULL)
 			bestp = p;
 
-		if (p->p_stat != SRUN &&
-		    p->p_stat != SIDL &&
-		    p->p_stat != SONPROC)
-			continue;
+		if (is_runnable(p) && !is_runnable(bestp))
+			bestp = p;
+		if (!is_stopped(p) && is_stopped(bestp))
+			bestp = p;
+
 		if (p->p_estcpu < bestp->p_estcpu)
 			continue;
 		if (p->p_slptime > bestp->p_slptime)
 			continue;
 		if (!(p->p_flag & P_SINTR) && bestp->p_flag & P_SINTR)
 			continue;
-		if (p->p_pid < bestp->p_pid)
+		if (LIST_FIRST(&p->p_children) != NULL)
 			continue;
 		bestp = p;
 	}	
