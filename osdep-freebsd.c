@@ -22,6 +22,7 @@
 #include <sys/proc.h>
 #include <sys/stat.h>
 #include <sys/sysctl.h>
+#include <sys/time.h>
 #include <sys/user.h>
 
 #include <err.h>
@@ -87,12 +88,12 @@ retry:
 			bestp = p;
 		if (!is_stopped(p) && is_stopped(bestp))
 			bestp = p;
-
-		if (p->ki_estcpu < bestp->ki_estcpu)
-			continue;
-		if (p->ki_slptime > bestp->ki_slptime)
-			continue;
-		bestp = p;
+		if (p->ki_estcpu > bestp->ki_estcpu)
+			bestp = p;
+		if (p->ki_slptime < bestp->ki_slptime)
+			bestp = p;
+		if (timercmp(&p->ki_rusage_ch, &bestp->ki_rusage_ch, <))
+			bestp = p;
 	}
 	if (bestp != NULL) {
 		procname = get_proc_argv0(bestp->ki_pid);
