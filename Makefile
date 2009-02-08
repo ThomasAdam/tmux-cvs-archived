@@ -4,13 +4,13 @@
 .PHONY: clean update-index.html upload-index.html
 
 PROG= tmux
-VERSION= 0.7
+VERSION= 0.8
 
 OS!= uname
 REL!= uname -r
 DATE!= date +%Y%m%d-%H%M
 
-#FDEBUG= 1
+FDEBUG= 1
 
 META?= \002 # C-b
 
@@ -127,8 +127,7 @@ clean:
 		rm -f ${CLEANFILES}
 
 upload-index.html:
-		scp index.html nicm@shell.sf.net:index.html
-		ssh nicm@shell.sf.net sh update-index-tmux.sh
+		scp index.html nicm@web.sf.net:/home/groups/t/tm/tmux/htdocs
 
 update-index.html:
 		sed "s/%%VERSION%%/${VERSION}/g" index.html.in >index.html

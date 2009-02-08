@@ -1,3 +1,7 @@
+08 February 2009
+
+* tmux 0.7 released.
+
 03 February 2009
 
 * New command, copy-buffer (alias copyb), to copy a session paste buffer to
