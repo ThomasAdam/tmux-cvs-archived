@@ -398,7 +398,7 @@ main(int argc, char **argv)
 		}
 
 		if (buffer_poll(&pfd, cctx.srv_in, cctx.srv_out) != 0)
-			fatalx("lost server");
+			goto out;
 
 	restart:
 		if (BUFFER_USED(cctx.srv_in) < sizeof hdr)

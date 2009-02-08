@@ -151,7 +151,7 @@ server_start(const char *path)
 	 * Must daemonise before loading configuration as the PID changes so
 	 * $TMUX would be wrong for sessions created in the config file.
 	 */
-	if (daemon(1, 0) != 0)
+	if (daemon(1, 1) != 0)
 		fatal("daemon failed");
 
 	ARRAY_INIT(&windows);
