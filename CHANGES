@@ -1,5 +1,7 @@
 08 February 2009
 
+* Don't treat empty arguments ("") differently when parsing configuration
+  file/command prompt rather than command line.
 * tmux 0.7 released.
 
 03 February 2009
