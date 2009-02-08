@@ -21,6 +21,7 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/un.h>
+#include <sys/wait.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -142,6 +143,10 @@ client_main(struct client_ctx *cctx)
 	error = NULL;
 	xtimeout = INFTIM;
 	while (!sigterm) {
+		if (sigchld) {
+			waitpid(WAIT_ANY, NULL, WNOHANG);
+			sigchld = 0;
+		}
 		if (sigwinch)
 			client_handle_winch(cctx);
 		if (sigcont) {
