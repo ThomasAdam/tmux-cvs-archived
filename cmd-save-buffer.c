@@ -67,9 +67,6 @@ cmd_save_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 	}
 
-	if (pb == NULL)
-		return (0);
-
 	mask = umask(S_IRWXG | S_IRWXO);
 	if (data->flags & CMD_AFLAG)
 		f = fopen(data->arg, "a");
