@@ -124,7 +124,7 @@ extern const char    *__progname;
 #define PANE_MINIMUM 4	/* includes separator line */
 
 /* Automatic name refresh interval, in milliseconds. */
-#define NAME_INTERVAL 100
+#define NAME_INTERVAL 250
 
 /* Fatal errors. */
 #define fatal(msg) log_fatal("%s: %s", __func__, msg);
