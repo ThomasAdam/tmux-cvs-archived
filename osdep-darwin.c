@@ -43,12 +43,12 @@ osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
 	struct kinfo_proc kp;
 	
 	if ((mib[3] = tcgetpgrp(fd)) == -1)
-		return (NULL);
+		return (-1);
 
 	size = sizeof kp;
 	if (sysctl(mib, 4, &kp, &size, NULL, 0) == -1 ||
 	    kp.kp_proc.p_comm[0] == '\0')
-		return (NULL);
+		return (-1);
 
 	return (strdup(kp.kp_proc.p_comm));
 }
