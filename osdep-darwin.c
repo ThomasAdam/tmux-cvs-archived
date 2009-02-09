@@ -25,7 +25,9 @@
 #include <string.h>
 #include <unistd.h>
 
-char	*get_argv0(int, char *);
+int	 osdep_get_name(int, char *, pid_t *, char **);
+
+#define unused __attribute__ ((unused))
 
 /*
  * XXX This actually returns the executable path, not the process's argv[0].
@@ -33,8 +35,8 @@ char	*get_argv0(int, char *);
  * Apple's 'ps' source and start digging.
  */
 
-char *
-get_argv0(int fd, __attribute__ ((unused)) char *tty)
+int
+osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
 {
 	int	mib[4] = { CTL_KERN, KERN_PROC, KERN_PROC_PID, 0 };
         size_t	size;

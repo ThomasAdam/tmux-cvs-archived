@@ -235,6 +235,7 @@ window_create(const char *name, const char *cmd, const char *cwd,
 	}
 	w->active = TAILQ_FIRST(&w->panes);
 
+	w->name_pid = -1;
 	if (name != NULL) {
 		w->name = xstrdup(name);
 		options_set_number(&w->options, "automatic-rename", 0);
