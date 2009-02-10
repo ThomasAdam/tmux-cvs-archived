@@ -1,3 +1,8 @@
+10 February 2009
+
+* No longer redraw the status line every status-interval unless it has actually
+  changed.
+
 08 February 2009
 
 * Don't treat empty arguments ("") differently when parsing configuration

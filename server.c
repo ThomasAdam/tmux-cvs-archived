@@ -464,7 +464,7 @@ server_check_redraw(struct client *c)
 {
 	struct session	*s;
 	char		 title[512];
-	int		 flags;
+	int		 flags, redraw;
 
 	if (c == NULL || c->session == NULL)
 		return;
@@ -487,11 +487,13 @@ server_check_redraw(struct client *c)
 
 	if (c->flags & (CLIENT_REDRAW|CLIENT_STATUS)) {
 		if (c->message_string != NULL)
-			status_message_redraw(c);
+			redraw = status_message_redraw(c);
 		else if (c->prompt_string != NULL)
-			status_prompt_redraw(c);
+			redraw = status_prompt_redraw(c);
 		else
-			status_redraw(c);
+			redraw = status_redraw(c);
+		if (!redraw)
+			c->flags &= ~CLIENT_STATUS;
 	}
 
 	if (c->flags & CLIENT_REDRAW) {
