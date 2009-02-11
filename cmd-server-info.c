@@ -86,8 +86,8 @@ cmd_server_info_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 
 		ctx->print(ctx, "%4d: %s (%d, %d): %s [%ux%u %s] "
 		    "[flags=0x%x/0x%x]", i, c->tty.path, c->fd, c->tty.fd, 
-		    c->session->name, c->sx, c->sy, c->tty.termname, c->flags,
-		    c->tty.flags);
+		    c->session->name, c->tty.sx, c->tty.sy, c->tty.termname, 
+		    c->flags, c->tty.flags);
 	}
 	ctx->print(ctx, "");
 

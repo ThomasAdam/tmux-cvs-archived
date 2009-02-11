@@ -54,7 +54,7 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 			continue;
 
 		ctx->print(ctx, "%s: %s [%ux%u %s]", c->tty.path,
-		    c->session->name, c->sx, c->sy, c->tty.termname);
+		    c->session->name, c->tty.sx, c->tty.sy, c->tty.termname);
 	}
 
 	return (0);

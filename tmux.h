@@ -712,6 +712,9 @@ SLIST_HEAD(tty_terms, tty_term);
 struct tty {
 	char		*path;
 
+        u_int            sx;
+        u_int            sy;
+
 	u_int		 cx;
 	u_int		 cy;
 
@@ -761,9 +764,6 @@ struct client {
 	struct tty 	 tty;
 	struct timeval	 status_timer;
 	struct timeval	 repeat_timer;
-
-	u_int		 sx;
-	u_int		 sy;
 
 	struct screen	 status;
 
