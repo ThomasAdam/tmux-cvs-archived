@@ -240,10 +240,6 @@ tty_term_find(char *name, int fd, char **cause)
 		xasprintf(cause, "terminal does not support ri");
 		goto error;
 	}
-	if (!tty_term_has(term, TTYC_CSR)) {
-		xasprintf(cause, "terminal does not support csr");
-		goto error;
-	}
 	if (!tty_term_has(term, TTYC_CUP)) {
 		xasprintf(cause, "terminal does not support cup");
 		goto error;

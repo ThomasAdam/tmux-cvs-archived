@@ -1,3 +1,8 @@
+11 February 2009
+
+* Emulate scroll regions (slowly) to support the few terminals which don't have
+  it (some of which don't really have any excuse).
+
 10 February 2009
 
 * No longer redraw the status line every status-interval unless it has actually
