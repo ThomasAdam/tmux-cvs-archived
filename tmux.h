@@ -702,6 +702,7 @@ struct tty_term {
 
 #define TERM_HASDEFAULTS 0x1
 #define TERM_256COLOURS 0x2
+#define TERM_EARLYWRAP 0x4
 	int		 flags;
 
 	SLIST_ENTRY(tty_term) entry;

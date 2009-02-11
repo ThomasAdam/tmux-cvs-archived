@@ -134,6 +134,11 @@ screen_redraw_line(struct client *c, struct screen *s, u_int oy, u_int py)
 	sx = screen_size_x(s);
 	if (sx > c->tty.sx)
 		sx = c->tty.sx;
+	if (c->tty.term->flags & TERM_EARLYWRAP) {
+		/* Work around weirdness by omitting bottom right character. */
+		if (oy + py == c->tty.sy - 1 && sx == c->tty.sx)
+			sx--;
+	}
 	for (i = 0; i < sx; i++) {
 		gc = grid_view_peek_cell(s->grid, i, py);
  		tty_cursor(&c->tty, i, py, oy);

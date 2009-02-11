@@ -1,5 +1,12 @@
 11 February 2009
 
+* FreeBSD's console wraps lines at $COLUMNS - 1 rather than $COLUMNS (the
+  cursor can never be beyond $COLUMNS - 1) and does not appear to support
+  changing this behaviour, or any of the obvious possibilities (turning off
+  right margin wrapping, insert mode). This is irritating, most notably because
+  it impossible to write to the very bottom-right of the screen without
+  scrolling. To work around this, if built on FreeBSD and run with a "cons"
+  $TERM, the bottom-right cell on the screen is omitted.
 * Emulate scroll regions (slowly) to support the few terminals which don't have
   it (some of which don't really have any excuse).
 
