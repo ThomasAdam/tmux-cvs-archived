@@ -630,13 +630,21 @@ tty_cmd_clearscreen(
 void
 tty_cmd_cell(struct tty *tty, struct screen *s, u_int oy, va_list ap)
 {
+	struct grid_cell	*gc;
+
+	gc = va_arg(ap, struct grid_cell *);
+
+	tty_cell(tty, s, oy, gc);
+}
+
+void
+tty_cell(struct tty *tty, struct screen *s, u_int oy, struct grid_cell *gc)
+{
 	struct grid_cell       *gc;
 	u_int			i, width;
 	u_char			out[4];
 
 	tty_cursor(tty, s->cx, s->cy, oy);
-
-	gc = va_arg(ap, struct grid_cell *);
 
 	/* If this is a padding character, do nothing. */
 	if (gc->flags & GRID_FLAG_PADDING)
