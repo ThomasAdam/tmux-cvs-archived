@@ -48,11 +48,12 @@ osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
 		return (-1);
 
 	size = sizeof kp;
-	if (sysctl(mib, 4, &kp, &size, NULL, 0) == -1 ||
-	    kp.kp_proc.p_comm[0] == '\0')
+	if (sysctl(mib, 4, &kp, &size, NULL, 0) == -1)
+		return (-1);
+	if (*kp.kp_proc.p_comm == '\0')
 		return (-1);
 
-	*name = strdup(kp.kp_proc.p_comm[0]);
+	*name = strdup(kp.kp_proc.p_comm);
 	return (0);
 }
 
