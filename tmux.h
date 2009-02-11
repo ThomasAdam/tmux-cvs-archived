@@ -240,7 +240,6 @@ enum tty_code_code {
 	TTYC_CLEAR,	/* clear_screen, cl */
 	TTYC_CNORM,	/* cursor_normal, ve */
 	TTYC_COLORS,	/* max_colors, Co */
-	TTYC_CR,	/* carriage_return, cr */
 	TTYC_CSR,	/* change_scroll_region, cs */
 	TTYC_CUD,	/* parm_down_cursor, DO */
 	TTYC_CUD1,	/* cursor_down, do */
