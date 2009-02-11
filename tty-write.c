@@ -54,7 +54,7 @@ tty_vwrite_cmd(struct window_pane *wp, enum tty_cmd cmd, va_list ap)
 
 		if (c->session->curw->window == wp->window) {
 			va_copy(aq, ap);
-			tty_vwrite(&c->tty, wp->screen, wp->yoff, cmd, aq);
+			tty_vwrite(&c->tty, wp, cmd, aq);
 			va_end(aq);
 		}
 	}
