@@ -496,8 +496,14 @@ struct screen {
 	u_int		 cx;		/* cursor x */
 	u_int		 cy;		/* cursor y */
 
+	u_int		 old_cx;
+	u_int		 old_cy;
+
 	u_int		 rupper;	/* scroll region top */
 	u_int		 rlower;	/* scroll region bottom */
+
+	u_int		 old_rupper;
+	u_int		 old_rlower;
 
 	int		 mode;
 
@@ -1011,9 +1017,10 @@ void	options_set_number(struct options *, const char *, long long);
 long long options_get_number(struct options *, const char *);
 
 /* tty.c */
+void		 tty_reset(struct tty *);
+void		 tty_region(struct tty *, u_int, u_int, u_int);
 void		 tty_cursor(struct tty *, u_int, u_int, u_int);
-void		 tty_cell(struct tty *,
-    		     struct screen *, u_int, const struct grid_cell *);
+void		 tty_cell(struct tty *, const struct grid_cell *);
 void		 tty_putcode(struct tty *, enum tty_code_code);
 void		 tty_putcode1(struct tty *, enum tty_code_code, int);
 void		 tty_putcode2(struct tty *, enum tty_code_code, int, int);
