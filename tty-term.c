@@ -210,8 +210,6 @@ tty_term_find(char *name, int fd, char **cause)
 				break;
 			code->type = TTYCODE_STRING;
 			code->value.string = tty_term_strip(s);
-			log_debug(
-			    "code %d,%s: (string) %s", ent->code, ent->name, s);
 			break;
 		case TTYCODE_NUMBER:
 			n = tigetnum(ent->name);
@@ -219,8 +217,6 @@ tty_term_find(char *name, int fd, char **cause)
 				break;
 			code->type = TTYCODE_NUMBER;
 			code->value.number = n;
-			log_debug(
-			    "code %d,%s: (number) %d", ent->code, ent->name, n);
 			break;
 		case TTYCODE_FLAG:
 			n = tigetflag(ent->name);
@@ -228,8 +224,6 @@ tty_term_find(char *name, int fd, char **cause)
 				break;
 			code->type = TTYCODE_FLAG;
 			code->value.number = n;
-			log_debug(
-			    "code %d,%s: (flag) %d", ent->code, ent->name, n);
 			break;
 		}
 	}
