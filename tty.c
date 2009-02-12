@@ -736,7 +736,7 @@ tty_cell(struct tty *tty, const struct grid_cell *gc)
 	u_char	out[4];
 
 	/* Skip last character if terminal is stupid. */
-	if (c->tty.term->flags & TERM_EARLYWRAP && 
+	if (tty->term->flags & TERM_EARLYWRAP && 
 	    tty->cy == tty->sy - 1 && tty->cx == tty->sx - 1)
 		return;
 
