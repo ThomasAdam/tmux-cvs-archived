@@ -587,16 +587,18 @@ tty_cmd_reverseindex(struct tty *tty, struct window_pane *wp, unused va_list ap)
 		if (s->old_cy == s->old_rupper) {
 			for (i = s->old_rupper; i <= s->old_rlower; i++)
 				tty_draw_line(tty, wp, i);
-			return;
 		}
+		return;
 	}
 
 	tty_reset(tty);
 
  	tty_region(tty, s->old_rupper, s->old_rlower, wp->yoff);
 
-	tty_cursor(tty, s->old_cx, s->old_cy, wp->yoff);
-	tty_putcode(tty, TTYC_RI);
+	if (s->old_cy == s->old_rupper) {
+		tty_cursor(tty, s->old_cx, 0, wp->yoff);
+		tty_putcode(tty, TTYC_RI);
+	}
 }
 
 void

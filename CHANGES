@@ -1,5 +1,7 @@
 11 February 2009
 
+* Only use ri when actually at the top of the screen; just move the cursor up
+  otherwise.
 * FreeBSD's console wraps lines at $COLUMNS - 1 rather than $COLUMNS (the
   cursor can never be beyond $COLUMNS - 1) and does not appear to support
   changing this behaviour, or any of the obvious possibilities (turning off
