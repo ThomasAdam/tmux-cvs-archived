@@ -178,6 +178,8 @@ key_bindings_print(struct cmd_ctx *ctx, const char *fmt, ...)
 	struct winlink	*wl = ctx->cursession->curw; 
 	va_list		 ap;
 
+	if (wl->window->active->mode != &window_more_mode)
+		window_pane_reset_mode(wl->window->active);
 	window_pane_set_mode(wl->window->active, &window_more_mode);
 
 	va_start(ap, fmt);
