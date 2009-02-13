@@ -96,7 +96,7 @@ cmd_command_prompt_exec(struct cmd *self, struct cmd_ctx *ctx)
 		cdata->template = NULL;
 		hdr = xstrdup(":");
 	}
-	server_set_client_prompt(c, hdr, cmd_command_prompt_callback, cdata, 0);
+	status_prompt_set(c, hdr, cmd_command_prompt_callback, cdata, 0);
 	xfree(hdr);
 
 	return (0);
@@ -148,7 +148,7 @@ cmd_command_prompt_callback(void *data, const char *s)
 		if (cause == NULL)
 			return (0);
 		*cause = toupper((u_char) *cause);
-		server_set_client_message(c, cause);
+		status_message_set(c, cause);
 		xfree(cause);
 		cmdlist = NULL;
 	}

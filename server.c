@@ -556,7 +556,7 @@ server_check_timers(struct client *c)
 		fatal("gettimeofday");
 
 	if (c->message_string != NULL && timercmp(&tv, &c->message_timer, >))
-		server_clear_client_message(c);
+		status_message_clear(c);
 
 	if (c->message_string != NULL || c->prompt_string != NULL) {
 		/*
@@ -694,7 +694,7 @@ server_handle_client(struct client *c)
 			return;
 		wp = c->session->curw->window->active;	/* could die */
 
-		server_clear_client_message(c);
+		status_message_clear(c);
 		if (c->prompt_string != NULL) {
 			status_prompt_key(c, key);
 			continue;
