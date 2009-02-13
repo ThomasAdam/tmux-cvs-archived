@@ -641,6 +641,7 @@ tty_cmd_clearendofscreen(
 	tty_reset(tty);
 
 	tty_cursor(tty, s->old_cx, s->old_cy, wp->yoff);
+	tty_region(tty, 0, screen_size_y(s) - 1, wp->yoff);
 	if (tty_term_has(tty->term, TTYC_EL)) {	
 		tty_putcode(tty, TTYC_EL);
 		if (s->old_cy != screen_size_y(s) - 1) {
@@ -673,6 +674,7 @@ tty_cmd_clearstartofscreen(
 	tty_reset(tty);
 
 	tty_cursor(tty, 0, 0, wp->yoff);
+	tty_region(tty, 0, screen_size_y(s) - 1, wp->yoff);
 	if (tty_term_has(tty->term, TTYC_EL)) {
 		for (i = 0; i < s->old_cy; i++) {
 			tty_putcode(tty, TTYC_EL);
@@ -699,6 +701,7 @@ tty_cmd_clearscreen(
 	tty_reset(tty);
 
 	tty_cursor(tty, 0, 0, wp->yoff);
+	tty_region(tty, 0, screen_size_y(s) - 1, wp->yoff);
 	if (tty_term_has(tty->term, TTYC_EL)) {
 		for (i = 0; i < screen_size_y(s); i++) {
 			tty_putcode(tty, TTYC_EL);
