@@ -42,6 +42,9 @@ const struct cmd_entry cmd_set_option_entry = {
 	cmd_option_print
 };
 
+const char *set_option_status_keys_list[] = {
+	"emacs", "vi", NULL
+};
 const char *set_option_bell_action_list[] = {
 	"none", "any", "current", NULL
 };
@@ -64,6 +67,7 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "status-bg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "status-fg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "status-interval", SET_OPTION_NUMBER, 0, INT_MAX, NULL },
+	{ "status-keys", SET_OPTION_CHOICE, 0, 0, set_option_status_keys_list },
 	{ "status-left", SET_OPTION_STRING, 0, 0, NULL },
 	{ "status-left-length", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
 	{ "status-right", SET_OPTION_STRING, 0, 0, NULL },

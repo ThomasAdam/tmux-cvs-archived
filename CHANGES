@@ -1,5 +1,10 @@
 13 February 2009
 
+* Redo mode keys slightly more cleanly and apply them to command prompt
+  editing. vi or emacs mode is controlled by the session option status-keys.
+
+12 February 2009
+
 * Looking up argv[0] is expensive, so just use p_comm for the window name which
   is good enough. Also increase name update time to 500 ms.
 
