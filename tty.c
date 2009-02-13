@@ -596,7 +596,7 @@ tty_cmd_reverseindex(struct tty *tty, struct window_pane *wp, unused va_list ap)
  	tty_region(tty, s->old_rupper, s->old_rlower, wp->yoff);
 
 	if (s->old_cy == s->old_rupper) {
-		tty_cursor(tty, s->old_cx, 0, wp->yoff);
+		tty_cursor(tty, s->old_cx, s->old_rupper, wp->yoff);
 		tty_putcode(tty, TTYC_RI);
 	}
 }
