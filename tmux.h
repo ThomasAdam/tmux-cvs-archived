@@ -124,7 +124,7 @@ extern const char    *__progname;
 #define PANE_MINIMUM 4	/* includes separator line */
 
 /* Automatic name refresh interval, in milliseconds. */
-#define NAME_INTERVAL 250
+#define NAME_INTERVAL 500
 
 /* Fatal errors. */
 #define fatal(msg) log_fatal("%s: %s", __func__, msg);
@@ -615,7 +615,6 @@ TAILQ_HEAD(window_panes, window_pane);
 struct window {
 	char		*name;
 	struct timeval	 name_timer;
-	pid_t		 name_pid;
 
 	struct window_pane *active;	
 	struct window_panes panes;
@@ -1527,7 +1526,7 @@ int	utf8_width(u_int);
 char   *section_string(char *, size_t, size_t, size_t);
 
 /* osdep-*.c */
-int	osdep_get_name(int, char *, pid_t *, char **);
+char   *osdep_get_name(int, char *);
 
 /* buffer.c */
 struct buffer 	*buffer_create(size_t);

@@ -235,7 +235,6 @@ window_create(const char *name, const char *cmd, const char *cwd,
 	}
 	w->active = TAILQ_FIRST(&w->panes);
 
-	w->name_pid = -1;
 	if (name != NULL) {
 		w->name = xstrdup(name);
 		options_set_number(&w->options, "automatic-rename", 0);
@@ -627,7 +626,6 @@ window_pane_set_mode(struct window_pane *wp, const struct window_mode *mode)
 
 	if (wp->mode != NULL || wp->mode == mode)
 		return (1);
-	wp->window->name_pid = -1;
 
 	wp->mode = mode;
 
@@ -642,7 +640,6 @@ window_pane_reset_mode(struct window_pane *wp)
 {
 	if (wp->mode == NULL)
 		return;
-	wp->window->name_pid = -1;
 
 	wp->mode->free(wp);
 	wp->mode = NULL;

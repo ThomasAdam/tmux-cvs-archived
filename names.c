@@ -53,12 +53,8 @@ set_window_names(void)
 
 		if (w->active->screen != &w->active->base)
 			name = NULL;
-		else {
-			if (osdep_get_name(w->active->fd, 
-			    w->active->tty, &w->name_pid, &name) == 1)
-				continue;
-		}
-		
+		else
+			name = osdep_get_name(w->active->fd, w->active->tty);
 		if (name == NULL)
 			wname = default_window_name(w);
 		else {

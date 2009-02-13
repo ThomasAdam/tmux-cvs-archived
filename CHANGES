@@ -1,3 +1,8 @@
+13 February 2009
+
+* Looking up argv[0] is expensive, so just use p_comm for the window name which
+  is good enough. Also increase name update time to 500 ms.
+
 11 February 2009
 
 * Only use ri when actually at the top of the screen; just move the cursor up

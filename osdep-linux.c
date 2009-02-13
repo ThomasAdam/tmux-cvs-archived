@@ -26,8 +26,8 @@
 
 #include "tmux.h"
 
-int
-osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
+char *
+osdep_get_name(int fd, unused char *tty)
 {
 	FILE	*f;
 	char	*path, *buf;
@@ -35,15 +35,13 @@ osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
 	int	 ch;
 	pid_t	 pgrp;
 
-	*name = NULL;
-
 	if ((pgrp = tcgetpgrp(fd)) == -1)
-		return (-1);
+		return (NULL);
 
 	xasprintf(&path, "/proc/%lld/cmdline", (long long) pgrp);
 	if ((f = fopen(path, "r")) == NULL) {
 		xfree(path);
-		return (-1);
+		return (NULL);
 	}
 	xfree(path);
 
@@ -57,10 +55,9 @@ osdep_get_name(int fd, unused char *tty, unused pid_t *last_pid, char **name)
 	}
 	if (buf != NULL)
 		buf[len] = '\0';
-	*name = buf;
 
 	fclose(f);
-	return (0);
+	return (buf);
 }
 
 #endif
