@@ -218,9 +218,6 @@ tty_term_find(char *name, int fd, char **cause)
 	for (i = 0; i < NTTYCODE; i++) {
 		ent = &tty_term_codes[i];
 
-//		if (ent->code == TTYC_CSR)/*XXX*/
-//			continue;
-
 		code = &term->codes[ent->code];
 		code->type = TTYCODE_NONE;
 		switch (ent->type) {

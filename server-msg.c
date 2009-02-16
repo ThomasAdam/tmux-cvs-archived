@@ -200,7 +200,7 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 		c->cwd = xstrdup(data.cwd);
 
 	data.tty[(sizeof data.tty) - 1] = '\0';
-	tty_init(&c->tty, data.tty, xstrdup(term));
+	tty_init(&c->tty, data.tty, term);
 	if (data.flags & IDENTIFY_UTF8)
 		c->tty.flags |= TTY_UTF8;
 	if (data.flags & IDENTIFY_256COLOURS)

@@ -245,7 +245,7 @@ tty_close(struct tty *tty, int no_stop)
 
 	if (!no_stop)
 		tty_stop_tty(tty);
-
+	
 	tty_term_free(tty->term);
 	tty_keys_free(tty);
 
