@@ -107,7 +107,7 @@ grid_destroy(struct grid_data *gd)
 {
 	u_int	yy;
 
-	for (yy = 0; yy < gd->hsize + gd->sy - 1; yy++) {
+	for (yy = 0; yy < gd->hsize + gd->sy; yy++) {
 		if (gd->data[yy] != NULL)
 			xfree(gd->data[yy]);
 	}

@@ -790,6 +790,8 @@ server_lost_client(struct client *c)
 
 	tty_free(&c->tty, c->flags & CLIENT_SUSPENDED);
 
+	screen_free(&c->status);
+
 	if (c->title != NULL)
 		xfree(c->title);
 
