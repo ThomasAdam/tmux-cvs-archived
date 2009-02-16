@@ -336,6 +336,11 @@ server_main(const char *srv_path, int srv_fd)
 	close(srv_fd);
 	unlink(srv_path);
 
+	options_free(&global_options);
+	options_free(&global_window_options);
+	if (server_password != NULL)
+		xfree(server_password);
+
 	return (0);
 }
 
