@@ -47,10 +47,8 @@ cmd_list_parse(int argc, char **argv, char **cause)
 	}
 
 	cmd = cmd_parse(argc - lastsplit, argv + lastsplit, cause);
-	if (cmd == NULL) {
-		cmd_list_free(cmdlist);
-		return (NULL);
-	}
+	if (cmd == NULL)
+		goto bad;
 	TAILQ_INSERT_TAIL(cmdlist, cmd, qentry);
        
 	return (cmdlist);

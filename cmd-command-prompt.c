@@ -112,8 +112,10 @@ cmd_command_prompt_callback(void *data, const char *s)
 	char				*cause, *ptr, *buf, ch;
 	size_t				 len, slen;
 
-	if (s == NULL)
+	if (s == NULL) {
+		xfree(cdata);
 		return (0);
+	}
 	slen = strlen(s);
 
 	len = 0;
