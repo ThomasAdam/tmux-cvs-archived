@@ -123,7 +123,14 @@ tty_keys_cmp(struct tty_key *k1, struct tty_key *k2)
 void
 tty_keys_add(struct tty *tty, const char *s, int key, int flags)
 {
-	struct tty_key	*tk;
+	struct tty_key	*tk, tl;
+
+	tl.string = s;
+	if ((tk = RB_FIND(tty_keys, &tty->ktree, &tl)) != NULL) {
+		log_debug("already key matching: %s (old %x, new %x)", 
+		    tk->string, tk->key, key);
+		return;
+	}
 
 	tk = xmalloc(sizeof *tk);
 	tk->string = xstrdup(s);
@@ -174,10 +181,10 @@ tty_keys_init(struct tty *tty)
 void
 tty_keys_free(struct tty *tty)
 {
-	struct tty_key	*tk, *tl;
-
-	for (tk = RB_MIN(tty_keys, &tty->ktree); tk != NULL; tk = tl) {
-		tl = RB_NEXT(tty_keys, &tty->ktree, tk);
+	struct tty_key	*tk;
+	
+	while (!RB_EMPTY(&tty->ktree)) {
+		tk = RB_ROOT(&tty->ktree);
 		RB_REMOVE(tty_keys, &tty->ktree, tk);
 		xfree(tk->string);
 		xfree(tk);
