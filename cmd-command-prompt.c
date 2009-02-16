@@ -170,6 +170,7 @@ cmd_command_prompt_callback(void *data, const char *s)
 	ctx.cmdclient = NULL;
 
 	cmd_list_exec(cmdlist, &ctx);
+	cmd_list_free(cmdlist);
 
 	if (c->prompt_callback != (void *) &cmd_command_prompt_callback)
 		return (1);
