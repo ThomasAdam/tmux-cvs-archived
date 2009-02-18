@@ -144,6 +144,6 @@ update-index.html:
 
 install:	all
 		${INSTALLDIR} ${DESTDIR}${PREFIX}/bin
-		${INSTALLBIN} ${PROG} ${DESTDIR}${PREFIX}/bin/${PROG}
+		${INSTALLBIN} ${PROG} ${DESTDIR}${PREFIX}/bin/
 		${INSTALLDIR} ${DESTDIR}${PREFIX}/man/man1
 		${INSTALLMAN} ${PROG}.1 ${DESTDIR}${PREFIX}/man/man1/
