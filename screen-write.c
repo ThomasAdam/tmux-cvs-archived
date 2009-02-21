@@ -34,9 +34,6 @@ screen_write_start(
 		ctx->s = wp->screen;
 	else
 		ctx->s = s;
-	
-	if (ctx->s != NULL)
-		tty_write_mode(ctx->wp, ctx->s->mode & ~MODE_CURSOR);
 }
 
 /* Finish writing. */
