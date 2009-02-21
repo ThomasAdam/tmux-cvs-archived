@@ -506,6 +506,7 @@ server_check_redraw(struct client *c)
 			server_redraw_locked(c);
 		else
  			screen_redraw_screen(c, NULL);
+		c->flags &= ~CLIENT_STATUS;
 	}
 
 	if (c->flags & CLIENT_STATUS)

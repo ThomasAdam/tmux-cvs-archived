@@ -38,7 +38,8 @@ screen_redraw_screen(struct client *c, struct screen *s)
 	/* Override the normal screen if one is given. */
 	if (s != NULL) {
 		for (i = 0; i < screen_size_y(s); i++)
-			screen_redraw_line(c, s, 0, i);
+			screen_redraw_line(c, s, 0, i);	
+		screen_redraw_status(c);
 		return;
 	}
 
