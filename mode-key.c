@@ -94,7 +94,7 @@ mode_key_lookup_vi(struct mode_key_data *mdata, int key)
 		}
 		break;
 	case '\r':
-		if (mdata->flags & MODEKEY_CANEDIT)
+		if (mdata->flags & (MODEKEY_CANEDIT|MODEKEY_CHOOSEMODE))
 			return (MODEKEYCMD_CHOOSE);
 		return (MODEKEYCMD_COPYSELECTION);
 	case '0':

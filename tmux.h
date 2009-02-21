@@ -428,6 +428,7 @@ struct mode_key_data {
 	int			 flags;
 #define MODEKEY_EDITMODE 0x1
 #define MODEKEY_CANEDIT 0x2
+#define MODEKEY_CHOOSEMODE 0x4
 };
 
 #define MODEKEY_EMACS 0

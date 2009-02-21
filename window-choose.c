@@ -119,7 +119,8 @@ window_choose_init(struct window_pane *wp)
 	s->mode |= MODE_MOUSE;
 
 	mode_key_init(&data->mdata,
-	    options_get_number(&wp->window->options, "mode-keys"), 0);
+	    options_get_number(&wp->window->options, "mode-keys"),
+	    MODEKEY_CHOOSEMODE);
 	
 	return (s);
 }
