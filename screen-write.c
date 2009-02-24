@@ -30,7 +30,7 @@ screen_write_start(
     struct screen_write_ctx *ctx, struct window_pane *wp, struct screen *s)
 {
 	ctx->wp = wp;
-	if (wp != NULL && ctx->s != NULL)
+	if (wp != NULL && s == NULL)
 		ctx->s = wp->screen;
 	else
 		ctx->s = s;
