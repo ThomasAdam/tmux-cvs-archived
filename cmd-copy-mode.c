@@ -52,6 +52,5 @@ cmd_copy_mode_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (data->flags & CMD_UFLAG)
 		window_copy_pageup(wl->window->active);
 
-
 	return (0);
 }

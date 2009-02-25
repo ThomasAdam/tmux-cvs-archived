@@ -616,7 +616,7 @@ screen_write_cell(struct screen_write_ctx *ctx, const struct grid_cell *gc)
 	s->cx += width;
 
 	/* Draw to the screen if necessary. */
-	if (screen_check_selection(s, s->cx, s->cy)) {
+	if (screen_check_selection(s, s->cx - width, s->cy)) {
 		memcpy(&tc, &s->sel.cell, sizeof tc);
 		tc.data = gc->data;
 		tty_write_cmd(ctx->wp, TTY_CELL, &tc);
