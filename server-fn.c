@@ -161,7 +161,7 @@ server_lock(void)
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
-		if (c == NULL)
+		if (c == NULL || c->session == NULL)
 			continue;
 
 		status_prompt_clear(c);
