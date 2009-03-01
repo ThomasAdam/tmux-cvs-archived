@@ -390,8 +390,10 @@ window_add_pane(struct window *w, int wanty, const char *cmd,
 		wanty = w->sy;
 	else {
 		sizey = w->active->sy - 1; /* for separator */
-		if (sizey < PANE_MINIMUM * 2)
+		if (sizey < PANE_MINIMUM * 2) {
+			*cause = xstrdup("pane too small");
 			return (NULL);
+		}
 
   		if (wanty == -1)
 			wanty = sizey / 2;
