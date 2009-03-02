@@ -1,3 +1,8 @@
+02 March 2009
+
+* Make escape key timer work properly so escape+key can be used without
+  lightning fast key presses.
+
 13 February 2009
 
 * Redo mode keys slightly more cleanly and apply them to command prompt
