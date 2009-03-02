@@ -237,10 +237,13 @@ window_choose_key(struct window_pane *wp, unused struct client *c, int key)
 		if (data->selected > items - 1)
 			data->selected = items - 1;
 		data->top += screen_size_y(s);
+		if (screen_size_y(s) < items) {
+			if (data->top + screen_size_y(s) > items)
+				data->top = items - screen_size_y(s);
+		} else
+			data->top = 0;
 		if (data->selected < data->top)
 			data->top = data->selected;
-		if (data->top + screen_size_y(s) > items)
-			data->top = items - screen_size_y(s);
 		window_choose_redraw_screen(wp);
 		break;
 	default:
