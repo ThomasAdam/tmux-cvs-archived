@@ -163,6 +163,9 @@ server_start(const char *path)
 	server_password = NULL;
 	server_activity = time(NULL);
 
+	start_time = time(NULL);
+	socket_path = path;
+
 	if (cfg_file != NULL && load_cfg(cfg_file, &cause) != 0) {
 		log_warnx("%s", cause);
 		exit(1);
@@ -173,8 +176,6 @@ server_start(const char *path)
 	setproctitle("server (%s)", path);
 #endif
 	log_debug("server started, pid %ld", (long) getpid());
-	start_time = time(NULL);
-	socket_path = path;
 	
 	memset(&sa, 0, sizeof sa);
 	sa.sun_family = AF_UNIX;
