@@ -139,18 +139,15 @@ cmd_split_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct winlink			*wl;
 	struct window			*w;
 	struct window_pane		*wp;
-	const char			*env[] = CHILD_ENVIRON;
-	char		 		 buf[256], *cmd, *cwd, *cause;
-	u_int				 i, hlimit, lines;
+	const char		       **env;
+	char		 		*cmd, *cwd, *cause;
+	u_int				 hlimit, lines;
 
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
 		return (-1);
 	w = wl->window;
 
-	if (session_index(s, &i) != 0)
-		fatalx("session not found");
-	xsnprintf(buf, sizeof buf, "TMUX=%ld,%u", (long) getpid(), i);
-	env[0] = buf;
+	env = server_fill_environ(s);
 
 	cmd = data->cmd;
 	if (cmd == NULL)
