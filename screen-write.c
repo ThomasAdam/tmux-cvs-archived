@@ -379,7 +379,7 @@ screen_write_scrollregion(
 
 	/* Cursor moves to top-left. */
 	s->cx = 0;
-	s->cy = rupper;
+	s->cy = 0;
 
 	s->rupper = rupper;
 	s->rlower = rlower;
