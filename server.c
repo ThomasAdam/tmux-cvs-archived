@@ -176,6 +176,7 @@ server_start(const char *path)
 	setproctitle("server (%s)", path);
 #endif
 	log_debug("server started, pid %ld", (long) getpid());
+	log_debug("socket path %s", socket_path);
 	
 	memset(&sa, 0, sizeof sa);
 	sa.sun_family = AF_UNIX;
