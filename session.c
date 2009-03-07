@@ -201,7 +201,7 @@ session_new(struct session *s,
 {
 	struct window	*w;
 	const char     **env;
-	u_int		 i, hlimit;
+	u_int		 hlimit;
 
 	env = server_fill_environ(s);
 
