@@ -30,8 +30,8 @@ const char **
 server_fill_environ(struct session *s)
 {
 	static const char *env[] = { NULL /* TMUX= */, "TERM=screen", NULL };
-	static char	  *tmuxvar[MAXPATHLEN + 256];
-	u_int		   idx;
+	static char	tmuxvar[MAXPATHLEN + 256];
+	u_int		idx;
 
 	if (session_index(s, &idx) != 0)
 		fatalx("session not found");
