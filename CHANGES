@@ -1,5 +1,6 @@
 07 March 2009
 
+* Support for 88 colour terminals.
 * break-pane command to create a new window using an existing pane.
 
 02 March 2009

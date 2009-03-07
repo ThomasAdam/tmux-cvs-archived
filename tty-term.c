@@ -310,7 +310,7 @@ tty_term_find(char *name, int fd, char **cause)
 		term->flags |= TERM_HASDEFAULTS;
 
 	/*
-	 * Try to figure out if we have 256 colours. The standard xterm
+	 * Try to figure out if we have 256 or 88 colours. The standard xterm
 	 * definitions are broken (well, or the way they are parsed is: in any
 	 * case they end up returning 8). So also do a hack.
 	 */
@@ -318,6 +318,10 @@ tty_term_find(char *name, int fd, char **cause)
 		term->flags |= TERM_256COLOURS;
 	if (strstr(name, "256col") != NULL) /* XXX HACK */
 		term->flags |= TERM_256COLOURS;
+	if (tty_term_number(term, TTYC_COLORS) == 88)
+		term->flags |= TERM_88COLOURS;
+	if (strstr(name, "88col") != NULL) /* XXX HACK */
+		term->flags |= TERM_88COLOURS;
 
 	return (term);
 

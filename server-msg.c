@@ -205,6 +205,8 @@ server_msg_fn_identify(struct hdr *hdr, struct client *c)
 		c->tty.flags |= TTY_UTF8;
 	if (data.flags & IDENTIFY_256COLOURS)
 		c->tty.term_flags |= TERM_256COLOURS;
+	else if (data.flags & IDENTIFY_88COLOURS)
+		c->tty.term_flags |= TERM_88COLOURS;
 	if (data.flags & IDENTIFY_HASDEFAULTS)
 		c->tty.term_flags |= TERM_HASDEFAULTS;
 	xfree(term);

@@ -191,10 +191,15 @@ main(int argc, char **argv)
 
 	unlock = flags = 0;
 	path = NULL;
-        while ((opt = getopt(argc, argv, "2df:qS:uUVv")) != -1) {
+        while ((opt = getopt(argc, argv, "28df:qS:uUVv")) != -1) {
                 switch (opt) {
 		case '2':
 			flags |= IDENTIFY_256COLOURS;
+			flags &= ~IDENTIFY_88COLOURS;
+			break;
+		case '8':
+			flags |= IDENTIFY_88COLOURS;
+			flags &= ~IDENTIFY_256COLOURS;
 			break;
 		case 'f':
 			cfg_file = xstrdup(optarg);
