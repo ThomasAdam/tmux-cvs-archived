@@ -77,12 +77,13 @@ key_bindings_init(void)
 		int			 key;
 		const struct cmd_entry	*entry;
 	} table[] = {
+		{ '!', &cmd_break_pane_entry },
 		{ '"', &cmd_split_window_entry },
 		{ '#', &cmd_list_buffers_entry },
 		{ '&', &cmd_kill_window_entry },
 		{ ',', &cmd_command_prompt_entry },
-		{ '.', &cmd_command_prompt_entry },
 		{ '-', &cmd_delete_buffer_entry },
+		{ '.', &cmd_command_prompt_entry },
 		{ '0', &cmd_select_window_entry },
 		{ '1', &cmd_select_window_entry },
 		{ '2', &cmd_select_window_entry },

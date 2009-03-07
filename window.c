@@ -201,8 +201,7 @@ window_index(struct window *s, u_int *i)
 }
 
 struct window *
-window_create(const char *name, const char *cmd, const char *cwd,
-    const char **envp, u_int sx, u_int sy, u_int hlimit, char **cause)
+window_create1(u_int sx, u_int sy)
 {
 	struct window	*w;
 	u_int		 i;
@@ -229,6 +228,16 @@ window_create(const char *name, const char *cmd, const char *cwd,
 		ARRAY_ADD(&windows, w);
 	w->references = 0;
 
+	return (w);
+}
+
+struct window *
+window_create(const char *name, const char *cmd, const char *cwd,
+    const char **envp, u_int sx, u_int sy, u_int hlimit, char **cause)
+{
+	struct window	*w;
+
+	w = window_create1(sx, sy);
 	if (window_add_pane(w, -1, cmd, cwd, envp, hlimit, cause) == NULL) {
 		window_destroy(w);
 		return (NULL);
