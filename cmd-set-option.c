@@ -61,6 +61,7 @@ const struct set_option_entry set_option_table[NSETOPTION] = {
 	{ "message-fg", SET_OPTION_COLOUR, 0, 0, NULL },
 	{ "prefix", SET_OPTION_KEY, 0, 0, NULL },
 	{ "repeat-time", SET_OPTION_NUMBER, 0, SHRT_MAX, NULL },
+	{ "set-remain-on-exit", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "set-titles", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "status", SET_OPTION_FLAG, 0, 0, NULL },
 	{ "status-attr", SET_OPTION_ATTRIBUTES, 0, 0, NULL },
