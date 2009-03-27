@@ -1065,7 +1065,6 @@ void		 tty_start_tty(struct tty *);
 void		 tty_stop_tty(struct tty *);
 void		 tty_set_title(struct tty *, const char *);
 void		 tty_update_mode(struct tty *, int);
-void		 tty_draw_line(struct tty *, struct screen *, u_int, u_int);
 int		 tty_open(struct tty *, char **);
 void		 tty_close(struct tty *, int);
 void		 tty_free(struct tty *, int);

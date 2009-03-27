@@ -128,5 +128,21 @@ screen_redraw_blanky(struct client *c, u_int oy, u_int ny, char ch)
 void
 screen_redraw_line(struct client *c, struct screen *s, u_int oy, u_int py)
 {
-	tty_draw_line(&c->tty, s, py, oy);
+	const struct grid_cell	*gc;
+	struct grid_cell	 tc;
+	u_int			 i, sx;
+
+	sx = screen_size_x(s);
+	if (sx > c->tty.sx)
+		sx = c->tty.sx;
+	for (i = 0; i < sx; i++) {
+		gc = grid_view_peek_cell(s->grid, i, py);
+ 		tty_cursor(&c->tty, i, py, oy);
+		if (screen_check_selection(s, i, py)) {
+			memcpy(&tc, &s->sel.cell, sizeof tc);
+			tc.data = gc->data;
+			tty_cell(&c->tty, &tc);
+		} else
+			tty_cell(&c->tty, gc);
+	}
 }
