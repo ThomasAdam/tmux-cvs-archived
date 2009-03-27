@@ -36,8 +36,7 @@
 void	client_handle_winch(struct client_ctx *);
 
 int
-client_init(
-    const char *path, struct client_ctx *cctx, int start_server, int flags)
+client_init(char *path, struct client_ctx *cctx, int start_server, int flags)
 {
 	struct sockaddr_un		sa;
 	struct stat			sb;

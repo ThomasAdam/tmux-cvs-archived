@@ -120,7 +120,7 @@ server_client_index(struct client *c)
 
 /* Fork new server. */
 int
-server_start(const char *path)
+server_start(char *path)
 {
 	struct sockaddr_un	sa;
 	size_t			size;
