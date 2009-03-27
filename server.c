@@ -249,6 +249,7 @@ server_main(const char *srv_path, int srv_fd)
 		}
 		nfds += ARRAY_LENGTH(&clients) * 2;
 		pfds = xrealloc(pfds, nfds, sizeof *pfds);
+		memset(pfds, 0, nfds * sizeof *pfds);
 		pfd = pfds;
 
 		/* Fill server socket. */
