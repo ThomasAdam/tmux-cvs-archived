@@ -1022,7 +1022,7 @@ extern time_t	 server_activity;
 extern int	 debug_level;
 extern int	 be_quiet;
 extern time_t	 start_time;
-extern const char *socket_path;
+extern char 	*socket_path;
 void		 logfile(const char *);
 void		 siginit(void);
 void		 sigreset(void);
