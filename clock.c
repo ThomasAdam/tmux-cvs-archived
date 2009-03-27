@@ -23,7 +23,7 @@
 
 #include "tmux.h"
 
-char clock_table[14][5][5] = {
+const char clock_table[14][5][5] = {
 	{ { 1,1,1,1,1 }, /* 0 */
 	  { 1,0,0,0,1 },
 	  { 1,0,0,0,1 },
