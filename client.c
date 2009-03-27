@@ -48,7 +48,7 @@ client_init(
 	struct buffer		       *b;
 	char			       *name;
 
-	if (stat(path, &sb) != 0) {
+	if (lstat(path, &sb) != 0) {
 		if (start_server && errno == ENOENT) {
 			if ((cctx->srv_fd = server_start(path)) == -1)
 				goto start_failed;
