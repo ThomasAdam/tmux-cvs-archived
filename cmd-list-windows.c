@@ -49,7 +49,7 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct winlink		*wl;
 	struct window		*w;
 	struct window_pane	*wp;	
-	struct grid_data	*gd;
+	struct grid		*gd;
 	u_int			 i;
 	unsigned long long	 size;
 	const char		*name;
