@@ -30,7 +30,7 @@ int	cmd_previous_window_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_previous_window_entry = {
 	"previous-window", "prev",
 	CMD_TARGET_SESSION_USAGE,
-	CMD_CANREPEAT|CMD_AFLAG,
+	CMD_AFLAG,
 	cmd_previous_window_init,
 	cmd_target_parse,
 	cmd_previous_window_exec,

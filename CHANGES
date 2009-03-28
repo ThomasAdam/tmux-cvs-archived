@@ -1,3 +1,10 @@
+28 March 2009
+
+* Key repeating is now a property of the key binding not of the command.
+  Repeat is turned on when the key is bound with the -r flag to bind-key.
+  next/previous-window no longer repeat by default as it turned out to annoy
+  me.
+
 27 March 2009
 
 * Clear using ED when redrawing the screen. I foolishly assumed using spaces

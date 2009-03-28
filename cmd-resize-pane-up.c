@@ -32,7 +32,7 @@ int	cmd_resize_pane_up_exec(struct cmd *, struct cmd_ctx *);
 const struct cmd_entry cmd_resize_pane_up_entry = {
 	"resize-pane-up", "resizep-up",
 	CMD_PANE_WINDOW_USAGE " [adjustment]",
-	CMD_ARG01|CMD_CANREPEAT,
+	CMD_ARG01,
 	cmd_resize_pane_up_init,
 	cmd_pane_parse,
 	cmd_resize_pane_up_exec,
