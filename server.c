@@ -689,7 +689,6 @@ server_handle_client(struct client *c)
 	struct window_pane	*wp;
 	struct timeval	 	 tv;
 	struct key_binding	*bd;
-	struct cmd		*cmd;
 	int		 	 key, prefix, status, xtimeout;
 	int			 mode;
 	u_char			 mouse[3];
