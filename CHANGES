@@ -1,5 +1,8 @@
 27 March 2009
 
+* Clear using ED when redrawing the screen. I foolishly assumed using spaces
+  would be equivalent and terminals would pick up on this, but apparently not.
+  This fixes copy and paste in xterm/rxvt.
 * Sockets in /tmp are now created in a subdirectory named, tmux-UID, eg
   tmux-1000. The default socket is thus /tmp/tmux-UID/default. To start a
   separate server, the new -L command line option should be used: this creates
