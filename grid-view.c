@@ -37,6 +37,13 @@ grid_view_peek_cell(struct grid *gd, u_int px, u_int py)
 	return (grid_peek_cell(gd, grid_view_x(gd, px), grid_view_y(gd, py)));
 }
 
+/* Get cell text. */
+uint64_t
+grid_view_peek_text(struct grid *gd, u_int px, u_int py)
+{
+	return (grid_peek_text(gd, grid_view_x(gd, px), grid_view_y(gd, py)));
+}
+
 /* Get cell for writing. */
 struct grid_cell *
 grid_view_get_cell(struct grid *gd, u_int px, u_int py)
@@ -50,6 +57,13 @@ grid_view_set_cell(
     struct grid *gd, u_int px, u_int py, const struct grid_cell *gc)
 {
 	grid_set_cell(gd, grid_view_x(gd, px), grid_view_y(gd, py), gc);
+}
+
+/* Set text. */
+void
+grid_view_set_text(struct grid *gd, u_int px, u_int py, uint64_t text)
+{
+	grid_set_text(gd, grid_view_x(gd, px), grid_view_y(gd, py), text);
 }
 
 /* Clear area. */

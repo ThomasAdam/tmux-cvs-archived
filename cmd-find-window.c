@@ -163,19 +163,19 @@ cmd_find_window_callback(void *data, int idx)
 char *
 cmd_find_window_search(struct window_pane *wp, const char *searchstr)
 {
-	char			*buf, *s;
-	size_t			 off;
-	const struct grid_cell	*gc;
-	u_int			 i, j, k;
-	u_char			 data[4];
+	char	*buf, *s;
+	size_t	 off;
+	uint64_t text;
+	u_int	 i, j, k;
+	u_char	 data[4];
 
 	buf = xmalloc(1);
 				
 	for (j = 0; j < screen_size_y(&wp->base); j++) {
 		off = 0;
 		for (i = 0; i < screen_size_x(&wp->base); i++) {
-			gc = grid_view_peek_cell(wp->base.grid, i, j);
-			utf8_split(gc->data, data);
+			text = grid_view_peek_text(wp->base.grid, i, j);
+			utf8_split(text, data);
 			
 			buf = xrealloc(buf, 1, off + 4);
 			for (k = 0; k < sizeof data; k++) {

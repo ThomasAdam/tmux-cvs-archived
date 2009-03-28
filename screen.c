@@ -89,6 +89,7 @@ screen_resize_x(struct screen *s, u_int sx)
 {
 	struct grid		*gd = s->grid;
 	const struct grid_cell	*gc;
+	uint64_t		 text;
 	u_int			 xx, yy;
 
 	if (sx == 0)
@@ -106,14 +107,15 @@ screen_resize_x(struct screen *s, u_int sx)
 		 * If the character after the last is wide or padding, remove
 		 * it and any leading padding.
 		 */
-		gc = &grid_default_cell;
+		text = ' ';
 		for (xx = sx; xx > 0; xx--) {
 			gc = grid_peek_cell(gd, xx - 1, yy);
+			text = grid_peek_text(gd, xx - 1, yy);
 			if (!(gc->flags & GRID_FLAG_PADDING))
 				break;
 			grid_set_cell(gd, xx - 1, yy, &grid_default_cell);
 		}
-		if (xx > 0 && xx != sx && utf8_width(gc->data) != 1)
+		if (xx > 0 && xx != sx && utf8_width(text) != 1)
 			grid_set_cell(gd, xx - 1, yy, &grid_default_cell);
 
 		/* Reduce the line size. */
@@ -165,6 +167,7 @@ screen_resize_y(struct screen *s, u_int sy)
 	/* Resize line arrays. */
 	gd->size = xrealloc(gd->size, gd->hsize + sy, sizeof *gd->size);
 	gd->data = xrealloc(gd->data, gd->hsize + sy, sizeof *gd->data);
+	gd->text = xrealloc(gd->text, gd->hsize + sy, sizeof *gd->text);
 
 	/* Size increasing. */
 	if (sy > screen_size_y(s)) {
@@ -172,6 +175,7 @@ screen_resize_y(struct screen *s, u_int sy)
 		for (yy = gd->hsize + oy; yy < gd->hsize + sy; yy++) {
 			gd->size[yy] = 0;
 			gd->data[yy] = NULL;
+			gd->text[yy] = NULL;
 		}
 	}
 

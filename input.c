@@ -541,9 +541,9 @@ input_state_utf8(u_char ch, struct input_ctx *ictx)
 	if (value > 0xffff)	/* non-BMP not supported */
 		value = '_';
 
-	ictx->cell.data = value;
+	ictx->text = value;
  	ictx->cell.flags |= GRID_FLAG_UTF8;
-	screen_write_cell(&ictx->ctx, &ictx->cell);
+	screen_write_cell(&ictx->ctx, &ictx->cell, ictx->text);
  	ictx->cell.flags &= ~GRID_FLAG_UTF8;
 }
 
@@ -585,8 +585,8 @@ input_handle_character(u_char ch, struct input_ctx *ictx)
 	}
 	log_debug2("-- ch %zu: %hhu (%c)", ictx->off, ch, ch);
 
-	ictx->cell.data = ch;
-	screen_write_cell(&ictx->ctx, &ictx->cell);
+	ictx->text = ch;
+	screen_write_cell(&ictx->ctx, &ictx->cell, ictx->text);
 }
 
 void
