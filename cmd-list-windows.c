@@ -68,7 +68,7 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 			size = 0;
 			for (i = 0; i < gd->hsize; i++) {
 				size += gd->size[i] * sizeof **gd->data;
-				size += gd->size[i] * sizeof (u_short);
+				size += gd->usize[i] * sizeof **gd->udata;
 			}
 			size += gd->hsize * (sizeof *gd->data);
 			size += gd->hsize * (sizeof *gd->size);
