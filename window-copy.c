@@ -487,7 +487,7 @@ window_copy_copy_line(struct window_pane *wp,
 			} else {
 				gu = grid_peek_utf8(wp->base.grid, i, sy);
 				*buf = xrealloc(*buf, 1, (*off) + 8);
-				for (j = 0; j < 8; j++) {
+				for (j = 0; j < UTF8_SIZE; j++) {
 					if (gu->data[i] == 0xff)
 						break;
 					(*buf)[(*off)++] = gc->data;

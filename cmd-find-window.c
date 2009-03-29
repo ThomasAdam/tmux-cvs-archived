@@ -178,7 +178,7 @@ cmd_find_window_search(struct window_pane *wp, const char *searchstr)
 			if (gc->flags & GRID_FLAG_UTF8) {
 				gu = grid_view_peek_utf8(wp->base.grid, i, j);
 				buf = xrealloc(buf, 1, off + 8);
-				for (k = 0; k < 8; k++) {
+				for (k = 0; k < UTF8_SIZE; k++) {
 					if (gu->data[k] == 0xff)
 						break;
 					buf[off++] = gu->data[k];

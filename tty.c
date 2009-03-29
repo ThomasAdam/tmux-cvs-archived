@@ -800,8 +800,8 @@ tty_cell(
 		return;
 	}
 
-	/* Otherwise, unpack UTF-8 and write it. */
-	for (i = 0; i < 8; i++) {
+	/* Otherwise, write UTF-8. */
+	for (i = 0; i < UTF8_SIZE; i++) {
 		if (gu->data[i] == 0xff)
 			break;
 		tty_putc(tty, gu->data[i]);

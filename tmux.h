@@ -493,9 +493,10 @@ struct grid_cell {
 } __packed;
 
 /* Grid cell UTF-8 data. Used instead of data in grid_cell for UTF-8 cells. */
+#define UTF8_SIZE 8
 struct grid_utf8 {
 	u_char	width;
-	u_char	data[8];
+	u_char	data[UTF8_SIZE];
 } __packed;
 
 /* Entire grid of cells. */
