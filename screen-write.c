@@ -533,6 +533,10 @@ screen_write_cell(
 	struct grid_cell 	 tmp_gc, *tmp_gc2;
 	size_t			 size;
 
+	/* Ignore padding. */
+	if (gc->flags & GRID_FLAG_PADDING)
+		return;
+
 	/* Find character width. */
 	if (gc->flags & GRID_FLAG_UTF8) {
 		uvalue = utf8_combine(udata);
@@ -547,9 +551,14 @@ screen_write_cell(
 	if (width == 0) {
 		if (s->cx == 0)
 			return;
-		gc = grid_view_peek_cell(gd, s->cx - 1, s->cy);
-		if (!(gc->flags & GRID_FLAG_UTF8))
-			return;
+		tmp_gc2 = grid_view_get_cell(gd, s->cx - 1, s->cy);
+		if (!(tmp_gc2->flags & GRID_FLAG_UTF8)) {
+			tmp_gc2->flags |= GRID_FLAG_UTF8;
+			memset(&gu.data, 0xff, sizeof gu.data);
+			*gu.data = tmp_gc2->data;
+			gu.width = 1;
+			grid_view_set_utf8(gd, s->cx - 1, s->cy, &gu);
+		}
 		tmp_gu = grid_view_get_utf8(gd, s->cx - 1, s->cy);
 
 		for (i = 0; i < 8; i++) {
