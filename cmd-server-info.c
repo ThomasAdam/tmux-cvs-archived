@@ -80,6 +80,7 @@ cmd_server_info_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		ctx->print(ctx, "configuration file is %s", cfg_file);
 	else
 		ctx->print(ctx, "configuration file not specified");
+	ctx->print(ctx, "protocol version is %d", PROTOCOL_VERSION);
 	ctx->print(ctx, "%u clients, %u sessions",
 	    ARRAY_LENGTH(&clients), ARRAY_LENGTH(&sessions));
 	ctx->print(ctx, "");
