@@ -260,7 +260,6 @@ window_copy_write_line(struct window_pane *wp, struct screen_write_ctx *ctx, u_i
 		gc.attr |= options_get_number(&wp->window->options, "mode-attr");
 		screen_write_cursormove(ctx, screen_size_x(s) - size, 0);
 		screen_write_puts(ctx, &gc, "%s", hdr);
-		screen_write_puts(ctx, &gc, "%s", hdr);
 	} else
 		size = 0;
 
