@@ -483,7 +483,7 @@ window_copy_copy_line(struct window_pane *wp,
 			gc = grid_peek_cell(wp->base.grid, i, sy);
 			if (gc->flags & GRID_FLAG_PADDING)
 				continue;
-			if (gc->flags & GRID_FLAG_UTF8) {
+			if (!(gc->flags & GRID_FLAG_UTF8)) {
 				*buf = xrealloc(*buf, 1, (*off) + 1);
 				(*buf)[(*off)++] = gc->data;
 			} else {

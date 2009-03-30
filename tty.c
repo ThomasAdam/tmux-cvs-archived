@@ -384,7 +384,6 @@ void
 tty_draw_line(struct tty *tty, struct screen *s, u_int py, u_int oy)
 {
 	const struct grid_cell	*gc;
-	struct grid_cell	 tmp_gc;
 	const struct grid_utf8	*gu;
 	u_int			 i, sx;
 
@@ -403,8 +402,8 @@ tty_draw_line(struct tty *tty, struct screen *s, u_int py, u_int oy)
 
  		tty_cursor(tty, i, py, oy);
 		if (screen_check_selection(s, i, py)) {
-			memcpy(&tmp_gc, &s->sel.cell, sizeof tmp_gc);
-			tty_cell(tty, &tmp_gc, gu);
+			s->sel.cell.data = gc->data;
+			tty_cell(tty, &s->sel.cell, gu);
 		} else
 			tty_cell(tty, gc, gu);
 	}
