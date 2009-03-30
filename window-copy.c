@@ -481,6 +481,8 @@ window_copy_copy_line(struct window_pane *wp,
 	if (sx < ex) {
 		for (i = sx; i < ex; i++) {
 			gc = grid_peek_cell(wp->base.grid, i, sy);
+			if (gc->flags & GRID_FLAG_PADDING)
+				continue;
 			if (gc->flags & GRID_FLAG_UTF8) {
 				*buf = xrealloc(*buf, 1, (*off) + 1);
 				(*buf)[(*off)++] = gc->data;
@@ -524,7 +526,9 @@ window_copy_find_length(struct window_pane *wp, u_int py)
 	px = wp->base.grid->size[py];
 	while (px > 0) {
 		gc = grid_peek_cell(wp->base.grid, px - 1, py);
-		if (!(gc->flags & GRID_FLAG_UTF8) && gc->data != ' ')
+		if (gc->flags & GRID_FLAG_UTF8)
+			break;
+		if (gc->data != ' ')
 			break;
 		px--;
 	}
