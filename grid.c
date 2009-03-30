@@ -138,6 +138,7 @@ int
 grid_compare(struct grid *ga, struct grid *gb)
 {
 	struct grid_cell	*gca, *gcb;
+	struct grid_utf8	*gua, *gub;
 	u_int			 xx, yy;
 
 	if (ga->sx != gb->sx || ga->sy != ga->sy)
@@ -151,7 +152,12 @@ grid_compare(struct grid *ga, struct grid *gb)
 			gcb = &gb->data[yy][xx];
 			if (memcmp(gca, gcb, sizeof (struct grid_cell)) != 0)
 				return (1);
-			/* XXX */
+			if (!(gca->flags & GRID_FLAG_UTF8))
+				continue;
+			gua = &ga->udata[yy][xx];
+			gub = &gb->udata[yy][xx];
+			if (memcmp(gua, gub, sizeof (struct grid_utf8)) != 0)
+				return (1);
 		}
 	}
 
