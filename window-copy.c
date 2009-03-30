@@ -287,7 +287,7 @@ window_copy_write_column(
 
 	screen_write_cursormove(ctx, px, 0);
 	screen_write_copy(ctx, &wp->base,
-	    data->ox, screen_hsize(&wp->base) - data->oy, 1, screen_size_y(s));
+	    data->ox + px, screen_hsize(&wp->base) - data->oy, 1, screen_size_y(s));
 }
 
 void
@@ -297,7 +297,7 @@ window_copy_write_columns(
 	u_int	xx;
 
 	for (xx = px; xx < px + nx; xx++)
-		window_copy_write_column(wp, ctx, px);
+		window_copy_write_column(wp, ctx, xx);
 }
 
 void
