@@ -73,6 +73,8 @@ server_create_client(int fd)
 		fatal("fcntl failed");
 	if (fcntl(fd, F_SETFL, mode|O_NONBLOCK) == -1)
 		fatal("fcntl failed");
+	if (fcntl(fd, F_SETFD, FD_CLOEXEC) == -1)
+		fatal("fcntl failed");
 
 	c = xcalloc(1, sizeof *c);
 	c->fd = fd;

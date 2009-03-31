@@ -85,9 +85,9 @@ client_init(char *path, struct client_ctx *cctx, int start_server, int flags)
 
 server_started:
 	if ((mode = fcntl(cctx->srv_fd, F_GETFL)) == -1)
-		fatal("fcntl");
+		fatal("fcntl failed");
 	if (fcntl(cctx->srv_fd, F_SETFL, mode|O_NONBLOCK) == -1)
-		fatal("fcntl");
+		fatal("fcntl failed");
 	cctx->srv_in = buffer_create(BUFSIZ);
 	cctx->srv_out = buffer_create(BUFSIZ);
 

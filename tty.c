@@ -98,9 +98,11 @@ tty_open(struct tty *tty, char **cause)
 	}
 
 	if ((mode = fcntl(tty->fd, F_GETFL)) == -1)
-		fatal("fcntl");
+		fatal("fcntl failed");
 	if (fcntl(tty->fd, F_SETFL, mode|O_NONBLOCK) == -1)
-		fatal("fcntl");
+		fatal("fcntl failedo");
+	if (fcntl(tty->fd, F_SETFD, FD_CLOEXEC) == -1)
+		fatal("fcntl failed");
 
 	if (debug_level > 3)
 		tty->log_fd = open("tmux.out", O_WRONLY|O_CREAT|O_TRUNC, 0644);
