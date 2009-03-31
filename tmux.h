@@ -109,6 +109,7 @@ extern const char    *__progname;
 #define	_PATH_BSHELL	"/bin/sh"
 #define	_PATH_TMP	"/tmp/"
 #define _PATH_DEVNULL	"/dev/null"
+#define _PATH_TTY	"/dev/tty"
 #endif
 
 /* Default configuration file. */
