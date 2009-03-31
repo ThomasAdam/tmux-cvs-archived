@@ -1,5 +1,9 @@
 31 March 2009
 
+* AIX port, thanks to cmihai for access to a box. Only tested on 6.1 with xlc
+  10.1 (make sure CC is set). Needs GNU make and probably ncurses (didn't try
+  plain curses). Also won't build with DEBUG, so comment the FDEBUG=1 line in
+  GNUmakefile.
 * Draw a vertical line on the right when the window size is less than the
   terminal size. This is partly to shake out any horizontal limit bugs on the
   way to horizontal splitting/pane tiling. Currently a bit slow since it has to
