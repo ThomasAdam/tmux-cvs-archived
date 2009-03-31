@@ -9,6 +9,7 @@
   way to horizontal splitting/pane tiling. Currently a bit slow since it has to
   do a lot of redrawing but hopefully that will improve as I get some better
   ideas for how to do it.
+* Fix remaining problems with copy and paste and UTF-8.
 
 28 March 2009
 
