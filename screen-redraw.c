@@ -73,6 +73,14 @@ screen_redraw_screen(struct client *c, struct screen *s)
 	if (w->sy < c->tty.sy - status)
 		screen_redraw_blanky(c, w->sy, c->tty.sy - status - w->sy, '=');
 
+	/* Draw right border line. */
+	if (w->sx < c->tty.sx) {
+		for (i = 0; i < c->tty.sy; i++) {
+			tty_putcode2(&c->tty, TTYC_CUP, i, w->sx);
+			tty_putc(&c->tty, '|');
+		}
+	}
+
 	/* Draw the status line. */
 	screen_redraw_status(c);
 }

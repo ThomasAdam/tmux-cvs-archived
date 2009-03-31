@@ -1,3 +1,11 @@
+31 March 2009
+
+* Draw a vertical line on the right when the window size is less than the
+  terminal size. This is partly to shake out any horizontal limit bugs on the
+  way to horizontal splitting/pane tiling. Currently a bit slow since it has to
+  do a lot of redrawing but hopefully that will improve as I get some better
+  ideas for how to do it.
+
 28 March 2009
 
 * Better UTF-8 support, including combined characters. Unicode data is now
