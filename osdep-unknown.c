@@ -24,7 +24,7 @@
 #include "tmux.h"
 
 char *
-get_argv0(unused pid_t pgrp)
+osdep_get_name(unused int fd, unused char *tty)
 {
 	return (NULL);
 }

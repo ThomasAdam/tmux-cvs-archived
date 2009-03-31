@@ -111,7 +111,11 @@ log_vwrite(int pri, const char *msg, va_list ap)
 
 	switch (log_type) {
 	case LOG_TYPE_SYSLOG:
+#ifdef NO_VSYSLOG
+		/* XXX */
+#else
 		vsyslog(pri, msg, ap);
+#endif
 		break;
 	case LOG_TYPE_TTY:
 		if (pri == LOG_INFO)
