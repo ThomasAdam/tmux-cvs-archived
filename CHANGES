@@ -1,8 +1,9 @@
 01 April 2009
 
 * Basic horizontal splitting and layout management. Still some redraw and other
-  issues - particularly, don't mix with manual pane resizing and be careful
-  when viewing from multiple clients; generally cycling the layout a few times
+  issues - particularly, don't mix with manual pane resizing, be careful when
+  viewing from multiple clients and don't expect shell windows to redraw very
+  well after the layout is changed; generally cycling the layout a few times
   will fix most problems. Getting this in for testing while I think about how
   to deal with manual mode.
 
