@@ -916,7 +916,7 @@ server_check_window(struct window *w)
 		else if (!flag) {
 			window_remove_pane(w, wp);
 			server_redraw_window(w);
-			layout_refresh(w);
+			layout_refresh(w, 0);
 		}
 		wp = wq;
 	} 

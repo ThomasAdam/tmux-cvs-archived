@@ -54,6 +54,7 @@ cmd_up_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 		w->active = TAILQ_PREV(w->active, window_panes, entry);
 		if (w->active == NULL)
 			w->active = TAILQ_LAST(&w->panes, window_panes);
+		layout_refresh(w, 1);
 	} while (w->active->flags & PANE_HIDDEN);
 
 	return (0);

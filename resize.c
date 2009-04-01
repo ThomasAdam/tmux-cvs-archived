@@ -48,7 +48,6 @@ recalculate_sizes(void)
 	struct session		*s;
 	struct client		*c;
 	struct window		*w;
-	struct window_pane	*wp;
 	u_int		 	 i, j, ssx, ssy, has, limit;
 	int		 	 flag;
 
@@ -134,6 +133,6 @@ recalculate_sizes(void)
 
 		window_resize(w, ssx, ssy);
 		server_redraw_window(w);
-		layout_refresh(w);
+		layout_refresh(w, 0);
 	}
 }

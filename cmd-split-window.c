@@ -178,7 +178,7 @@ cmd_split_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		server_redraw_session(s);
 	} else
 		server_status_session(s);
-	layout_refresh(w);
+	layout_refresh(w, 0);
 
 	return (0);
 }
