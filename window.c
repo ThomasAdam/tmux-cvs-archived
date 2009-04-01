@@ -684,8 +684,11 @@ window_pane_mouse(
 {
 	/* XXX convert from 1-based? */
 
+	if (x < wp->xoff || x >= wp->xoff + wp->sx)
+		return;
 	if (y < wp->yoff || y >= wp->yoff + wp->sy)
 		return;
+	x -= wp->xoff;
 	y -= wp->yoff;
 
 	if (wp->mode != NULL) {
