@@ -113,7 +113,7 @@ screen_redraw_screen(struct client *c)
 			for (i = 0; i < sx; i++)
 				tty_putc(tty, '-');
 		}			
-		if (wp->yoff + sy < tty->sy) {
+		if (wp->yoff + sy < tty->sy - status) {
 			tty_cursor(tty, wp->xoff, wp->yoff + sy, 0, 0);
 			for (i = 0; i < sx; i++)
 				tty_putc(tty, '-');
