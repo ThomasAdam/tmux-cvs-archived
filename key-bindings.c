@@ -79,6 +79,7 @@ key_bindings_init(void)
 		int			 can_repeat;
 		const struct cmd_entry	*entry;
 	} table[] = {
+		{ ' ',			  0, &cmd_next_layout_entry },
 		{ '!', 			  0, &cmd_break_pane_entry },
 		{ '"', 			  0, &cmd_split_window_entry },
 		{ '#', 			  0, &cmd_list_buffers_entry },

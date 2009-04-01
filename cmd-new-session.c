@@ -185,6 +185,7 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 		server_write_client(c, MSG_READY, NULL, 0);
 		server_redraw_client(c);
 	}
+	recalculate_sizes();
 
 	return (1);
 }

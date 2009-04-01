@@ -216,7 +216,7 @@ main(int argc, char **argv)
 	const char		*shell;
 	struct passwd		*pw;
 	char			*path, *label, *cause, *home, *pass = NULL;
-	char			 cwd[MAXPATHLEN]; 
+	char			 cwd[MAXPATHLEN];
 	int	 		 retcode, opt, flags, unlock, start_server;
 
 	unlock = flags = 0;

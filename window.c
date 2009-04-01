@@ -212,6 +212,7 @@ window_create1(u_int sx, u_int sy)
 
 	TAILQ_INIT(&w->panes);
 	w->active = NULL;
+	w->layout = 0;
 
 	w->sx = sx;
 	w->sy = sy;
@@ -375,6 +376,7 @@ window_update_panes(struct window *w)
 	TAILQ_FOREACH(wp, &w->panes, entry) {
 		if (wp->flags & PANE_HIDDEN)
 			continue;
+		wp->xoff = 0;
 		wp->yoff = yoff;
 		yoff += wp->sy + 1;
 	}
@@ -512,10 +514,11 @@ window_pane_create(struct window *w, u_int sx, u_int sy, u_int hlimit)
 
 	wp->mode = NULL;
 
+	wp->xoff = 0;
+ 	wp->yoff = 0;
+
 	wp->sx = sx;
 	wp->sy = sy;
-
- 	wp->yoff = 0;
 
 	screen_init(&wp->base, sx, sy, hlimit);
 	wp->screen = &wp->base;

@@ -67,5 +67,6 @@ cmd_kill_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	window_remove_pane(wl->window, wp);
 	server_redraw_window(wl->window);
+	layout_refresh(wl->window);
 	return (0);
 }

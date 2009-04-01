@@ -1,3 +1,14 @@
+01 April 2009
+
+* Basic horizontal splitting and layout management. Still some redraw and other
+  issues - particularly, don't mix with manual pane resizing and be careful
+  when viewing from multiple clients; generally cycling the layout a few times
+  will fix most problems. Getting this in for testing while I think about how
+  to deal with manual mode.
+
+  Split window as normal and cycle the layouts with C-b space. Some of the
+  layouts will work better when swap-pane comes along.
+
 31 March 2009
 
 * AIX port, thanks to cmihai for access to a box. Only tested on 6.1 with xlc

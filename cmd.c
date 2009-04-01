@@ -57,6 +57,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_move_window_entry,
 	&cmd_new_session_entry,
 	&cmd_new_window_entry,
+	&cmd_next_layout_entry,
 	&cmd_next_window_entry,
 	&cmd_paste_buffer_entry,
 	&cmd_previous_window_entry,

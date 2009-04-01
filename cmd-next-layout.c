@@ -21,18 +21,18 @@
 #include "tmux.h"
 
 /*
- * Move down a pane.
+ * Switch window to next layout.
  */
 
-int	cmd_down_pane_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_next_layout_exec(struct cmd *, struct cmd_ctx *);
 
-const struct cmd_entry cmd_down_pane_entry = {
-	"down-pane", "downp",
+const struct cmd_entry cmd_next_layout_entry = {
+	"next-layout", "nextl",
 	CMD_TARGET_WINDOW_USAGE,
 	0,
 	cmd_target_init,
 	cmd_target_parse,
-	cmd_down_pane_exec,
+	cmd_next_layout_exec,
 	cmd_target_send,
 	cmd_target_recv,
 	cmd_target_free,
@@ -40,23 +40,15 @@ const struct cmd_entry cmd_down_pane_entry = {
 };
 
 int
-cmd_down_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
+cmd_next_layout_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
-	struct window		*w;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
-	w = wl->window;
 
-	do {
-		w->active = TAILQ_NEXT(w->active, entry);
-		if (w->active == NULL)
-			w->active = TAILQ_FIRST(&w->panes);
-	} while (w->active->flags & PANE_HIDDEN);
-
-	layout_refresh(wl->window);
+	layout_next(wl->window);
 
 	return (0);
 }
