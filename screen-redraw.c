@@ -87,6 +87,9 @@ screen_redraw_screen(struct client *c)
 
 	/* Draw the panes. */
 	TAILQ_FOREACH(wp, &w->panes, entry) {
+		if (wp->flags & PANE_HIDDEN)
+			continue;
+
 		tty_reset(tty);
 
 		s = wp->screen;
