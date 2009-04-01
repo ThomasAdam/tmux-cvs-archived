@@ -190,11 +190,11 @@ makesockpath(const char *label)
 
 	if (lstat(base, &sb) != 0)
 		return (NULL);
-	if (!S_ISDIR(sb.st_mode) || sb.st_uid != uid) {
-		errno = EACCES;
+	if (!S_ISDIR(sb.st_mode)) {
+		errno = ENOTDIR;
 		return (NULL);
 	}
-	if ((sb.st_mode & (S_IRWXG|S_IRWXO)) != 0) {
+	if (sb.st_uid != uid || (sb.st_mode & (S_IRWXG|S_IRWXO)) != 0) {
 		errno = EACCES;
 		return (NULL);
 	}
