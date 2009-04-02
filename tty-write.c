@@ -42,7 +42,7 @@ tty_vwrite_cmd(struct window_pane *wp, enum tty_cmd cmd, va_list ap)
 	if (wp == NULL)
 		return;
 
-	if (wp->window->flags & WINDOW_REDRAW)
+	if (wp->window->flags & WINDOW_REDRAW || wp->flags & PANE_REDRAW)
 		return;
 	if (wp->window->flags & WINDOW_HIDDEN || wp->flags & PANE_HIDDEN)
 		return;
@@ -73,7 +73,7 @@ tty_write_mode(struct window_pane *wp, int mode)
 	if (wp == NULL)
 		return;
 
-	if (wp->window->flags & WINDOW_REDRAW)
+	if (wp->window->flags & WINDOW_REDRAW || wp->flags & PANE_REDRAW)
 		return;
 	if (wp->window->flags & WINDOW_HIDDEN || wp->flags & PANE_HIDDEN)
 		return;
