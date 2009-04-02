@@ -656,6 +656,7 @@ struct window_pane {
 	int		 flags;
 #define PANE_HIDDEN 0x1
 #define PANE_RESTART 0x2
+#define PANE_REDRAW 0x4
 	
 	char		*cmd;
 	char		*cwd;
@@ -1466,6 +1467,7 @@ void	 screen_write_cell(
 
 /* screen-redraw.c */
 void	 screen_redraw_screen(struct client *);
+void	 screen_redraw_pane(struct client *, struct window_pane *);
 void	 screen_redraw_status(struct client *);
 
 /* screen.c */

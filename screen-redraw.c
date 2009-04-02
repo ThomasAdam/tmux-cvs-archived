@@ -109,7 +109,7 @@ screen_redraw_screen(struct client *c)
 				tty_putc(&c->tty, '|');
 			}
 		}
-
+		
 		/* Draw top and bottom borders. */
 		if (wp->yoff > 0) {
 			tty_cursor(tty, wp->xoff, wp->yoff - 1, 0, 0);
@@ -121,15 +121,25 @@ screen_redraw_screen(struct client *c)
 			for (i = 0; i < sx; i++)
 				tty_putc(tty, '-');
 		}
-		
+
 		/* Draw the pane. */
-		for (i = 0; i < sy; i++)
-			tty_draw_line(tty, s, i, wp->xoff, wp->yoff);
+		screen_redraw_pane(c, wp);
 	}
 	
 	/* Draw the status line. */
 	screen_redraw_status(c);
 }
+
+/* Draw a single pane. */
+void
+screen_redraw_pane(struct client *c, struct window_pane *wp)
+{
+	u_int	i;
+
+	for (i = 0; i < wp->sy; i++)
+		tty_draw_line(&c->tty, wp->screen, i, wp->xoff, wp->yoff);
+}
+	
 
 /* Draw the status line. */
 void

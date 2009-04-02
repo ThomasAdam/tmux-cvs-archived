@@ -1,11 +1,11 @@
 02 April 2009
 
+* Change scroll/pane redraws to only redraw the single pane affected rather
+  than the entire window.
 * If redrawing the region would mean redrawing > half the pane, just schedule
   to redraw the entire window. Also add a flag to skip updating the window any
   further if it is scheduled to be redrawn. This has the effect of batching
   multiple redraws together.
-
-  Redraws should be moved to the pane level later.
 
 01 April 2009
 
