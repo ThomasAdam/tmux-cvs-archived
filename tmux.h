@@ -694,6 +694,7 @@ struct window {
 #define WINDOW_BELL 0x1
 #define WINDOW_HIDDEN 0x2
 #define WINDOW_ACTIVITY 0x4
+#define WINDOW_REDRAW 0x8
 
 	struct options	 options;
 
@@ -1085,7 +1086,7 @@ void		 tty_set_title(struct tty *, const char *);
 void		 tty_update_mode(struct tty *, int);
 void		 tty_draw_line(
     		     struct tty *, struct screen *, u_int, u_int, u_int);
-void		 tty_draw_region(struct tty *, struct screen *, u_int, u_int);
+void		 tty_redraw_region(struct tty *, struct window_pane *);
 int		 tty_open(struct tty *, char **);
 void		 tty_close(struct tty *, int);
 void		 tty_free(struct tty *, int);

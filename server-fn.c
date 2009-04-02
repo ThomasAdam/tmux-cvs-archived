@@ -146,6 +146,7 @@ server_redraw_window(struct window *w)
 		if (c->session->curw->window == w)
 			server_redraw_client(c);
 	}
+	w->flags |= WINDOW_REDRAW;
 }
 
 void

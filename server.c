@@ -921,6 +921,8 @@ server_check_window(struct window *w)
 		wp = wq;
 	} 
 
+	w->flags &= ~WINDOW_REDRAW; /* redrawn as part of client */
+
 	if (!destroyed)
 		return;
 
