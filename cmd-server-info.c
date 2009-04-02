@@ -133,9 +133,9 @@ cmd_server_info_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 						    sizeof (**gd->udata);
 					}
 				}
-				ctx->print(ctx, "%6u: %s %lu %d %u/%u, %zu "
-				    "bytes; UTF-8 %u/%u, %zu bytes", j, wp->tty,
-				    (u_long) wp->pid, wp->fd, lines,
+				ctx->print(ctx, "%6u: %p %s %lu %d %u/%u, %zu "
+				    "bytes; UTF-8 %u/%u, %zu bytes", j, wp,
+				    wp->tty, (u_long) wp->pid, wp->fd, lines,
 				    gd->hsize + gd->sy, size, ulines,
 				    gd->hsize + gd->sy, usize);
 				j++;

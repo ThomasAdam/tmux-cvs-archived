@@ -86,6 +86,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_split_window_entry,
 	&cmd_start_server_entry,
 	&cmd_suspend_client_entry,
+	&cmd_swap_pane_entry,
 	&cmd_swap_window_entry,
 	&cmd_switch_client_entry,
 	&cmd_unbind_key_entry,
