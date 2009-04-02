@@ -65,6 +65,10 @@ cmd_resize_pane_up_exec(struct cmd *self, struct cmd_ctx *ctx)
 	
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
+	if (wl->window->layout != 0) {
+		ctx->error(ctx, "window not in manual layout");
+		return (-1);
+	}
 	if (data->pane == -1)
 		wp = wl->window->active;
 	else {
