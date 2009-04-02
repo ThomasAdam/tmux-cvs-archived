@@ -136,10 +136,18 @@ lint:
 clean:
 		rm -f ${CLEANFILES}
 
-upload-index.html:
-		scp index.html nicm@web.sf.net:/home/groups/t/tm/tmux/htdocs
+upload-index.html: update-index.html
+		scp index.html images/*.png \
+			nicm,tmux@web.sf.net:/home/groups/t/tm/tmux/htdocs
+		rm -f images/small-*
 
 update-index.html:
+		(cd images && \
+			rm -f small-* && \
+			for i in *.png; do \
+			convert "$$i" -resize 200x150 "small-$$i"; \
+			done \
+		)
 		sed "s/%%VERSION%%/${VERSION}/g" index.html.in >index.html
 
 install:	all
