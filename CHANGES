@@ -1,3 +1,7 @@
+03 April 2009
+
+* rotate-window command. -U flag (default) for up, -D flag for down.
+
 02 April 2009
 
 * Change scroll/pane redraws to only redraw the single pane affected rather

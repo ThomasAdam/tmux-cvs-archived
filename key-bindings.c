@@ -128,6 +128,8 @@ key_bindings_init(void)
 		{ KEYC_ADDESC(KEYC_DOWN), 1, &cmd_resize_pane_down_entry },
 		{ KEYC_ADDCTL(KEYC_UP),   1, &cmd_resize_pane_up_entry },
 		{ KEYC_ADDCTL(KEYC_DOWN), 1, &cmd_resize_pane_down_entry },
+		{ KEYC_ADDESC('o'),	  0, &cmd_rotate_window_entry },
+		{ '\017',	          0, &cmd_rotate_window_entry },
 	};
 	u_int		 i;
 	struct cmd	*cmd;

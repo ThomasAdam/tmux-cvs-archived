@@ -24,7 +24,7 @@
 #include "tmux.h"
 
 /*
- * Create a new window.
+ * Split a window (add a new pane).
  */
 
 int	cmd_split_window_parse(struct cmd *, int, char **, char **);
