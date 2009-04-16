@@ -642,7 +642,7 @@ server_fill_clients(struct pollfd **pfd)
 	}
 	
 	/*
-	 * Clear any window redraw flags (will have been redrawn as part of *
+	 * Clear any window redraw flags (will have been redrawn as part of
 	 * client).
 	 */
 	for (i = 0; i < ARRAY_LENGTH(&windows); i++) {
