@@ -1,3 +1,9 @@
+17 April 2009
+
+* Remove the right number of characters from the buffer when escape then
+  a cursor key (or other key prefixed by \033) is pressed. Reported by
+  Stuart Henderson.
+
 03 April 2009
 
 * rotate-window command. -U flag (default) for up, -D flag for down.
