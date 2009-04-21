@@ -29,7 +29,7 @@ int	cmd_rotate_window_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_rotate_window_entry = {
 	"rotate-window", "rotatew",
-	CMD_TARGET_WINDOW_USAGE,
+	"[-DU] " CMD_TARGET_WINDOW_USAGE,
 	CMD_UPPERUFLAG|CMD_UPPERDFLAG,
 	cmd_rotate_window_init,
 	cmd_target_parse,
