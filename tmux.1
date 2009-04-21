@@ -403,6 +403,16 @@ The
 flag indicates this key may repeat, see the
 .Ic repeat-time
 option.
+.It Xo Ic break-pane
+.Op Fl d
+.Op Fl p Ar pane-index
+.Op Fl t Ar target-window
+.Xc
+Break the current pane off from its containing window to make it the only pane
+in a new window.
+If
+.Fl d
+is given, the new window does not become the current window.
 .It Xo Ic choose-session
 .Op Fl t Ar target-window
 .Xc
