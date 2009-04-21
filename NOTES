@@ -42,7 +42,6 @@ The following is a summary of major features implemented in this version:
 
 And major missing features:
 
-- Proper mouse support.
 - No support for programs changing termios(4) settings or other tty(4) ioctls.
 
 A more extensive, but rough, todo list is included in the TODO file.
