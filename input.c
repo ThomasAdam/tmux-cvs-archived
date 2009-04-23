@@ -630,6 +630,10 @@ input_handle_c1_control(u_char ch, struct input_ctx *ictx)
 	log_debug2("-- c1 %zu: %hhu (%c)", ictx->off, ch, ch);
 
 	switch (ch) {
+	case 'E': 	/* NEL */
+		screen_write_carriagereturn(&ictx->ctx);
+		screen_write_linefeed(&ictx->ctx);
+		break;
 	case 'M':	/* RI */
 		screen_write_reverseindex(&ictx->ctx);
 		break;
