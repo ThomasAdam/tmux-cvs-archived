@@ -1,3 +1,7 @@
+21 April 2009
+
+* tmux 0.8 released.
+
 17 April 2009
 
 * Remove the right number of characters from the buffer when escape then
