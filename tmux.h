@@ -317,8 +317,9 @@ enum tty_code_code {
 	TTYC_SMKX,	/* keypad_xmit, ks */
 	TTYC_SMSO,	/* enter_standout_mode, so */
 	TTYC_SMUL,	/* enter_underline_mode, us */
+	TTYC_XENL,	/* eat_newline_glitch, xn */
 };
-#define NTTYCODE (TTYC_SMUL + 1)
+#define NTTYCODE (TTYC_XENL + 1)
 
 /* Termcap types. */
 enum tty_code_type {
