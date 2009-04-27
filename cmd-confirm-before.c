@@ -171,7 +171,7 @@ cmd_confirm_before_print(struct cmd *self, char *buf, size_t len)
 	if (data == NULL)
 		return (off);
 	if (off < len && data->cmd != NULL)
-		off += xsnprintf(buf + off, len - off, "%s", data->cmd);
+		off += cmd_prarg(buf + off, len - off, " ", data->cmd);
 	return (off);
 }
 
