@@ -1,3 +1,9 @@
+27 April 2009
+
+* New command, confirm-before (alias confirm), which asks for confirmation
+  before executing a command. Bound "&" and "x" by default to confirm-before
+  "kill-window" and confirm-before "kill-pane", respectively.
+
 23 April 2009
 
 * Support NEL, yet another way of making newline. Fixes the output from some
