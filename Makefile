@@ -94,7 +94,7 @@ LIBS+= -lcrypt
 INCDIRS+= -Icompat
 SRCS+= compat/strtonum.c compat/vis.c
 LIBS+= -lcrypt
-CFLAGS+=-DNO_STRTONUM
+CFLAGS+=-DNO_STRTONUM -DNO_QUEUE_H
 .endif
 
 OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
