@@ -91,7 +91,7 @@ LIBS+= -lcrypt
 
 # NetBSD
 .if ${OS} == "NetBSD"
-INCDIRS= -Icompat
+INCDIRS+= -Icompat
 SRCS+= compat/strtonum.c compat/vis.c
 LIBS+= -lcrypt
 CFLAGS+=-DNO_STRTONUM
