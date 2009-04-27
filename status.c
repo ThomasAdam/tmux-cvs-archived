@@ -784,6 +784,9 @@ status_prompt_key(struct client *c, int key)
 		}
 		break;
 	case MODEKEYCMD_UP:
+		if (server_locked)
+			break;
+
 		if (ARRAY_LENGTH(&c->prompt_hdata) == 0)
 			break;
 	       	xfree(c->prompt_buffer);
@@ -797,6 +800,9 @@ status_prompt_key(struct client *c, int key)
 		c->flags |= CLIENT_STATUS;
 		break;
 	case MODEKEYCMD_DOWN:
+		if (server_locked)
+			break;
+
 		xfree(c->prompt_buffer);
 
 		if (c->prompt_hindex != 0) {
@@ -849,6 +855,9 @@ status_prompt_key(struct client *c, int key)
 void
 status_prompt_add_history(struct client *c)
 {
+	if (server_locked)
+		return;
+
 	if (ARRAY_LENGTH(&c->prompt_hdata) > 0 &&
 	    strcmp(ARRAY_LAST(&c->prompt_hdata), c->prompt_buffer) == 0)
 		return;
