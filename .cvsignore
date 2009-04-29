@@ -1,4 +1,5 @@
 tmux
 tmux*.log
+tmux*.out
 releases
 saved
