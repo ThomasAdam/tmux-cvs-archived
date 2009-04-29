@@ -16,9 +16,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(__OpenBSD__) && !defined(__FreeBSD__) && !defined(__linux__) && \
-	!defined(__APPLE__) && !defined(__NetBSD__)
-
 #include <sys/types.h>
 
 #include "tmux.h"
@@ -28,5 +25,3 @@ osdep_get_name(unused int fd, unused char *tty)
 {
 	return (NULL);
 }
-
-#endif

@@ -16,8 +16,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifdef __OpenBSD__
-
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #include <sys/stat.h>
@@ -130,5 +128,3 @@ retry:
 	free(buf);
 	return (name);
 }
-
-#endif

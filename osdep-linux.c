@@ -16,8 +16,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifdef __linux__
-
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -59,5 +57,3 @@ osdep_get_name(int fd, unused char *tty)
 	fclose(f);
 	return (buf);
 }
-
-#endif

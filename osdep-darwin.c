@@ -16,8 +16,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifdef __APPLE__
-
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -47,5 +45,3 @@ osdep_get_name(int fd, unused char *tty)
 
 	return (strdup(kp.kp_proc.p_comm));
 }
-
-#endif
