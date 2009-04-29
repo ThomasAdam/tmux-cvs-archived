@@ -306,7 +306,7 @@ tty_puts(struct tty *tty, const char *s)
 }
 
 void
-tty_putc(struct tty *tty, char ch)
+tty_putc(struct tty *tty, u_char ch)
 {
 	u_int	sx;
 

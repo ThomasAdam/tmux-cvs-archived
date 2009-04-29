@@ -1090,7 +1090,7 @@ void		 tty_putcode(struct tty *, enum tty_code_code);
 void		 tty_putcode1(struct tty *, enum tty_code_code, int);
 void		 tty_putcode2(struct tty *, enum tty_code_code, int, int);
 void		 tty_puts(struct tty *, const char *);
-void		 tty_putc(struct tty *, char);
+void		 tty_putc(struct tty *, u_char);
 void		 tty_init(struct tty *, char *, char *);
 void		 tty_start_tty(struct tty *);
 void		 tty_stop_tty(struct tty *);
