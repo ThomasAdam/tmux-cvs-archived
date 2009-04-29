@@ -314,7 +314,7 @@ tty_putc(struct tty *tty, char ch)
 		ch = tty_get_acs(tty, ch);
 	buffer_write8(tty->out, ch);
 
-	if (ch >= 0x20) {
+	if (ch >= 0x20 && ch != 0x7f) {
 		sx = tty->sx;
 		if (tty->term->flags & TERM_EARLYWRAP)
 			sx--;
