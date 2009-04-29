@@ -1605,6 +1605,7 @@ int	utf8_width(u_int);
 
 /* util.c */
 char   *section_string(char *, size_t, size_t, size_t);
+void	clean_string(const char *, char *, size_t);
 
 /* osdep-*.c */
 char   *osdep_get_name(int, char *);

@@ -1,3 +1,8 @@
+29 April 2009
+
+* Get rid of compat/vis.* - only one function was used which is easily
+  replaced,and less compat code == good.
+
 27 April 2009
 
 * Avoid using the prompt history when the server is locked, and prevent any
