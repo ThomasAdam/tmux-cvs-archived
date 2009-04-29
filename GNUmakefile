@@ -95,7 +95,7 @@ endif
 ifeq ($(shell uname),SunOS)
 INCDIRS+= -Icompat -I/usr/include/ncurses
 SRCS+= compat/strtonum.c compat/daemon.c compat/forkpty-sunos.c \
-	compat/asprintf.c compat/fgetln.c compat/getopt.c
+	compat/asprintf.c compat/fgetln.c compat/getopt_long.c
 CFLAGS+= -DNO_STRTONUM -DNO_TREE_H -DNO_PATHS_H -DNO_SETPROCTITLE \
 	-DNO_DAEMON -DNO_FORKPTY -DNO_PROGNAME -DNO_ASPRINTF -DNO_FGETLN \
 	-DBROKEN_GETOPT -DNO_QUEUE_H
