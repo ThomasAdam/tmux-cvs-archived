@@ -74,7 +74,7 @@ key_bindings_remove(int key)
 void
 key_bindings_init(void)
 {
-	struct {
+	static const struct {
 		int			 key;
 		int			 can_repeat;
 		const struct cmd_entry	*entry;
