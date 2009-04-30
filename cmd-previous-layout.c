@@ -21,18 +21,18 @@
 #include "tmux.h"
 
 /*
- * Switch window to next layout.
+ * Switch window to previous layout.
  */
 
-int	cmd_next_layout_exec(struct cmd *, struct cmd_ctx *);
+int	cmd_previous_layout_exec(struct cmd *, struct cmd_ctx *);
 
-const struct cmd_entry cmd_next_layout_entry = {
-	"next-layout", "nextl",
+const struct cmd_entry cmd_previous_layout_entry = {
+	"previous-layout", "prevl",
 	CMD_TARGET_WINDOW_USAGE,
 	0,
 	cmd_target_init,
 	cmd_target_parse,
-	cmd_next_layout_exec,
+	cmd_previous_layout_exec,
 	cmd_target_send,
 	cmd_target_recv,
 	cmd_target_free,
@@ -40,7 +40,7 @@ const struct cmd_entry cmd_next_layout_entry = {
 };
 
 int
-cmd_next_layout_exec(struct cmd *self, struct cmd_ctx *ctx)
+cmd_previous_layout_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct winlink		*wl;
@@ -48,7 +48,7 @@ cmd_next_layout_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
 
-	layout_next(wl->window);
+	layout_previous(wl->window);
 	ctx->info(ctx, "layout now: %s", layout_name(wl->window));
 
 	return (0);

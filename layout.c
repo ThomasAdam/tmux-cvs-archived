@@ -62,6 +62,21 @@ layout_next(struct window *w)
 }
 
 void
+layout_previous(struct window *w)
+{
+	if (w->layout == 0)
+		w->layout = nitems(layouts) - 1;
+	else
+		w->layout--;
+	if (w->layout == 0) {
+		/* XXX Special-case manual. */
+		window_fit_panes(w);
+		window_update_panes(w);
+	}
+	layout_refresh(w, 0);
+}
+
+void
 layout_refresh(struct window *w, unused int active_changed)
 {
 	layouts[w->layout].fn(w, active_changed);

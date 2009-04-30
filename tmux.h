@@ -1216,6 +1216,7 @@ extern const struct cmd_entry cmd_new_window_entry;
 extern const struct cmd_entry cmd_next_layout_entry;
 extern const struct cmd_entry cmd_next_window_entry;
 extern const struct cmd_entry cmd_paste_buffer_entry;
+extern const struct cmd_entry cmd_previous_layout_entry;
 extern const struct cmd_entry cmd_previous_window_entry;
 extern const struct cmd_entry cmd_refresh_client_entry;
 extern const struct cmd_entry cmd_rename_session_entry;
@@ -1546,6 +1547,7 @@ void		 window_pane_mouse(struct window_pane *,
 const char * 	 layout_name(struct window *);
 void		 layout_refresh(struct window *, int);
 void		 layout_next(struct window *);
+void		 layout_previous(struct window *);
 
 /* window-clock.c */
 extern const struct window_mode window_clock_mode;
