@@ -163,6 +163,7 @@ server_start(char *path)
 	ARRAY_INIT(&clients);
 	ARRAY_INIT(&sessions);
 	key_bindings_init();
+	utf8_build();
 
 	server_locked = 0;
 	server_password = NULL;

@@ -529,7 +529,7 @@ screen_write_cell(
 	struct screen		*s = ctx->s;
 	struct grid		*gd = s->grid;
 	struct grid_utf8	 gu, *tmp_gu;
-	u_int		 	 width, uvalue, xx, i;
+	u_int		 	 width, xx, i;
 	struct grid_cell 	 tmp_gc, *tmp_gc2;
 	size_t			 size;
 
@@ -539,8 +539,7 @@ screen_write_cell(
 
 	/* Find character width. */
 	if (gc->flags & GRID_FLAG_UTF8) {
-		uvalue = utf8_combine(udata);
-		width = utf8_width(uvalue);
+		width = utf8_width(udata);
 
 		gu.width = width;
 		memcpy(&gu.data, udata, sizeof gu.data);

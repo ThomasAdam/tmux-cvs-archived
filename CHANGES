@@ -1,5 +1,6 @@
 30 April 2009
 
+* Display the layout name in window lists.
 * Merge resize-pane-up and resize-pane-down into resize-pane with -U and -D
   flags.
 
