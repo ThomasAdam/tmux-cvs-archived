@@ -78,8 +78,9 @@ cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 			else
 				name = "unknown";		
 			ctx->print(ctx, 
-			    "     %s [%ux%u] [history %u/%u, %llu bytes]", 
-			    name, wp->sx, wp->sy, gd->hsize, gd->hlimit, size);
+			    "     %s [%ux%u %s] [history %u/%u, %llu bytes]", 
+			    name, wp->sx, wp->sy, layout_name(w), gd->hsize,
+			    gd->hlimit, size);
 		}
 	}
 

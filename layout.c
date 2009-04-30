@@ -42,6 +42,12 @@ const struct {
 	{ "left-vertical", layout_left_vertical },
 }; 
 
+const char *
+layout_name(struct window *w)
+{
+	return (layouts[w->layout].name);
+}
+
 void
 layout_next(struct window *w)
 {

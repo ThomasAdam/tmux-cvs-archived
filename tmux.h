@@ -1543,6 +1543,7 @@ void		 window_pane_mouse(struct window_pane *,
     		     struct client *, u_char, u_char, u_char);
 
 /* layout.c */
+const char * 	 layout_name(struct window *);
 void		 layout_refresh(struct window *, int);
 void		 layout_next(struct window *);
 
