@@ -119,7 +119,7 @@ cmd_resize_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 			}
 			if (wq == NULL)
 				break;
-		window_pane_resize(wp, wp->sx, wp->sy + 1);
+			window_pane_resize(wp, wp->sx, wp->sy + 1);
 		}
 	} else {
 		/*
