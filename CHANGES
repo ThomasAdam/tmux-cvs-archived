@@ -1,3 +1,8 @@
+30 April 2009
+
+* Merge resize-pane-up and resize-pane-down into resize-pane with -U and -D
+  flags.
+
 29 April 2009
 
 * Get rid of compat/vis.* - only one function was used which is easily
