@@ -53,7 +53,7 @@ section_string(char *buf, size_t len, size_t sectoff, size_t sectlen)
 
 /* Clean string of invisible characters. */
 void
-clean_string(const u_char *in, char *buf, size_t len)
+clean_string(const char *in, char *buf, size_t len)
 {
 	const u_char	*cp;
 	size_t	 	 off;
