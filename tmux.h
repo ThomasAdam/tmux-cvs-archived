@@ -127,6 +127,9 @@ extern const char    *__progname;
 /* Escape timer period, in milliseconds. */
 #define ESCAPE_PERIOD 250
 
+/* Maximum poll timeout (when attached). */
+#define POLL_TIMEOUT 50
+
 /* Fatal errors. */
 #define fatal(msg) log_fatal("%s: %s", __func__, msg);
 #define fatalx(msg) log_fatalx("%s: %s", __func__, msg);
