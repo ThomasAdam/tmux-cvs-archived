@@ -1082,6 +1082,7 @@ void	options_set_number(struct options *, const char *, long long);
 long long options_get_number(struct options *, const char *);
 
 /* tty.c */
+u_char		 tty_get_acs(struct tty *, u_char);
 void		 tty_emulate_repeat(struct tty *,
     		     enum tty_code_code, enum tty_code_code, u_int);
 void		 tty_reset(struct tty *);

@@ -28,7 +28,6 @@
 #include "tmux.h"
 
 void	tty_fill_acs(struct tty *);
-u_char	tty_get_acs(struct tty *, u_char);
 
 void	tty_raw(struct tty *, const char *);
 

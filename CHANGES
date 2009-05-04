@@ -1,3 +1,7 @@
+04 May 2009
+
+* Use ACS line drawing characters for pane separator lines.
+
 30 April 2009
 
 * Support command sequences without a space before the semicolon, for example
