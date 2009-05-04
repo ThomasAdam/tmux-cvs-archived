@@ -171,7 +171,7 @@ cmd_split_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return (-1);
 	}
 	server_redraw_window(w);
-	
+
 	if (!data->flag_detached) {
 		window_set_active_pane(w, wp);
 		session_select(s, wl->idx);

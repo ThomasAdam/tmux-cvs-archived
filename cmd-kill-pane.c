@@ -47,7 +47,7 @@ cmd_kill_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_pane_data	*data = self->data;
 	struct winlink		*wl;
 	struct window_pane	*wp;
-	
+
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
 	if (data->pane == -1)

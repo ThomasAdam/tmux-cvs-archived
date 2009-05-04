@@ -99,12 +99,12 @@ window_scroll_pageup(struct window_pane *wp)
 {
 	struct window_scroll_mode_data	*data = wp->modedata;
 	struct screen			*s = &data->screen;
-	
+
 	if (data->oy + screen_size_y(s) > screen_hsize(&wp->base))
 		data->oy = screen_hsize(&wp->base);
 	else
 		data->oy += screen_size_y(s);
-	
+
 	window_scroll_redraw_screen(wp);
 }
 

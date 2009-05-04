@@ -33,7 +33,7 @@ osdep_get_name(int fd, unused char *tty)
 	int	mib[4] = { CTL_KERN, KERN_PROC, KERN_PROC_PID, 0 };
         size_t	size;
 	struct kinfo_proc kp;
-	
+
 	if ((mib[3] = tcgetpgrp(fd)) == -1)
 		return (NULL);
 

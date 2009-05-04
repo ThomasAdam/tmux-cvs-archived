@@ -67,7 +67,7 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_rename_session_entry,
 	&cmd_rename_window_entry,
 	&cmd_resize_pane_entry,
-	&cmd_respawn_window_entry,	
+	&cmd_respawn_window_entry,
 	&cmd_rotate_window_entry,
 	&cmd_save_buffer_entry,
 	&cmd_scroll_mode_entry,

@@ -50,7 +50,7 @@ cmd_break_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct window_pane	*wp;
 	struct window		*w;
 	char			*cause;
-	
+
 	if ((wl = cmd_find_window(ctx, data->target, &s)) == NULL)
 		return (-1);
 	if (data->pane == -1)

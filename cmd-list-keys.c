@@ -49,7 +49,7 @@ cmd_list_keys_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 	SPLAY_FOREACH(bd, key_bindings, &key_bindings) {
 		if ((key = key_string_lookup_key(bd->key)) == NULL)
 			continue;
-		
+
 		*tmp = '\0';
 		cmd_list_print(bd->cmdlist, tmp, sizeof tmp);
 		ctx->print(ctx, "%11s: %s", key, tmp);

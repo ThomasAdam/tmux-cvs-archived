@@ -65,7 +65,7 @@ cmd_bind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 		case 'r':
 			data->can_repeat = 1;
 			break;
-		default:			
+		default:
 			goto usage;
 		}
 	}

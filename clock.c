@@ -125,7 +125,7 @@ clock_draw(struct screen_write_ctx *ctx, u_int colour, int style)
 			screen_write_puts(ctx, &gc, "%s", tim);
 		}
 		return;
-	}		
+	}
 
 	x = (screen_size_x(s) / 2) - 3 * strlen(tim);
 	y = (screen_size_y(s) / 2) - 3;

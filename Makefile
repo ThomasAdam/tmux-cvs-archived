@@ -104,7 +104,7 @@ DISTFILES= *.[chyl] Makefile GNUmakefile *.[1-9] NOTES TODO CHANGES FAQ \
 
 CLEANFILES= ${PROG} *.o .depend *~ ${PROG}.core *.log compat/*.o index.html
 
-CPPFLAGS:= ${INCDIRS} ${CPPFLAGS} 
+CPPFLAGS:= ${INCDIRS} ${CPPFLAGS}
 
 .c.o:
 		${CC} ${CPPFLAGS} ${CFLAGS} -c ${.IMPSRC} -o ${.TARGET}

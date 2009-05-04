@@ -610,7 +610,7 @@ screen_write_cell(
 	grid_view_set_cell(gd, s->cx, s->cy, gc);
 	if (gc->flags & GRID_FLAG_UTF8)
 		grid_view_set_utf8(gd, s->cx, s->cy, &gu);
-	
+
 	/* Move the cursor. */
 	screen_write_save(ctx);
 	s->cx += width;

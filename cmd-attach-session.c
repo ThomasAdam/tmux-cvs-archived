@@ -45,7 +45,7 @@ cmd_attach_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	struct cmd_target_data	*data = self->data;
 	struct session		*s;
 	char			*cause;
-	
+
 	if (ctx->curclient != NULL)
 		return (0);
 

@@ -56,6 +56,6 @@ cmd_delete_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 		ctx->error(ctx, "no buffer %d", data->buffer);
 		return (-1);
 	}
-	
+
 	return (0);
 }

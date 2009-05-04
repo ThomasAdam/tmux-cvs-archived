@@ -286,7 +286,7 @@
 18 January 2009
 
 * Unbreak UTF-8.
-* -a flag to next-window and previous-window to select the next or previous 
+* -a flag to next-window and previous-window to select the next or previous
   window with activity or bell. Bound to M-n and M-p.
 * find-window command to search window names, titles and visible content (but
   not history) for a string. If only one is found, the window is selected
@@ -371,7 +371,7 @@
 
 * Vertical window splitting. Currently can only split a window into two panes.
   New split-window command splits (bound to ") and switch-pane command (bound to
-  o) switches between panes. 
+  o) switches between panes.
 
   close-pane, swap-pane commands are to follow. Also to come are pane resizing,
   >2 panes, the ability to break a pane out to a full window and vice versa and
@@ -390,7 +390,7 @@
 
 * New option, lock-after-time. If there is no activity in the period specified
   by this option (in seconds), tmux will lock the server. Default is 1800 (30
-  minutes), set to 0 to disable. 
+  minutes), set to 0 to disable.
 * Server locking. Two new commands: set-password to set a password (a
   preencrypted password may be specified with -c); and lock-server to lock the
   server until the password is entered. Also an additional command line flag,

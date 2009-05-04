@@ -69,7 +69,7 @@ cmd_resize_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 	const char	       	*errstr;
 	struct window_pane	*wp, *wq;
 	u_int			 adjust;
-	
+
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
 	if (wl->window->layout != 0) {

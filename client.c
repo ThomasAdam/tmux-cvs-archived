@@ -150,7 +150,7 @@ client_main(struct client_ctx *cctx)
 			client_handle_winch(cctx);
 		if (sigcont) {
 			siginit();
-			client_write_server(cctx, MSG_WAKEUP, NULL, 0);	
+			client_write_server(cctx, MSG_WAKEUP, NULL, 0);
 			sigcont = 0;
 		}
 

@@ -181,7 +181,7 @@ screen_resize_y(struct screen *s, u_int sy)
 			gd->size[yy] = 0;
 			gd->data[yy] = NULL;
 			gd->usize[yy] = 0;
-			gd->udata[yy] = NULL;			
+			gd->udata[yy] = NULL;
 		}
 	}
 

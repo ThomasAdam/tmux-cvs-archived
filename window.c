@@ -289,7 +289,7 @@ window_fit_panes(struct window *w)
 	struct window_pane	*wp;
 	u_int			 npanes, canfit, total;
 	int			 left;
-	
+
 	if (TAILQ_EMPTY(&w->panes))
 		return;
 
@@ -352,7 +352,7 @@ window_fit_panes(struct window *w)
 			}
 		}
 	}
-			
+
 	/* Now do the resize. */
 	TAILQ_FOREACH(wp, &w->panes, entry) {
 		wp->sy--;

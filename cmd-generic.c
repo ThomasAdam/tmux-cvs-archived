@@ -618,7 +618,7 @@ cmd_pane_parse(struct cmd *self, int argc, char **argv, char **cause)
 					goto error;
 				}
 				data->pane = n;
-			}			
+			}
 			break;
 		case 't':
 			if (data->target == NULL)

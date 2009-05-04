@@ -118,7 +118,7 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if (ctx->curclient != NULL)
 		return (0);
-	
+
 	if (!data->flag_detached) {
 		if (c == NULL) {
 			ctx->error(ctx, "no client to attach to");

@@ -183,7 +183,7 @@ key_bindings_error(struct cmd_ctx *ctx, const char *fmt, ...)
 void printflike2
 key_bindings_print(struct cmd_ctx *ctx, const char *fmt, ...)
 {
-	struct winlink	*wl = ctx->cursession->curw; 
+	struct winlink	*wl = ctx->cursession->curw;
 	va_list		 ap;
 
 	if (wl->window->active->mode != &window_more_mode)

@@ -231,7 +231,7 @@ utf8_build(void)
 
 		ptr = &utf8_width_root;
 		while (*ptr != NULL) {
-			node = *ptr;			
+			node = *ptr;
 			if (item->last < node->first)
 				ptr = &(node->left);
 			else if (item->first > node->last)

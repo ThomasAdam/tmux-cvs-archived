@@ -544,7 +544,7 @@ void
 input_handle_character(u_char ch, struct input_ctx *ictx)
 {
 	struct window_pane	*wp = ictx->wp;
-	
+
 	if (ch > 0x7f && options_get_number(&wp->window->options, "utf8")) {
 		/*
 		 * UTF-8 sequence.

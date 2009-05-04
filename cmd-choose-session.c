@@ -61,7 +61,7 @@ cmd_choose_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
 		return (-1);
-		
+
 	if (window_pane_set_mode(wl->window->active, &window_choose_mode) != 0)
 		return (0);
 

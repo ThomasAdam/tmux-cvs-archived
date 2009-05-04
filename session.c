@@ -212,7 +212,7 @@ session_new(struct session *s,
 
 	if (options_get_number(&s->options, "set-remain-on-exit"))
 		options_set_number(&w->options, "remain-on-exit", 1);
-	
+
 	return (session_attach(s, w, idx, cause));
 }
 

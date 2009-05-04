@@ -363,7 +363,7 @@ main(int argc, char **argv)
 	}
 	options_set_string(
 	    &global_options, "default-command", "exec %s", shell);
-	
+
 
 	if (getcwd(cwd, sizeof cwd) == NULL) {
 		log_warn("getcwd");
@@ -404,7 +404,7 @@ main(int argc, char **argv)
 			}
 		}
 	}
-	
+
  	memset(&cctx, 0, sizeof cctx);
 	if (client_init(path, &cctx, start_server, flags) != 0)
 		exit(1);

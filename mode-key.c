@@ -132,7 +132,7 @@ mode_key_lookup_vi(struct mode_key_data *mdata, int key)
 	case KEYC_UP:
 		return (MODEKEYCMD_UP);
 	}
-	
+
 	return (MODEKEYCMD_NONE);
 }
 

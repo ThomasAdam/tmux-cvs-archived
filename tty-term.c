@@ -267,10 +267,10 @@ tty_term_find(char *name, int fd, char **cause)
 		xasprintf(cause, "terminal does not support dl1 or dl");
 		goto error;
 	}
-	if (!tty_term_has(term, TTYC_ICH1) && 
+	if (!tty_term_has(term, TTYC_ICH1) &&
 	    !tty_term_has(term, TTYC_ICH) && (!tty_term_has(term, TTYC_SMIR) ||
 	    !tty_term_has(term, TTYC_RMIR))) {
-		xasprintf(cause, 
+		xasprintf(cause,
 		    "terminal does not support ich1 or ich or smir and rmir");
 		goto error;
 	}
