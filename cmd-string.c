@@ -274,7 +274,7 @@ cmd_string_variable(const char *s, size_t *p)
 		buf = xrealloc(buf, 1, len + 1);
 		buf[len++] = ch;
 
-		for(;;) {
+		for (;;) {
 			ch = cmd_string_getc(s, p);
 			if (ch == EOF || !cmd_string_other(ch))
 				break;
