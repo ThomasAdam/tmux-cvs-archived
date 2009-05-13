@@ -48,8 +48,6 @@
 
 #ifndef BROKEN_GETOPT
 #include <getopt.h>
-#else
-#include "compat/getopt.h"
 #endif
 
 #include <limits.h>
@@ -1037,6 +1035,22 @@ int	vasprintf(char **, const char *, va_list);
 #ifdef NO_FGETLN
 /* fgetln.c */
 char   *fgetln(FILE *, size_t *);
+#endif
+
+#ifdef BROKEN_GETOPT
+/* getopt.c */
+extern int	BSDopterr;
+extern int	BSDoptind;
+extern int	BSDoptopt;
+extern int	BSDoptreset;
+extern char    *BSDoptarg;
+int	BSDgetopt(int, char *const *, const char *);
+#define getopt(ac, av, o)  BSDgetopt(ac, av, o)
+#define opterr             BSDopterr
+#define optind             BSDoptind
+#define optopt             BSDoptopt
+#define optreset           BSDoptreset
+#define optarg             BSDoptarg
 #endif
 
 /* tmux.c */
