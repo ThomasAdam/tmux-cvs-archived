@@ -29,7 +29,8 @@
 
 #include <stdlib.h>
 #include <errno.h>
-#include "bsd-poll.h"
+
+#include "compat/bsd-poll.h"
 
 /*
  * A minimal implementation of poll(2), built on top of select(2).
