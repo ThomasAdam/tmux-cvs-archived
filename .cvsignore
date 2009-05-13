@@ -3,3 +3,5 @@ tmux*.log
 tmux*.out
 releases
 saved
+config.h
+config.mk
