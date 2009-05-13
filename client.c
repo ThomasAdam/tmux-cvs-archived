@@ -135,7 +135,7 @@ client_main(struct client_ctx *cctx)
 	siginit();
 
 	logfile("client");
-#ifndef NO_SETPROCTITLE
+#ifdef HAVE_SETPROCTITLE
 	setproctitle("client");
 #endif
 

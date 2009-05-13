@@ -28,23 +28,23 @@
 #include <termios.h>
 #include <unistd.h>
 
-#ifndef NO_PATHS_H
+#include "tmux.h"
+
+#ifdef HAVE_PATHS_H
 #include <paths.h>
 #endif
 
-#ifdef USE_LIBUTIL_H
+#ifdef HAVE_FORKPTY
+#ifdef HAVE_LIBUTIL_H
 #include <libutil.h>
-#else
+#endif
 #ifdef USE_PTY_H
 #include <pty.h>
-#else
-#ifndef NO_FORKPTY
+#endif
+#ifdef HAVE_UTIL_H
 #include <util.h>
 #endif
 #endif
-#endif
-
-#include "tmux.h"
 
 /*
  * Each window is attached to one or two panes, each of which is a pty. This

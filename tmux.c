@@ -27,11 +27,11 @@
 #include <syslog.h>
 #include <unistd.h>
 
-#ifndef NO_PATHS_H
+#include "tmux.h"
+
+#ifdef HAVE_PATHS_H
 #include <paths.h>
 #endif
-
-#include "tmux.h"
 
 #ifdef DEBUG
 /* DragonFly uses an OpenBSD-like malloc() since 1.6 */
@@ -64,7 +64,7 @@ char		*socket_path;
 __dead void	 usage(void);
 char 		*makesockpath(const char *);
 
-#ifdef NO_PROGNAME
+#ifndef HAVE_PROGNAME
 const char      *__progname = "tmux";
 #endif
 

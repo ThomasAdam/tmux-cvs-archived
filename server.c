@@ -129,7 +129,7 @@ server_start(char *path)
 	mode_t			mask;
 	int		   	n, fd, pair[2], mode;
 	char		       *cause;
-#ifndef NO_SETPROCTITLE
+#ifdef HAVE_SETPROCTITLE
 	char			rpathbuf[MAXPATHLEN];
 #endif
 
@@ -181,7 +181,7 @@ server_start(char *path)
 	log_debug("server started, pid %ld", (long) getpid());
 	log_debug("socket path %s", socket_path);
 
-#ifndef NO_SETPROCTITLE
+#ifdef HAVE_SETPROCTITLE
 	if (realpath(socket_path, rpathbuf) == NULL)
 		strlcpy(rpathbuf, socket_path, sizeof rpathbuf);
 	setproctitle("server (%s)", rpathbuf);
@@ -284,7 +284,7 @@ server_main(int srv_fd)
 		pfd = pfds;
 
 		/* Handle server socket. */
-#ifndef BROKEN_POLL
+#ifdef HAVE_POLL
 		if (pfd->revents & (POLLERR|POLLNVAL|POLLHUP))
 			fatalx("lost server socket");
 #endif

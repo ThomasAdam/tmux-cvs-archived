@@ -46,7 +46,7 @@ buffer_poll(struct pollfd *pfd, struct buffer *in, struct buffer *out)
 	    pfd->fd, pfd->revents, BUFFER_USED(out), BUFFER_USED(in));
 #endif
 
-#ifndef BROKEN_POLL
+#ifdef HAVE_POLL
 	if (pfd->revents & (POLLERR|POLLNVAL|POLLHUP))
 		return (-1);
 #endif
