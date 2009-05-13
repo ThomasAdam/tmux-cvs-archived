@@ -34,7 +34,7 @@ include config.mk
 OBJS= $(patsubst %.c,%.o,$(SRCS))
 
 all:		$(OBJS)
-		$(CC) $(LDFLAGS) -o $@ $+ $(LIBS)
+		$(CC) $(LDFLAGS) -o tmux $+ $(LIBS)
 
 depend: 	$(SRCS)
 		$(CC) $(CPPFLAGS) $(CFLAGS) -MM $(SRCS) > .depend
