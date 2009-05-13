@@ -118,7 +118,7 @@ key_bindings_init(void)
 		{ 'x', 			  0, &cmd_confirm_before_entry },
 		{ '{',			  0, &cmd_swap_pane_entry },
 		{ '}',			  0, &cmd_swap_pane_entry },
-		{ META, 		  0, &cmd_send_prefix_entry },
+		{ '\002', 		  0, &cmd_send_prefix_entry },
 		{ KEYC_PPAGE, 		  0, &cmd_scroll_mode_entry },
 		{ KEYC_ADDESC('n'), 	  0, &cmd_next_window_entry },
 		{ KEYC_ADDESC('p'), 	  0, &cmd_previous_window_entry },

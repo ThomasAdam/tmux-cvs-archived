@@ -12,8 +12,6 @@ DATE!= date +%Y%m%d-%H%M
 
 FDEBUG= 1
 
-META?= \002 # C-b
-
 SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       xmalloc.c xmalloc-debug.c input.c input-keys.c \
       screen.c screen-write.c screen-redraw.c \
@@ -48,7 +46,6 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
 
 CC?= c
 INCDIRS+= -I. -I- -I/usr/local/include
-CFLAGS+= -DMETA="'${META}'"
 .ifdef PROFILE
 # Don't use ccache
 CC= /usr/bin/gcc

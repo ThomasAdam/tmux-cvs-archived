@@ -9,8 +9,6 @@ DATE= $(shell date +%Y%m%d-%H%M)
 
 FDEBUG= 1
 
-META?= \002
-
 SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
       xmalloc.c xmalloc-debug.c input.c input-keys.c \
       screen.c screen-write.c screen-redraw.c \
@@ -45,7 +43,7 @@ SRCS= tmux.c server.c server-msg.c server-fn.c buffer.c buffer-poll.c status.c \
 
 CC?= gcc
 INCDIRS+= -I. -I-
-CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\"" -DMETA="'${META}'"
+CFLAGS+= -DBUILD="\"$(VERSION) ($(DATE))\""
 ifdef FDEBUG
 CFLAGS+= -g -ggdb -DDEBUG
 LDFLAGS+= -rdynamic
