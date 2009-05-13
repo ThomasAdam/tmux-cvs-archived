@@ -76,17 +76,6 @@ CFLAGS+= -DNO_TREE_H -DNO_ASPRINTF -DNO_QUEUE_H -DNO_VSYSLOG \
 LDFLAGS+= -L/usr/local/lib
 endif
 
-ifeq ($(shell uname),IRIX64)
-INCDIRS+= -Icompat -I/usr/local/include/ncurses
-SRCS+= compat/strlcpy.c compat/strtonum.c compat/daemon.c \
-	compat/asprintf.c compat/fgetln.c compat/forkpty-irix.c
-CFLAGS+= -DNO_STRLCPY -DNO_STRTONUM -DNO_TREE_H -DNO_SETPROCTITLE \
-	-DNO_DAEMON -DNO_FORKPTY -DNO_PROGNAME -DNO_ASPRINTF -DNO_FGETLN \
-	-DBROKEN_VSNPRINTF -D_SGI_SOURCE -std=c99
-LDFLAGS+= -L/usr/local/lib
-LIBS+= -lgen
-endif
-
 ifeq ($(shell uname),SunOS)
 INCDIRS+= -Icompat -I/usr/include/ncurses
 SRCS+= compat/strtonum.c compat/daemon.c compat/forkpty-sunos.c \
