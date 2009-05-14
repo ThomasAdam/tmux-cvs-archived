@@ -601,7 +601,7 @@ server_check_timers(struct client *c)
 	if (interval == 0)
 		return;
 	if (tv.tv_sec < c->status_timer.tv_sec ||
-	    tv.tv_sec - c->status_timer.tv_sec >= interval)
+	    ((u_int) tv.tv_sec) - c->status_timer.tv_sec >= interval)
 		c->flags |= CLIENT_STATUS;
 }
 
