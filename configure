@@ -88,8 +88,11 @@ EOF
 EOF
 	cat <<EOF >>$CONFIG_MK
 CPPFLAGS+= -I/usr/local/include/ncurses \
-	-I/opt/csw/include -I/opt/csw/include/ncurses
-LDFLAGS+= -L/usr/gnu/lib -L/opt/csw/lib
+	-I/opt/csw/include -I/opt/csw/include/ncurses \
+	-I/opt/sfw/include -I/opt/sfw/include/ncurses
+LDFLAGS+= -L/usr/gnu/lib \
+	-L/opt/csw/lib \
+	-L/opt/sfw/lib
 LIBS+= -lsocket -lnsl
 SRCS+= osdep-unknown.c \
 	compat/asprintf.c \
