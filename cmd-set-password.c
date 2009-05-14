@@ -23,6 +23,10 @@
 
 #include "tmux.h"
 
+#ifdef HAVE_CRYPT_H
+#include <crypt.h>
+#endif
+
 /*
  * Set server password.
  */
