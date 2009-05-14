@@ -156,7 +156,6 @@ EOF
 #define HAVE_SETPROCTITLE
 #define HAVE_STRLCAT
 #define HAVE_STRLCPY
-#define HAVE_TREE_H
 #define HAVE_UTIL_H
 #define HAVE_VSYSLOG
 EOF
