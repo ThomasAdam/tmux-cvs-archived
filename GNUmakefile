@@ -38,7 +38,9 @@ SRCS= $(shell echo *.c|sed 's|osdep-[a-z0-9]*.c||g')
 include config.mk
 OBJS= $(patsubst %.c,%.o,$(SRCS))
 
-all:		$(OBJS)
+all:		tmux
+
+tmux:		$(OBJS)
 		$(CC) $(LDFLAGS) -o tmux $+ $(LIBS)
 
 depend: 	$(SRCS)

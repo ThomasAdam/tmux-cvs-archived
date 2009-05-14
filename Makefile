@@ -42,7 +42,9 @@ OBJS= ${SRCS:S/.c/.o/}
 .c.o:
 		${CC} ${CPPFLAGS} ${CFLAGS} -c ${.IMPSRC} -o ${.TARGET}
 
-all:		${OBJS}
+all:		tmux
+
+tmux:		${OBJS}
 		${CC} ${LDFLAGS} -o tmux ${OBJS} ${LIBS}
 
 depend:
