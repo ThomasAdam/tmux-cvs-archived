@@ -652,10 +652,10 @@ tty_cmd_linefeed(struct tty *tty, struct window_pane *wp, unused va_list ap)
 
  	tty_region(tty, s->old_rupper, s->old_rlower, wp->yoff);
 
-	tty_cursor(tty, s->old_cx, s->old_cy, wp->xoff, wp->yoff);
-	tty_putc(tty, '\n');
-
-	tty->cy++;
+	if (s->old_cy == s->old_rlower) {
+		tty_cursor(tty, s->old_cx, s->old_cy, wp->xoff, wp->yoff);
+		tty_putc(tty, '\n');
+	}
 }
 
 void

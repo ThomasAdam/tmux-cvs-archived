@@ -1,5 +1,7 @@
 14 May 2009
 
+* Don't force wrapping with \n when asked, let the cursor code figure it out.
+  Should fix terminals which use this to detect line breaks.
 * Major cleanup and restructuring of build infrastructure. Still separate files
   for GNU and BSD make, but they are now hugely simplified at the expense of
   adding a configure script which must be run before make. Now build and
