@@ -14,7 +14,7 @@ LIBS+= -lncurses
 
 # This sort of sucks but gets rid of the stupid warning and should work on
 # most platforms...
-CCV!= (${CC} -v 2>&1|awk '/gcc version 4/ { print $0 }') || true
+CCV!= (${CC} -v 2>&1|awk '/gcc version 4/') || true
 .if "${CCV}" == ""
 CPPFLAGS:= -I. -I- -I/usr/local/include ${CPPFLAGS}
 .else
