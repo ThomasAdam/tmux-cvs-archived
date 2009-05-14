@@ -1,5 +1,6 @@
 14 May 2009
 
+* clear-history command to clear a pane's history.
 * Don't force wrapping with \n when asked, let the cursor code figure it out.
   Should fix terminals which use this to detect line breaks.
 * Major cleanup and restructuring of build infrastructure. Still separate files
