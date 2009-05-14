@@ -47,7 +47,7 @@ depend: 	$(SRCS)
 clean:
 		rm -f tmux *.o .depend *~ *.core *.log compat/*.o
 
-install:
+install:	all
 		$(INSTALLDIR) $(DESTDIR)$(PREFIX)/bin
 		$(INSTALLBIN) tmux $(DESTDIR)$(PREFIX)/bin/tmux
 		$(INSTALLDIR) $(DESTDIR)$(PREFIX)/man/man1
