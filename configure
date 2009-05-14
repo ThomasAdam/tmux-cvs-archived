@@ -135,7 +135,7 @@ EOF
 #define HAVE_VSYSLOG
 EOF
 	cat <<EOF >>$CONFIG_MK
-SRCS+= osdep-openbsd.c
+SRCS+= osdep-freebsd.c
 LIBS+= -lcrypt
 EOF
 	;;
@@ -158,7 +158,7 @@ EOF
 #define HAVE_VSYSLOG
 EOF
 	cat <<EOF >>$CONFIG_MK
-SRCS+= osdep-openbsd.c
+SRCS+= osdep-netbsd.c
 LIBS+= -lcrypt
 EOF
 	;;
