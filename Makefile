@@ -11,7 +11,7 @@ CC?= cc
 CFLAGS+= -DBUILD="\"$(VERSION)\""
 CPPFLAGS:= -I. -I- -I/usr/local/include ${CPPFLAGS}
 LDFLAGS+= -L/usr/local/lib
-LIBS+= -lutil -lncurses
+LIBS+= -lncurses
 
 .ifdef FDEBUG
 LDFLAGS+= -Wl,-E

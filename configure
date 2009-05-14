@@ -30,6 +30,7 @@ case `uname` in
 EOF
 	cat <<EOF >>$CONFIG_MK
 SRCS+= osdep-openbsd.c
+LIBS+= -lutil
 EOF
 	;;
 # ------------------------------------------------------------------------------
@@ -136,7 +137,7 @@ EOF
 EOF
 	cat <<EOF >>$CONFIG_MK
 SRCS+= osdep-freebsd.c
-LIBS+= -lcrypt
+LIBS+= -lcrypt -lutil
 EOF
 	;;
 # ------------------------------------------------------------------------------
