@@ -160,8 +160,9 @@ EOF
 #define HAVE_VSYSLOG
 EOF
 	cat <<EOF >>$CONFIG_MK
-SRCS+= osdep-netbsd.c
-LIBS+= -lcrypt
+SRCS+= osdep-netbsd.c \
+	compat/strtonum.c
+LIBS+= -lcrypt -lutil
 CPPFLAGS+= -I/usr/pkg/include
 LDFLAGS+= -L/usr/pkg/lib
 EOF
