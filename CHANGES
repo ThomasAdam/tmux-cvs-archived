@@ -1,5 +1,7 @@
 14 May 2009
 
+* Keys in status line (p in vi mode, M-y in emacs) to paste the first line
+  of the upper paste buffer. Suggested by Dan Colish.
 * clear-history command to clear a pane's history.
 * Don't force wrapping with \n when asked, let the cursor code figure it out.
   Should fix terminals which use this to detect line breaks.

@@ -54,6 +54,13 @@ mode_key_lookup(struct mode_key_data *mdata, int key)
 enum mode_key_cmd
 mode_key_lookup_vi(struct mode_key_data *mdata, int key)
 {
+	if (KEYC_ISESC(key)) {
+		key = KEYC_REMOVEESC(key);
+		if (mdata->flags & MODEKEY_CANEDIT)
+			mdata->flags ^= MODEKEY_EDITMODE;
+	}
+
+
 	if (mdata->flags & MODEKEY_EDITMODE) {
 		switch (key) {
 		case '\003':
@@ -131,6 +138,8 @@ mode_key_lookup_vi(struct mode_key_data *mdata, int key)
 	case 'k':
 	case KEYC_UP:
 		return (MODEKEYCMD_UP);
+	case 'p':
+		return (MODEKEYCMD_PASTE);
 	}
 
 	return (MODEKEYCMD_NONE);
@@ -173,6 +182,8 @@ mode_key_lookup_emacs(struct mode_key_data *mdata, int key)
 		return (MODEKEYCMD_NEXTPAGE);
 	case KEYC_ADDESC('f'):
 		return (MODEKEYCMD_NEXTWORD);
+	case '\031':
+		return (MODEKEYCMD_PASTE);
 	case KEYC_ADDESC('v'):
 	case KEYC_PPAGE:
 		return (MODEKEYCMD_PREVIOUSPAGE);
