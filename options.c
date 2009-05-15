@@ -63,7 +63,7 @@ options_find1(struct options *oo, const char *name)
 {
 	struct options_entry	p;
 
-	p.name = name;
+	p.name = (char *) name;
 	return (SPLAY_FIND(options_tree, &oo->tree, &p));
 }
 
@@ -72,7 +72,7 @@ options_find(struct options *oo, const char *name)
 {
 	struct options_entry	*o, p;
 
-	p.name = name;
+	p.name = (char *) name;
 	o = SPLAY_FIND(options_tree, &oo->tree, &p);
 	while (o == NULL) {
 		oo = oo->parent;
