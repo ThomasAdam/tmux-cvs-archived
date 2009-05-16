@@ -8,7 +8,7 @@ DISTFILES= *.[ch] Makefile GNUmakefile configure tmux.1 \
 	`find examples compat -type f -and ! -path '*CVS*'`
 
 dist:          
-		make clean
+		(./configure &&	make clean-all)
 		grep '^#FDEBUG=' Makefile
 		grep '^#FDEBUG=' GNUmakefile
 		[ "`(grep '^VERSION' Makefile; grep '^VERSION' GNUmakefile)| \
