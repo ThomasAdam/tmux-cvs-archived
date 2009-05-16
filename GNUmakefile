@@ -49,6 +49,9 @@ depend: 	$(SRCS)
 clean:
 		rm -f tmux *.o .depend *~ *.core *.log compat/*.o
 
+clean-all:	clean
+		rm -f config.h config.mk
+
 install:	all
 		$(INSTALLDIR) $(DESTDIR)$(PREFIX)/bin
 		$(INSTALLBIN) tmux $(DESTDIR)$(PREFIX)/bin/tmux
