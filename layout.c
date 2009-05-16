@@ -18,6 +18,8 @@
 
 #include <sys/types.h>
 
+#include <string.h>
+
 #include "tmux.h"
 
 /*
@@ -46,6 +48,39 @@ const char *
 layout_name(struct window *w)
 {
 	return (layouts[w->layout].name);
+}
+
+int
+layout_lookup(const char *name)
+{
+	u_int	i;
+	int	matched = -1;
+
+	for (i = 0; i < nitems(layouts); i++) {
+		if (strncmp(layouts[i].name, name, strlen(name)) == 0) {
+			if (matched != -1)	/* ambiguous */
+				return (-1);
+			matched = i;
+		}
+	}
+
+	return (matched);
+}
+
+int
+layout_select(struct window *w, u_int layout)
+{
+	if (layout > nitems(layouts) - 1 || layout == w->layout)
+		return (-1);
+	w->layout = layout;
+
+	if (w->layout == 0) {
+		/* XXX Special-case manual. */
+		window_fit_panes(w);
+		window_update_panes(w);
+	}
+	layout_refresh(w, 0);
+	return (0);
 }
 
 void
