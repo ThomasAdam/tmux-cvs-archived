@@ -1,3 +1,7 @@
+16 May 2009
+
+* Recreate server socket on SIGUSR1, per SF feature request 2792533.
+
 14 May 2009
 
 * Keys in status line (p in vi mode, M-y in emacs) to paste the first line
