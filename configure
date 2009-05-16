@@ -4,10 +4,10 @@
 TMUX_PLATFORM=${TMUX_PLATFORM:-`uname -s`}
 
 CONFIG_H=config.h
-echo "/* $TMUX_PLATFORM */" >$CONFIG_H
+echo "/* $TMUX_PLATFORM */" >|$CONFIG_H
 
 CONFIG_MK=config.mk
-echo "# $TMUX_PLATFORM" >$CONFIG_MK
+echo "# $TMUX_PLATFORM" >|$CONFIG_MK
 
 case $TMUX_PLATFORM in
 # ------------------------------------------------------------------------------
