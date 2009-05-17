@@ -18,15 +18,15 @@ dist:
 		        -f ${DISTDIR}.tar.gz ${DISTFILES}
 
 upload-index.html: update-index.html
-		scp index.html images/*.png \
+		scp www/index.html www/images/*.png \
 		        nicm,tmux@web.sf.net:/home/groups/t/tm/tmux/htdocs
-		rm -f images/small-*
+		rm -f www/index.html www/images/small-*
 
 update-index.html:
-		(cd images && \
+		(cd www/images && \
 		        rm -f small-* && \
 		        for i in *.png; do \
 		        convert "$$i" -resize 200x150 "small-$$i"; \
 		        done \
 		)
-		sed "s/%%VERSION%%/${VERSION}/g" index.html.in >index.html
+		sed "s/%%VERSION%%/${VERSION}/g" www/index.html.in >www/index.html
