@@ -1,5 +1,6 @@
 18 May 2009
 
+* main-horizontal layout and main-pane-height option to match vertical.
 * New window option main-pane-width to set the width of the large left pane with
   main-vertical (was left-vertical) layout. 
 * Lots of layout cleanup. manual layout is now manual-vertical.
