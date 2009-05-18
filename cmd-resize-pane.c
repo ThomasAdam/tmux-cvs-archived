@@ -92,10 +92,13 @@ cmd_resize_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 	}
 
-	if (data->flags & CMD_UPPERDFLAG)
-		layout_resize(wp, adjust);
-	else
-		layout_resize(wp, -adjust);
+	if (!(data->flags & CMD_UPPERDFLAG))
+		adjust = -adjust;
+	if (layout_resize(wp, adjust) != 0) {
+		ctx->error(ctx, "layout %s "
+		    "does not support resizing", layout_name(wp->window));
+		return (-1);
+	}
 	server_redraw_window(wl->window);
 
 	return (0);

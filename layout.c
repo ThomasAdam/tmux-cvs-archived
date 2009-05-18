@@ -109,10 +109,15 @@ layout_refresh(struct window *w, int active_only)
 	server_redraw_window(w);
 }
 
-void
+int
 layout_resize(struct window_pane *wp, int adjust)
 {
-	layouts[wp->window->layout].resize(wp, adjust);
+	struct window	*w = wp->window;
+
+	if (layouts[w->layout].resize == NULL)
+		return (-1);
+	layouts[w->layout].resize(wp, adjust);
+	return (0);
 }
 
 void
