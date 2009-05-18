@@ -1001,7 +1001,7 @@ struct set_option_entry {
 extern const struct set_option_entry set_option_table[];
 extern const struct set_option_entry set_window_option_table[];
 #define NSETOPTION 24
-#define NSETWINDOWOPTION 17
+#define NSETWINDOWOPTION 18
 
 #ifndef HAVE_STRTONUM
 /* strtonum.c */
