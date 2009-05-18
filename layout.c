@@ -34,7 +34,7 @@
 void	layout_active_only_refresh(struct window *, int);
 void	layout_even_h_refresh(struct window *, int);
 void	layout_even_v_refresh(struct window *, int);
-void	layout_left_v_refresh(struct window *, int);
+void	layout_main_v_refresh(struct window *, int);
 
 const struct {
 	const char     *name;
@@ -45,7 +45,7 @@ const struct {
 	{ "active-only", layout_active_only_refresh, NULL },
 	{ "even-horizontal", layout_even_h_refresh, NULL },
 	{ "even-vertical", layout_even_v_refresh, NULL },
-	{ "left-vertical", layout_left_v_refresh, NULL },
+	{ "main-vertical", layout_main_v_refresh, NULL },
 };
 
 const char *
@@ -231,7 +231,7 @@ layout_even_v_refresh(struct window *w, int active_only)
 }
 
 void
-layout_left_v_refresh(struct window *w, int active_only)
+layout_main_v_refresh(struct window *w, int active_only)
 {
 	struct window_pane	*wp;
 	u_int			 i, n, mainwidth, height, yoff;
