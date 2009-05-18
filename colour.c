@@ -48,7 +48,6 @@ colour_tostring(u_char c)
 	return (NULL);
 }
 
-/* String to colour. */
 int
 colour_fromstring(const char *s)
 {
