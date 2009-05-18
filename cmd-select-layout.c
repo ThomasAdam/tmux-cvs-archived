@@ -50,7 +50,7 @@ cmd_select_layout_init(struct cmd *self, int key)
 
 	switch (key) {
 	case KEYC_ADDESC('0'):
-		data->arg = xstrdup("manual");
+		data->arg = xstrdup("manual-vertical");
 		break;
 	case KEYC_ADDESC('1'):
 		data->arg = xstrdup("even-horizontal");
