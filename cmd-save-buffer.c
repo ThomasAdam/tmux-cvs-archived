@@ -69,9 +69,9 @@ cmd_save_buffer_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	mask = umask(S_IRWXG | S_IRWXO);
 	if (data->flags & CMD_AFLAG)
-		f = fopen(data->arg, "a");
+		f = fopen(data->arg, "ab");
 	else
-		f = fopen(data->arg, "w");
+		f = fopen(data->arg, "wb");
 	if (f == NULL) {
 		ctx->error(ctx, "%s: %s", data->arg, strerror(errno));
 		return (-1);
