@@ -1575,8 +1575,8 @@ void		 layout_next(struct window *);
 void		 layout_previous(struct window *);
 
 /* layout-manual.c */
-void		 layout_manual_vertical_refresh(struct window *, int);
-void		 layout_manual_vertical_resize(struct window_pane *, int);
+void		 layout_manual_v_refresh(struct window *, int);
+void		 layout_manual_v_resize(struct window_pane *, int);
 
 /* window-clock.c */
 extern const struct window_mode window_clock_mode;
