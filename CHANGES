@@ -1,5 +1,8 @@
 19 May 2009
 
+* If LANG contains "UTF-8", assume the terminal supports UTF-8, on the grounds
+  that anyone who configures it probably wants UTF-8. Not certain if this is
+  a perfect idea but let's see if it causes any problems.
 * New window option: monitor-content. Searches for a string in a window and if
   it matches, highlight the status line.
 
