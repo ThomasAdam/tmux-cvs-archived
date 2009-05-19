@@ -47,14 +47,20 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct client	*c;
 	u_int		 i;
+	const char	*s_utf8;
 
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
 		if (c == NULL || c->session == NULL)
 			continue;
 
-		ctx->print(ctx, "%s: %s [%ux%u %s]", c->tty.path,
-		    c->session->name, c->tty.sx, c->tty.sy, c->tty.termname);
+		if (c->tty.flags & TTY_UTF8)
+			s_utf8 = " (utf8)";
+		else
+			s_utf8 = "";
+		ctx->print(ctx, "%s: %s [%ux%u %s]%s", c->tty.path,
+			c->session->name, c->tty.sx, c->tty.sy, 
+			c->tty.termname, s_utf8);
 	}
 
 	return (0);
