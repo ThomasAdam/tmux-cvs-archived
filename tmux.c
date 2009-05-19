@@ -328,6 +328,7 @@ main(int argc, char **argv)
 	options_set_number(&global_window_options, "mode-fg", 0);
 	options_set_number(&global_window_options, "mode-keys", MODEKEY_EMACS);
 	options_set_number(&global_window_options, "monitor-activity", 0);
+	options_set_string(&global_window_options, "monitor-content", "%s", "");
 	options_set_number(&global_window_options, "utf8", 0);
 	options_set_number(&global_window_options, "window-status-attr", 0);
 	options_set_number(&global_window_options, "window-status-bg", 8);

@@ -266,6 +266,8 @@ session_next_activity(struct session *s, struct winlink *wl)
 			break;
 		if (session_alert_has(s, wl, WINDOW_ACTIVITY))
 			break;
+		if (session_alert_has(s, wl, WINDOW_CONTENT))
+			break;
 		wl = winlink_next(&s->windows, wl);
 	}
 	return (wl);
@@ -304,6 +306,8 @@ session_previous_activity(struct session *s, struct winlink *wl)
 		if (session_alert_has(s, wl, WINDOW_BELL))
 			break;
 		if (session_alert_has(s, wl, WINDOW_ACTIVITY))
+			break;
+		if (session_alert_has(s, wl, WINDOW_CONTENT))
 			break;
 		wl = winlink_previous(&s->windows, wl);
 	}
