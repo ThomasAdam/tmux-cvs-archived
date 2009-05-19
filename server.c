@@ -1045,7 +1045,7 @@ server_second_timers(void)
 
 /* Update socket execute permissions based on whether sessions are attached. */
 int
-server_update_socket()
+server_update_socket(void)
 {
 	struct session	*s;
 	u_int		 i;
