@@ -59,8 +59,8 @@ cmd_list_clients_exec(unused struct cmd *self, struct cmd_ctx *ctx)
 		else
 			s_utf8 = "";
 		ctx->print(ctx, "%s: %s [%ux%u %s]%s", c->tty.path,
-			c->session->name, c->tty.sx, c->tty.sy, 
-			c->tty.termname, s_utf8);
+		    c->session->name, c->tty.sx, c->tty.sy, 
+		    c->tty.termname, s_utf8);
 	}
 
 	return (0);
