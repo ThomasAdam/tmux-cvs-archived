@@ -1,3 +1,8 @@
+21 May 2009
+
+* stat(2) files before trying to load them to avoid problems, for example
+  with "source-file /dev/zero".
+
 19 May 2009
 
 * Try to guess if the window is UTF-8 by outputting a three-byte UTF-8 wide
