@@ -34,7 +34,7 @@ int	cmd_fill_argument(int, char **, int, char **);
 size_t
 cmd_prarg(char *buf, size_t len, const char *prefix, char *arg)
 {
-	if (strchr(arg, ' ' ) != NULL)
+	if (strchr(arg, ' ') != NULL)
 		return (xsnprintf(buf, len, "%s\"%s\"", prefix, arg));
 	return (xsnprintf(buf, len, "%s%s", prefix, arg));
 }
