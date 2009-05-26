@@ -387,7 +387,6 @@ main(int argc, char **argv)
 	options_set_string(
 	    &global_options, "default-command", "exec %s", shell);
 
-
 	if (getcwd(cwd, sizeof cwd) == NULL) {
 		log_warn("getcwd");
 		exit(1);
