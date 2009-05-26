@@ -23,9 +23,6 @@
 
 #define PROTOCOL_VERSION -13
 
-/* Shut up gcc warnings about empty if bodies. */
-#define RB_AUGMENT(x) do {} while (0)
-
 #include <sys/param.h>
 #include <sys/time.h>
 
