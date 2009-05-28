@@ -205,6 +205,7 @@ server_unlock(const char *s)
 
 	if (!server_locked)
 		return (0);
+	server_activity = time(NULL);
 
 	if (server_password != NULL) {
 		if (s == NULL)
