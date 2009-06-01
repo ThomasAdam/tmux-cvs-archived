@@ -353,7 +353,6 @@ main(int argc, char **argv)
 			pw = getpwuid(getuid());
 			if (pw != NULL)
 				home = pw->pw_dir;
-			endpwent();
 		}
 		xasprintf(&cfg_file, "%s/%s", home, DEFAULT_CFG);
 		if (access(cfg_file, R_OK) != 0) {
@@ -380,7 +379,6 @@ main(int argc, char **argv)
 		pw = getpwuid(getuid());
 		if (pw != NULL)
 			shell = pw->pw_shell;
-		endpwent();
 		if (shell == NULL || *shell == '\0')
 			shell = _PATH_BSHELL;
 	}
