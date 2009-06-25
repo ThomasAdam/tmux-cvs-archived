@@ -142,25 +142,3 @@ xvsnprintf(char *buf, size_t len, const char *fmt, va_list ap)
 
         return (i);
 }
-
-/*
- * Some systems modify the path in place. This function and xbasename below
- * avoid that by using a temporary buffer.
- */
-char *
-xdirname(const char *src)
-{
-	static char	dst[MAXPATHLEN];
-
-	strlcpy(dst, src, sizeof dst);
-	return (dirname(dst));
-}
-
-char *
-xbasename(const char *src)
-{
-	static char	dst[MAXPATHLEN];
-
-	strlcpy(dst, src, sizeof dst);
-	return (basename(dst));
-}

@@ -63,4 +63,3 @@ tty_vwrite_cmd(struct window_pane *wp, enum tty_cmd cmd, va_list ap)
 		}
 	}
 }
-

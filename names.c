@@ -101,9 +101,8 @@ parse_window_name(const char *in)
 	}
 
 	if (*name == '/')
-		name = xbasename(name);
+		name = basename(name);
 	name = xstrdup(name);
 	xfree(copy);
 	return (name);
 }
-

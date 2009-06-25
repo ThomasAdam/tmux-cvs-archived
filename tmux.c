@@ -29,10 +29,6 @@
 
 #include "tmux.h"
 
-#ifdef HAVE_PATHS_H
-#include <paths.h>
-#endif
-
 #ifdef DEBUG
 /* DragonFly uses an OpenBSD-like malloc() since 1.6 */
 #if defined(__OpenBSD__) || defined(__DragonFly__)

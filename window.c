@@ -31,22 +31,6 @@
 
 #include "tmux.h"
 
-#ifdef HAVE_PATHS_H
-#include <paths.h>
-#endif
-
-#ifdef HAVE_FORKPTY
-#ifdef HAVE_LIBUTIL_H
-#include <libutil.h>
-#endif
-#ifdef HAVE_PTY_H
-#include <pty.h>
-#endif
-#ifdef HAVE_UTIL_H
-#include <util.h>
-#endif
-#endif
-
 /*
  * Each window is attached to one or two panes, each of which is a pty. This
  * file contains code to handle them.
@@ -586,7 +570,7 @@ window_pane_mouse(
 	} else
 		input_mouse(wp, b, x, y);
 }
-	
+
 char *
 window_pane_search(struct window_pane *wp, const char *searchstr, u_int *lineno)
 {
