@@ -20,6 +20,7 @@
 #include <sys/time.h>
 
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "tmux.h"

@@ -66,17 +66,23 @@
 #endif
 
 #ifdef HAVE_QUEUE_H
- #include <sys/queue.h>
+#include <sys/queue.h>
 #else
 #include "compat/queue.h"
 #endif
 
 #ifdef HAVE_TREE_H
- #include <sys/tree.h>
+#include <sys/tree.h>
 #else
 #include "compat/tree.h"
 #endif
  
+#ifdef HAVE_BITSTRING_H
+#include <bitstring.h>
+#else
+#include "compat/bitstring.h"
+#endif
+
 #ifdef HAVE_POLL
 #include <poll.h>
 #else

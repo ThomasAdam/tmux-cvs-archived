@@ -20,14 +20,12 @@
 #define TMUX_H
 
 #include "config.h"
-#include "compat.h"
 
 #define PROTOCOL_VERSION -13
 
 #include <sys/param.h>
 #include <sys/time.h>
 
-#include <bitstring.h>
 #include <limits.h>
 #include <signal.h>
 #include <stdarg.h>
@@ -36,6 +34,8 @@
 #include <termios.h>
 
 #include "array.h"
+
+#include "compat.h"
 
 extern const char    *__progname;
 
