@@ -19,6 +19,7 @@
 #include <sys/types.h>
 
 #include <ctype.h>
+#include <libgen.h>
 #include <string.h>
 #include <unistd.h>
 
