@@ -22,7 +22,6 @@ CPPFLAGS:= -iquote. -I/usr/local/include ${CPPFLAGS}
 .endif
 
 .ifdef FDEBUG
-LDFLAGS+= -Wl,-E
 CFLAGS+= -g -ggdb -DDEBUG
 CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
 CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations

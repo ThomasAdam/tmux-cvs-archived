@@ -20,9 +20,7 @@ CPPFLAGS:= -iquote. $(CPPFLAGS)
 endif
 
 ifdef FDEBUG
-LDFLAGS+= -rdynamic
 CFLAGS+= -g -ggdb -DDEBUG
-LIBS+= -ldl
 CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
 CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
 CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wsign-compare
