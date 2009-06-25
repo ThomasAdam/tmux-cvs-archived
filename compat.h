@@ -113,6 +113,12 @@
 #endif
 #endif
 
+#ifdef HAVE_VIS
+#include <vis.h>
+#else
+#include "compat/vis.h"
+#endif
+
 #ifndef HAVE_STRTONUM
 /* strtonum.c */
 long long	 strtonum(const char *, long long, long long, const char **);

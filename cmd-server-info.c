@@ -23,7 +23,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <vis.h>
 
 #include "tmux.h"
 
