@@ -83,28 +83,12 @@ log_close(void)
 
 /* Write a log message. */
 void
-log_write(int pri, const char *msg, ...)
-{
-	va_list	ap;
-
-	va_start(ap, msg);
-	log_vwrite(pri, msg, ap);
-	va_end(ap);
-}
-
-/* Write a log message. */
-void
 log_vwrite(int pri, const char *msg, va_list ap)
 {
 	char	*fmt;
 	FILE	*f = log_file;
 
 	switch (log_type) {
-	case LOG_TYPE_SYSLOG:
-#ifdef HAVE_VSYSLOG
-		vsyslog(pri, msg, ap);
-#endif
-		break;
 	case LOG_TYPE_TTY:
 		if (pri == LOG_INFO)
 			f = stdout;
