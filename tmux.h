@@ -1684,16 +1684,4 @@ int printflike3	 printpath(char *, size_t, const char *, ...);
 char 		*xdirname(const char *);
 char 		*xbasename(const char *);
 
-/* xmalloc-debug.c */
-#ifdef DEBUG
-#define xmalloc_caller() __builtin_return_address(0)
-
-void		 xmalloc_clear(void);
-void		 xmalloc_report(pid_t, const char *);
-
-void		 xmalloc_new(void *, void *, size_t);
-void		 xmalloc_change(void *, void *, void *, size_t);
-void		 xmalloc_free(void *);
-#endif
-
 #endif
