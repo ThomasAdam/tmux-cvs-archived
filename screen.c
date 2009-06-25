@@ -1,4 +1,4 @@
-/* $OpenBSD: screen.c,v 1.5 2009/06/24 22:51:47 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>

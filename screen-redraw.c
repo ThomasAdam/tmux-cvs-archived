@@ -1,4 +1,4 @@
-/* $OpenBSD: screen-redraw.c,v 1.2 2009/06/25 05:56:44 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>

@@ -1,4 +1,4 @@
-/* $OpenBSD: window-choose.c,v 1.2 2009/06/24 23:00:31 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2009 Nicholas Marriott <nicm@users.sourceforge.net>

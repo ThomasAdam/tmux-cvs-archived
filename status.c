@@ -1,4 +1,4 @@
-/* $OpenBSD: status.c,v 1.4 2009/06/04 21:43:24 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>

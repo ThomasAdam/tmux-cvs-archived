@@ -1,4 +1,4 @@
-/* $OpenBSD: server.c,v 1.3 2009/06/24 22:49:56 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
