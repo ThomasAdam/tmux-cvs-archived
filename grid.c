@@ -517,5 +517,3 @@ grid_string_cells(struct grid *gd, u_int px, u_int py, u_int nx)
 	buf[off] = '\0';
 	return (buf);
 }
-
-

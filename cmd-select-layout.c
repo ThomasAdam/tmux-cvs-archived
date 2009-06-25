@@ -78,7 +78,7 @@ cmd_select_layout_exec(struct cmd *self, struct cmd_ctx *ctx)
 		ctx->error(ctx, "unknown or ambiguous layout: %s", data->arg);
 		return (-1);
 	}
-	
+
 	if (layout_select(wl->window, layout) == 0)
 		ctx->info(ctx, "layout now: %s", layout_name(wl->window));
 

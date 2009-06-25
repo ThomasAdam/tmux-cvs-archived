@@ -1684,4 +1684,4 @@ int printflike3	 printpath(char *, size_t, const char *, ...);
 char 		*xdirname(const char *);
 char 		*xbasename(const char *);
 
-#endif
+#endif /* TMUX_H */

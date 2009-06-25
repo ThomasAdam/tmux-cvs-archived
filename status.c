@@ -847,7 +847,7 @@ status_prompt_key(struct client *c, int key)
 			c->prompt_index += n;
 		}
 
-		c->flags |= CLIENT_STATUS;		
+		c->flags |= CLIENT_STATUS;
 		break;
  	case MODEKEYCMD_CHOOSE:
 		if (*c->prompt_buffer != '\0') {

@@ -504,8 +504,5 @@ out:
 	buffer_destroy(cctx.srv_in);
 	buffer_destroy(cctx.srv_out);
 
-#ifdef DEBUG
-	xmalloc_report(getpid(), "client");
-#endif
 	return (retcode);
 }
