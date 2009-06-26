@@ -31,7 +31,9 @@
 
 char	*osdep_get_name(int, char *);
 
+#ifndef nitems
 #define nitems(_a) (sizeof((_a)) / sizeof((_a)[0]))
+#endif
 
 #define is_runnable(p) \
 	((p)->ki_stat == SRUN || (p)->ki_stat == SIDL)
