@@ -1,3 +1,15 @@
+On 01 June 2009, tmux was imported into the OpenBSD base system. From this
+point onward changes are logged as part of the normal CVS commit message to
+either OpenBSD or SourceForge CVS.
+
+For now on, this file will be updated to contain a summary of major changes
+with each release and to mention only important configuration or command syntax
+changes in CVS.
+
+The list of older changes is below.
+
+================================================================================
+
 21 May 2009
 
 * stat(2) files before trying to load them to avoid problems, for example
