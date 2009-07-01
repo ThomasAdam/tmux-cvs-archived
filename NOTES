@@ -55,8 +55,10 @@ xterm-color or rxvt for colour.
 
 tmux supports UTF-8. To use it, the utf8 option must be set on each window;
 this may be turned on for all windows by setting it as a global option, see
-tmux(1) and the FAQ file. In addition, when starting tmux or attaching to an
-existing session from a UTF-8-capable terminal, the -u flag must be specified.
+tmux(1) and the FAQ file. As of 0.9, tmux attempts to autodetect a
+UTF-8-capable terminal by checking the LC_ALL, LC_CTYPE and LANG environment
+variables. list-clients may be used to check if this is detected correctly; if
+not, the -u command-line flag may be specified.
 
 A Vim syntax file is available in the examples directory. To install it:
 
