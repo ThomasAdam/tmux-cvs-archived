@@ -5,7 +5,7 @@
 
 VERSION= 0.9
 
-FDEBUG= 1
+#FDEBUG= 1
 
 CC?= cc
 CFLAGS+= -DBUILD="\"$(VERSION)\""

@@ -1,6 +1,6 @@
 # $Id$
 
-VERSION= 0.8
+VERSION= 0.9
 
 DISTDIR= tmux-${VERSION}
 DISTFILES= *.[ch] Makefile GNUmakefile configure tmux.1 \
