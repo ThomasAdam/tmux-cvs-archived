@@ -86,7 +86,7 @@
 #ifdef HAVE_POLL
 #include <poll.h>
 #else
-#include "compat/bsdpoll.h"
+#include "compat/bsd-poll.h"
 #endif
 
 #ifdef HAVE_GETOPT
