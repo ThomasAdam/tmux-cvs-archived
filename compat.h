@@ -16,48 +16,6 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef INFTIM
-#define INFTIM -1
-#endif
-
-#ifndef WAIT_ANY
-#define WAIT_ANY -1
-#endif
-
-#ifndef SUN_LEN
-#define SUN_LEN(sun) (sizeof (sun)->sun_path)
-#endif
-
-#ifndef __dead
-#define __dead __attribute__ ((__noreturn__))
-#endif
-#ifndef __packed
-#define __packed __attribute__ ((__packed__))
-#endif
-
-#ifndef timercmp
-#define	timercmp(tvp, uvp, cmp)						\
-	(((tvp)->tv_sec == (uvp)->tv_sec) ?				\
-	    ((tvp)->tv_usec cmp (uvp)->tv_usec) :			\
-	    ((tvp)->tv_sec cmp (uvp)->tv_sec))
-#endif
-
-#ifndef timeradd
-#define	timeradd(tvp, uvp, vvp)						\
-	do {								\
-		(vvp)->tv_sec = (tvp)->tv_sec + (uvp)->tv_sec;		\
-		(vvp)->tv_usec = (tvp)->tv_usec + (uvp)->tv_usec;	\
-		if ((vvp)->tv_usec >= 1000000) {			\
-			(vvp)->tv_sec++;				\
-			(vvp)->tv_usec -= 1000000;			\
-		}							\
-	} while (0)
-#endif
-
-#ifndef TTY_NAME_MAX
-#define TTY_NAME_MAX 32
-#endif
-
 #ifndef HAVE_PATHS_H
 #define	_PATH_BSHELL	"/bin/sh"
 #define	_PATH_TMP	"/tmp/"
@@ -117,6 +75,48 @@
 #include <vis.h>
 #else
 #include "compat/vis.h"
+#endif
+
+#ifndef INFTIM
+#define INFTIM -1
+#endif
+
+#ifndef WAIT_ANY
+#define WAIT_ANY -1
+#endif
+
+#ifndef SUN_LEN
+#define SUN_LEN(sun) (sizeof (sun)->sun_path)
+#endif
+
+#ifndef __dead
+#define __dead __attribute__ ((__noreturn__))
+#endif
+#ifndef __packed
+#define __packed __attribute__ ((__packed__))
+#endif
+
+#ifndef timercmp
+#define	timercmp(tvp, uvp, cmp)						\
+	(((tvp)->tv_sec == (uvp)->tv_sec) ?				\
+	    ((tvp)->tv_usec cmp (uvp)->tv_usec) :			\
+	    ((tvp)->tv_sec cmp (uvp)->tv_sec))
+#endif
+
+#ifndef timeradd
+#define	timeradd(tvp, uvp, vvp)						\
+	do {								\
+		(vvp)->tv_sec = (tvp)->tv_sec + (uvp)->tv_sec;		\
+		(vvp)->tv_usec = (tvp)->tv_usec + (uvp)->tv_usec;	\
+		if ((vvp)->tv_usec >= 1000000) {			\
+			(vvp)->tv_sec++;				\
+			(vvp)->tv_usec -= 1000000;			\
+		}							\
+	} while (0)
+#endif
+
+#ifndef TTY_NAME_MAX
+#define TTY_NAME_MAX 32
 #endif
 
 #ifndef HAVE_STRTONUM
