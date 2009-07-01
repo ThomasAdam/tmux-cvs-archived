@@ -26,8 +26,8 @@ CHANGES FROM 0.8 TO 0.9, 01 July 2009
 On 01 June 2009, tmux was imported into the OpenBSD base system. From this date
 onward changes are logged as part of the normal CVS commit message to either
 OpenBSD or SourceForge CVS. This file will be updated to contain a summary of
-major changes with each release and to mention only important configuration or
-command syntax changes in CVS.
+major changes with each release, and to mention important configuration or
+command syntax changes during development.
 
 The list of older changes is below.
 
