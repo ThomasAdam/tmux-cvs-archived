@@ -72,8 +72,6 @@
  */
 #define	UNVIS_END	1	/* no more characters */
 
-#include <sys/cdefs.h>
-
 char	*vis(char *, int, int, int);
 int	strvis(char *, const char *, int);
 int	strnvis(char *, const char *, size_t, int);
