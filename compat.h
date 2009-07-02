@@ -119,6 +119,11 @@
 #define TTY_NAME_MAX 32
 #endif
 
+#ifndef HAVE_STRCASESTR
+/* strcasestr.c */
+char		*strcasestr(const char *, const char *);
+#endif
+
 #ifndef HAVE_STRTONUM
 /* strtonum.c */
 long long	 strtonum(const char *, long long, long long, const char **);
