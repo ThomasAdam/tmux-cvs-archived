@@ -54,8 +54,6 @@
 /* Global window list. */
 struct windows windows;
 
-const char	*window_default_command(void);
-
 RB_GENERATE(winlinks, winlink, entry, winlink_cmp);
 
 const char *

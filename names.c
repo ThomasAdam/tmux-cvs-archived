@@ -78,7 +78,9 @@ default_window_name(struct window *w)
 {
 	if (w->active->screen != &w->active->base)
 		return (xstrdup("[tmux]"));
-	return (parse_window_name(w->active->cmd));
+	if (w->active->cmd != NULL && *w->active->cmd != '\0')
+		return (parse_window_name(w->active->cmd));
+	return (parse_window_name(window_default_command()));
 }
 
 char *
