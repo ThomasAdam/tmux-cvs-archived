@@ -2,9 +2,9 @@
 
 .PHONY: clean
 
-VERSION= 0.9
+VERSION= 1.0
 
-#FDEBUG= 1
+FDEBUG= 1
 
 CC?= gcc
 CFLAGS+= -DBUILD="\"$(VERSION)\""
