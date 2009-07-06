@@ -41,10 +41,6 @@ The following is a summary of major features implemented in this version:
 - A configuration file.
 - UTF-8 support.
 
-And major missing features:
-
-- No support for programs changing termios(4) settings or other tty(4) ioctls.
-
 A more extensive, but rough, todo list is included in the TODO file.
 
 tmux also depends on several features of the client terminal (TERM), if these
