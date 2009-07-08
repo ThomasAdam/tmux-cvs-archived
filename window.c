@@ -1,4 +1,4 @@
-/* $OpenBSD: window.c,v 1.7 2009/07/07 19:49:19 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>

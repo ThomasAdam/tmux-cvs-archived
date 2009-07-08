@@ -1,4 +1,4 @@
-/* $OpenBSD: cmd-split-window.c,v 1.3 2009/07/07 07:01:10 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2009 Nicholas Marriott <nicm@users.sourceforge.net>

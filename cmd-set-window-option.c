@@ -1,4 +1,4 @@
-/* $OpenBSD: cmd-set-window-option.c,v 1.3 2009/07/07 19:49:19 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2008 Nicholas Marriott <nicm@users.sourceforge.net>
