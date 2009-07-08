@@ -199,10 +199,10 @@ server_unlock(const char *s)
 		if (strcmp(out, server_password) != 0)
 			goto wrong;
 	}
-
+	
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		c = ARRAY_ITEM(&clients, i);
-                if (c == NULL || c->prompt_buffer == NULL)
+                if (c == NULL)
 			continue;
 
 		status_prompt_clear(c);
