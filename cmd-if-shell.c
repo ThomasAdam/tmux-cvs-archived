@@ -1,4 +1,4 @@
-/* $OpenBSD$ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2009 Tiago Cunha <me@tiagocunha.org>
