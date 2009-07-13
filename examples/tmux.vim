@@ -36,7 +36,7 @@ syn keyword tmuxCmds swap-pane splitw split-window upp up-pane choose-session
 syn keyword tmuxCmds choose-window loadb load-buffer copyb copy-buffer suspendc
 syn keyword tmuxCmds suspend-client findw find-window breakp break-pane nextl
 syn keyword tmuxCmds next-layout rotatew rotate-window confirm[-before]
-syn keyword tmuxCmds clearhist clear-history selectl select-layout
+syn keyword tmuxCmds clearhist clear-history selectl select-layout if[-shell]
 
 syn keyword tmuxOptsSet prefix status status-fg status-bg bell-action
 syn keyword tmuxOptsSet default-command history-limit status-left status-right
@@ -44,7 +44,7 @@ syn keyword tmuxOptsSet status-interval set-titles display-time buffer-limit
 syn keyword tmuxOptsSet status-left-length status-right-length message-fg
 syn keyword tmuxOptsSet message-bg lock-after-time default-path repeat-time
 syn keyword tmuxOptsSet message-attr status-attr status-keys set-remain-on-exit
-syn keyword tmuxOptsSet status-utf8
+syn keyword tmuxOptsSet status-utf8 default-terminal
 
 syn keyword tmuxOptsSetw monitor-activity aggressive-resize force-width
 syn keyword tmuxOptsSetw force-height remain-on-exit uft8 mode-fg mode-bg
