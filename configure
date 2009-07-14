@@ -92,7 +92,6 @@ EOF
 #define HAVE_DAEMON
 EOF
 	cat <<EOF >>$CONFIG_MK
-CPPFLAGS+= -I/usr/local/include/ncurses
 SRCS+= osdep-unknown.c \
 	compat/asprintf.c \
 	compat/bsd-poll.c \

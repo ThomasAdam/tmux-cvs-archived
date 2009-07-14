@@ -10,7 +10,7 @@ FDEBUG= 1
 CC?= cc
 CFLAGS+= -DBUILD="\"$(VERSION)\""
 LDFLAGS+= -L/usr/local/lib
-LIBS+= -lncurses
+LIBS+= -lcurses
 
 # This sort of sucks but gets rid of the stupid warning and should work on
 # most platforms...
