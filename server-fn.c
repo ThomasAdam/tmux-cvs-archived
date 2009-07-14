@@ -17,7 +17,6 @@
  */
 
 #include <sys/types.h>
-#include <sys/time.h>
 
 #include <string.h>
 #include <time.h>
