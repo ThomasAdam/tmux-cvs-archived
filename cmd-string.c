@@ -158,16 +158,13 @@ cmd_string_parse(const char *s, struct cmd_list **cmdlist, char **cause)
 			rval = 0;
 			goto out;
 		case '~':
-			if (!have_arg) {
-				t = cmd_string_expand_tilde(s, &p);
-				if (t == NULL)
+			if (have_arg == 0) {
+				if ((t = cmd_string_expand_tilde(s, &p)) == NULL)
 					goto error;
 				buf = xrealloc(buf, 1, len + strlen(t) + 1);
 				strlcpy(buf + len, t, strlen(t) + 1);
 				len += strlen(t);
 				xfree(t);
-				
-				have_arg = 1;
 				break;
 			}
 			/* FALLTHROUGH */

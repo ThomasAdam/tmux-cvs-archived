@@ -1,4 +1,4 @@
-/* $OpenBSD: tty-term.c,v 1.3 2009/07/14 06:30:45 nicm Exp $ */
+/* $Id$ */
 
 /*
  * Copyright (c) 2008 Nicholas Marriott <nicm@users.sourceforge.net>
