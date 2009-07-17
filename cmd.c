@@ -555,7 +555,7 @@ cmd_find_window(struct cmd_ctx *ctx, const char *arg, struct session **sp)
 	 */
 	if ((s = cmd_current_session(ctx)) == NULL) {
 		ctx->error(ctx, "can't establish current session");
-		return (-1);
+		return (NULL);
 	}
 
 	/* A NULL argument means the current session and window. */
