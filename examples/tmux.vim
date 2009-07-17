@@ -37,6 +37,7 @@ syn keyword tmuxCmds choose-window loadb load-buffer copyb copy-buffer suspendc
 syn keyword tmuxCmds suspend-client findw find-window breakp break-pane nextl
 syn keyword tmuxCmds next-layout rotatew rotate-window confirm[-before]
 syn keyword tmuxCmds clearhist clear-history selectl select-layout if[-shell]
+syn keyword tmuxCmds display[-message]
 
 syn keyword tmuxOptsSet prefix status status-fg status-bg bell-action
 syn keyword tmuxOptsSet default-command history-limit status-left status-right
