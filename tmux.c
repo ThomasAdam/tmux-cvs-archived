@@ -51,6 +51,7 @@ struct options	 global_s_options;	/* session options */
 struct options	 global_w_options;	/* window options */
 
 int		 server_locked;
+u_int		 password_failures;
 char		*server_password;
 time_t		 server_activity;
 
