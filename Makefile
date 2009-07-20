@@ -12,6 +12,14 @@ CFLAGS+= -DBUILD="\"$(VERSION)\""
 LDFLAGS+= -L/usr/local/lib
 LIBS+= -lcurses
 
+.ifdef FDEBUG
+CFLAGS+= -g -ggdb -DDEBUG
+CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
+CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
+CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wsign-compare
+CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
+.endif
+
 # This sort of sucks but gets rid of the stupid warning and should work on
 # most platforms...
 CCV!= (LC_ALL=C ${CC} -v 2>&1|awk '/gcc version 4/') || true
@@ -19,14 +27,9 @@ CCV!= (LC_ALL=C ${CC} -v 2>&1|awk '/gcc version 4/') || true
 CPPFLAGS:= -I. -I- -I/usr/local/include ${CPPFLAGS}
 .else
 CPPFLAGS:= -iquote. -I/usr/local/include ${CPPFLAGS}
-.endif
-
 .ifdef FDEBUG
-CFLAGS+= -g -ggdb -DDEBUG
-CFLAGS+= -Wno-long-long -Wall -W -Wnested-externs -Wformat=2
-CFLAGS+= -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations
-CFLAGS+= -Wwrite-strings -Wshadow -Wpointer-arith -Wsign-compare
-CFLAGS+= -Wundef -Wbad-function-cast -Winline -Wcast-align
+CFLAGS+= -Wno-pointer-sign
+.endif
 .endif
 
 PREFIX?= /usr/local
