@@ -53,9 +53,12 @@ depend:
 		mkdep ${CPPFLAGS} ${CFLAGS} ${SRCS:M*.c}
 
 clean:
-		rm -f tmux *.o .depend *~ *.core *.log compat/*.o
+		rm -f tmux *.o *~ *.core *.log compat/*.o
 
-clean-all:	clean
+clean-depend:
+		rm -f .depend
+
+clean-all:	clean clean-depend
 		rm -f config.h config.mk
 
 install:	all

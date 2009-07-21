@@ -48,9 +48,12 @@ depend: 	$(SRCS)
 		$(CC) $(CPPFLAGS) $(CFLAGS) -MM $(SRCS) > .depend
 
 clean:
-		rm -f tmux *.o .depend *~ *.core *.log compat/*.o
+		rm -f tmux *.o *~ *.core *.log compat/*.o
 
-clean-all:	clean
+clean-depend:
+		rm -f .depend
+
+clean-all:	clean clean-depend
 		rm -f config.h config.mk
 
 install:	all
@@ -58,3 +61,5 @@ install:	all
 		$(INSTALLBIN) tmux $(DESTDIR)$(PREFIX)/bin/tmux
 		$(INSTALLDIR) $(DESTDIR)$(PREFIX)/man/man1
 		$(INSTALLMAN) tmux.1 $(DESTDIR)$(PREFIX)/man/man1/tmux.1
+
+-include .depend
