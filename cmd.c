@@ -20,7 +20,6 @@
 #include <sys/time.h>
 
 #include <fnmatch.h>
-#include <paths.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>

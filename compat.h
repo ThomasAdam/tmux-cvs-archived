@@ -21,6 +21,7 @@
 #define	_PATH_TMP	"/tmp/"
 #define _PATH_DEVNULL	"/dev/null"
 #define _PATH_TTY	"/dev/tty"
+#define _PATH_DEV	"/dev/"
 #endif
 
 #ifdef HAVE_QUEUE_H
