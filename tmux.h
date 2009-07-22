@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $OpenBSD: tmux.h,v 1.42 2009/07/21 18:38:52 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -37,7 +37,7 @@
 
 #include "compat.h"
 
-extern const char    *__progname;
+extern char    *__progname;
 
 /* Default configuration files. */
 #define DEFAULT_CFG ".tmux.conf"

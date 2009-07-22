@@ -64,7 +64,7 @@ __dead void	 usage(void);
 char 		*makesockpath(const char *);
 
 #ifndef HAVE_PROGNAME
-const char      *__progname = "tmux";
+char      *__progname = (char *) "tmux";
 #endif
 
 __dead void
