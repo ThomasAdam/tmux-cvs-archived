@@ -83,24 +83,28 @@ retry:
 			continue;
 		}
 
-		if (is_runnable(p) && !is_runnable(bestp))
+		if (is_runnable(p) && !is_runnable(bestp)) {
 			bestp = p;
-		else if (!is_runnable(p) && is_runnable(bestp))
+			continue;
+		} else if (!is_runnable(p) && is_runnable(bestp))
 			continue;
 
-		if (!is_stopped(p) && is_stopped(bestp))
+		if (!is_stopped(p) && is_stopped(bestp)) {
 			bestp = p;
-		else if (is_stopped(p) && !is_stopped(bestp))
+			continue;
+		} else if (is_stopped(p) && !is_stopped(bestp))
 			continue;
 
-		if (p->p_estcpu > bestp->p_estcpu)
+		if (p->p_estcpu > bestp->p_estcpu) {
 			bestp = p;
-		else if (p->p_estcpu < bestp->p_estcpu)
+			continue;
+		} else if (p->p_estcpu < bestp->p_estcpu)
 			continue;
 
-		if (p->p_slptime < bestp->p_slptime)
+		if (p->p_slptime < bestp->p_slptime) {
 			bestp = p;
-		else if (p->p_slptime > bestp->p_slptime)
+			continue;
+		} else if (p->p_slptime > bestp->p_slptime)
 			continue;
 
 		if (p->p_pid > bestp->p_pid)
