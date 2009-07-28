@@ -116,6 +116,10 @@
 	} while (0)
 #endif
 
+#ifndef PASS_MAX
+#define PASS_MAX 128
+#endif
+
 #ifndef TTY_NAME_MAX
 #define TTY_NAME_MAX 32
 #endif
