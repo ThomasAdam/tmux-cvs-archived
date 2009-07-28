@@ -161,6 +161,7 @@ server_start(char *path)
 	ARRAY_INIT(&windows);
 	ARRAY_INIT(&clients);
 	ARRAY_INIT(&sessions);
+	mode_key_init_trees();
 	key_bindings_init();
 	utf8_build();
 
@@ -384,6 +385,7 @@ server_main(int srv_fd)
 	}
 	ARRAY_FREE(&clients);
 
+	mode_key_free_trees();
 	key_bindings_free();
 
 	close(srv_fd);
