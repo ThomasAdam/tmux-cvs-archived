@@ -55,7 +55,7 @@ syn keyword tmuxOptsSetw xterm-keys mode-attr window-status-attr
 syn keyword tmuxOptsSetw window-status-bg window-status-fg automatic-rename
 syn keyword tmuxOptsSetw main-pane-width main-pane-height monitor-content
 syn keyword tmuxOptsSetw window-status-current-attr window-status-current-bg
-syn keyword tmuxOptsSetw window-status-current-fg
+syn keyword tmuxOptsSetw window-status-current-fg mode-mouse
 
 syn keyword tmuxTodo FIXME NOTE TODO XXX contained
 
