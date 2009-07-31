@@ -1,7 +1,9 @@
 tmux
 tmux*.log
 tmux*.out
+regress
 releases
 saved
+patchsets
 config.h
 config.mk
