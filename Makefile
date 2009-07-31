@@ -10,7 +10,7 @@ FDEBUG= 1
 CC?= cc
 CFLAGS+= -DBUILD="\"$(VERSION)\""
 LDFLAGS+= -L/usr/local/lib
-LIBS+= -lcurses
+LIBS+=
 
 .ifdef FDEBUG
 CFLAGS+= -g -ggdb -DDEBUG
