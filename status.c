@@ -47,8 +47,10 @@ status_redraw(struct client *c)
 	char		 	       *left, *right, *text, *ptr;
 	size_t				llen, llen2, rlen, rlen2, offset;
 	size_t				ox, xx, yy, size, start, width;
-	struct grid_cell	        stdgc, gc;
+	struct grid_cell	        stdgc, sl_stdgc, sr_stdgc, gc;
 	int				larrow, rarrow, utf8flag;
+	int				sl_fg, sl_bg, sr_fg, sr_bg;
+	int				sl_attr, sr_attr;
 
 	left = right = NULL;
 
@@ -64,9 +66,50 @@ status_redraw(struct client *c)
 	if (gettimeofday(&c->status_timer, NULL) != 0)
 		fatal("gettimeofday");
 	memcpy(&stdgc, &grid_default_cell, sizeof gc);
+	memcpy(&sl_stdgc, &grid_default_cell, sizeof gc);
+	memcpy(&sr_stdgc, &grid_default_cell, sizeof gc);
+
+	/* Assume the entire status line. */
 	stdgc.bg = options_get_number(&s->options, "status-fg");
 	stdgc.fg = options_get_number(&s->options, "status-bg");
 	stdgc.attr |= options_get_number(&s->options, "status-attr");
+
+	/* Set the status left and status right parts to the same fg/bg colour
+	 * as the status line above -- and only change them below where they
+	 * differ from the defaults.
+	 */
+	sl_stdgc.fg = stdgc.fg;
+	sl_stdgc.bg = stdgc.bg;
+	sr_stdgc.fg = stdgc.fg;
+	sr_stdgc.bg = stdgc.bg;
+	sl_stdgc.attr = stdgc.attr;
+	sr_stdgc.attr = stdgc.attr;
+
+	/* Left status line options. */
+	sl_bg = options_get_number(&s->options, "status-left-fg");
+	if (sl_bg != 0)
+		sl_stdgc.bg = sl_bg;		
+	
+	sl_fg = options_get_number(&s->options, "status-left-bg");
+	if (sl_fg != 2)
+		sl_stdgc.fg = sl_fg;
+
+	sl_attr = options_get_number(&s->options, "status-left-attr");
+	if (sl_attr != 0)
+		sl_stdgc.attr = sl_attr;
+
+	/* Right status line options. */
+	sr_bg = options_get_number(&s->options, "status-right-fg");
+	if (sr_bg != 0)
+		sr_stdgc.bg = sr_bg;
+
+	sr_fg = options_get_number(&s->options, "status-right-bg");
+	if (sr_fg != 2)
+		sr_stdgc.fg = sr_fg;
+
+	sr_attr = options_get_number(&s->options, "status-right-attr");
+	if (sr_attr != 0)
+		sr_stdgc.attr = sr_attr;
 
 	yy = c->tty.sy - 1;
 	if (yy == 0)
@@ -164,7 +207,7 @@ draw:
 	screen_write_start(&ctx, NULL, &c->status);
 	if (llen != 0) {
  		screen_write_cursormove(&ctx, 0, yy);
-		screen_write_nputs(&ctx, llen, &stdgc, utf8flag, "%s", left);
+		screen_write_nputs(&ctx, llen, &sl_stdgc, utf8flag, "%s", left);
 		screen_write_putc(&ctx, &stdgc, ' ');
 		if (larrow)
 			screen_write_putc(&ctx, &stdgc, ' ');
@@ -238,7 +281,7 @@ draw:
 	if (rlen != 0) {
 		screen_write_cursormove(&ctx, c->tty.sx - rlen - 1, yy);
 		screen_write_putc(&ctx, &stdgc, ' ');
-		screen_write_nputs(&ctx, rlen, &stdgc, utf8flag, "%s", right);
+		screen_write_nputs(&ctx, rlen, &sr_stdgc, utf8flag, "%s", right);
 	}
 
 	/* Draw the arrows. */
