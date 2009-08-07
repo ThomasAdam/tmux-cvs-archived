@@ -66,10 +66,8 @@ status_redraw(struct client *c)
 	if (gettimeofday(&c->status_timer, NULL) != 0)
 		fatal("gettimeofday");
 	memcpy(&stdgc, &grid_default_cell, sizeof gc);
-	memcpy(&sl_stdgc, &grid_default_cell, sizeof gc);
-	memcpy(&sr_stdgc, &grid_default_cell, sizeof gc);
 
-	/* Assume the entire status line. */
+	/* Settins for the entire status line. */
 	stdgc.bg = options_get_number(&s->options, "status-fg");
 	stdgc.fg = options_get_number(&s->options, "status-bg");
 	stdgc.attr |= options_get_number(&s->options, "status-attr");
@@ -78,20 +76,16 @@ status_redraw(struct client *c)
 	 * as the status line above -- and only change them below where they
 	 * differ from the defaults.
 	 */
-	sl_stdgc.fg = stdgc.fg;
-	sl_stdgc.bg = stdgc.bg;
-	sr_stdgc.fg = stdgc.fg;
-	sr_stdgc.bg = stdgc.bg;
-	sl_stdgc.attr = stdgc.attr;
-	sr_stdgc.attr = stdgc.attr;
+	memcpy(&sl_stdgc, &stdgc, sizeof(struct grid_cell));
+	memcpy(&sr_stdgc, &stdgc, sizeof(struct grid_cell));
 
 	/* Left status line options. */
 	sl_bg = options_get_number(&s->options, "status-left-fg");
-	if (sl_bg != 0)
+	if (sl_bg != 8)
 		sl_stdgc.bg = sl_bg;		
 	
 	sl_fg = options_get_number(&s->options, "status-left-bg");
-	if (sl_fg != 2)
+	if (sl_fg != 8)
 		sl_stdgc.fg = sl_fg;
 
 	sl_attr = options_get_number(&s->options, "status-left-attr");
@@ -100,11 +94,11 @@ status_redraw(struct client *c)
 
 	/* Right status line options. */
 	sr_bg = options_get_number(&s->options, "status-right-fg");
-	if (sr_bg != 0)
+	if (sr_bg != 8)
 		sr_stdgc.bg = sr_bg;
 
 	sr_fg = options_get_number(&s->options, "status-right-bg");
-	if (sr_fg != 2)
+	if (sr_fg != 8)
 		sr_stdgc.fg = sr_fg;
 
 	sr_attr = options_get_number(&s->options, "status-right-attr");
