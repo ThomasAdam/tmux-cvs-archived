@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: cmd-confirm-before.c,v 1.10 2009/08/16 19:29:24 tcunha Exp $ */
 
 /*
  * Copyright (c) 2009 Tiago Cunha <me@tiagocunha.org>
@@ -107,7 +107,9 @@ cmd_confirm_before_callback(void *data, const char *s)
 	struct cmd_ctx	 	 	 ctx;
 	char				*cause;
 
-	if (s == NULL || tolower((u_char) s[0]) != 'y' || s[1] != '\0')
+	if (s == NULL || *s == '\0')
+		return (0);
+	if (tolower((u_char) s[0]) != 'y' || s[1] != '\0')
 		return (0);
 
 	if (cmd_string_parse(cdata->cmd, &cmdlist, &cause) != 0) {
