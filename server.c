@@ -140,6 +140,7 @@ server_start(char *path)
 	if (socketpair(AF_UNIX, SOCK_STREAM, PF_UNSPEC, pair) != 0)
 		fatal("socketpair failed");
 
+	/*
 	switch (fork()) {
 	case -1:
 		fatal("fork failed");
@@ -149,14 +150,17 @@ server_start(char *path)
 		close(pair[1]);
 		return (pair[0]);
 	}
+	*/
 	close(pair[0]);
 
 	/*
 	 * Must daemonise before loading configuration as the PID changes so
 	 * $TMUX would be wrong for sessions created in the config file.
 	 */
+	/*
 	if (daemon(1, 0) != 0)
 		fatal("daemon failed");
+		*/
 
 	logfile("server");
 	log_debug("server started, pid %ld", (long) getpid());
