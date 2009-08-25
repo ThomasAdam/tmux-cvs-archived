@@ -798,6 +798,8 @@ server_handle_client(struct client *c)
 	int			 mode;
 	u_char			 mouse[3];
 
+	bd = NULL;
+
 	xtimeout = options_get_number(&c->session->options, "repeat-time");
 	if (xtimeout != 0 && c->flags & CLIENT_REPEAT) {
 		if (gettimeofday(&tv, NULL) != 0)
@@ -845,7 +847,17 @@ server_handle_client(struct client *c)
 
 		/* Prefix key already pressed. Reset prefix and lookup key. */
 		c->flags &= ~CLIENT_PREFIX;
-		if ((bd = key_bindings_lookup(key | KEYC_PREFIX)) == NULL) {
+	
+		if(bd != NULL && bd->has_second_key && key != bd->key2)
+		{
+			log_debug2( "I find key2 to be:  <<%d>> <<%d>> : continuing", 
+					bd->key2, KEYC_NONE );
+			continue;
+		}
+
+
+		if (bd == NULL && 
+			(bd = key_bindings_lookup(key | KEYC_PREFIX)) == NULL) {
 			/* If repeating, treat this as a key, else ignore. */
 			if (c->flags & CLIENT_REPEAT) {
 				c->flags &= ~CLIENT_REPEAT;

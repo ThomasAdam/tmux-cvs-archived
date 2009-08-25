@@ -35,7 +35,9 @@ int	cmd_bind_key_table(struct cmd *, struct cmd_ctx *);
 
 struct cmd_bind_key_data {
 	int		 key;
+	int		 key2;
 	int		 can_repeat;
+	int		 has_second_key;
 	struct cmd_list	*cmdlist;
 
 	int		 command_key;
@@ -61,7 +63,9 @@ cmd_bind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 	int				 opt, no_prefix = 0;
 
 	self->data = data = xmalloc(sizeof *data);
+	data->key2 = KEYC_NONE;
 	data->can_repeat = 0;
+	data->has_second_key = 0;
 	data->cmdlist = NULL;
 	data->command_key = 0;
 	data->tablename = NULL;
@@ -94,6 +98,17 @@ cmd_bind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 		xasprintf(cause, "unknown key: %s", argv[0]);
 		goto error;
 	}
+
+	/* Do we have another key here?  If we do, treat it as a valid key. */
+	if (key_string_lookup_string(argv[1]) != KEYC_NONE)
+	{
+		data->key2 = key_string_lookup_string(argv[1]);
+		data->has_second_key = 1;
+
+		argc--;
+		argv++;
+	}
+
 	if (!no_prefix)
 		data->key |= KEYC_PREFIX;
 
@@ -104,6 +119,10 @@ cmd_bind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 			goto usage;
 		data->modecmd = xstrdup(argv[0]);
 	} else {
+		int z;
+		for (z = 0; z < argc; z++) {
+			log_debug( "Passing [%d]: %s", z, argv[z] );
+		}
 		if ((data->cmdlist = cmd_list_parse(argc, argv, cause)) == NULL)
 			goto error;
 	}
@@ -114,6 +133,7 @@ usage:
 	xasprintf(cause, "usage: %s %s", self->entry->name, self->entry->usage);
 
 error:
+	log_debug2("I errored here...");
 	self->entry->free(self);
 	return (-1);
 }
@@ -128,7 +148,8 @@ cmd_bind_key_exec(struct cmd *self, unused struct cmd_ctx *ctx)
 	if (data->tablename != NULL)
 		return (cmd_bind_key_table(self, ctx));
 
-	key_bindings_add(data->key, data->can_repeat, data->cmdlist);
+	key_bindings_add(data->key, data->key2, data->has_second_key, 
+			data->can_repeat, data->cmdlist);
 	data->cmdlist = NULL;	/* avoid free */
 
 	return (0);

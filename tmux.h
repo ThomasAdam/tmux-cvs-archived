@@ -1056,8 +1056,10 @@ struct cmd_buffer_data {
 /* Key binding. */
 struct key_binding {
 	int		 key;
+	int		 key2;
 	struct cmd_list	*cmdlist;
 	int		 can_repeat;
+	int		 has_second_key;
 
 	SPLAY_ENTRY(key_binding) entry;
 };
@@ -1388,7 +1390,7 @@ extern struct key_bindings key_bindings;
 int	 key_bindings_cmp(struct key_binding *, struct key_binding *);
 SPLAY_PROTOTYPE(key_bindings, key_binding, entry, key_bindings_cmp);
 struct key_binding *key_bindings_lookup(int);
-void	 key_bindings_add(int, int, struct cmd_list *);
+void	 key_bindings_add(int, int, int, int, struct cmd_list *);
 void	 key_bindings_remove(int);
 void	 key_bindings_clean(void);
 void	 key_bindings_init(void);
