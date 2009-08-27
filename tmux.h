@@ -932,7 +932,8 @@ struct client {
 #define CLIENT_STATUS 0x10
 #define CLIENT_REPEAT 0x20	/* allow command to repeat within repeat time */
 #define CLIENT_SUSPENDED 0x40
-#define CLIENT_BAD 0x80
+#define CLIENT_SECONDKEY 0x80
+#define CLIENT_BAD 0x100
 	int		 flags;
 
 	char		*message_string;

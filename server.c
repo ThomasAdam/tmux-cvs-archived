@@ -796,10 +796,11 @@ server_handle_client(struct client *c)
 	struct key_binding	*bd;
 	int		 	 key, prefix, status, xtimeout;
 	int			 mode;
+	int			 is_multikey;
 	u_char			 mouse[3];
 
 	bd = NULL;
-
+	is_multikey = 0;
 	xtimeout = options_get_number(&c->session->options, "repeat-time");
 	if (xtimeout != 0 && c->flags & CLIENT_REPEAT) {
 		if (gettimeofday(&tv, NULL) != 0)
@@ -848,17 +849,30 @@ server_handle_client(struct client *c)
 		/* Prefix key already pressed. Reset prefix and lookup key. */
 		c->flags &= ~CLIENT_PREFIX;
 	
-		if(bd != NULL && bd->has_second_key && key != bd->key2)
-		{
-			log_debug2( "I find key2 to be:  <<%d>> <<%d>> : continuing", 
-					bd->key2, KEYC_NONE );
+		/* If repeating, treat this as a key, else ignore. */
+		if (bd && bd->has_second_key && !is_multikey) {
+			/* We're not done yet -- carry on */
+			is_multikey = 1;
 			continue;
 		}
-
-
-		if (bd == NULL && 
-			(bd = key_bindings_lookup(key | KEYC_PREFIX)) == NULL) {
-			/* If repeating, treat this as a key, else ignore. */
+		
+		if (is_multikey)
+		{
+			is_multikey = 0;
+			/* Then we've already got the binding as defined in
+			 * "bd" -- so don't go looking it up again.  Instead,
+			 * compare the keys.
+			 */
+			if ((bd != NULL) && (bd->key2 == key))
+			{
+				/* Correct key was pressed -- dispatch the
+				 * binding.
+				 */
+				key_bindings_dispatch(bd, c);
+			}
+		}
+		
+		if ((bd = key_bindings_lookup(key | KEYC_PREFIX)) == NULL) {
 			if (c->flags & CLIENT_REPEAT) {
 				c->flags &= ~CLIENT_REPEAT;
 				if (key == prefix)
@@ -890,7 +904,6 @@ server_handle_client(struct client *c)
 			timeradd(&c->repeat_timer, &tv, &c->repeat_timer);
 		}
 
-		/* Dispatch the command. */
 		key_bindings_dispatch(bd, c);
 	}
 	if (c->session == NULL)
