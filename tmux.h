@@ -796,7 +796,7 @@ struct session_alert {
 struct session {
 	char		*name;
 	struct timeval	 tv;
-
+	time_t       session_activity;
 	u_int		 sx;
 	u_int		 sy;
 
@@ -1112,7 +1112,6 @@ extern struct options global_s_options;
 extern struct options global_w_options;
 extern struct environ global_environ;
 extern char	*cfg_file;
-extern time_t	 server_activity;
 extern int	 debug_level;
 extern int	 be_quiet;
 extern time_t	 start_time;
@@ -1456,10 +1455,7 @@ void	 server_redraw_session(struct session *);
 void	 server_status_session(struct session *);
 void	 server_redraw_window(struct window *);
 void	 server_status_window(struct window *);
-void	 server_lock(void);
-void	 server_lock_session(struct session *);
-void	 server_lock_client(struct client *);
-int	 server_unlock(const char *);
+void	 server_lock(struct client *, struct session *);
 void	 server_kill_window(struct window *);
 int	 server_link_window(
 	     struct winlink *, struct session *, int, int, int, char **);

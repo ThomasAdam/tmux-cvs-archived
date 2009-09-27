@@ -161,8 +161,6 @@ server_start(char *path)
 	key_bindings_init();
 	utf8_build();
 
-	server_activity = time(NULL);
-
 	start_time = time(NULL);
 	socket_path = path;
 
@@ -772,10 +770,10 @@ server_handle_client(struct client *c)
 	/* Process keys. */
 	keylist = options_get_data(&c->session->options, "prefix");
 	while (tty_keys_next(&c->tty, &key, mouse) == 0) {
-		server_activity = time(NULL);
 
 		if (c->session == NULL)
 			return;
+		c->session->session_activity = time(NULL);
 		w = c->session->curw->window;
 		wp = w->active;	/* could die */
 
@@ -1189,17 +1187,23 @@ void
 server_second_timers(void)
 {
 	struct window		*w;
+	struct session		*s;
+	struct client		*c = NULL;
 	struct window_pane	*wp;
 	u_int		 	 i;
 	int			 xtimeout;
 	time_t		 	 t;
 
 	t = time(NULL);
+	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
+		s = ARRAY_ITEM(&sessions, i);
+		if (s == NULL)
+			continue;
 
-	xtimeout = options_get_number(&global_s_options, "lock-after-time");
-	if (xtimeout > 0 && t > server_activity + xtimeout) {
-		server_lock();
-		recalculate_sizes();
+		xtimeout = options_get_number(&s->options, "lock-after-time");
+		if (xtimeout > 0 && t > s->session_activity + xtimeout)
+			server_lock(c, s);
+			recalculate_sizes();
 	}
 
 	for (i = 0; i < ARRAY_LENGTH(&windows); i++) {

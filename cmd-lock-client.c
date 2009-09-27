@@ -42,11 +42,12 @@ cmd_lock_client_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct client		*c;
+	struct session		*s = NULL;
 
 	if ((c = cmd_find_client(ctx, data->target)) == NULL)
 		return (-1);
 
-	server_lock_client(c);
+	server_lock(c, s);
 	recalculate_sizes();
 
 	return (0);

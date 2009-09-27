@@ -44,7 +44,7 @@ const struct cmd_entry cmd_lock_server_entry = {
 int
 cmd_lock_server_exec(unused struct cmd *self, unused struct cmd_ctx *ctx)
 {
-	server_lock();
+	server_lock(NULL, NULL);
 	recalculate_sizes();
 
 	return (0);
