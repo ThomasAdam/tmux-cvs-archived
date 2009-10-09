@@ -130,6 +130,9 @@ commands which are executed in sequence when the server is first started.
 If a command in the configuration file fails,
 .Nm
 will report an error and exit without executing further commands.
+.It Fl F
+Tell tmux not to fork when creating the server process.
+Useful mostly for debugging.
 .It Fl l
 Behave as a login shell.
 This flag currently has no effect and is for compatibility with other shells

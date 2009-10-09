@@ -1408,7 +1408,7 @@ void	cmd_buffer_free(struct cmd *);
 size_t	cmd_buffer_print(struct cmd *, char *, size_t);
 
 /* client.c */
-int	 client_init(char *, struct client_ctx *, int, int);
+int	 client_init(char *, struct client_ctx *, int, int, int);
 int	 client_main(struct client_ctx *);
 int	 client_msg_dispatch(struct client_ctx *);
 
@@ -1439,7 +1439,7 @@ const char *key_string_lookup_key(int);
 /* server.c */
 extern struct clients clients;
 extern struct clients dead_clients;
-int	 server_start(char *);
+int	 server_start(char *, int);
 
 /* server-msg.c */
 int	 server_msg_dispatch(struct client *);

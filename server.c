@@ -121,7 +121,7 @@ server_create_client(int fd)
 
 /* Fork new server. */
 int
-server_start(char *path)
+server_start(char *path, int fork_server)
 {
 	struct client	*c;
 	int		 pair[2], srv_fd;
@@ -134,14 +134,16 @@ server_start(char *path)
 	if (socketpair(AF_UNIX, SOCK_STREAM, PF_UNSPEC, pair) != 0)
 		fatal("socketpair failed");
 
-	switch (fork()) {
-	case -1:
-		fatal("fork failed");
-	case 0:
-		break;
-	default:
-		close(pair[1]);
-		return (pair[0]);
+	if (fork_server) {
+		switch (fork()) {
+			case -1:
+				fatal("fork failed");
+			case 0:
+				break;
+			default:
+				close(pair[1]);
+				return (pair[0]);
+		}
 	}
 	close(pair[0]);
 
@@ -149,7 +151,7 @@ server_start(char *path)
 	 * Must daemonise before loading configuration as the PID changes so
 	 * $TMUX would be wrong for sessions created in the config file.
 	 */
-	if (daemon(1, 0) != 0)
+	if (fork_server && daemon(1, 0) != 0)
 		fatal("daemon failed");
 
 	logfile("server");

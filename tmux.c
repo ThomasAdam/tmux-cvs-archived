@@ -291,11 +291,12 @@ main(int argc, char **argv)
 	size_t			 len;
 	int	 		 retcode, opt, flags, cmdflags = 0;
 	int			 nfds;
+	int			 fork_server = 1;
 
 	flags = 0;
 	shellcmd = label = path = NULL;
 	login_shell = (**argv == '-');
-	while ((opt = getopt(argc, argv, "28c:df:lL:qS:uUv")) != -1) {
+	while ((opt = getopt(argc, argv, "28c:dFf:lL:qS:uUv")) != -1) {
 		switch (opt) {
 		case '2':
 			flags |= IDENTIFY_256COLOURS;
@@ -317,6 +318,9 @@ main(int argc, char **argv)
 			if (cfg_file != NULL)
 				xfree(cfg_file);
 			cfg_file = xstrdup(optarg);
+			break;
+		case 'F':
+			fork_server = 0;
 			break;
 		case 'l':
 			login_shell = 1;
@@ -528,7 +532,7 @@ main(int argc, char **argv)
 	}
 
  	memset(&cctx, 0, sizeof cctx);
-	if (client_init(path, &cctx, cmdflags, flags) != 0)
+	if (client_init(path, &cctx, cmdflags, flags, fork_server) != 0)
 		exit(1);
 	xfree(path);
 

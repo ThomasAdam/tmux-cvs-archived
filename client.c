@@ -36,7 +36,7 @@
 void	client_send_environ(struct client_ctx *);
 
 int
-client_init(char *path, struct client_ctx *cctx, int cmdflags, int flags)
+client_init(char *path, struct client_ctx *cctx, int cmdflags, int flags, int fork_server)
 {
 	struct sockaddr_un		sa;
 	struct stat			sb;
@@ -57,7 +57,7 @@ client_init(char *path, struct client_ctx *cctx, int cmdflags, int flags)
 
 	if (lstat(path, &sb) != 0) {
 		if (cmdflags & CMD_STARTSERVER && errno == ENOENT) {
-			if ((fd = server_start(path)) == -1)
+			if ((fd = server_start(path, fork_server)) == -1)
 				goto start_failed;
 			goto server_started;
 		}
@@ -83,7 +83,7 @@ client_init(char *path, struct client_ctx *cctx, int cmdflags, int flags)
 		if (errno == ECONNREFUSED) {
 			if (unlink(path) != 0 || !(cmdflags & CMD_STARTSERVER))
 				goto not_found;
-			if ((fd = server_start(path)) == -1)
+			if ((fd = server_start(path, fork_server)) == -1)
 				goto start_failed;
 			goto server_started;
 		}
