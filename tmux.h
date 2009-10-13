@@ -742,6 +742,8 @@ struct window {
 	struct window_panes panes;
 
 	int		 lastlayout;
+	size_t		 window_format_len;
+	struct grid_cell gc;
 	struct layout_cell *layout_root;
 
 	u_int		 sx;
@@ -1536,7 +1538,7 @@ void	 server_clear_identify(struct client *);
 
 /* status.c */
 int	 status_redraw(struct client *);
-char	*status_replace(struct client *, const char *, time_t);
+char	*status_replace(struct client *, struct winlink *, const char *, time_t);
 void printflike2 status_message_set(struct client *, const char *, ...);
 void	 status_message_clear(struct client *);
 int	 status_message_redraw(struct client *);
