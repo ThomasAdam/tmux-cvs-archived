@@ -733,16 +733,23 @@ struct window_pane {
 };
 TAILQ_HEAD(window_panes, window_pane);
 
+struct status_line {
+	struct grid_cell gc;
+	char		*raw_status;
+	char		*interpolated_status;
+	size_t		*interpolated_status_len;
+};
+
 /* Window structure. */
 struct window {
 	char		*name;
 	struct timeval	 name_timer;
 
+	struct status_line *sl;
 	struct window_pane *active;
 	struct window_panes panes;
 
 	int		 lastlayout;
-	size_t		 window_format_len;
 	struct grid_cell gc;
 	struct layout_cell *layout_root;
 

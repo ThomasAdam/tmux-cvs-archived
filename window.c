@@ -216,6 +216,7 @@ window_create1(u_int sx, u_int sy)
 
 	w->lastlayout = -1;
 	w->layout_root = NULL;
+	w->sl = NULL;
 	
 	w->sx = sx;
 	w->sy = sy;

@@ -44,6 +44,7 @@ cmd_display_message_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data	*data = self->data;
 	struct client		*c;
+	struct status_line	*sl = c->session->curw->window->sl;
 	const char		*template;
 	char			*msg;
 
@@ -51,11 +52,11 @@ cmd_display_message_exec(struct cmd *self, struct cmd_ctx *ctx)
 		return (-1);
 
 	if (data->arg == NULL)
-		template = "[#S] #I:#W, current pane #P - (%H:%M %d-%b-%y)";
+		sl->raw_status = "[#S] #I:#W, current pane #P - (%H:%M %d-%b-%y)";
 	else
-		template = data->arg;
+		sl->raw_status = data->arg;
 
-	msg = status_replace(c, c->session->curw, template, time(NULL));
+	msg = status_replace(c, c->session->curw, sl->raw_status, time(NULL));
 	status_message_set(c, "%s", msg);
 	xfree(msg);
 

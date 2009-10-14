@@ -459,7 +459,8 @@ cmd_lookup_client(const char *name)
 	for (i = 0; i < ARRAY_LENGTH(&clients); i++) {
 		if ((c = ARRAY_ITEM(&clients, i)) == NULL)
 			continue;
-		path = c->tty.path;
+		if ((path = c->tty.path) == NULL)
+			continue;
 
 		/* Check for exact matches. */
 		if (strcmp(name, path) == 0)

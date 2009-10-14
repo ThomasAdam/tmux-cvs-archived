@@ -32,7 +32,7 @@
 char   *status_job(struct client *, char **);
 void	status_job_callback(struct job *);
 size_t	status_width(struct winlink *);
-char   *status_print(struct client *, struct winlink *);
+void   *status_interpolate(struct client *, struct status_line *);
 
 char	status_window_printable_flag(struct session *, struct winlink *);
 void	status_window_update_gridcell(struct grid_cell *, char);
@@ -142,7 +142,7 @@ status_redraw(struct client *c)
 	width = offset = 0;
 	RB_FOREACH(wl, winlinks, &s->windows) {
 		memcpy(&wl->window->gc, &stdgc, sizeof stdgc);
-		text = status_print(c, wl);
+		status_interpolate(c, wl->window->sl);
 		size = status_width(wl);
 		if (wl == s->curw)
 			offset = width;
@@ -228,11 +228,8 @@ draw:
 	offset = 0;
 	RB_FOREACH(wl, winlinks, &s->windows) {
 		memcpy(&wl->window->gc, &stdgc, sizeof stdgc);
-		text = status_print(c, wl);
+		text = status_interpolate(c, wl->window->sl);
 		size = screen_write_cstrlen(utf8flag, "%s", text);
-
-		log_debug("TEXT: <<%s>> | SIZE:  <<%d>> | OFFSET:  <<%d>>",
-				text, size, offset);
 
 		if (larrow == 1 && offset < start) {
 			if (session_alert_has(s, wl, WINDOW_ACTIVITY))
@@ -243,15 +240,10 @@ draw:
 				larrow = -1;
 		}
 
-		if (offset >= start && offset < start + width) {
-			log_debug( "OFFSET:  <<%d>> | START:  <<%d>> | START + WIDTH:  <<%d>>",
-					offset, start, start + width);
+		if (offset >= start && offset < start + width)
 			screen_write_cnputs(&ctx, size, &wl->window->gc, utf8flag, "%s", text);
-		}
 		offset += size;
 
-		log_debug( "WROTE ENTRY:  <%s> | OFFSET NOW:  <<%d>>", text, offset );
-		
 		if (rarrow == 1 && offset > start + width) {
 			if (session_alert_has(s, wl, WINDOW_ACTIVITY))
 				rarrow = -1;
@@ -262,11 +254,7 @@ draw:
 		}
 
 		if (offset < start + width) {
-			log_debug( "OFFSET:  <<%d>> LESS THAN:  START + WIDTH, WHICH IS:  <<%d>>",
-					offset, start + width);
 			if (offset >= start) {
-				log_debug( "OFFSET:  <<%d>> GTE START, WHICH IS:  <<%d>>",
-						offset, start);
 				screen_write_putc(&ctx, &stdgc, ' ');
 			}
 		}
@@ -336,6 +324,7 @@ char *
 status_replace(struct client *c, struct winlink *wl, const char *fmt, time_t t)
 {
 	struct session *s = c->session;
+	struct status_line *sl = wl->window->sl;
 	static char	out[BUFSIZ];
 	char		in[BUFSIZ], tmp[256], ch, *iptr, *optr, *ptr, *endptr;
 	char           *savedptr;	/* freed at end of each loop */
@@ -380,8 +369,6 @@ status_replace(struct client *c, struct winlink *wl, const char *fmt, time_t t)
 					xsnprintf(tmp, sizeof tmp, "%c",
 							status_window_printable_flag(s, wl));
 					ptr = tmp;
-
-					//status_window_update_gridcell(wl->window->gc, *ptr);
 				}
 				/* FALLTHROUGH */
 			case 'H':
@@ -456,7 +443,10 @@ status_replace(struct client *c, struct winlink *wl, const char *fmt, time_t t)
 	}
 	*optr = '\0';
 
-	return (xstrdup(out));
+	/* Update the status line.*/
+	sl->interpolated_status = xstrdup(out);
+
+	//return (xstrdup(out));
 }
 
 char *
@@ -578,7 +568,7 @@ status_window_update_gridcell(struct grid_cell *gc, char flag)
 }
 
 char *
-status_print(struct client *c, struct winlink *wl)
+status_interpolate(struct client *c, struct winlink *wl)
 {
 	struct session	*s = c->session;
 	struct options	*oo = &wl->window->options;
