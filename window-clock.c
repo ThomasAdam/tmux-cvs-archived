@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: window-clock.c,v 1.9 2009/11/28 14:50:37 tcunha Exp $ */
 
 /*
  * Copyright (c) 2009 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -82,6 +82,7 @@ window_clock_resize(struct window_pane *wp, u_int sx, u_int sy)
 	window_clock_draw_screen(wp);
 }
 
+/* ARGSUSED */
 void
 window_clock_key(
     struct window_pane *wp, unused struct client *c, unused int key)
