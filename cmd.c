@@ -90,10 +90,12 @@ const struct cmd_entry *cmd_table[] = {
 	&cmd_server_info_entry,
 	&cmd_set_buffer_entry,
 	&cmd_set_environment_entry,
+	&cmd_set_hook_entry,
 	&cmd_set_option_entry,
 	&cmd_set_window_option_entry,
 	&cmd_show_buffer_entry,
 	&cmd_show_environment_entry,
+	&cmd_show_hooks_entry,
 	&cmd_show_messages_entry,
 	&cmd_show_options_entry,
 	&cmd_show_window_options_entry,
@@ -263,7 +265,46 @@ usage:
 int
 cmd_exec(struct cmd *cmd, struct cmd_ctx *ctx)
 {
-	return (cmd->entry->exec(cmd, ctx));
+	struct session	*s = ctx->curclient->session;
+	struct cmd_ctx	 hookctx;
+	char		*hookname;
+	int		 n, retcode;
+
+	if (++ctx->depth > MAXIMUM_DEPTH) {
+		ctx->error(ctx, "too many nested commands");
+		return (-1);
+	}
+
+	memcpy(&hookctx, ctx, sizeof hookctx);
+	hookctx.cmdclient = NULL;
+	xasprintf(&hookname, "before-%s", cmd->entry->name);
+	if ((n = hooks_call(&global_hooks, hookname, &hookctx)) != 0) {
+		xfree(hookname);
+		return (n);
+	}
+	if (s != NULL && (n = hooks_call(&s->hooks, hookname, &hookctx)) != 0) {
+		xfree(hookname);
+		return (n);
+	}
+	xfree(hookname);
+
+	if ((retcode = cmd->entry->exec(cmd, ctx)) == -1)
+		return (retcode);
+
+	memcpy(&hookctx, ctx, sizeof hookctx);
+	hookctx.cmdclient = NULL;
+	xasprintf(&hookname, "after-%s", cmd->entry->name);
+	if ((n = hooks_call(&global_hooks, hookname, &hookctx)) != 0) {
+		xfree(hookname);
+		return (n);
+	}
+	if (s != NULL && (n = hooks_call(&s->hooks, hookname, &hookctx)) != 0) {
+		xfree(hookname);
+		return (n);
+	}
+	xfree(hookname);
+
+	return (retcode);
 }
 
 void

@@ -129,6 +129,7 @@ cmd_confirm_before_callback(void *data, const char *s)
 	ctx.info = key_bindings_info;
 
 	ctx.cmdclient = NULL;
+	ctx.depth = 0;
 
 	cmd_list_exec(cmdlist, &ctx);
 	cmd_list_free(cmdlist);

@@ -64,6 +64,9 @@ extern char   **environ;
 /* Maximum data to buffer for output before suspending reading from panes. */
 #define BACKOFF_THRESHOLD 1024
 
+/* Maximum command recursion depth. */
+#define MAXIMUM_DEPTH 10
+
 /*
  * Maximum sizes of strings in message data. Don't forget to bump
  * PROTOCOL_VERSION if any of these change!
@@ -897,6 +900,21 @@ struct environ_entry {
 };
 RB_HEAD(environ, environ_entry);
 
+/* Hook data. */
+struct hook_cmd {
+	struct cmd_list	*cmdlist;
+
+	TAILQ_ENTRY(hook_cmd) entry;
+};
+
+struct hook {
+	char		*name;
+	TAILQ_HEAD(, hook_cmd) cmds;
+
+	SPLAY_ENTRY(hook) entry;
+};
+SPLAY_HEAD(hooks, hook);
+
 /* Client session. */
 struct session_alert {
 	struct winlink	*wl;
@@ -937,6 +955,7 @@ struct session {
 
 	struct termios	*tio;
 
+	struct hooks	 hooks;
 	struct environ	 environ;
 
 	int		 references;
@@ -1129,6 +1148,9 @@ struct cmd_ctx {
 	struct client  *curclient;
 	struct client  *cmdclient;
 
+	/* Recursion depth. */
+	int		depth;
+
 	struct msg_command_data	*msgdata;
 
 	/* gcc2 doesn't understand attributes on function pointers... */
@@ -1238,6 +1260,7 @@ extern const struct set_option_entry set_window_option_table[];
 /* tmux.c */
 extern struct options global_s_options;
 extern struct options global_w_options;
+extern struct hooks global_hooks;
 extern struct environ global_environ;
 extern char	*cfg_file;
 extern int	 debug_level;
@@ -1492,10 +1515,12 @@ extern const struct cmd_entry cmd_send_prefix_entry;
 extern const struct cmd_entry cmd_server_info_entry;
 extern const struct cmd_entry cmd_set_buffer_entry;
 extern const struct cmd_entry cmd_set_environment_entry;
+extern const struct cmd_entry cmd_set_hook_entry;
 extern const struct cmd_entry cmd_set_option_entry;
 extern const struct cmd_entry cmd_set_window_option_entry;
 extern const struct cmd_entry cmd_show_buffer_entry;
 extern const struct cmd_entry cmd_show_environment_entry;
+extern const struct cmd_entry cmd_show_hooks_entry;
 extern const struct cmd_entry cmd_show_messages_entry;
 extern const struct cmd_entry cmd_show_options_entry;
 extern const struct cmd_entry cmd_show_window_options_entry;
@@ -1551,6 +1576,17 @@ size_t	cmd_buffer_print(struct cmd *, char *, size_t);
 /* client.c */
 struct imsgbuf *client_init(char *, int, int);
 __dead void	client_main(void);
+
+/* hooks.c */
+int	 hooks_cmp(struct hook *, struct hook *);
+SPLAY_PROTOTYPE(hooks, hook, entry, hooks_cmp);
+void	 hooks_init(struct hooks *);
+void	 hooks_free(struct hooks *);
+void	 hooks_add(struct hooks *, const char *, struct cmd_list *);
+struct   hook *hooks_find(struct hooks *, const char *);
+void	 hooks_remove(struct hooks *, struct hook *);
+int      hooks_call(struct hooks *, const char *, struct cmd_ctx *);
+
 
 /* key-bindings.c */
 extern struct key_bindings key_bindings;

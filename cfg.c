@@ -102,6 +102,7 @@ load_cfg(const char *path, struct cmd_ctx *ctxin, char **cause)
 		ctx.error = cfg_error;
 		ctx.print = cfg_print;
 		ctx.info = cfg_print;
+		ctx.depth = 0;
 
 		cfg_cause = NULL;
 		cmd_list_exec(cmdlist, &ctx);

@@ -249,6 +249,7 @@ key_bindings_dispatch(struct key_binding *bd, struct client *c)
 	ctx.info = key_bindings_info;
 
 	ctx.cmdclient = NULL;
+	ctx.depth = 0;
 
 	cmd_list_exec(bd->cmdlist, &ctx);
 }

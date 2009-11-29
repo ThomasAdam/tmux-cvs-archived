@@ -280,6 +280,9 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	recalculate_sizes();
 	server_update_socket();
 
+	/* Update the context for hooks. */
+	ctx->curclient->session = s;
+
 	return (!detached);	/* 1 means don't tell command client to exit */
 }
 

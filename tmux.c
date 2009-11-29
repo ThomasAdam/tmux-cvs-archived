@@ -37,6 +37,7 @@ extern char	*malloc_options;
 char		*cfg_file;
 struct options	 global_s_options;	/* session options */
 struct options	 global_w_options;	/* window options */
+struct hooks	 global_hooks;
 struct environ	 global_environ;
 
 int		 debug_level;
@@ -312,6 +313,14 @@ main(int argc, char **argv)
 		    strcasestr(s, "UTF8") != NULL))
 			flags |= IDENTIFY_UTF8;
 	}
+
+	hooks_init(&global_hooks);
+	if (cmd_string_parse("if-shell '[ -f \"$HOME/.tmux-session.conf\" ]' "
+	    "'source-file $HOME/.tmux-session.conf'", &cmdlist, &cause) != 0) {
+		log_warnx("%s", cause);
+		exit(1);
+	}
+	hooks_add(&global_hooks, "after-new-session", cmdlist);
 
 	environ_init(&global_environ);
  	for (var = environ; *var != NULL; var++)

@@ -138,6 +138,7 @@ session_create(const char *name, const char *cmd, const char *cwd,
 	paste_init_stack(&s->buffers);
 
 	options_init(&s->options, &global_s_options);
+	hooks_init(&s->hooks);
 	environ_init(&s->environ);
 	if (env != NULL)
 		environ_copy(env, &s->environ);
@@ -198,6 +199,7 @@ session_destroy(struct session *s)
 	session_group_remove(s);
 	session_alert_cancel(s, NULL);
 	environ_free(&s->environ);
+	hooks_free(&global_hooks);
 	options_free(&s->options);
 	paste_free_stack(&s->buffers);
 

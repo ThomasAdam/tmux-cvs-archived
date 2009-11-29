@@ -611,6 +611,9 @@ server_client_msg_error(struct cmd_ctx *ctx, const char *fmt, ...)
 	struct msg_print_data	data;
 	va_list			ap;
 
+	if (ctx->cmdclient == NULL)
+		return;
+
 	va_start(ap, fmt);
 	xvsnprintf(data.msg, sizeof data.msg, fmt, ap);
 	va_end(ap);
@@ -624,6 +627,9 @@ server_client_msg_print(struct cmd_ctx *ctx, const char *fmt, ...)
 {
 	struct msg_print_data	data;
 	va_list			ap;
+
+	if (ctx->cmdclient == NULL)
+		return;
 
 	va_start(ap, fmt);
 	xvsnprintf(data.msg, sizeof data.msg, fmt, ap);
@@ -639,7 +645,7 @@ server_client_msg_info(struct cmd_ctx *ctx, const char *fmt, ...)
 	struct msg_print_data	data;
 	va_list			ap;
 
-	if (be_quiet)
+	if (be_quiet || ctx->cmdclient == NULL)
 		return;
 
 	va_start(ap, fmt);
@@ -667,6 +673,7 @@ server_client_msg_command(struct client *c, struct msg_command_data *data)
 	ctx.curclient = NULL;
 
 	ctx.cmdclient = c;
+	ctx.depth = 0;
 
 	argc = data->argc;
 	data->argv[(sizeof data->argv) - 1] = '\0';
