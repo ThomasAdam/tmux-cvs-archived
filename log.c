@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: log.c,v 1.17 2009/12/04 22:14:47 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -183,7 +183,7 @@ log_vfatal(const char *msg, va_list ap)
 		log_vwrite(LOG_CRIT, fmt, ap);
 	} else {
 		if (asprintf(&fmt, "fatal: %s", msg) == -1)
-       			exit(1);
+			exit(1);
 		log_vwrite(LOG_CRIT, fmt, ap);
 	}
 	free(fmt);
