@@ -851,14 +851,21 @@ struct window {
 };
 ARRAY_DECL(windows, struct window *);
 
+struct statusline {
+	size_t		 width;
+	struct grid_cell cell;
+	char		*text;
+	
+	struct timeval	 timer;
+	struct jobs	 jobs;
+	struct screen	 status_screen;
+};
+
 /* Entry on local window list. */
 struct winlink {
-	int		 idx;
-	struct window	*window;
-
-	size_t		 status_width;
-	struct grid_cell status_cell;
-	char		*status_text;
+	int			idx;
+	struct window		*window;
+	struct statusline	*status;
 
 	int              flags;
 #define WINLINK_BELL 0x1
@@ -1101,9 +1108,6 @@ struct client {
 
 	struct event	 repeat_timer;
 
-	struct timeval	 status_timer;
-	struct jobs	 status_jobs;
-	struct screen	 status;
 
 #define CLIENT_TERMINAL 0x1
 #define CLIENT_PREFIX 0x2

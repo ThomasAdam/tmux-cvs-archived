@@ -102,7 +102,7 @@ session_create(const char *name, const char *cmd, const char *cwd,
 		s->name = xstrdup(name);
 	else
 		xasprintf(&s->name, "%u", i);
-
+	
 	if (cmd != NULL) {
 		if (session_new(s, NULL, cmd, cwd, idx, cause) == NULL) {
 			session_destroy(s);

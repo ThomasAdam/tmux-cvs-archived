@@ -147,8 +147,8 @@ winlink_remove(struct winlinks *wwl, struct winlink *wl)
 	struct window	*w = wl->window;
 
 	RB_REMOVE(winlinks, wwl, wl);
-	if (wl->status_text != NULL)
-		xfree(wl->status_text);
+	if (wl->status->text != NULL)
+		xfree(wl->status->text);
 	xfree(wl);
 
 	if (w->references == 0)

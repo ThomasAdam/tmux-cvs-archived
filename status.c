@@ -111,6 +111,7 @@ status_redraw(struct client *c)
 	struct screen_write_ctx	ctx;
 	struct session	       *s = c->session;
 	struct winlink	       *wl;
+	struct statusline      *status;
 	struct screen		old_status, window_list;
 	struct grid_cell	stdgc, lgc, rgc, gc;
 	time_t			t;
@@ -126,10 +127,12 @@ status_redraw(struct client *c)
 	left = right = NULL;
 	larrow = rarrow = 0;
 
+	status = c->session->curw->status;
+
 	/* Update status timer. */
-	if (gettimeofday(&c->status_timer, NULL) != 0)
+	if (gettimeofday(&status->timer, NULL) != 0)
 		fatal("gettimeofday failed");
-	t = c->status_timer.tv_sec;
+	t = status->timer.tv_sec;
 
 	/* Set up default colour. */
 	memcpy(&stdgc, &grid_default_cell, sizeof gc);
@@ -138,9 +141,9 @@ status_redraw(struct client *c)
 	stdgc.attr |= options_get_number(&s->options, "status-attr");
 
 	/* Create the target screen. */
-	memcpy(&old_status, &c->status, sizeof old_status);
-	screen_init(&c->status, c->tty.sx, 1, 0);
-	screen_write_start(&ctx, NULL, &c->status);
+	memcpy(&old_status, &status->status_screen, sizeof old_status);
+	screen_init(&status->status_screen, c->tty.sx, 1, 0);
+	screen_write_start(&ctx, NULL, &status->status_screen);
 	for (offset = 0; offset < c->tty.sx; offset++)
 		screen_write_putc(&ctx, &stdgc, ' ');
 	screen_write_stop(&ctx);
@@ -174,16 +177,16 @@ status_redraw(struct client *c)
 	/* Calculate the total size needed for the window list. */
 	wlstart = wloffset = wlwidth = 0;
 	RB_FOREACH(wl, winlinks, &s->windows) {
-		if (wl->status_text != NULL)
-			xfree(wl->status_text);
-		memcpy(&wl->status_cell, &stdgc, sizeof wl->status_cell);
-		wl->status_text = status_print(c, wl, t, &wl->status_cell);
-		wl->status_width =
-		    screen_write_cstrlen(utf8flag, "%s", wl->status_text);
+		if (wl->status->text != NULL)
+			xfree(wl->status->text);
+		memcpy(&wl->status->cell, &stdgc, sizeof wl->status->cell);
+		wl->status->text = status_print(c, wl, t, &wl->status->cell);
+		wl->status->width =
+		    screen_write_cstrlen(utf8flag, "%s", wl->status->text);
 
 		if (wl == s->curw)
 			wloffset = wlwidth;
-		wlwidth += wl->status_width + 1;
+		wlwidth += wl->status->width + 1;
 	}
 
 	/* Create a new screen for the window list. */
@@ -193,7 +196,7 @@ status_redraw(struct client *c)
 	screen_write_start(&ctx, NULL, &window_list);
 	RB_FOREACH(wl, winlinks, &s->windows) {
 		screen_write_cnputs(&ctx,
-		    -1, &wl->status_cell, utf8flag, "%s", wl->status_text);
+		    -1, &wl->status->cell, utf8flag, "%s", wl->status->text);
 		screen_write_putc(&ctx, &stdgc, ' ');
 	}
 	screen_write_stop(&ctx);
@@ -203,7 +206,7 @@ status_redraw(struct client *c)
 		goto draw;
 
 	/* Find size of current window text. */
-	wlsize = s->curw->status_width;
+	wlsize = s->curw->status->width;
 
 	/*
 	 * If the current window is already on screen, good to draw from the
@@ -252,7 +255,7 @@ status_redraw(struct client *c)
 		    larrow == 1 && offset < wlstart)
 			larrow = -1;
 
-		offset += wl->status_width;
+		offset += wl->status->width;
 
 		if (wl->flags & WINLINK_ALERTFLAGS &&
 		    rarrow == 1 && offset > wlstart + wlwidth)
@@ -261,7 +264,7 @@ status_redraw(struct client *c)
 
 draw:
 	/* Begin drawing. */
-	screen_write_start(&ctx, NULL, &c->status);
+	screen_write_start(&ctx, NULL, &status->status_screen);
 
 	/* Draw the left string and arrow. */
 	screen_write_cursormove(&ctx, 0, 0);
@@ -321,7 +324,7 @@ out:
 	if (right != NULL)
 		xfree(right);
 
-	if (grid_compare(c->status.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}
@@ -477,6 +480,7 @@ status_replace(struct client *c,
 char *
 status_job(struct client *c, char **iptr)
 {
+	struct statusline	*status = c->session->curw->status;
 	struct job	*job;
 	char   		*cmd;
 	int		 lastesc;
@@ -510,9 +514,9 @@ status_job(struct client *c, char **iptr)
 	(*iptr)++;			/* skip final ) */
 	cmd[len] = '\0';
 
-	job = job_get(&c->status_jobs, cmd);
+	job = job_get(&status->jobs, cmd);
 	if (job == NULL) {
-		job = job_add(&c->status_jobs,
+		job = job_add(&status->jobs,
 		    JOB_PERSIST, c, cmd, status_job_callback, xfree, NULL);
 		job_run(job);
 	}
@@ -660,7 +664,7 @@ status_message_clear(struct client *c)
 	c->tty.flags &= ~(TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_REDRAW; /* screen was frozen and may have changed */
 
-	screen_reinit(&c->status);
+	screen_reinit(&c->session->curw->status->status_screen);
 }
 
 /* Clear status line message after timer expires. */
@@ -680,14 +684,15 @@ status_message_redraw(struct client *c)
 	struct screen_write_ctx		ctx;
 	struct session		       *s = c->session;
 	struct screen		        old_status;
+	struct statusline		*status = s->curw->status;
 	size_t			        len;
 	struct grid_cell		gc;
 	int				utf8flag;
 
 	if (c->tty.sx == 0 || c->tty.sy == 0)
 		return (0);
-	memcpy(&old_status, &c->status, sizeof old_status);
-	screen_init(&c->status, c->tty.sx, 1, 0);
+	memcpy(&old_status, &status->status_screen, sizeof old_status);
+	screen_init(&status->status_screen, c->tty.sx, 1, 0);
 
 	utf8flag = options_get_number(&s->options, "status-utf8");
 
@@ -700,7 +705,7 @@ status_message_redraw(struct client *c)
 	colour_set_bg(&gc, options_get_number(&s->options, "message-bg"));
 	gc.attr |= options_get_number(&s->options, "message-attr");
 
-	screen_write_start(&ctx, NULL, &c->status);
+	screen_write_start(&ctx, NULL, &status->status_screen);
 
 	screen_write_cursormove(&ctx, 0, 0);
 	screen_write_nputs(&ctx, len, &gc, utf8flag, "%s", c->message_string);
@@ -709,7 +714,7 @@ status_message_redraw(struct client *c)
 
 	screen_write_stop(&ctx);
 
-	if (grid_compare(c->status.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}
@@ -770,7 +775,7 @@ status_prompt_clear(struct client *c)
 	c->tty.flags &= ~(TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_REDRAW; /* screen was frozen and may have changed */
 
-	screen_reinit(&c->status);
+	screen_reinit(&c->session->curw->status->status_screen);
 }
 
 /* Update status line prompt with a new prompt string. */
@@ -795,14 +800,15 @@ status_prompt_redraw(struct client *c)
 	struct screen_write_ctx		ctx;
 	struct session		       *s = c->session;
 	struct screen		        old_status;
+	struct statusline	       *status = s->curw->status;
 	size_t			        i, size, left, len, off;
 	struct grid_cell		gc, *gcp;
 	int				utf8flag;
 
 	if (c->tty.sx == 0 || c->tty.sy == 0)
 		return (0);
-	memcpy(&old_status, &c->status, sizeof old_status);
-	screen_init(&c->status, c->tty.sx, 1, 0);
+	memcpy(&old_status, &status->status_screen, sizeof old_status);
+	screen_init(&status->status_screen, c->tty.sx, 1, 0);
 
 	utf8flag = options_get_number(&s->options, "status-utf8");
 
@@ -816,7 +822,7 @@ status_prompt_redraw(struct client *c)
 	colour_set_bg(&gc, options_get_number(&s->options, "message-bg"));
 	gc.attr |= options_get_number(&s->options, "message-attr");
 
-	screen_write_start(&ctx, NULL, &c->status);
+	screen_write_start(&ctx, NULL, &status->status_screen);
 
 	screen_write_cursormove(&ctx, 0, 0);
 	screen_write_nputs(&ctx, len, &gc, utf8flag, "%s", c->prompt_string);
@@ -841,10 +847,10 @@ status_prompt_redraw(struct client *c)
 
 	/* Apply fake cursor. */
 	off = len + c->prompt_index - off;
-	gcp = grid_view_get_cell(c->status.grid, off, 0);
+	gcp = grid_view_get_cell(status->status_screen.grid, off, 0);
 	gcp->attr ^= GRID_ATTR_REVERSE;
 
-	if (grid_compare(c->status.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}

@@ -300,7 +300,7 @@ cmd_set_option_exec(struct cmd *self, struct cmd_ctx *ctx)
 			if (c == NULL || c->session == NULL)
 				continue;
 
-			jobs = &c->status_jobs;
+			jobs = &c->session->curw->status->jobs;
 			do {
 				try_again = 0;
 				job = RB_ROOT(jobs);

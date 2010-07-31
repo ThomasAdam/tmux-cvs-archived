@@ -184,7 +184,8 @@ screen_redraw_screen(struct client *c, int status_only, int borders_only)
 
 	/* If only drawing status and it is present, don't need the rest. */
 	if (status_only && status) {
-		tty_draw_line(tty, &c->status, 0, 0, tty->sy - 1);
+		tty_draw_line(tty, &c->session->curw->status->status_screen, 
+				0, 0, tty->sy - 1);
 		tty_reset(tty);
 		return;
 	}
@@ -248,7 +249,8 @@ screen_redraw_screen(struct client *c, int status_only, int borders_only)
 
 	/* Draw the status line. */
 	if (status)
-		tty_draw_line(tty, &c->status, 0, 0, tty->sy - 1);
+		tty_draw_line(tty, &c->session->curw->status->status_screen, 
+				0, 0, tty->sy - 1);
 	tty_reset(tty);
 }
 
