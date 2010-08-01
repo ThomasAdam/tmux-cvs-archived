@@ -79,9 +79,6 @@ server_client_create(int fd)
 	c->tty.sx = 80;
 	c->tty.sy = 24;
 
-	screen_init(&c->session->curw->status->status_screen, c->tty.sx, 1, 0);
-	job_tree_init(&c->session->curw->status->jobs);
-
 	c->message_string = NULL;
 	ARRAY_INIT(&c->message_log);
 
@@ -127,10 +124,12 @@ server_client_lost(struct client *c)
 		fclose(c->stdout_file);
 	if (c->stderr_file != NULL)
 		fclose(c->stderr_file);
-
-	screen_free(&c->session->curw->status->status_screen);
-	job_tree_free(&c->session->curw->status->jobs);
-
+#if 0
+	if (c->session != NULL) {
+		screen_free(c->session->curw->status->status_screen);
+		job_tree_free(c->session->curw->status->jobs);
+	}
+#endif
 	if (c->title != NULL)
 		xfree(c->title);
 
@@ -239,9 +238,9 @@ server_client_status_timer(void)
 			continue;
 		interval = options_get_number(&s->options, "status-interval");
 
-		difference = tv.tv_sec - c->session->curw->status->timer.tv_sec;
+		difference = tv.tv_sec - s->curw->status->timer.tv_sec;
 		if (difference >= interval) {
-			RB_FOREACH(job, jobs, &c->session->curw->status->jobs)
+			RB_FOREACH(job, jobs, s->curw->status->jobs)
 				job_run(job);
 			c->flags |= CLIENT_STATUS;
 		}

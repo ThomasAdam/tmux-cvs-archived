@@ -857,8 +857,8 @@ struct statusline {
 	char		*text;
 	
 	struct timeval	 timer;
-	struct jobs	 jobs;
-	struct screen	 status_screen;
+	struct jobs	 *jobs;
+	struct screen	 *status_screen;
 };
 
 /* Entry on local window list. */

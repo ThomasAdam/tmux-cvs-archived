@@ -124,10 +124,11 @@ status_redraw(struct client *c)
 	/* No status line? */
 	if (c->tty.sy == 0 || !options_get_number(&s->options, "status"))
 		return (1);
-	left = right = NULL;
-	larrow = rarrow = 0;
 
 	status = c->session->curw->status;
+
+	left = right = NULL;
+	larrow = rarrow = 0;
 
 	/* Update status timer. */
 	if (gettimeofday(&status->timer, NULL) != 0)
@@ -142,8 +143,8 @@ status_redraw(struct client *c)
 
 	/* Create the target screen. */
 	memcpy(&old_status, &status->status_screen, sizeof old_status);
-	screen_init(&status->status_screen, c->tty.sx, 1, 0);
-	screen_write_start(&ctx, NULL, &status->status_screen);
+	screen_init(status->status_screen, c->tty.sx, 1, 0);
+	screen_write_start(&ctx, NULL, status->status_screen);
 	for (offset = 0; offset < c->tty.sx; offset++)
 		screen_write_putc(&ctx, &stdgc, ' ');
 	screen_write_stop(&ctx);
@@ -264,7 +265,7 @@ status_redraw(struct client *c)
 
 draw:
 	/* Begin drawing. */
-	screen_write_start(&ctx, NULL, &status->status_screen);
+	screen_write_start(&ctx, NULL, status->status_screen);
 
 	/* Draw the left string and arrow. */
 	screen_write_cursormove(&ctx, 0, 0);
@@ -324,7 +325,7 @@ out:
 	if (right != NULL)
 		xfree(right);
 
-	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen->grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}
@@ -493,6 +494,9 @@ status_job(struct client *c, char **iptr)
 		return (NULL);
 	}
 
+	if (status->jobs == NULL)
+		job_tree_init(status->jobs);
+
 	cmd = xmalloc(strlen(*iptr) + 1);
 	len = 0;
 
@@ -514,9 +518,9 @@ status_job(struct client *c, char **iptr)
 	(*iptr)++;			/* skip final ) */
 	cmd[len] = '\0';
 
-	job = job_get(&status->jobs, cmd);
+	job = job_get(status->jobs, cmd);
 	if (job == NULL) {
-		job = job_add(&status->jobs,
+		job = job_add(status->jobs,
 		    JOB_PERSIST, c, cmd, status_job_callback, xfree, NULL);
 		job_run(job);
 	}
@@ -664,7 +668,7 @@ status_message_clear(struct client *c)
 	c->tty.flags &= ~(TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_REDRAW; /* screen was frozen and may have changed */
 
-	screen_reinit(&c->session->curw->status->status_screen);
+	screen_reinit(c->session->curw->status->status_screen);
 }
 
 /* Clear status line message after timer expires. */
@@ -692,7 +696,7 @@ status_message_redraw(struct client *c)
 	if (c->tty.sx == 0 || c->tty.sy == 0)
 		return (0);
 	memcpy(&old_status, &status->status_screen, sizeof old_status);
-	screen_init(&status->status_screen, c->tty.sx, 1, 0);
+	screen_init(status->status_screen, c->tty.sx, 1, 0);
 
 	utf8flag = options_get_number(&s->options, "status-utf8");
 
@@ -705,7 +709,7 @@ status_message_redraw(struct client *c)
 	colour_set_bg(&gc, options_get_number(&s->options, "message-bg"));
 	gc.attr |= options_get_number(&s->options, "message-attr");
 
-	screen_write_start(&ctx, NULL, &status->status_screen);
+	screen_write_start(&ctx, NULL, status->status_screen);
 
 	screen_write_cursormove(&ctx, 0, 0);
 	screen_write_nputs(&ctx, len, &gc, utf8flag, "%s", c->message_string);
@@ -714,7 +718,7 @@ status_message_redraw(struct client *c)
 
 	screen_write_stop(&ctx);
 
-	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen->grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}
@@ -760,6 +764,8 @@ status_prompt_set(struct client *c, const char *msg,
 void
 status_prompt_clear(struct client *c)
 {
+	struct statusline	 *status = c->session->curw->status;
+
 	if (c->prompt_string == NULL)
 		return;
 
@@ -775,7 +781,7 @@ status_prompt_clear(struct client *c)
 	c->tty.flags &= ~(TTY_NOCURSOR|TTY_FREEZE);
 	c->flags |= CLIENT_REDRAW; /* screen was frozen and may have changed */
 
-	screen_reinit(&c->session->curw->status->status_screen);
+	screen_reinit(status->status_screen);
 }
 
 /* Update status line prompt with a new prompt string. */
@@ -808,7 +814,7 @@ status_prompt_redraw(struct client *c)
 	if (c->tty.sx == 0 || c->tty.sy == 0)
 		return (0);
 	memcpy(&old_status, &status->status_screen, sizeof old_status);
-	screen_init(&status->status_screen, c->tty.sx, 1, 0);
+	screen_init(status->status_screen, c->tty.sx, 1, 0);
 
 	utf8flag = options_get_number(&s->options, "status-utf8");
 
@@ -822,7 +828,7 @@ status_prompt_redraw(struct client *c)
 	colour_set_bg(&gc, options_get_number(&s->options, "message-bg"));
 	gc.attr |= options_get_number(&s->options, "message-attr");
 
-	screen_write_start(&ctx, NULL, &status->status_screen);
+	screen_write_start(&ctx, NULL, status->status_screen);
 
 	screen_write_cursormove(&ctx, 0, 0);
 	screen_write_nputs(&ctx, len, &gc, utf8flag, "%s", c->prompt_string);
@@ -847,10 +853,10 @@ status_prompt_redraw(struct client *c)
 
 	/* Apply fake cursor. */
 	off = len + c->prompt_index - off;
-	gcp = grid_view_get_cell(status->status_screen.grid, off, 0);
+	gcp = grid_view_get_cell(status->status_screen->grid, off, 0);
 	gcp->attr ^= GRID_ATTR_REVERSE;
 
-	if (grid_compare(status->status_screen.grid, old_status.grid) == 0) {
+	if (grid_compare(status->status_screen->grid, old_status.grid) == 0) {
 		screen_free(&old_status);
 		return (0);
 	}
