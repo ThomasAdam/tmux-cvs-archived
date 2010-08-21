@@ -62,6 +62,9 @@ cmd_select_layout_init(struct cmd *self, int key)
 	case ('5' | KEYC_ESCAPE):
 		data->arg = xstrdup("tiled");
 		break;
+	case ('6' | KEYC_ESCAPE):
+		data->arg = xstrdup("maximise-pane");
+		break;
 	}
 }
 
