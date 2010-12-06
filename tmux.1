@@ -2044,6 +2044,14 @@ display a message when content is present in a window
 for which the
 .Ic monitor-content
 window option is enabled.
+.It Xo Ic visual-silence
+.Op Ic on | off
+.Xc
+If
+.Ic monitor-silence
+is enabled, prints a message after the
+.Ic monitor-silence-interval
+option has expired on a given window.
 .El
 .It Xo Ic set-window-option
 .Op Fl agu
@@ -2158,6 +2166,20 @@ When
 pattern
 .Ar match-string
 appears in the window, it is highlighted in the status line.
+.Pp
+.It Xo Ic monitor-silence
+.Op Ic on | off
+.Xc
+Monitor for silence in the window, after the given
+.Ic monitor-silence-interval
+has elapsed.  
+Windows with silence are highlighted in the status line.
+.Pp
+.It Ic monitor-silence-interval Ar interval
+Set the timeout (in seconds) after which if no output happens in the given
+window, silence is flagged.  See the
+.Ic monitor-silence
+option.
 .Pp
 .It Xo Ic remain-on-exit
 .Op Ic on | off

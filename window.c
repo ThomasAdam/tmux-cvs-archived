@@ -634,6 +634,13 @@ window_pane_read_callback(unused struct bufferevent *bufev, void *data)
 	input_parse(wp);
 
 	wp->pipe_off = EVBUFFER_LENGTH(wp->event->input);
+
+	/* If we get here, we're not outputting anymore, so ensure we set the
+	 * silence flag on the window.
+	 */
+	wp->window->flags |= WINDOW_SILENCE;
+	if (gettimeofday(&wp->window->silence_timer, NULL) != 0)
+		fatal("gettimeofday failed.");
 }
 
 /* ARGSUSED */

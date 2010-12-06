@@ -380,6 +380,7 @@ main(int argc, char **argv)
 	options_set_number(so, "visual-activity", 0);
 	options_set_number(so, "visual-bell", 0);
 	options_set_number(so, "visual-content", 0);
+	options_set_number(so, "visual-silence", 0);
 
 	keylist = xmalloc(sizeof *keylist);
 	ARRAY_INIT(keylist);
@@ -404,6 +405,8 @@ main(int argc, char **argv)
 	options_set_number(wo, "mode-mouse", 0);
 	options_set_number(wo, "monitor-activity", 0);
 	options_set_string(wo, "monitor-content", "%s", "");
+	options_set_number(wo, "monitor-silence", 0);
+	options_set_number(wo, "monitor-silence-interval", 5);
 	options_set_number(wo, "window-status-attr", 0);
 	options_set_number(wo, "window-status-bg", 8);
 	options_set_number(wo, "window-status-current-attr", 0);
