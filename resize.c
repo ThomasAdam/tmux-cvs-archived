@@ -1,4 +1,4 @@
-/* $Id: resize.c,v 1.25 2010/06/22 23:26:18 tcunha Exp $ */
+/* $Id: resize.c,v 1.6 2007/11/21 13:11:41 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -33,25 +33,24 @@
  * smallest client it is attached to, and resize it to that size. Then for
  * every window, find the smallest session it is attached to, resize it to that
  * size and clear and redraw every client with it as the current window.
- *
+ * 
  * This is quite inefficient - better/additional data structures are needed
  * to make it better.
  *
  * As a side effect, this function updates the SESSION_UNATTACHED flag. This
  * flag is necessary to make sure unattached sessions do not limit the size of
- * windows that are attached both to them and to other (attached) sessions.
+ * windows that are attached both to them and to other sessions which are
+ * attached.
  */
 
 void
 recalculate_sizes(void)
 {
-	struct session		*s;
-	struct client		*c;
-	struct window		*w;
-	struct window_pane	*wp;
-	u_int		 	 i, j, ssx, ssy, has, limit;
-	int		 	 flag;
-
+	struct session	*s;
+	struct client	*c;
+	struct window	*w;
+	u_int		 i, j, ssx, ssy;
+	
 	for (i = 0; i < ARRAY_LENGTH(&sessions); i++) {
 		s = ARRAY_ITEM(&sessions, i);
 		if (s == NULL)
@@ -60,13 +59,13 @@ recalculate_sizes(void)
 		ssx = ssy = UINT_MAX;
 		for (j = 0; j < ARRAY_LENGTH(&clients); j++) {
 			c = ARRAY_ITEM(&clients, j);
-			if (c == NULL || c->flags & CLIENT_SUSPENDED)
+			if (c == NULL)
 				continue;
 			if (c->session == s) {
-				if (c->tty.sx < ssx)
-					ssx = c->tty.sx;
-				if (c->tty.sy < ssy)
-					ssy = c->tty.sy;
+				if (c->sx < ssx)
+					ssx = c->sx;
+				if (c->sy < ssy)
+					ssy = c->sy;
 			}
 		}
 		if (ssx == UINT_MAX || ssy == UINT_MAX) {
@@ -75,12 +74,9 @@ recalculate_sizes(void)
 		}
 		s->flags &= ~SESSION_UNATTACHED;
 
-		if (options_get_number(&s->options, "status")) {
-			if (ssy == 0)
-				ssy = 1;
-			else
-				ssy--;
-		}
+		if (ssy < status_lines)
+			ssy = status_lines + 1;
+		ssy -= status_lines;
 		if (s->sx == ssx && s->sy == ssy)
 			continue;
 
@@ -95,18 +91,13 @@ recalculate_sizes(void)
 		w = ARRAY_ITEM(&windows, i);
 		if (w == NULL)
 			continue;
-		flag = options_get_number(&w->options, "aggressive-resize");
 
 		ssx = ssy = UINT_MAX;
 		for (j = 0; j < ARRAY_LENGTH(&sessions); j++) {
 			s = ARRAY_ITEM(&sessions, j);
 			if (s == NULL || s->flags & SESSION_UNATTACHED)
 				continue;
-			if (flag)
-				has = s->curw->window == w;
-			else
-				has = session_has(s, w) != NULL;
-			if (has) {
+			if (session_has(s, w)) {
 				if (s->sx < ssx)
 					ssx = s->sx;
 				if (s->sy < ssy)
@@ -114,40 +105,20 @@ recalculate_sizes(void)
 			}
 		}
 		if (ssx == UINT_MAX || ssy == UINT_MAX) {
-			w->flags |= WINDOW_HIDDEN;
+			w->screen.mode |= MODE_HIDDEN;
 			continue;
 		}
-		w->flags &= ~WINDOW_HIDDEN;
+		w->screen.mode &= ~MODE_HIDDEN;
 
-		limit = options_get_number(&w->options, "force-width");
-		if (limit != 0 && ssx > limit)
-			ssx = limit;
-		limit = options_get_number(&w->options, "force-height");
-		if (limit != 0 && ssy > limit)
-			ssy = limit;
-
-		if (w->sx == ssx && w->sy == ssy)
+		if (screen_size_x(&w->screen) == ssx &&
+		    screen_size_y(&w->screen) == ssy)
 			continue;
 
-		log_debug(
-		    "window size %u,%u (was %u,%u)", ssx, ssy, w->sx, w->sy);
+		log_debug("window size %u,%u (was %u,%u)", ssx, ssy,
+		    screen_size_x(&w->screen), screen_size_y(&w->screen));
 
-		layout_resize(w, ssx, ssy);
+		server_clear_window_cur(w);
 		window_resize(w, ssx, ssy);
-
-		/*
-		 * If the current pane is now not visible, move to the next
-		 * that is.
-		 */
-		wp = w->active;
-		while (!window_pane_visible(w->active)) {
-			w->active = TAILQ_PREV(w->active, window_panes, entry);
-			if (w->active == NULL)
-				w->active = TAILQ_LAST(&w->panes, window_panes);
-			if (w->active == wp)
-			       break;
-		}
-
-		server_redraw_window(w);
+		server_redraw_window_cur(w);
 	}
 }
