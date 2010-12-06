@@ -1,4 +1,4 @@
-/* $Id: cmd-unbind-key.c,v 1.22 2010/01/25 17:12:44 tcunha Exp $ */
+/* $Id: cmd-unbind-key.c,v 1.8 2007/12/06 09:46:22 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -18,58 +18,44 @@
 
 #include <sys/types.h>
 
+#include <getopt.h>
+
 #include "tmux.h"
 
 /*
  * Unbind key from command.
  */
 
-int	cmd_unbind_key_parse(struct cmd *, int, char **, char **);
-int	cmd_unbind_key_exec(struct cmd *, struct cmd_ctx *);
-void	cmd_unbind_key_free(struct cmd *);
-
-int	cmd_unbind_key_table(struct cmd *, struct cmd_ctx *);
+int	cmd_unbind_key_parse(void **, int, char **, char **);
+void	cmd_unbind_key_exec(void *, struct cmd_ctx *);
+void	cmd_unbind_key_send(void *, struct buffer *);
+void	cmd_unbind_key_recv(void **, struct buffer *);
+void	cmd_unbind_key_free(void *);
 
 struct cmd_unbind_key_data {
-	int	key;
-
-	int	command_key;
-	char   *tablename;
+	int		 key;
 };
 
 const struct cmd_entry cmd_unbind_key_entry = {
-	"unbind-key", "unbind",
-	"[-cn] [-t key-table] key",
-	0, "",
-	NULL,
+	"unbind-key", "unbind", "key",
+	CMD_NOCLIENT|CMD_NOSESSION,
 	cmd_unbind_key_parse,
 	cmd_unbind_key_exec,
-	cmd_unbind_key_free,
-	NULL
+	cmd_unbind_key_send,
+	cmd_unbind_key_recv,
+	cmd_unbind_key_free
 };
 
 int
-cmd_unbind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
+cmd_unbind_key_parse(void **ptr, int argc, char **argv, char **cause)
 {
 	struct cmd_unbind_key_data	*data;
-	int				 opt, no_prefix = 0;
+	int				 opt;
 
-	self->data = data = xmalloc(sizeof *data);
-	data->command_key = 0;
-	data->tablename = NULL;
+	*ptr = data = xmalloc(sizeof *data);
 
-	while ((opt = getopt(argc, argv, "cnt:")) != -1) {
+	while ((opt = getopt(argc, argv, "")) != EOF) {
 		switch (opt) {
-		case 'c':
-			data->command_key = 1;
-			break;
-		case 'n':
-			no_prefix = 1;
-			break;
-		case 't':
-			if (data->tablename == NULL)
-				data->tablename = xstrdup(optarg);
-			break;
 		default:
 			goto usage;
 		}
@@ -83,61 +69,53 @@ cmd_unbind_key_parse(struct cmd *self, int argc, char **argv, char **cause)
 		xasprintf(cause, "unknown key: %s", argv[0]);
 		goto error;
 	}
-	if (!no_prefix)
-		data->key |= KEYC_PREFIX;
 
 	return (0);
 
 usage:
-	xasprintf(cause, "usage: %s %s", self->entry->name, self->entry->usage);
+	usage(cause, "%s %s",
+	    cmd_unbind_key_entry.name, cmd_unbind_key_entry.usage);
 
 error:
 	xfree(data);
 	return (-1);
 }
 
-int
-cmd_unbind_key_exec(struct cmd *self, unused struct cmd_ctx *ctx)
+void
+cmd_unbind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
 {
-	struct cmd_unbind_key_data	*data = self->data;
+	struct cmd_unbind_key_data	*data = ptr;
 
 	if (data == NULL)
-		return (0);
-	if (data->tablename != NULL)
-		return (cmd_unbind_key_table(self, ctx));
+		return;
 
 	key_bindings_remove(data->key);
 
-	return (0);
-}
-
-int
-cmd_unbind_key_table(struct cmd *self, struct cmd_ctx *ctx)
-{
-	struct cmd_unbind_key_data	*data = self->data;
-	const struct mode_key_table	*mtab;
-	struct mode_key_binding		*mbind, mtmp;
-
-	if ((mtab = mode_key_findtable(data->tablename)) == NULL) {
-		ctx->error(ctx, "unknown key table: %s", data->tablename);
-		return (-1);
-	}
-
-	mtmp.key = data->key & ~KEYC_PREFIX;
-	mtmp.mode = data->command_key ? 1 : 0;
-	if ((mbind = SPLAY_FIND(mode_key_tree, mtab->tree, &mtmp)) != NULL) {
-		SPLAY_REMOVE(mode_key_tree, mtab->tree, mbind);
-		xfree(mbind);
-	}
-	return (0);
+	if (ctx->cmdclient != NULL)
+		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
 }
 
 void
-cmd_unbind_key_free(struct cmd *self)
+cmd_unbind_key_send(void *ptr, struct buffer *b)
 {
-	struct cmd_unbind_key_data	*data = self->data;
+	struct cmd_unbind_key_data	*data = ptr;
 
-	if (data->tablename != NULL)
-		xfree(data->tablename);
+	buffer_write(b, data, sizeof *data);
+}
+
+void
+cmd_unbind_key_recv(void **ptr, struct buffer *b)
+{
+	struct cmd_unbind_key_data	*data;
+
+	*ptr = data = xmalloc(sizeof *data);
+	buffer_read(b, data, sizeof *data);
+}
+
+void
+cmd_unbind_key_free(void *ptr)
+{
+	struct cmd_unbind_key_data	*data = ptr;
+
 	xfree(data);
 }
