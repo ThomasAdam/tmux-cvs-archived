@@ -1,4 +1,4 @@
-/* $Id: cmd-list-windows.c,v 1.10 2007/11/21 13:11:41 nicm Exp $ */
+/* $Id: cmd-list-windows.c,v 1.44 2010/12/06 21:56:32 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -18,7 +18,6 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
 #include <unistd.h>
 
 #include "tmux.h"
@@ -27,32 +26,37 @@
  * List windows on given session.
  */
 
-void	cmd_list_windows_exec(void *, struct cmd_ctx *);
+int	cmd_list_windows_exec(struct cmd *, struct cmd_ctx *);
 
 const struct cmd_entry cmd_list_windows_entry = {
-	"list-windows", "lsw", NULL,
-	CMD_NOCLIENT,
-	NULL,
+	"list-windows", "lsw",
+	CMD_TARGET_SESSION_USAGE,
+	0, "",
+	cmd_target_init,
+	cmd_target_parse,
 	cmd_list_windows_exec,
-	NULL,
-	NULL,
-	NULL
+	cmd_target_free,
+	cmd_target_print
 };
 
-void
-cmd_list_windows_exec(unused void *ptr, struct cmd_ctx *ctx)
+int
+cmd_list_windows_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
-	struct winlink	*wl;
-	struct window	*w;
+	struct cmd_target_data	*data = self->data;
+	struct session		*s;
+	struct winlink		*wl;
+	char			*layout;
 
-	RB_FOREACH(wl, winlinks, &ctx->session->windows) {
-		w = wl->window;
-		ctx->print(ctx, "%d: %s \"%s\" (%s) [%ux%u] [history %u]",
-		    wl->idx, w->name, w->screen.title, ttyname(w->fd),
-		    screen_size_x(&w->screen), screen_size_y(&w->screen),
-		    w->screen.hsize);
+	if ((s = cmd_find_session(ctx, data->target)) == NULL)
+		return (-1);
+
+	RB_FOREACH(wl, winlinks, &s->windows) {
+		layout = layout_dump(wl->window);
+		ctx->print(ctx, "%d: %s [%ux%u] [layout %s]%s",
+		    wl->idx, wl->window->name, wl->window->sx, wl->window->sy,
+		    layout, wl == s->curw ? " (active)" : "");
+		xfree(layout);
 	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	return (0);
 }
