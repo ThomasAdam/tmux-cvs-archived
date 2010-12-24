@@ -460,6 +460,37 @@ window_destroy_panes(struct window *w)
 	}
 }
 
+char *
+window_printable_flags(struct session *s, struct winlink *wl)
+{
+	int		 window_flags;
+	char		 flags[BUFSIZ];
+	int		 pos;
+
+	pos = 0;
+	window_flags = wl->flags;
+
+	if (window_flags & WINLINK_ACTIVITY)
+		flags[pos++] = '#';
+	if (window_flags & WINLINK_BELL)
+		flags[pos++] = '!';
+	if (window_flags & WINLINK_CONTENT)
+		flags[pos++] = '+';
+	if (window_flags & WINLINK_SILENCE)
+		flags[pos++] = '~';
+	if (wl == s->curw)
+		flags[pos++] = '*';
+	if (wl == TAILQ_FIRST(&s->lastw))
+		flags[pos++] = '-';
+
+	/* Set flags to be a space if there's no other flags. */
+	if (pos == 0)
+		flags[pos++] = ' ';
+
+	flags[pos] = '\0';
+	return (xstrdup(flags));
+}
+
 struct window_pane *
 window_pane_create(struct window *w, u_int sx, u_int sy, u_int hlimit)
 {
