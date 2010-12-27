@@ -35,6 +35,7 @@ void	window_choose_write_line(
 
 void	window_choose_scroll_up(struct window_pane *);
 void	window_choose_scroll_down(struct window_pane *);
+int	window_choose_item_window(struct session *, struct winlink *);
 
 const struct window_mode window_choose_mode = {
 	window_choose_init,
@@ -454,4 +455,110 @@ window_choose_scroll_down(struct window_pane *wp)
 	if (screen_size_y(&data->screen) > 1)
 		window_choose_write_line(wp, &ctx, screen_size_y(s) - 2);
 	screen_write_stop(&ctx);
+}
+
+int window_choose_item_window(struct session *s, struct winlink *wl)
+{
+	struct winlink		*wm;
+	struct window		*w;
+	const char		*left, *right;
+	char			*flags, *title;
+	u_int			 cur, idx;
+
+	idx = cur = 0;
+	RB_FOREACH(wm, winlinks, &s->windows) {
+		w = wm->window;
+
+		if (wm == s->curw)
+			cur = idx;
+		idx++;
+
+		flags = window_printable_flags(s, wm);
+		title = w->active->screen->title;
+		if (wm == wl)
+			title = w->active->base.title;
+		left = " \"";
+		right = "\"";
+		if (*title == '\0')
+			left = right = "";
+
+		window_choose_add(wl->window->active,
+		    wm->idx, "%3d: %s%s [%ux%u] (%u panes%s)%s%s%s",
+		    wm->idx, w->name, flags, w->sx, w->sy, window_count_panes(w),
+		    w->active->fd == -1 ? ", dead" : "",
+		    left, title, right);
+
+		if (flags != NULL)
+			xfree(flags);
+	}
+
+	return cur;
+}
+
+int
+window_choose_item_data(struct cmd_ctx *ctx, struct winlink *wl, int type_flags)
+{
+	struct session		*s;
+	struct session_group	*sg;
+	u_int			 ses_count;
+        u_int			 selected, cur_win, cur_ses;
+	u_int			 idx, cur_ses_win, total_items;
+	char			 tmp[64];
+	u_int			 window_total;
+
+	/* XXX: Ugly. */
+	selected = cur_win = idx = total_items = 0;
+
+	if (type_flags == WIN_CHOOSE_WINDOWS) {
+		s = ctx->curclient->session;
+		return (window_choose_item_window(s, wl));
+	}
+
+	for (ses_count = 0; ses_count < ARRAY_LENGTH(&sessions); ses_count++) {
+		window_total = 0;
+
+		s = ARRAY_ITEM(&sessions, ses_count);
+		if (s == NULL)
+			continue;
+		if (s == ctx->curclient->session)
+			selected = idx;
+		idx++;
+
+		sg = session_group_find(s);
+		if (sg == NULL)
+			*tmp = '\0';
+		else {
+			idx = session_group_index(sg);
+			xsnprintf(tmp, sizeof tmp, " (group %u)", idx);
+		}
+
+		window_choose_add(wl->window->active, ses_count,
+		    "%s: %u windows [%ux%u]%s%s", s->name,
+		    winlink_count(&s->windows), s->sx, s->sy,
+		    tmp, s->flags & SESSION_UNATTACHED ? "" : " (attached)");
+
+		if (type_flags == WIN_CHOOSE_SESSIONS)
+			continue;
+
+		if (type_flags == WIN_CHOOSE_WINDOWS_SESSIONS) {
+			cur_win = window_choose_item_window(s, wl);
+			window_total = winlink_count(&s->windows);
+			total_items += window_total;
+
+			if (!(s->flags & SESSION_UNATTACHED))
+			{
+				/* Then the session is attached.  This is the
+				 * one we're interested in jumping to in the
+				 * list -- but as a consequence we jump
+				 * straight to the window which we work out
+				 * based on the session it's in.
+				 */
+				cur_ses = (total_items - window_total);
+				cur_ses_win = (cur_ses + cur_win + selected) + 1;
+			}
+		}
+	}
+
+	return (type_flags == WIN_CHOOSE_WINDOWS_SESSIONS ?
+		cur_ses_win : selected);
 }

@@ -53,17 +53,15 @@ cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 {
 	struct cmd_target_data		*data = self->data;
 	struct cmd_choose_window_data	*cdata;
+	struct winlink			*wl;
 	struct session			*s;
-	struct winlink			*wl, *wm;
-	struct window			*w;
-	u_int			 	 idx, cur;
-	char				*flags, *title;
-	const char			*left, *right;
+	u_int			 	 cur;
 
 	if (ctx->curclient == NULL) {
 		ctx->error(ctx, "must be run interactively");
 		return (-1);
 	}
+
 	s = ctx->curclient->session;
 
 	if ((wl = cmd_find_window(ctx, data->target, NULL)) == NULL)
@@ -72,32 +70,7 @@ cmd_choose_window_exec(struct cmd *self, struct cmd_ctx *ctx)
 	if (window_pane_set_mode(wl->window->active, &window_choose_mode) != 0)
 		return (0);
 
-	cur = idx = 0;
-	RB_FOREACH(wm, winlinks, &s->windows) {
-		w = wm->window;
-
-		if (wm == s->curw)
-			cur = idx;
-		idx++;
-
-		flags = window_printable_flags(s, wm);
-		title = w->active->screen->title;
-		if (wm == wl)
-			title = w->active->base.title;
-		left = " \"";
-		right = "\"";
-		if (*title == '\0')
-			left = right = "";
-
-		window_choose_add(wl->window->active,
-		    wm->idx, "%3d: %s%s [%ux%u] (%u panes%s)%s%s%s",
-		    wm->idx, w->name, flags, w->sx, w->sy, window_count_panes(w),
-		    w->active->fd == -1 ? ", dead" : "",
-		    left, title, right);
-	}
-
-	if (flags != NULL)
-		xfree(flags);
+	cur = window_choose_item_data(ctx, wl, WIN_CHOOSE_WINDOWS);
 
 	cdata = xmalloc(sizeof *cdata);
 	if (data->arg != NULL)
