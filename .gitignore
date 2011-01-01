@@ -1,4 +1,4 @@
-MakeFile
+Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache/
@@ -9,3 +9,5 @@ etc/
 tags
 *.patch
 tree-notes
+.deps
+*.sw*
