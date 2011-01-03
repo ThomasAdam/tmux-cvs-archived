@@ -1,4 +1,4 @@
-/* $Id: tmux.h,v 1.596 2010/12/31 22:12:33 nicm Exp $ */
+/* $Id: tmux.h,v 1.600 2011/01/03 23:52:38 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -530,10 +530,10 @@ struct mode_key_cmdstr {
 
 /* Named mode key table description. */
 struct mode_key_table {
-	const char		*name;
-	struct mode_key_cmdstr	*cmdstr;
-	struct mode_key_tree	*tree;
-	const struct mode_key_entry *table;	/* default entries */
+	const char			*name;
+	const struct mode_key_cmdstr	*cmdstr;
+	struct mode_key_tree		*tree;
+	const struct mode_key_entry	*table;	/* default entries */
 };
 
 /* Modes. */
@@ -1266,23 +1266,31 @@ struct key_binding {
 };
 SPLAY_HEAD(key_bindings, key_binding);
 
-/* Set/display option data. */
-struct set_option_entry {
-	const char	*name;
-	enum {
-		SET_OPTION_STRING,
-		SET_OPTION_NUMBER,
-		SET_OPTION_KEYS,
-		SET_OPTION_COLOUR,
-		SET_OPTION_ATTRIBUTES,
-		SET_OPTION_FLAG,
-		SET_OPTION_CHOICE
-	} type;
+/*
+ * Option table entries. The option table is the user-visible part of the
+ * option, as opposed to the internal options (struct option) which are just
+ * number or string.
+ */
+enum options_table_type {
+	OPTIONS_TABLE_STRING,
+	OPTIONS_TABLE_NUMBER,
+	OPTIONS_TABLE_KEYS,
+	OPTIONS_TABLE_COLOUR,
+	OPTIONS_TABLE_ATTRIBUTES,
+	OPTIONS_TABLE_FLAG,
+	OPTIONS_TABLE_CHOICE
+};
 
-	u_int		 minimum;
-	u_int		 maximum;
+struct options_table_entry {
+	const char	       *name;
+	enum options_table_type	type;
 
-	const char     **choices;
+	u_int		 	minimum;
+	u_int		 	maximum;
+	const char	      **choices;
+
+	const char	       *default_str;
+	long long		default_num;
 };
 
 /* List of configuration causes. */
@@ -1325,8 +1333,10 @@ extern struct mode_key_tree mode_key_tree_emacs_choice;
 extern struct mode_key_tree mode_key_tree_emacs_copy;
 int	mode_key_cmp(struct mode_key_binding *, struct mode_key_binding *);
 SPLAY_PROTOTYPE(mode_key_tree, mode_key_binding, entry, mode_key_cmp);
-const char *mode_key_tostring(struct mode_key_cmdstr *r, enum mode_key_cmd);
-enum mode_key_cmd mode_key_fromstring(struct mode_key_cmdstr *, const char *);
+const char *mode_key_tostring(const struct mode_key_cmdstr *,
+	    enum mode_key_cmd);
+enum mode_key_cmd mode_key_fromstring(const struct mode_key_cmdstr *,
+	    const char *);
 const struct mode_key_table *mode_key_findtable(const char *);
 void	mode_key_init_trees(void);
 void	mode_key_init(struct mode_key_data *, struct mode_key_tree *);
@@ -1349,6 +1359,15 @@ long long options_get_number(struct options *, const char *);
 struct options_entry *options_set_data(
 	    struct options *, const char *, void *, void (*)(void *));
 void   *options_get_data(struct options *, const char *);
+
+/* options-table.c */
+extern const struct options_table_entry server_options_table[];
+extern const struct options_table_entry session_options_table[];
+extern const struct options_table_entry window_options_table[];
+void	options_table_populate_tree(
+	    const struct options_table_entry *, struct options *);
+const char *options_table_print_entry(
+	    const struct options_table_entry *, struct options_entry *);
 
 /* job.c */
 extern struct joblist all_jobs;
@@ -1422,7 +1441,7 @@ void	tty_cmd_reverseindex(struct tty *, const struct tty_ctx *);
 
 /* tty-term.c */
 extern struct tty_terms tty_terms;
-extern struct tty_term_code_entry tty_term_codes[NTTYCODE];
+extern const struct tty_term_code_entry tty_term_codes[NTTYCODE];
 struct tty_term *tty_term_find(char *, int, const char *, char **);
 void		 tty_term_free(struct tty_term *);
 int		 tty_term_has(struct tty_term *, enum tty_code_code);
@@ -1454,13 +1473,6 @@ char		*paste_print(struct paste_buffer *, size_t);
 /* clock.c */
 extern const char clock_table[14][5][5];
 void		 clock_draw(struct screen_write_ctx *, int, int);
-
-/* cmd-set-option.c */
-extern const struct set_option_entry set_option_table[];
-extern const struct set_option_entry set_session_option_table[];
-extern const struct set_option_entry set_window_option_table[];
-const char	*cmd_set_option_print(
-		    const struct set_option_entry *, struct options_entry *);
 
 /* cmd.c */
 int		 cmd_pack_argv(int, char **, char *, size_t);
@@ -1974,6 +1986,7 @@ struct session	*session_create(const char *, const char *, const char *,
 		     struct environ *, struct termios *, int, u_int, u_int,
 		     char **);
 void		 session_destroy(struct session *);
+void		 session_update_activity(struct session *);
 struct session	*session_next_session(struct session *);
 struct session	*session_previous_session(struct session *);
 struct winlink	*session_new(struct session *,
