@@ -1,4 +1,4 @@
-/* $Id: cmd-unbind-key.c,v 1.8 2007/12/06 09:46:22 nicm Exp $ */
+/* $Id: cmd-unbind-key.c,v 1.24 2011/01/07 14:45:34 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -18,104 +18,86 @@
 
 #include <sys/types.h>
 
-#include <getopt.h>
-
 #include "tmux.h"
 
 /*
  * Unbind key from command.
  */
 
-int	cmd_unbind_key_parse(void **, int, char **, char **);
-void	cmd_unbind_key_exec(void *, struct cmd_ctx *);
-void	cmd_unbind_key_send(void *, struct buffer *);
-void	cmd_unbind_key_recv(void **, struct buffer *);
-void	cmd_unbind_key_free(void *);
+int	cmd_unbind_key_check(struct args *);
+int	cmd_unbind_key_exec(struct cmd *, struct cmd_ctx *);
 
-struct cmd_unbind_key_data {
-	int		 key;
-};
+int	cmd_unbind_key_table(struct cmd *, struct cmd_ctx *, int);
 
 const struct cmd_entry cmd_unbind_key_entry = {
-	"unbind-key", "unbind", "key",
-	CMD_NOCLIENT|CMD_NOSESSION,
-	cmd_unbind_key_parse,
-	cmd_unbind_key_exec,
-	cmd_unbind_key_send,
-	cmd_unbind_key_recv,
-	cmd_unbind_key_free
+	"unbind-key", "unbind",
+	"acnt:", 1, 1,
+	"[-acn] [-t key-table] key",
+	0,
+	NULL,
+	cmd_unbind_key_check,
+	cmd_unbind_key_exec
 };
 
 int
-cmd_unbind_key_parse(void **ptr, int argc, char **argv, char **cause)
+cmd_unbind_key_check(struct args *args)
 {
-	struct cmd_unbind_key_data	*data;
-	int				 opt;
-
-	*ptr = data = xmalloc(sizeof *data);
-
-	while ((opt = getopt(argc, argv, "")) != EOF) {
-		switch (opt) {
-		default:
-			goto usage;
-		}
-	}
-	argc -= optind;
-	argv += optind;
-	if (argc != 1)
-		goto usage;
-
-	if ((data->key = key_string_lookup_string(argv[0])) == KEYC_NONE) {
-		xasprintf(cause, "unknown key: %s", argv[0]);
-		goto error;
-	}
-
+	if (args_has(args, 'a') && (args->argc != 0 || args_has(args, 't')))
+		return (-1);
 	return (0);
-
-usage:
-	usage(cause, "%s %s",
-	    cmd_unbind_key_entry.name, cmd_unbind_key_entry.usage);
-
-error:
-	xfree(data);
-	return (-1);
 }
 
-void
-cmd_unbind_key_exec(void *ptr, unused struct cmd_ctx *ctx)
+int
+cmd_unbind_key_exec(struct cmd *self, unused struct cmd_ctx *ctx)
 {
-	struct cmd_unbind_key_data	*data = ptr;
+	struct args		*args = self->args;
+	struct key_binding	*bd;
+	int			 key;
 
-	if (data == NULL)
-		return;
+	if (args_has(args, 'a')) {
+		while (!SPLAY_EMPTY(&key_bindings)) {
+			bd = SPLAY_ROOT(&key_bindings);
+			SPLAY_REMOVE(key_bindings, &key_bindings, bd);
+			cmd_list_free(bd->cmdlist);
+			xfree(bd);
+		}
+		return (0);
+	}
 
-	key_bindings_remove(data->key);
+	key = key_string_lookup_string(args->argv[0]);
+	if (key == KEYC_NONE) {
+		ctx->error(ctx, "unknown key: %s", args->argv[0]);
+		return (-1);
+	}
 
-	if (ctx->cmdclient != NULL)
-		server_write_client(ctx->cmdclient, MSG_EXIT, NULL, 0);
+	if (args_has(args, 't'))
+		return (cmd_unbind_key_table(self, ctx, key));
+
+	if (!args_has(args, 'n'))
+		key |= KEYC_PREFIX;
+	key_bindings_remove(key);
+	return (0);
 }
 
-void
-cmd_unbind_key_send(void *ptr, struct buffer *b)
+int
+cmd_unbind_key_table(struct cmd *self, struct cmd_ctx *ctx, int key)
 {
-	struct cmd_unbind_key_data	*data = ptr;
+	struct args			*args = self->args;
+	const char			*tablename;
+	const struct mode_key_table	*mtab;
+	struct mode_key_binding		*mbind, mtmp;
 
-	buffer_write(b, data, sizeof *data);
-}
+	tablename = args_get(args, 't');
+	if ((mtab = mode_key_findtable(tablename)) == NULL) {
+		ctx->error(ctx, "unknown key table: %s", tablename);
+		return (-1);
+	}
 
-void
-cmd_unbind_key_recv(void **ptr, struct buffer *b)
-{
-	struct cmd_unbind_key_data	*data;
-
-	*ptr = data = xmalloc(sizeof *data);
-	buffer_read(b, data, sizeof *data);
-}
-
-void
-cmd_unbind_key_free(void *ptr)
-{
-	struct cmd_unbind_key_data	*data = ptr;
-
-	xfree(data);
+	mtmp.key = key;
+	mtmp.mode = !!args_has(args, 'c');
+	if ((mbind = SPLAY_FIND(mode_key_tree, mtab->tree, &mtmp)) != NULL) {
+		SPLAY_REMOVE(mode_key_tree, mtab->tree, mbind);
+		xfree(mbind);
+	}
+	return (0);
 }
