@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: asprintf.c,v 1.5 2011/01/07 00:35:13 nicm Exp $ */
 
 /*
  * Copyright (c) 2006 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -18,7 +18,11 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#ifdef HAVE_STDINT_H
 #include <stdint.h>
+#else
+#include <inttypes.h>
+#endif
 #include <string.h>
 
 #include "tmux.h"
