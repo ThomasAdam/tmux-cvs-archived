@@ -1,4 +1,4 @@
-/* $Id: tmux.h,v 1.600 2011/01/03 23:52:38 tcunha Exp $ */
+/* $Id: tmux.h,v 1.603 2011/01/07 16:55:40 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -546,6 +546,7 @@ struct mode_key_table {
 #define MODE_MOUSE_HIGHLIGHT 0x40
 #define MODE_MOUSE_BUTTON 0x80
 #define MODE_MOUSE_ANY 0x100
+#define MODE_MOUSE_UTF8 0x200
 
 #define ALL_MOUSE_MODES (MODE_MOUSE_STANDARD| \
     MODE_MOUSE_HIGHLIGHT|MODE_MOUSE_BUTTON|MODE_MOUSE_ANY)
@@ -1071,15 +1072,15 @@ struct tty_ctx {
  */
 /* Mouse input. */
 struct mouse_event {
-	u_char	b;
+	u_int	b;
 #define MOUSE_1 0
 #define MOUSE_2 1
 #define MOUSE_3 2
 #define MOUSE_UP 3
 #define MOUSE_BUTTON 3
 #define MOUSE_45 64
-	u_char	x;
-	u_char	y;
+	u_int	x;
+	u_int	y;
 };
 
 /* Saved message entry. */
@@ -1163,6 +1164,15 @@ struct client {
 };
 ARRAY_DECL(clients, struct client *);
 
+/* Parsed arguments. */
+struct args {
+	bitstr_t	*flags;
+	char		*values[SCHAR_MAX]; /* XXX This is awfully big. */
+
+	int		 argc;
+	char	       **argv;
+};
+
 /* Key/command line command. */
 struct cmd_ctx {
 	/*
@@ -1193,67 +1203,35 @@ struct cmd_ctx {
 };
 
 struct cmd {
-	const struct cmd_entry *entry;
-	void		*data;
+	const struct cmd_entry	*entry;
+	struct args		*args;
 
-	TAILQ_ENTRY(cmd) qentry;
+	TAILQ_ENTRY(cmd)	 qentry;
 };
 struct cmd_list {
-	int		 references;
-	TAILQ_HEAD(, cmd) list;
+	int		 	 references;
+	TAILQ_HEAD(, cmd) 	 list;
 };
 
 struct cmd_entry {
 	const char	*name;
 	const char	*alias;
+
+	const char	*args_template;
+	int		 args_lower;
+	int		 args_upper;
+
 	const char	*usage;
 
 #define CMD_STARTSERVER 0x1
 #define CMD_CANTNEST 0x2
 #define CMD_SENDENVIRON 0x4
-#define CMD_ARG1 0x8
-#define CMD_ARG01 0x10
-#define CMD_ARG2 0x20
-#define CMD_ARG12 0x40
-#define CMD_READONLY 0x80
+#define CMD_READONLY 0x8
 	int		 flags;
 
-	const char	*chflags;
-
-	void		 (*init)(struct cmd *, int);
-	int		 (*parse)(struct cmd *, int, char **, char **);
+	void		 (*key_binding)(struct cmd *, int);
+	int		 (*check)(struct args *);
 	int		 (*exec)(struct cmd *, struct cmd_ctx *);
-	void		 (*free)(struct cmd *);
-	size_t		 (*print)(struct cmd *, char *, size_t);
-};
-
-/* Generic command data. */
-struct cmd_target_data {
-	uint64_t chflags;
-
-	char	*target;
-
-	char	*arg;
-	char	*arg2;
-};
-
-struct cmd_srcdst_data {
-	uint64_t chflags;
-
-	char	*src;
-	char	*dst;
-
-	char	*arg;
-	char	*arg2;
-};
-
-struct cmd_buffer_data {
-	uint64_t chflags;
-
-	int	 buffer;
-
-	char	*arg;
-	char	*arg2;
 };
 
 /* Key binding. */
@@ -1295,6 +1273,17 @@ struct options_table_entry {
 
 /* List of configuration causes. */
 ARRAY_DECL(causelist, char *);
+
+/* Common command usages. */
+#define CMD_TARGET_PANE_USAGE "[-t target-pane]"
+#define CMD_TARGET_WINDOW_USAGE "[-t target-window]"
+#define CMD_TARGET_SESSION_USAGE "[-t target-session]"
+#define CMD_TARGET_CLIENT_USAGE "[-t target-client]"
+#define CMD_SRCDST_PANE_USAGE "[-s src-pane] [-t dst-pane]"
+#define CMD_SRCDST_WINDOW_USAGE "[-s src-window] [-t dst-window]"
+#define CMD_SRCDST_SESSION_USAGE "[-s src-session] [-t dst-session]"
+#define CMD_SRCDST_CLIENT_USAGE "[-s src-client] [-t dst-client]"
+#define CMD_BUFFER_USAGE "[-b buffer-index]"
 
 /* tmux.c */
 extern struct options global_options;
@@ -1474,10 +1463,21 @@ char		*paste_print(struct paste_buffer *, size_t);
 extern const char clock_table[14][5][5];
 void		 clock_draw(struct screen_write_ctx *, int, int);
 
+/* arguments.c */
+struct args	*args_create(int, ...);
+struct args	*args_parse(const char *, int, char **);
+void		 args_free(struct args *);
+size_t		 args_print(struct args *, char *, size_t);
+int		 args_has(struct args *, u_char);
+void		 args_set(struct args *, u_char, const char *);
+const char	*args_get(struct args *, u_char);
+long long	 args_strtonum(
+		    struct args *, u_char, long long, long long, char **);
+
 /* cmd.c */
 int		 cmd_pack_argv(int, char **, char *, size_t);
 int		 cmd_unpack_argv(char *, size_t, int, char ***);
-char	       **cmd_copy_argv(int, char **);
+char	       **cmd_copy_argv(int, char *const *);
 void		 cmd_free_argv(int, char **);
 struct cmd	*cmd_parse(int, char **, char **);
 int		 cmd_exec(struct cmd *, struct cmd_ctx *);
@@ -1586,32 +1586,6 @@ size_t		 cmd_list_print(struct cmd_list *, char *, size_t);
 
 /* cmd-string.c */
 int	cmd_string_parse(const char *, struct cmd_list **, char **);
-
-/* cmd-generic.c */
-size_t	cmd_prarg(char *, size_t, const char *, char *);
-int	cmd_check_flag(uint64_t, int);
-void	cmd_set_flag(uint64_t *, int);
-#define CMD_TARGET_PANE_USAGE "[-t target-pane]"
-#define CMD_TARGET_WINDOW_USAGE "[-t target-window]"
-#define CMD_TARGET_SESSION_USAGE "[-t target-session]"
-#define CMD_TARGET_CLIENT_USAGE "[-t target-client]"
-void	cmd_target_init(struct cmd *, int);
-int	cmd_target_parse(struct cmd *, int, char **, char **);
-void	cmd_target_free(struct cmd *);
-size_t	cmd_target_print(struct cmd *, char *, size_t);
-#define CMD_SRCDST_PANE_USAGE "[-s src-pane] [-t dst-pane]"
-#define CMD_SRCDST_WINDOW_USAGE "[-s src-window] [-t dst-window]"
-#define CMD_SRCDST_SESSION_USAGE "[-s src-session] [-t dst-session]"
-#define CMD_SRCDST_CLIENT_USAGE "[-s src-client] [-t dst-client]"
-void	cmd_srcdst_init(struct cmd *, int);
-int	cmd_srcdst_parse(struct cmd *, int, char **, char **);
-void	cmd_srcdst_free(struct cmd *);
-size_t	cmd_srcdst_print(struct cmd *, char *, size_t);
-#define CMD_BUFFER_USAGE "[-b buffer-index]"
-void	cmd_buffer_init(struct cmd *, int);
-int	cmd_buffer_parse(struct cmd *, int, char **, char **);
-void	cmd_buffer_free(struct cmd *);
-size_t	cmd_buffer_print(struct cmd *, char *, size_t);
 
 /* client.c */
 int	client_main(int, char **, int);
@@ -1813,6 +1787,7 @@ void	 screen_write_cursormode(struct screen_write_ctx *, int);
 void	 screen_write_reverseindex(struct screen_write_ctx *);
 void	 screen_write_scrollregion(struct screen_write_ctx *, u_int, u_int);
 void	 screen_write_insertmode(struct screen_write_ctx *, int);
+void	 screen_write_utf8mousemode(struct screen_write_ctx *, int);
 void	 screen_write_mousemode_on(struct screen_write_ctx *, int);
 void	 screen_write_mousemode_off(struct screen_write_ctx *);
 void	 screen_write_linefeed(struct screen_write_ctx *, int);
@@ -1898,6 +1873,8 @@ void		 window_pane_mouse(struct window_pane *,
 int		 window_pane_visible(struct window_pane *);
 char		*window_pane_search(
 		     struct window_pane *, const char *, u_int *);
+char		*window_printable_flags(struct session *, struct winlink *);
+
 struct window_pane *window_pane_find_up(struct window_pane *);
 struct window_pane *window_pane_find_down(struct window_pane *);
 struct window_pane *window_pane_find_left(struct window_pane *);
@@ -2011,6 +1988,8 @@ void		 session_group_synchronize1(struct session *, struct session *);
 void	utf8_build(void);
 int	utf8_open(struct utf8_data *, u_char);
 int	utf8_append(struct utf8_data *, u_char);
+u_int	utf8_combine(const struct utf8_data *);
+u_int	utf8_split2(u_int, u_char *);
 
 /* osdep-*.c */
 char		*osdep_get_name(int, char *);

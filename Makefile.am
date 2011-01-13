@@ -1,4 +1,4 @@
-# $Id: Makefile.am,v 1.4 2011/01/04 09:43:14 nicm Exp $
+# $Id: Makefile.am,v 1.8 2011/01/07 15:09:04 tcunha Exp $
 
 # Obvious program stuff.
 bin_PROGRAMS = tmux
@@ -9,6 +9,7 @@ EXTRA_DIST = \
 	CHANGES FAQ NOTES TODO examples compat \
 	array.h compat.h tmux.h osdep-*.c
 dist-hook:
+	grep "^#found_debug=" configure
 	find $(distdir) -name CVS -type d|xargs rm -Rf
 
 # glibc as usual does things ass-backwards and hides useful things by default,
@@ -56,6 +57,7 @@ endif
 
 # List of sources.
 dist_tmux_SOURCES = \
+	arguments.c \
 	attributes.c \
 	cfg.c \
 	client.c \
@@ -78,7 +80,6 @@ dist_tmux_SOURCES = \
 	cmd-display-message.c \
 	cmd-display-panes.c \
 	cmd-find-window.c \
-	cmd-generic.c \
 	cmd-has-session.c \
 	cmd-if-shell.c \
 	cmd-join-pane.c \
@@ -86,8 +87,6 @@ dist_tmux_SOURCES = \
 	cmd-kill-server.c \
 	cmd-kill-session.c \
 	cmd-kill-window.c \
-	cmd-last-pane.c \
-	cmd-last-window.c \
 	cmd-link-window.c \
 	cmd-list-buffers.c \
 	cmd-list-clients.c \
@@ -98,18 +97,12 @@ dist_tmux_SOURCES = \
 	cmd-list-windows.c \
 	cmd-list.c \
 	cmd-load-buffer.c \
-	cmd-lock-client.c \
 	cmd-lock-server.c \
-	cmd-lock-session.c \
 	cmd-move-window.c \
 	cmd-new-session.c \
 	cmd-new-window.c \
-	cmd-next-layout.c \
-	cmd-next-window.c \
 	cmd-paste-buffer.c \
 	cmd-pipe-pane.c \
-	cmd-previous-layout.c \
-	cmd-previous-window.c \
 	cmd-refresh-client.c \
 	cmd-rename-session.c \
 	cmd-rename-window.c \
@@ -127,12 +120,10 @@ dist_tmux_SOURCES = \
 	cmd-set-buffer.c \
 	cmd-set-environment.c \
 	cmd-set-option.c \
-	cmd-set-window-option.c \
 	cmd-show-buffer.c \
 	cmd-show-environment.c \
 	cmd-show-messages.c \
 	cmd-show-options.c \
-	cmd-show-window-options.c \
 	cmd-source-file.c \
 	cmd-split-window.c \
 	cmd-start-server.c \
@@ -232,3 +223,18 @@ endif
 if NO_STRTONUM
 nodist_tmux_SOURCES += compat/strtonum.c
 endif
+
+# Update SF web site.
+upload-index.html: update-index.html
+	scp www/index.html www/main.css www/images/*.png \
+		${USER},tmux@web.sf.net:/home/groups/t/tm/tmux/htdocs
+	rm -f www/index.html www/images/small-*
+
+update-index.html:
+	(cd www/images && \
+		rm -f small-* && \
+		for i in *.png; do \
+			convert "$$i" -resize 200x150 "small-$$i"; \
+		done \
+	)
+	sed "s/%%VERSION%%/${VERSION}/g" www/index.html.in >www/index.html

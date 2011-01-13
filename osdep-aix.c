@@ -1,7 +1,7 @@
-/* $Id: cmd-lock-client.c,v 1.2 2009/11/14 17:56:39 tcunha Exp $ */
+/* $Id: osdep-aix.c,v 1.1 2011/01/10 22:00:47 nicm Exp $ */
 
 /*
- * Copyright (c) 2009 Nicholas Marriott <nicm@users.sourceforge.net>
+ * Copyright (c) 2011 Nicholas Marriott <nicm@users.sourceforge.net>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,36 +18,18 @@
 
 #include <sys/types.h>
 
+#include <event.h>
+
 #include "tmux.h"
 
-/*
- * Lock a single client.
- */
-
-int	cmd_lock_client_exec(struct cmd *, struct cmd_ctx *);
-
-const struct cmd_entry cmd_lock_client_entry = {
-	"lock-client", "lockc",
-	CMD_TARGET_CLIENT_USAGE,
-	0, "",
-	cmd_target_init,
-	cmd_target_parse,
-	cmd_lock_client_exec,
-	cmd_target_free,
-	cmd_target_print
-};
-
-int
-cmd_lock_client_exec(struct cmd *self, struct cmd_ctx *ctx)
+char *
+osdep_get_name(unused int fd, unused char *tty)
 {
-	struct cmd_target_data	*data = self->data;
-	struct client		*c;
+	return (NULL);
+}
 
-	if ((c = cmd_find_client(ctx, data->target)) == NULL)
-		return (-1);
-
-	server_lock_client(c);
-	recalculate_sizes();
-
-	return (0);
+struct event_base *
+osdep_event_init(void)
+{
+	return (event_init());
 }

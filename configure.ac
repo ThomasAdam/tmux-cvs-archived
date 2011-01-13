@@ -1,4 +1,4 @@
-# $Id: configure.ac,v 1.9 2011/01/04 09:48:10 nicm Exp $
+# $Id: configure.ac,v 1.12 2011/01/10 22:12:31 nicm Exp $
 
 # Miscellaneous autofoo bullshit.
 AC_INIT(tmux, 1.5)
@@ -215,14 +215,24 @@ AM_CONDITIONAL(NO_VIS, [test "x$found_strnvis" = xno])
 # Look for getopt. glibc's getopt does not enforce argument order and the ways
 # of making it do so are stupid, so just use our own instead.
 AC_CHECK_FUNC(getopt, found_getopt=yes, found_getopt=no)
-if test "x$found_getopt" != xno; then
-	AC_MSG_CHECKING(if system getopt should be avoided)
-	if test "x$found_glibc" = xyes; then
-		found_getopt=no
-		AC_MSG_RESULT(yes)
-	else
-		AC_MSG_RESULT(no)
-		AC_DEFINE(HAVE_GETOPT)
+if test "x$found_getopt" != xno; then	
+	AC_CHECK_DECLS(
+		[optarg, optind, optreset],
+		,
+		found_getopt=no,
+		[
+			#include <unistd.h>
+		]
+	)	
+	if test "x$found_getopt" != xno; then	
+		AC_MSG_CHECKING(if system getopt should be avoided)
+		if test "x$found_glibc" = xyes; then
+			found_getopt=no
+			AC_MSG_RESULT(yes)
+		else
+			AC_MSG_RESULT(no)
+			AC_DEFINE(HAVE_GETOPT)
+		fi
 	fi
 fi
 AM_CONDITIONAL(NO_GETOPT, [test "x$found_getopt" = xno])
@@ -272,10 +282,16 @@ fi
 
 # Look for __progname.
 AC_MSG_CHECKING(for __progname)
-AC_COMPILE_IFELSE(
+AC_LINK_IFELSE(
 	[
+		#include <stdio.h>
+		#include <stdlib.h>
 		extern char *__progname;
-		int main(void) { const char *cp = __progname; }
+		int main(void) {
+			const char *cp = __progname;
+			printf("%s\n", cp);
+			exit(0);
+		}
 	],
 	[AC_DEFINE(HAVE___PROGNAME) AC_MSG_RESULT(yes)],
 	AC_MSG_RESULT(no)
@@ -310,6 +326,10 @@ fi
 # Figure out the platform for osdep-*.c and forkpty-*.c.
 AC_MSG_CHECKING(platform)
 case "$host_os" in
+	*aix*)
+		AC_MSG_RESULT(aix)
+		PLATFORM=aix
+		;;
 	*darwin*)
 		AC_MSG_RESULT(darwin)
 		AC_DEFINE(BROKEN_CMSG_FIRSTHDR)
@@ -341,6 +361,7 @@ case "$host_os" in
 		;;	
 esac
 AC_SUBST(PLATFORM)
+AM_CONDITIONAL(IS_AIX, test "x$PLATFORM" = xaix)
 AM_CONDITIONAL(IS_DARWIN, test "x$PLATFORM" = xdarwin)
 AM_CONDITIONAL(IS_LINUX, test "x$PLATFORM" = xlinux)
 AM_CONDITIONAL(IS_FREEBSD, test "x$PLATFORM" = xfreebsd)
