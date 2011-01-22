@@ -1,4 +1,4 @@
-/* $Id: tty.c,v 1.199 2011/01/07 14:34:45 tcunha Exp $ */
+/* $Id: tty.c,v 1.202 2011/01/21 23:56:53 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -165,15 +165,11 @@ void
 tty_start_tty(struct tty *tty)
 {
 	struct termios	 tio;
-	int		 mode;
 
 	if (tty->fd == -1)
 		return;
 
-	if ((mode = fcntl(tty->fd, F_GETFL)) == -1)
-		fatal("fcntl failed");
-	if (fcntl(tty->fd, F_SETFL, mode|O_NONBLOCK) == -1)
-		fatal("fcntl failed");
+	setblocking(tty->fd, 0);
 
 	bufferevent_enable(tty->event, EV_READ|EV_WRITE);
 
@@ -220,7 +216,6 @@ void
 tty_stop_tty(struct tty *tty)
 {
 	struct winsize	ws;
-	int		mode;
 
 	if (!(tty->flags & TTY_STARTED))
 		return;
@@ -251,8 +246,7 @@ tty_stop_tty(struct tty *tty)
 
 	tty_raw(tty, tty_term_string(tty->term, TTYC_RMCUP));
 
-	if ((mode = fcntl(tty->fd, F_GETFL)) != -1)
-		fcntl(tty->fd, F_SETFL, mode & ~O_NONBLOCK);
+	setblocking(tty->fd, 1);
 }
 
 void
@@ -407,23 +401,19 @@ tty_update_mode(struct tty *tty, int mode)
 		if (mode & ALL_MOUSE_MODES) {
 			if (mode & MODE_MOUSE_UTF8)
 				tty_puts(tty, "\033[?1005h");
-			if (mode & MODE_MOUSE_STANDARD)
-				tty_puts(tty, "\033[?1000h");
-			else if (mode & MODE_MOUSE_HIGHLIGHT)
-				tty_puts(tty, "\033[?1001h");
+			if (mode & MODE_MOUSE_ANY)
+				tty_puts(tty, "\033[?1003h");
 			else if (mode & MODE_MOUSE_BUTTON)
 				tty_puts(tty, "\033[?1002h");
-			else if (mode & MODE_MOUSE_ANY)
-				tty_puts(tty, "\033[?1003h");
+			else if (mode & MODE_MOUSE_STANDARD)
+				tty_puts(tty, "\033[?1000h");
 		} else {
-			if (tty->mode & MODE_MOUSE_STANDARD)
-				tty_puts(tty, "\033[?1000l");
-			else if (tty->mode & MODE_MOUSE_HIGHLIGHT)
-				tty_puts(tty, "\033[?1001l");
+			if (tty->mode & MODE_MOUSE_ANY)
+				tty_puts(tty, "\033[?1003l");
 			else if (tty->mode & MODE_MOUSE_BUTTON)
 				tty_puts(tty, "\033[?1002l");
-			else if (tty->mode & MODE_MOUSE_ANY)
-				tty_puts(tty, "\033[?1003l");
+			else if (tty->mode & MODE_MOUSE_STANDARD)
+				tty_puts(tty, "\033[?1000l");
 			if (tty->mode & MODE_MOUSE_UTF8)
 				tty_puts(tty, "\033[?1005l");
 		}

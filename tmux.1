@@ -1,4 +1,4 @@
-.\" $Id: tmux.1,v 1.289 2011/01/13 19:59:48 nicm Exp $
+.\" $Id: tmux.1,v 1.295 2011/01/21 23:55:26 tcunha Exp $
 .\"
 .\" Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
 .\"
@@ -134,7 +134,10 @@ will report an error and exit without executing further commands.
 .It Fl L Ar socket-name
 .Nm
 stores the server socket in a directory under
-.Pa /tmp ;
+.Pa /tmp
+(or
+.Ev TMPDIR
+if set);
 the default socket is named
 .Em default .
 This option allows a different socket name to be specified, allowing several
@@ -592,6 +595,8 @@ Lock all clients attached to
 .Op Fl n Ar window-name
 .Op Fl s Ar session-name
 .Op Fl t Ar target-session
+.Op Fl x Ar width
+.Op Fl y Ar height
 .Op Ar shell-command
 .Xc
 .D1 (alias: Ic new )
@@ -605,6 +610,13 @@ is given.
 and
 .Ar shell-command
 are the name of and shell command to execute in the initial window.
+If
+.Fl d
+is used,
+.Fl x
+and
+.Fl y
+specify the size of the initial window (80 by 24 if not given).
 .Pp
 If run from a terminal, any
 .Xr termios 4
@@ -1632,16 +1644,19 @@ Available server options are:
 Set the number of buffers; as new buffers are added to the top of the stack,
 old ones are removed from the bottom if necessary to maintain this maximum
 length.
-.It Ic escape-time
+.It Ic escape-time Ar time
 Set the time in milliseconds for which
 .Nm
 waits after an escape is input to determine if it is part of a function or meta
 key sequences.
 The default is 500 milliseconds.
-.It Ic exit-unattached
-If enabled, the server will exit when there are no attached clients, rather
-than when there are no attached sessions.
-.It Ic quiet
+.It Xo Ic exit-unattached
+.Op Ic on | off
+.Xc
+If enabled, the server will exit when there are no attached clients.
+.It Xo Ic quiet
+.Op Ic on | off
+.Xc
 Enable or disable the display of various informational messages (see also the
 .Fl q
 command line flag).
@@ -1709,10 +1724,14 @@ to work correctly, this
 be set to
 .Ql screen
 or a derivative of it.
-.It Ic destroy-unattached
+.It Xo Ic destroy-unattached
+.Op Ic on | off
+.Xc
 If enabled and the session is no longer attached to any clients, it is
 destroyed.
-.It Ic detach-on-destroy
+.It Xo Ic detach-on-destroy
+.Op Ic on | off
+.Xc
 If on (the default), the client is detached when the session it is attached to
 is destroyed.
 If off, the client is switched to the most recently active of the remaining
@@ -1797,8 +1816,11 @@ is one of:
 .Ic colour0
 to
 .Ic colour255
-from the 256-colour palette, or
-.Ic default .
+from the 256-colour set,
+.Ic default ,
+or a hexadecimal RGB string such as
+.Ql #ffffff ,
+which chooses the closest match from the default 256-colour set.
 .It Ic message-fg Ar colour
 Set status line message foreground colour.
 .It Ic message-limit Ar number
@@ -2144,8 +2166,11 @@ may use the terminal alternate screen feature, which allows the
 and
 .Em rmcup
 .Xr terminfo 5
-capabilities to be issued to preserve the existing window content on start and
-restore it on exit.
+capabilities.
+The alternate screen feature preserves the contents of the window when an
+interactive application starts and restores it on exit, so that any output
+visible before the application starts reappears unchanged after it exits.
+The default is on.
 .Pp
 .It Xo Ic automatic-rename
 .Op Ic on | off
