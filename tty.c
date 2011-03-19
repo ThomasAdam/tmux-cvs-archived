@@ -1,4 +1,4 @@
-/* $Id: tty.c,v 1.203 2011/02/15 15:24:00 tcunha Exp $ */
+/* $Id: tty.c,v 1.205 2011/03/19 23:32:01 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -454,7 +454,7 @@ tty_redraw_region(struct tty *tty, const struct tty_ctx *ctx)
 	 * without this, the entire pane ends up being redrawn many times which
 	 * can be much more data.
 	 */
-	if (ctx->orupper - ctx->orlower >= screen_size_y(s) / 2) {
+	if (ctx->orlower - ctx->orupper >= screen_size_y(s) / 2) {
 		wp->flags |= PANE_REDRAW;
 		return;
 	}
@@ -929,6 +929,16 @@ tty_cmd_utf8character(struct tty *tty, const struct tty_ctx *ctx)
 	 * whole line.
 	 */
 	tty_draw_line(tty, wp->screen, ctx->ocy, wp->xoff, wp->yoff);
+}
+
+void
+tty_cmd_rawstring(struct tty *tty, const struct tty_ctx *ctx)
+{
+	u_int	 i;
+	u_char	*str = ctx->ptr;
+
+	for (i = 0; i < ctx->num; i++)
+		tty_putc(tty, str[i]);
 }
 
 void
