@@ -1,4 +1,4 @@
-.\" $Id: tmux.1,v 1.296 2011/03/19 23:27:35 tcunha Exp $
+.\" $Id: tmux.1,v 1.303 2011/04/06 22:31:23 nicm Exp $
 .\"
 .\" Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
 .\"
@@ -14,7 +14,7 @@
 .\" IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
 .\" OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\"
-.Dd $Mdocdate: December 10 2010 $
+.Dd $Mdocdate: April 5 2011 $
 .Dt TMUX 1
 .Os
 .Sh NAME
@@ -437,7 +437,8 @@ One of the strings
 .Em right ,
 .Em top-left ,
 .Em top-right ,
-.Em bottom-left or
+.Em bottom-left
+or
 .Em bottom-right
 may be used instead of a pane index.
 .Pp
@@ -452,6 +453,17 @@ select-window -t:+2
 .Pp
 When dealing with a session that doesn't contain sequential window indexes,
 they will be correctly skipped.
+.Pp
+.Nm
+also gives each pane created in a server an identifier consisting of a
+.Ql %
+and a number, starting from zero.
+A pane's identifier is unique for the life of the
+.Nm
+server and is passed to the child process of the pane in the
+.Ev TMUX_PANE
+environment variable.
+It may be used alone to target a pane or the window containing it.
 .Pp
 .Ar shell-command
 arguments are
@@ -554,6 +566,17 @@ If no server is started,
 .Ic attach-session
 will attempt to start it; this will fail unless sessions are created in the
 configuration file.
+.Pp
+The
+.Ar target-session
+rules for
+.Ic attach-session
+are slightly adjusted: if
+.Nm
+needs to select the most recently used session, it will prefer the most
+recently used
+.Em unattached
+session.
 .It Xo Ic detach-client
 .Op Fl P
 .Op Fl t Ar target-client
@@ -946,11 +969,20 @@ If
 is given, the new window does not become the current window.
 .It Xo Ic capture-pane
 .Op Fl b Ar buffer-index
+.Op Fl E Ar end-line
+.Op Fl S Ar start-line
 .Op Fl t Ar target-pane
 .Xc
 .D1 (alias: Ic capturep )
 Capture the contents of a pane to the specified buffer, or a new buffer if none
 is specified.
+.Pp
+.Fl S
+and
+.Fl E
+specify the starting and ending line numbers, zero is the first line of the
+visible pane and negative numbers are lines in the history.
+The default is to capture only the visible contents of the pane.
 .It Xo
 .Ic choose-client
 .Op Fl t Ar target-window
@@ -1099,13 +1131,33 @@ exists, it is killed, otherwise an error is generated.
 If
 .Fl d
 is given, the newly linked window is not selected.
-.It Ic list-panes Op Fl t Ar target-window
+.It Xo Ic list-panes
+.Op Fl as
+.Op Fl t Ar target
+.Xc
 .D1 (alias: Ic lsp )
-List the panes in the current window or in
-.Ar target-window .
-.It Ic list-windows Op Fl t Ar target-session
+If
+.Fl a
+is given,
+.Ar target
+is ignored and all panes on the server are listed.
+If
+.Fl s
+is given,
+.Ar target
+is a session (or the current session).
+If neither is given,
+.Ar target
+is a window (or the current window).
+.It Xo Ic list-windows
+.Op Fl a
+.Op Fl t Ar target-session
+.Xc
 .D1 (alias: Ic lsw )
-List windows in the current session or in
+If
+.Fl a
+is given, list all windows on the server.
+Otherwise, list windows in the current session or in
 .Ar target-session .
 .It Xo Ic move-window
 .Op Fl dk
@@ -2575,7 +2627,8 @@ This command works only from inside
 .Nm .
 .It Xo Ic display-message
 .Op Fl p
-.Op Fl t Ar target-client
+.Op Fl c Ar target-client
+.Op Fl t Ar target-pane
 .Op Ar message
 .Xc
 .D1 (alias: Ic display )
@@ -2589,7 +2642,12 @@ The format of
 .Ar message
 is as for
 .Ic status-left ,
-with the exception that #() are not handled.
+with the exception that #() are not handled; information is taken from
+.Ar target-pane
+if
+.Fl t
+is given, otherwise the active pane for the session attached to
+.Ar target-client .
 .El
 .Sh BUFFERS
 .Nm

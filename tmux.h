@@ -1,4 +1,4 @@
-/* $Id: tmux.h,v 1.612 2011/03/19 23:30:37 tcunha Exp $ */
+/* $Id: tmux.h,v 1.618 2011/04/06 22:29:26 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -106,7 +106,7 @@ extern char   **environ;
 #define KEYC_SHIFT 0x8000
 #define KEYC_PREFIX 0x10000
 
-/* Mask to obtain key w/o modifiers */
+/* Mask to obtain key w/o modifiers. */
 #define KEYC_MASK_MOD (KEYC_ESCAPE|KEYC_CTRL|KEYC_SHIFT|KEYC_PREFIX)
 #define KEYC_MASK_KEY (~KEYC_MASK_MOD)
 
@@ -775,6 +775,8 @@ struct window_mode {
 
 /* Child window structure. */
 struct window_pane {
+	u_int		 id;
+
 	struct window	*window;
 	struct layout_cell *layout_cell;
 
@@ -817,8 +819,10 @@ struct window_pane {
 	void		*modedata;
 
 	TAILQ_ENTRY(window_pane) entry;
+	RB_ENTRY(window_pane) tree_entry;
 };
 TAILQ_HEAD(window_panes, window_pane);
+RB_HEAD(window_pane_tree, window_pane);
 
 /* Window structure. */
 struct window {
@@ -1446,7 +1450,7 @@ void	tty_keys_free(struct tty *);
 int	tty_keys_next(struct tty *);
 
 /* paste.c */
-struct paste_buffer *paste_walk_stack(struct paste_stack *, uint *);
+struct paste_buffer *paste_walk_stack(struct paste_stack *, u_int *);
 struct paste_buffer *paste_get_top(struct paste_stack *);
 struct paste_buffer *paste_get_index(struct paste_stack *, u_int);
 int		 paste_free_top(struct paste_stack *);
@@ -1479,10 +1483,10 @@ struct cmd	*cmd_parse(int, char **, char **);
 int		 cmd_exec(struct cmd *, struct cmd_ctx *);
 void		 cmd_free(struct cmd *);
 size_t		 cmd_print(struct cmd *, char *, size_t);
-struct session	*cmd_current_session(struct cmd_ctx *);
+struct session	*cmd_current_session(struct cmd_ctx *, int);
 struct client	*cmd_current_client(struct cmd_ctx *);
 struct client	*cmd_find_client(struct cmd_ctx *, const char *);
-struct session	*cmd_find_session(struct cmd_ctx *, const char *);
+struct session	*cmd_find_session(struct cmd_ctx *, const char *, int);
 struct winlink	*cmd_find_window(
 		     struct cmd_ctx *, const char *, struct session **);
 int		 cmd_find_index(
@@ -1658,8 +1662,8 @@ RB_PROTOTYPE(status_out_tree, status_out, entry, status_out_cmp);
 void	 status_free_jobs(struct status_out_tree *);
 void	 status_update_jobs(struct client *);
 int	 status_redraw(struct client *);
-char	*status_replace(
-	     struct client *, struct winlink *, const char *, time_t, int);
+char	*status_replace(struct client *, struct session *,
+	     struct winlink *, struct window_pane *, const char *, time_t, int);
 void printflike2 status_message_set(struct client *, const char *, ...);
 void	 status_message_clear(struct client *);
 int	 status_message_redraw(struct client *);
@@ -1821,8 +1825,11 @@ int	 screen_check_selection(struct screen *, u_int, u_int);
 
 /* window.c */
 extern struct windows windows;
+extern struct window_pane_tree all_window_panes;
 int		 winlink_cmp(struct winlink *, struct winlink *);
 RB_PROTOTYPE(winlinks, winlink, entry, winlink_cmp);
+int		 window_pane_cmp(struct window_pane *, struct window_pane *);
+RB_PROTOTYPE(window_pane_tree, window_pane, tree_entry, window_pane_cmp);
 struct winlink	*winlink_find_by_index(struct winlinks *, int);
 struct winlink	*winlink_find_by_window(struct winlinks *, struct window *);
 int		 winlink_next_index(struct winlinks *, int);
@@ -1857,6 +1864,7 @@ struct window_pane *window_pane_previous_by_number(struct window *,
 u_int		 window_pane_index(struct window *, struct window_pane *);
 u_int		 window_count_panes(struct window *);
 void		 window_destroy_panes(struct window *);
+struct window_pane *window_pane_find_by_id(u_int);
 struct window_pane *window_pane_create(struct window *, u_int, u_int, u_int);
 void		 window_pane_destroy(struct window_pane *);
 int		 window_pane_spawn(struct window_pane *, const char *,
@@ -1966,6 +1974,7 @@ struct session	*session_create(const char *, const char *, const char *,
 		     struct environ *, struct termios *, int, u_int, u_int,
 		     char **);
 void		 session_destroy(struct session *);
+int		 session_check_name(const char *);
 void		 session_update_activity(struct session *);
 struct session	*session_next_session(struct session *);
 struct session	*session_previous_session(struct session *);

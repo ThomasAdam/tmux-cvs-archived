@@ -1,4 +1,4 @@
-/* $Id: cmd-new-session.c,v 1.84 2011/02/15 15:25:48 tcunha Exp $ */
+/* $Id: cmd-new-session.c,v 1.86 2011/04/06 22:29:26 nicm Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -68,14 +68,20 @@ cmd_new_session_exec(struct cmd *self, struct cmd_ctx *ctx)
 	u_int			 sx, sy, i;
 
 	newname = args_get(args, 's');
-	if (newname != NULL && session_find(newname) != NULL) {
-		ctx->error(ctx, "duplicate session: %s", newname);
-		return (-1);
+	if (newname != NULL) {
+		if (!session_check_name(newname)) {
+			ctx->error(ctx, "bad session name: %s", newname);
+			return (-1);
+		}
+		if (session_find(newname) != NULL) {
+			ctx->error(ctx, "duplicate session: %s", newname);
+			return (-1);
+		}
 	}
 
 	target = args_get(args, 't');
 	if (target != NULL) {
-		groupwith = cmd_find_session(ctx, target);
+		groupwith = cmd_find_session(ctx, target, 0);
 		if (groupwith == NULL)
 			return (-1);
 	} else
