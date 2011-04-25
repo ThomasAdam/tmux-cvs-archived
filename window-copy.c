@@ -1,4 +1,4 @@
-/* $Id: window-copy.c,v 1.128 2011/04/06 22:18:56 nicm Exp $ */
+/* $Id: window-copy.c,v 1.130 2011/04/25 20:34:26 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -760,11 +760,11 @@ window_copy_key_numeric_prefix(struct window_pane *wp, int key)
 /* ARGSUSED */
 void
 window_copy_mouse(
-    struct window_pane *wp, unused struct session *sess, struct mouse_event *m)
+    struct window_pane *wp, struct session *sess, struct mouse_event *m)
 {
 	struct window_copy_mode_data	*data = wp->modedata;
 	struct screen			*s = &data->screen;
-	u_int				 i;
+	u_int				 i, old_cy;
 
 	if (m->x >= screen_size_x(s))
 		return;
@@ -777,8 +777,11 @@ window_copy_mouse(
 			for (i = 0; i < 5; i++)
 				window_copy_cursor_up(wp, 0);
 		} else if ((m->b & MOUSE_BUTTON) == MOUSE_2) {
+			old_cy = data->cy;
 			for (i = 0; i < 5; i++)
 				window_copy_cursor_down(wp, 0);
+			if (old_cy == data->cy)
+				goto reset_mode;
 		}
 		return;
 	}
@@ -792,15 +795,9 @@ window_copy_mouse(
 			window_copy_update_cursor(wp, m->x, m->y);
 			if (window_copy_update_selection(wp))
 				window_copy_redraw_screen(wp);
-		} else {
-			s->mode &= ~MODE_MOUSE_ANY;
-			s->mode |= MODE_MOUSE_STANDARD;
-			if (sess != NULL) {
-				window_copy_copy_selection(wp);
-				window_pane_reset_mode(wp);
-			}
+			return;
 		}
-		return;
+		goto reset_mode;
 	}
 
 	/* Otherwise if other buttons pressed, start selection and motion. */
@@ -811,6 +808,16 @@ window_copy_mouse(
 		window_copy_update_cursor(wp, m->x, m->y);
 		window_copy_start_selection(wp);
 		window_copy_redraw_screen(wp);
+	}
+
+	return;
+
+reset_mode:
+	s->mode &= ~MODE_MOUSE_ANY;
+	s->mode |= MODE_MOUSE_STANDARD;
+	if (sess != NULL) {
+		window_copy_copy_selection(wp);
+		window_pane_reset_mode(wp);
 	}
 }
 
@@ -1218,6 +1225,7 @@ window_copy_copy_selection(struct window_pane *wp)
 	size_t				 off;
 	u_int				 i, xx, yy, sx, sy, ex, ey, limit;
 	u_int				 firstsx, lastex, restex, restsx;
+	int				 keys;
 
 	if (!s->sel.flag)
 		return;
@@ -1254,6 +1262,14 @@ window_copy_copy_selection(struct window_pane *wp)
 	 * end (restex) of all other lines.
 	 */
 	xx = screen_size_x(s);
+
+	/*
+	 * Behave according to mode-keys. If it is emacs, copy like emacs,
+	 * keeping the top-left-most character, and dropping the
+	 * bottom-right-most, regardless of copy direction. If it is vi, also
+	 * keep bottom-right-most character.
+	 */
+	keys = options_get_number(&wp->window->options, "mode-keys");
 	if (data->rectflag) {
 		/*
 		 * Need to ignore the column with the cursor in it, which for
@@ -1261,8 +1277,14 @@ window_copy_copy_selection(struct window_pane *wp)
 		 */
 		if (data->selx < data->cx) {
 			/* Selection start is on the left. */
-			lastex = data->cx;
-			restex = data->cx;
+			if (keys == MODEKEY_EMACS) {
+				lastex = data->cx;
+				restex = data->cx;
+			}
+			else {
+				lastex = data->cx + 1;
+				restex = data->cx + 1;
+			}
 			firstsx = data->selx;
 			restsx = data->selx;
 		} else {
@@ -1273,11 +1295,10 @@ window_copy_copy_selection(struct window_pane *wp)
 			restsx = data->cx;
 		}
 	} else {
-		/*
-		 * Like emacs, keep the top-left-most character, and drop the
-		 * bottom-right-most, regardless of copy direction.
-		 */
-		lastex = ex;
+		if (keys == MODEKEY_EMACS)
+			lastex = ex;
+		else	
+			lastex = ex + 1;
 		restex = xx;
 		firstsx = sx;
 		restsx = 0;
