@@ -1,4 +1,4 @@
-.\" $Id: tmux.1,v 1.310 2011/04/25 20:35:22 tcunha Exp $
+.\" $Id: tmux.1,v 1.313 2011/05/18 20:35:36 tcunha Exp $
 .\"
 .\" Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
 .\"
@@ -14,7 +14,7 @@
 .\" IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
 .\" OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\"
-.Dd $Mdocdate: April 24 2011 $
+.Dd $Mdocdate: May 18 2011 $
 .Dt TMUX 1
 .Os
 .Sh NAME
@@ -770,7 +770,7 @@ The following keys are supported as appropriate for the mode:
 .It Li "Cursor to top line" Ta "H" Ta "M-R"
 .It Li "Cursor up" Ta "k" Ta "Up"
 .It Li "Delete entire line" Ta "d" Ta "C-u"
-.It Li "Delete to end of line" Ta "D" Ta "C-k"
+.It Li "Delete/Copy to end of line" Ta "D" Ta "C-k"
 .It Li "End of line" Ta "$" Ta "C-e"
 .It Li "Go to line" Ta ":" Ta "g"
 .It Li "Half page down" Ta "C-d" Ta "M-Down"
@@ -1892,6 +1892,12 @@ Set status line message foreground colour.
 Set the number of error or information messages to save in the message log for
 each client.
 The default is 20.
+.It Xo Ic mouse-resize-pane
+.Op Ic on | off
+.Xc
+If on,
+.Nm
+captures the mouse and allows panes to be resized by dragging on their borders.
 .It Xo Ic mouse-select-pane
 .Op Ic on | off
 .Xc
@@ -2149,7 +2155,7 @@ The default value forcibly corrects the
 .Ql colors
 entry for terminals which support 88 or 256 colours:
 .Bd -literal -offset indent
-"*88col*:colors=88,*256col*:colors=256"
+"*88col*:colors=88,*256col*:colors=256,xterm*:XT"
 .Ed
 .It Ic update-environment Ar variables
 Set a space-separated string containing a list of environment variables to be

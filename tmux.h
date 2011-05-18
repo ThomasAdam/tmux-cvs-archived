@@ -1,4 +1,4 @@
-/* $Id: tmux.h,v 1.621 2011/04/25 20:33:42 tcunha Exp $ */
+/* $Id: tmux.h,v 1.624 2011/05/18 20:35:36 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -201,6 +201,7 @@ enum tty_code_code {
 	TTYC_EL,	/* clr_eol, ce */
 	TTYC_EL1,	/* clr_bol, cb */
 	TTYC_ENACS,	/* ena_acs, eA */
+	TTYC_FSL,	/* from_status_line, fsl */
 	TTYC_HOME,	/* cursor_home, ho */
 	TTYC_HPA,	/* column_address, ch */
 	TTYC_ICH,	/* parm_ich, IC */
@@ -313,17 +314,19 @@ enum tty_code_code {
 	TTYC_SETAB,	/* set_a_background, AB */
 	TTYC_SETAF,	/* set_a_foreground, AF */
 	TTYC_SGR0,	/* exit_attribute_mode, me */
+	TTYC_SITM,	/* enter_italics_mode, it */
 	TTYC_SMACS,	/* enter_alt_charset_mode, as */
 	TTYC_SMCUP,	/* enter_ca_mode, ti */
 	TTYC_SMIR,	/* enter_insert_mode, im */
 	TTYC_SMKX,	/* keypad_xmit, ks */
 	TTYC_SMSO,	/* enter_standout_mode, so */
 	TTYC_SMUL,	/* enter_underline_mode, us */
-	TTYC_SITM,	/* enter_italics_mode, it */
+	TTYC_TSL,	/* to_status_line, tsl */
 	TTYC_VPA,	/* row_address, cv */
 	TTYC_XENL,	/* eat_newline_glitch, xn */
+	TTYC_XT,	/* xterm(1)-compatible title, XT */
 };
-#define NTTYCODE (TTYC_XENL + 1)
+#define NTTYCODE (TTYC_XT + 1)
 
 /* Termcap types. */
 enum tty_code_type {
@@ -454,6 +457,8 @@ enum mode_key_cmd {
 	MODEKEYCOPY_BOTTOMLINE,
 	MODEKEYCOPY_CANCEL,
 	MODEKEYCOPY_CLEARSELECTION,
+	MODEKEYCOPY_COPYLINE,
+	MODEKEYCOPY_COPYENDOFLINE,
 	MODEKEYCOPY_COPYSELECTION,
 	MODEKEYCOPY_DOWN,
 	MODEKEYCOPY_ENDOFLINE,
@@ -484,6 +489,7 @@ enum mode_key_cmd {
 	MODEKEYCOPY_SEARCHDOWN,
 	MODEKEYCOPY_SEARCHREVERSE,
 	MODEKEYCOPY_SEARCHUP,
+	MODEKEYCOPY_SELECTLINE,
 	MODEKEYCOPY_STARTNUMBERPREFIX,
 	MODEKEYCOPY_STARTOFLINE,
 	MODEKEYCOPY_STARTSELECTION,
@@ -1079,6 +1085,7 @@ struct mouse_event {
 #define MOUSE_BUTTON 3
 #define MOUSE_DRAG 32
 #define MOUSE_45 64
+#define MOUSE_RESIZE_PANE 128 /* marker for resizing */
 	u_int	x;
 	u_int	y;
 };
@@ -1169,6 +1176,8 @@ struct client {
 
 	struct session	*session;
 	struct session	*last_session;
+
+	struct mouse_event last_mouse;
 
 	int		 references;
 };
@@ -1918,6 +1927,8 @@ void		 layout_free(struct window *);
 void		 layout_resize(struct window *, u_int, u_int);
 void		 layout_resize_pane(
 		     struct window_pane *, enum layout_type, int);
+void		 layout_resize_pane_mouse(
+		     struct client *c, struct mouse_event *mouse);
 void		 layout_assign_pane(struct layout_cell *, struct window_pane *);
 struct layout_cell *layout_split_pane(
 		     struct window_pane *, enum layout_type, int);
