@@ -1,4 +1,4 @@
-/* $Id: input.c,v 1.117 2011/03/19 23:30:37 tcunha Exp $ */
+/* $Id: input.c,v 1.119 2011/05/22 16:26:09 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -126,6 +126,7 @@ enum input_csi_type {
 	INPUT_CSI_CUU,
 	INPUT_CSI_DA,
 	INPUT_CSI_DCH,
+	INPUT_CSI_DECSCUSR,
 	INPUT_CSI_DECSTBM,
 	INPUT_CSI_DL,
 	INPUT_CSI_DSR,
@@ -168,6 +169,7 @@ const struct input_table_entry input_csi_table[] = {
 	{ 'l', "?", INPUT_CSI_RM_PRIVATE },
 	{ 'm', "",  INPUT_CSI_SGR },
 	{ 'n', "",  INPUT_CSI_DSR },
+	{ 'q', " ", INPUT_CSI_DECSCUSR },
 	{ 'r', "",  INPUT_CSI_DECSTBM },
 };
 
@@ -1259,6 +1261,10 @@ input_csi_dispatch(struct input_ctx *ictx)
 		n = input_get(ictx, 0, 1, 1);
 		screen_write_cursormove(sctx, s->cx, n - 1);
 		break;
+	case INPUT_CSI_DECSCUSR:
+		n = input_get(ictx, 0, 0, 0);
+		screen_set_cursor_style(s, n);
+		break;
 	}
 
 	return (0);
@@ -1445,17 +1451,39 @@ input_enter_osc(struct input_ctx *ictx)
 void
 input_exit_osc(struct input_ctx *ictx)
 {
+	u_char *p = ictx->input_buf;
+	int	option;
+
 	if (ictx->flags & INPUT_DISCARD)
 		return;
-	log_debug("%s: \"%s\"", __func__, ictx->input_buf);
-
-	if (ictx->input_len < 2 || ictx->input_buf[1] != ';')
-		return;
-	if (ictx->input_buf[0] != '0' && ictx->input_buf[0] != '2')
+	if (ictx->input_len < 1 || *p < '0' || *p > '9')
 		return;
 
-	screen_set_title(ictx->ctx.s, ictx->input_buf + 2);
-	server_status_window(ictx->wp->window);
+	log_debug("%s: \"%s\"", __func__, p);
+
+	option = 0;
+	while (*p >= '0' && *p <= '9')
+		option = option * 10 + *p++ - '0';
+	if (*p == ';')
+		p++;
+
+	switch (option) {
+	case 0:
+	case 2:
+		screen_set_title(ictx->ctx.s, p);
+		server_status_window(ictx->wp->window);
+		break;
+	case 12:
+		screen_set_cursor_colour(ictx->ctx.s, p);
+		break;
+	case 112:
+		if (*p == '\0') /* No arguments allowed. */
+			screen_set_cursor_colour(ictx->ctx.s, "");
+		break;
+	default:
+		log_debug("%s: unknown '%u'", __func__, option);
+		break;
+	}
 }
 
 /* APC string started. */

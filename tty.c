@@ -1,4 +1,4 @@
-/* $Id: tty.c,v 1.209 2011/05/18 20:28:43 tcunha Exp $ */
+/* $Id: tty.c,v 1.212 2011/05/22 16:26:09 tcunha Exp $ */
 
 /*
  * Copyright (c) 2007 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -19,8 +19,11 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
+#include <netinet/in.h>
+
 #include <errno.h>
 #include <fcntl.h>
+#include <resolv.h>
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
@@ -66,6 +69,8 @@ tty_init(struct tty *tty, int fd, char *term)
 	if ((path = ttyname(fd)) == NULL)
 		fatalx("ttyname failed");
 	tty->path = xstrdup(path);
+	tty->cstyle = 0;
+	tty->ccolour = xstrdup("");
 
 	tty->flags = 0;
 	tty->term_flags = 0;
@@ -207,6 +212,8 @@ tty_start_tty(struct tty *tty)
 	tty->mode = MODE_CURSOR;
 
 	tty->flags |= TTY_STARTED;
+
+	tty_force_cursor_colour(tty, "");
 }
 
 void
@@ -238,6 +245,13 @@ tty_stop_tty(struct tty *tty)
 	tty_raw(tty, tty_term_string(tty->term, TTYC_SGR0));
 	tty_raw(tty, tty_term_string(tty->term, TTYC_RMKX));
 	tty_raw(tty, tty_term_string(tty->term, TTYC_CLEAR));
+	if (tty_term_has(tty->term, TTYC_CS1) && tty->cstyle != 0) {
+		if (tty_term_has(tty->term, TTYC_CSR1))
+			tty_raw(tty, tty_term_string(tty->term, TTYC_CSR1));
+		else if (tty_term_has(tty->term, TTYC_CS1))
+			tty_raw(tty, tty_term_string1(tty->term, TTYC_CS1, 0));
+	}
+	tty_raw(tty, tty_term_string(tty->term, TTYC_CR));
 
 	tty_raw(tty, tty_term_string(tty->term, TTYC_CNORM));
 	if (tty_term_has(tty->term, TTYC_KMOUS))
@@ -277,6 +291,7 @@ tty_free(struct tty *tty)
 {
 	tty_close(tty);
 
+	xfree(tty->ccolour);
 	if (tty->path != NULL)
 		xfree(tty->path);
 	if (tty->termname != NULL)
@@ -309,6 +324,20 @@ tty_putcode2(struct tty *tty, enum tty_code_code code, int a, int b)
 	if (a < 0 || b < 0)
 		return;
 	tty_puts(tty, tty_term_string2(tty->term, code, a, b));
+}
+
+void
+tty_putcode_ptr1(struct tty *tty, enum tty_code_code code, const void *a)
+{
+	if (a != NULL)
+		tty_puts(tty, tty_term_ptr1(tty->term, code, a));
+}
+
+void
+tty_putcode_ptr2(struct tty *tty, enum tty_code_code code, const void *a, const void *b)
+{
+	if (a != NULL && b != NULL)
+		tty_puts(tty, tty_term_ptr2(tty->term, code, a, b));
 }
 
 void
@@ -379,9 +408,23 @@ tty_set_title(struct tty *tty, const char *title)
 }
 
 void
-tty_update_mode(struct tty *tty, int mode)
+tty_force_cursor_colour(struct tty *tty, const char *ccolour)
+{
+	if (*ccolour == '\0')
+		tty_putcode(tty, TTYC_CR);
+	else
+		tty_putcode_ptr1(tty, TTYC_CC, ccolour);
+	xfree(tty->ccolour);
+	tty->ccolour = xstrdup(ccolour);
+}
+
+void
+tty_update_mode(struct tty *tty, int mode, struct screen *s)
 {
 	int	changed;
+
+	if (strcmp(s->ccolour, tty->ccolour))
+		tty_force_cursor_colour(tty, s->ccolour);
 
 	if (tty->flags & TTY_NOCURSOR)
 		mode &= ~MODE_CURSOR;
@@ -392,6 +435,16 @@ tty_update_mode(struct tty *tty, int mode)
 			tty_putcode(tty, TTYC_CNORM);
 		else
 			tty_putcode(tty, TTYC_CIVIS);
+	}
+	if (tty->cstyle != s->cstyle) {
+		if (tty_term_has(tty->term, TTYC_CS1)) {
+			if (s->cstyle == 0 &&
+			    tty_term_has(tty->term, TTYC_CSR1))
+				tty_putcode(tty, TTYC_CSR1);
+			else
+				tty_putcode1(tty, TTYC_CS1, s->cstyle);
+		}
+		tty->cstyle = s->cstyle;
 	}
 	if (changed & ALL_MOUSE_MODES) {
 		if (mode & ALL_MOUSE_MODES) {
@@ -476,7 +529,7 @@ tty_draw_line(struct tty *tty, struct screen *s, u_int py, u_int ox, u_int oy)
 	const struct grid_utf8	*gu;
 	u_int			 i, sx;
 
-	tty_update_mode(tty, tty->mode & ~MODE_CURSOR);
+	tty_update_mode(tty, tty->mode & ~MODE_CURSOR, s);
 
 	sx = screen_size_x(s);
 	if (sx > s->grid->linedata[s->grid->hsize + py].cellsize)
@@ -516,7 +569,7 @@ tty_draw_line(struct tty *tty, struct screen *s, u_int py, u_int ox, u_int oy)
 	}
 
 	if (sx >= tty->sx) {
-		tty_update_mode(tty, tty->mode);
+		tty_update_mode(tty, tty->mode, s);
 		return;
 	}
 	tty_reset(tty);
@@ -528,7 +581,7 @@ tty_draw_line(struct tty *tty, struct screen *s, u_int py, u_int ox, u_int oy)
 		for (i = sx; i < screen_size_x(s); i++)
 			tty_putc(tty, ' ');
 	}
-	tty_update_mode(tty, tty->mode);
+	tty_update_mode(tty, tty->mode, s);
 }
 
 void
@@ -936,6 +989,24 @@ tty_cmd_utf8character(struct tty *tty, const struct tty_ctx *ctx)
 	 * whole line.
 	 */
 	tty_draw_line(tty, wp->screen, ctx->ocy, wp->xoff, wp->yoff);
+}
+
+void
+tty_cmd_setselection(struct tty *tty, const struct tty_ctx *ctx)
+{
+	char	*buf;
+	size_t	 off;
+
+	if (!tty_term_has(tty->term, TTYC_MS))
+		return;
+
+	off = 4 * ((ctx->num + 2) / 3) + 1; /* storage for base64 */
+	buf = xmalloc(off);
+
+	b64_ntop(ctx->ptr, ctx->num, buf, off);
+	tty_putcode_ptr2(tty, TTYC_MS, "", buf);
+
+	xfree(buf);
 }
 
 void
